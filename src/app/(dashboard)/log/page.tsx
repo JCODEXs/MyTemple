@@ -3,7 +3,7 @@
 // src/app/(dashboard)/log/page.tsx
 // Registro diario de alimentación + entrenamiento
 // ─────────────────────────────────────────────────────────────────────────────
-import DailyLogForm from "@/app/_components/domain/DailyLogForm"
+import DailyLogForm from "@/app/_components/domain/DailyLogFormV2"
 
 export const metadata = { title: "Registro del día" }
 

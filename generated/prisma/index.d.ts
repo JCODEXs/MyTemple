@@ -39,6 +39,21 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type UserProfile = $Result.DefaultSelection<Prisma.$UserProfilePayload>
 /**
+ * Model CoachInviteCode
+ * 
+ */
+export type CoachInviteCode = $Result.DefaultSelection<Prisma.$CoachInviteCodePayload>
+/**
+ * Model RegistrationCode
+ * 
+ */
+export type RegistrationCode = $Result.DefaultSelection<Prisma.$RegistrationCodePayload>
+/**
+ * Model Subscription
+ * 
+ */
+export type Subscription = $Result.DefaultSelection<Prisma.$SubscriptionPayload>
+/**
  * Model Post
  * 
  */
@@ -166,6 +181,24 @@ export const WorkoutType: {
 
 export type WorkoutType = (typeof WorkoutType)[keyof typeof WorkoutType]
 
+
+export const SubscriptionStatus: {
+  ACTIVE: 'ACTIVE',
+  CANCELLED: 'CANCELLED',
+  PAST_DUE: 'PAST_DUE',
+  TRIAL: 'TRIAL'
+};
+
+export type SubscriptionStatus = (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]
+
+
+export const InviteCodeType: {
+  COACH: 'COACH',
+  CLIENT: 'CLIENT'
+};
+
+export type InviteCodeType = (typeof InviteCodeType)[keyof typeof InviteCodeType]
+
 }
 
 export type UserRole = $Enums.UserRole
@@ -187,6 +220,14 @@ export const MealType: typeof $Enums.MealType
 export type WorkoutType = $Enums.WorkoutType
 
 export const WorkoutType: typeof $Enums.WorkoutType
+
+export type SubscriptionStatus = $Enums.SubscriptionStatus
+
+export const SubscriptionStatus: typeof $Enums.SubscriptionStatus
+
+export type InviteCodeType = $Enums.InviteCodeType
+
+export const InviteCodeType: typeof $Enums.InviteCodeType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -355,6 +396,36 @@ export class PrismaClient<
     * ```
     */
   get userProfile(): Prisma.UserProfileDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.coachInviteCode`: Exposes CRUD operations for the **CoachInviteCode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CoachInviteCodes
+    * const coachInviteCodes = await prisma.coachInviteCode.findMany()
+    * ```
+    */
+  get coachInviteCode(): Prisma.CoachInviteCodeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.registrationCode`: Exposes CRUD operations for the **RegistrationCode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RegistrationCodes
+    * const registrationCodes = await prisma.registrationCode.findMany()
+    * ```
+    */
+  get registrationCode(): Prisma.RegistrationCodeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.subscription`: Exposes CRUD operations for the **Subscription** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Subscriptions
+    * const subscriptions = await prisma.subscription.findMany()
+    * ```
+    */
+  get subscription(): Prisma.SubscriptionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.post`: Exposes CRUD operations for the **Post** model.
@@ -951,6 +1022,9 @@ export namespace Prisma {
     VerificationToken: 'VerificationToken',
     User: 'User',
     UserProfile: 'UserProfile',
+    CoachInviteCode: 'CoachInviteCode',
+    RegistrationCode: 'RegistrationCode',
+    Subscription: 'Subscription',
     Post: 'Post',
     Ingredient: 'Ingredient',
     UserIngredientOverride: 'UserIngredientOverride',
@@ -984,7 +1058,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "session" | "verificationToken" | "user" | "userProfile" | "post" | "ingredient" | "userIngredientOverride" | "recipe" | "recipeIngredient" | "nutritionPlan" | "planDay" | "meal" | "mealRecipe" | "metabolicProfile" | "dailyLog" | "workout" | "workoutSession" | "hydrationLog" | "weightLog"
+      modelProps: "account" | "session" | "verificationToken" | "user" | "userProfile" | "coachInviteCode" | "registrationCode" | "subscription" | "post" | "ingredient" | "userIngredientOverride" | "recipe" | "recipeIngredient" | "nutritionPlan" | "planDay" | "meal" | "mealRecipe" | "metabolicProfile" | "dailyLog" | "workout" | "workoutSession" | "hydrationLog" | "weightLog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1355,6 +1429,228 @@ export namespace Prisma {
           count: {
             args: Prisma.UserProfileCountArgs<ExtArgs>
             result: $Utils.Optional<UserProfileCountAggregateOutputType> | number
+          }
+        }
+      }
+      CoachInviteCode: {
+        payload: Prisma.$CoachInviteCodePayload<ExtArgs>
+        fields: Prisma.CoachInviteCodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CoachInviteCodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoachInviteCodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CoachInviteCodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoachInviteCodePayload>
+          }
+          findFirst: {
+            args: Prisma.CoachInviteCodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoachInviteCodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CoachInviteCodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoachInviteCodePayload>
+          }
+          findMany: {
+            args: Prisma.CoachInviteCodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoachInviteCodePayload>[]
+          }
+          create: {
+            args: Prisma.CoachInviteCodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoachInviteCodePayload>
+          }
+          createMany: {
+            args: Prisma.CoachInviteCodeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CoachInviteCodeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoachInviteCodePayload>[]
+          }
+          delete: {
+            args: Prisma.CoachInviteCodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoachInviteCodePayload>
+          }
+          update: {
+            args: Prisma.CoachInviteCodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoachInviteCodePayload>
+          }
+          deleteMany: {
+            args: Prisma.CoachInviteCodeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CoachInviteCodeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CoachInviteCodeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoachInviteCodePayload>[]
+          }
+          upsert: {
+            args: Prisma.CoachInviteCodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoachInviteCodePayload>
+          }
+          aggregate: {
+            args: Prisma.CoachInviteCodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCoachInviteCode>
+          }
+          groupBy: {
+            args: Prisma.CoachInviteCodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CoachInviteCodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CoachInviteCodeCountArgs<ExtArgs>
+            result: $Utils.Optional<CoachInviteCodeCountAggregateOutputType> | number
+          }
+        }
+      }
+      RegistrationCode: {
+        payload: Prisma.$RegistrationCodePayload<ExtArgs>
+        fields: Prisma.RegistrationCodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RegistrationCodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RegistrationCodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RegistrationCodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RegistrationCodePayload>
+          }
+          findFirst: {
+            args: Prisma.RegistrationCodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RegistrationCodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RegistrationCodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RegistrationCodePayload>
+          }
+          findMany: {
+            args: Prisma.RegistrationCodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RegistrationCodePayload>[]
+          }
+          create: {
+            args: Prisma.RegistrationCodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RegistrationCodePayload>
+          }
+          createMany: {
+            args: Prisma.RegistrationCodeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RegistrationCodeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RegistrationCodePayload>[]
+          }
+          delete: {
+            args: Prisma.RegistrationCodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RegistrationCodePayload>
+          }
+          update: {
+            args: Prisma.RegistrationCodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RegistrationCodePayload>
+          }
+          deleteMany: {
+            args: Prisma.RegistrationCodeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RegistrationCodeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RegistrationCodeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RegistrationCodePayload>[]
+          }
+          upsert: {
+            args: Prisma.RegistrationCodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RegistrationCodePayload>
+          }
+          aggregate: {
+            args: Prisma.RegistrationCodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRegistrationCode>
+          }
+          groupBy: {
+            args: Prisma.RegistrationCodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RegistrationCodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RegistrationCodeCountArgs<ExtArgs>
+            result: $Utils.Optional<RegistrationCodeCountAggregateOutputType> | number
+          }
+        }
+      }
+      Subscription: {
+        payload: Prisma.$SubscriptionPayload<ExtArgs>
+        fields: Prisma.SubscriptionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SubscriptionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SubscriptionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          findFirst: {
+            args: Prisma.SubscriptionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SubscriptionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          findMany: {
+            args: Prisma.SubscriptionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
+          }
+          create: {
+            args: Prisma.SubscriptionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          createMany: {
+            args: Prisma.SubscriptionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SubscriptionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
+          }
+          delete: {
+            args: Prisma.SubscriptionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          update: {
+            args: Prisma.SubscriptionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          deleteMany: {
+            args: Prisma.SubscriptionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SubscriptionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SubscriptionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
+          }
+          upsert: {
+            args: Prisma.SubscriptionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          aggregate: {
+            args: Prisma.SubscriptionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSubscription>
+          }
+          groupBy: {
+            args: Prisma.SubscriptionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SubscriptionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SubscriptionCountArgs<ExtArgs>
+            result: $Utils.Optional<SubscriptionCountAggregateOutputType> | number
           }
         }
       }
@@ -2569,6 +2865,9 @@ export namespace Prisma {
     verificationToken?: VerificationTokenOmit
     user?: UserOmit
     userProfile?: UserProfileOmit
+    coachInviteCode?: CoachInviteCodeOmit
+    registrationCode?: RegistrationCodeOmit
+    subscription?: SubscriptionOmit
     post?: PostOmit
     ingredient?: IngredientOmit
     userIngredientOverride?: UserIngredientOverrideOmit
@@ -2664,7 +2963,9 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
+    coachCodes: number
     clients: number
+    registrationCodes: number
     posts: number
     accounts: number
     sessions: number
@@ -2679,7 +2980,9 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    coachCodes?: boolean | UserCountOutputTypeCountCoachCodesArgs
     clients?: boolean | UserCountOutputTypeCountClientsArgs
+    registrationCodes?: boolean | UserCountOutputTypeCountRegistrationCodesArgs
     posts?: boolean | UserCountOutputTypeCountPostsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
@@ -2707,8 +3010,22 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountCoachCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CoachInviteCodeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountClientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRegistrationCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RegistrationCodeWhereInput
   }
 
   /**
@@ -6243,6 +6560,7 @@ export namespace Prisma {
     image: string | null
     role: $Enums.UserRole | null
     coachId: string | null
+    passwordHash: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6255,6 +6573,7 @@ export namespace Prisma {
     image: string | null
     role: $Enums.UserRole | null
     coachId: string | null
+    passwordHash: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6267,6 +6586,7 @@ export namespace Prisma {
     image: number
     role: number
     coachId: number
+    passwordHash: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -6281,6 +6601,7 @@ export namespace Prisma {
     image?: true
     role?: true
     coachId?: true
+    passwordHash?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6293,6 +6614,7 @@ export namespace Prisma {
     image?: true
     role?: true
     coachId?: true
+    passwordHash?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6305,6 +6627,7 @@ export namespace Prisma {
     image?: true
     role?: true
     coachId?: true
+    passwordHash?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6390,6 +6713,7 @@ export namespace Prisma {
     image: string | null
     role: $Enums.UserRole
     coachId: string | null
+    passwordHash: string | null
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -6419,10 +6743,16 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     coachId?: boolean
+    passwordHash?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    coachCodes?: boolean | User$coachCodesArgs<ExtArgs>
+    usedInviteCode?: boolean | User$usedInviteCodeArgs<ExtArgs>
     coach?: boolean | User$coachArgs<ExtArgs>
     clients?: boolean | User$clientsArgs<ExtArgs>
+    registrationCodes?: boolean | User$registrationCodesArgs<ExtArgs>
+    usedCode?: boolean | User$usedCodeArgs<ExtArgs>
+    subscription?: boolean | User$subscriptionArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
@@ -6446,6 +6776,7 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     coachId?: boolean
+    passwordHash?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     coach?: boolean | User$coachArgs<ExtArgs>
@@ -6459,6 +6790,7 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     coachId?: boolean
+    passwordHash?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     coach?: boolean | User$coachArgs<ExtArgs>
@@ -6472,14 +6804,20 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     coachId?: boolean
+    passwordHash?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "emailVerified" | "name" | "image" | "role" | "coachId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "emailVerified" | "name" | "image" | "role" | "coachId" | "passwordHash" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    coachCodes?: boolean | User$coachCodesArgs<ExtArgs>
+    usedInviteCode?: boolean | User$usedInviteCodeArgs<ExtArgs>
     coach?: boolean | User$coachArgs<ExtArgs>
     clients?: boolean | User$clientsArgs<ExtArgs>
+    registrationCodes?: boolean | User$registrationCodesArgs<ExtArgs>
+    usedCode?: boolean | User$usedCodeArgs<ExtArgs>
+    subscription?: boolean | User$subscriptionArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
@@ -6504,8 +6842,13 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
+      coachCodes: Prisma.$CoachInviteCodePayload<ExtArgs>[]
+      usedInviteCode: Prisma.$CoachInviteCodePayload<ExtArgs> | null
       coach: Prisma.$UserPayload<ExtArgs> | null
       clients: Prisma.$UserPayload<ExtArgs>[]
+      registrationCodes: Prisma.$RegistrationCodePayload<ExtArgs>[]
+      usedCode: Prisma.$RegistrationCodePayload<ExtArgs> | null
+      subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
       posts: Prisma.$PostPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
@@ -6527,6 +6870,7 @@ export namespace Prisma {
       image: string | null
       role: $Enums.UserRole
       coachId: string | null
+      passwordHash: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -6923,8 +7267,13 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    coachCodes<T extends User$coachCodesArgs<ExtArgs> = {}>(args?: Subset<T, User$coachCodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoachInviteCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    usedInviteCode<T extends User$usedInviteCodeArgs<ExtArgs> = {}>(args?: Subset<T, User$usedInviteCodeArgs<ExtArgs>>): Prisma__CoachInviteCodeClient<$Result.GetResult<Prisma.$CoachInviteCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     coach<T extends User$coachArgs<ExtArgs> = {}>(args?: Subset<T, User$coachArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     clients<T extends User$clientsArgs<ExtArgs> = {}>(args?: Subset<T, User$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    registrationCodes<T extends User$registrationCodesArgs<ExtArgs> = {}>(args?: Subset<T, User$registrationCodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RegistrationCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    usedCode<T extends User$usedCodeArgs<ExtArgs> = {}>(args?: Subset<T, User$usedCodeArgs<ExtArgs>>): Prisma__RegistrationCodeClient<$Result.GetResult<Prisma.$RegistrationCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    subscription<T extends User$subscriptionArgs<ExtArgs> = {}>(args?: Subset<T, User$subscriptionArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -6973,6 +7322,7 @@ export namespace Prisma {
     readonly image: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'UserRole'>
     readonly coachId: FieldRef<"User", 'String'>
+    readonly passwordHash: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -7371,6 +7721,49 @@ export namespace Prisma {
   }
 
   /**
+   * User.coachCodes
+   */
+  export type User$coachCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoachInviteCode
+     */
+    select?: CoachInviteCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CoachInviteCode
+     */
+    omit?: CoachInviteCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoachInviteCodeInclude<ExtArgs> | null
+    where?: CoachInviteCodeWhereInput
+    orderBy?: CoachInviteCodeOrderByWithRelationInput | CoachInviteCodeOrderByWithRelationInput[]
+    cursor?: CoachInviteCodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CoachInviteCodeScalarFieldEnum | CoachInviteCodeScalarFieldEnum[]
+  }
+
+  /**
+   * User.usedInviteCode
+   */
+  export type User$usedInviteCodeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoachInviteCode
+     */
+    select?: CoachInviteCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CoachInviteCode
+     */
+    omit?: CoachInviteCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoachInviteCodeInclude<ExtArgs> | null
+    where?: CoachInviteCodeWhereInput
+  }
+
+  /**
    * User.coach
    */
   export type User$coachArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7411,6 +7804,68 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User.registrationCodes
+   */
+  export type User$registrationCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RegistrationCode
+     */
+    select?: RegistrationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RegistrationCode
+     */
+    omit?: RegistrationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationCodeInclude<ExtArgs> | null
+    where?: RegistrationCodeWhereInput
+    orderBy?: RegistrationCodeOrderByWithRelationInput | RegistrationCodeOrderByWithRelationInput[]
+    cursor?: RegistrationCodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RegistrationCodeScalarFieldEnum | RegistrationCodeScalarFieldEnum[]
+  }
+
+  /**
+   * User.usedCode
+   */
+  export type User$usedCodeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RegistrationCode
+     */
+    select?: RegistrationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RegistrationCode
+     */
+    omit?: RegistrationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationCodeInclude<ExtArgs> | null
+    where?: RegistrationCodeWhereInput
+  }
+
+  /**
+   * User.subscription
+   */
+  export type User$subscriptionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    where?: SubscriptionWhereInput
   }
 
   /**
@@ -8902,6 +9357,3494 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserProfileInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CoachInviteCode
+   */
+
+  export type AggregateCoachInviteCode = {
+    _count: CoachInviteCodeCountAggregateOutputType | null
+    _min: CoachInviteCodeMinAggregateOutputType | null
+    _max: CoachInviteCodeMaxAggregateOutputType | null
+  }
+
+  export type CoachInviteCodeMinAggregateOutputType = {
+    id: string | null
+    coachId: string | null
+    code: string | null
+    expiresAt: Date | null
+    usedAt: Date | null
+    usedById: string | null
+    createdAt: Date | null
+  }
+
+  export type CoachInviteCodeMaxAggregateOutputType = {
+    id: string | null
+    coachId: string | null
+    code: string | null
+    expiresAt: Date | null
+    usedAt: Date | null
+    usedById: string | null
+    createdAt: Date | null
+  }
+
+  export type CoachInviteCodeCountAggregateOutputType = {
+    id: number
+    coachId: number
+    code: number
+    expiresAt: number
+    usedAt: number
+    usedById: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type CoachInviteCodeMinAggregateInputType = {
+    id?: true
+    coachId?: true
+    code?: true
+    expiresAt?: true
+    usedAt?: true
+    usedById?: true
+    createdAt?: true
+  }
+
+  export type CoachInviteCodeMaxAggregateInputType = {
+    id?: true
+    coachId?: true
+    code?: true
+    expiresAt?: true
+    usedAt?: true
+    usedById?: true
+    createdAt?: true
+  }
+
+  export type CoachInviteCodeCountAggregateInputType = {
+    id?: true
+    coachId?: true
+    code?: true
+    expiresAt?: true
+    usedAt?: true
+    usedById?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type CoachInviteCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CoachInviteCode to aggregate.
+     */
+    where?: CoachInviteCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CoachInviteCodes to fetch.
+     */
+    orderBy?: CoachInviteCodeOrderByWithRelationInput | CoachInviteCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CoachInviteCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CoachInviteCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CoachInviteCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CoachInviteCodes
+    **/
+    _count?: true | CoachInviteCodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CoachInviteCodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CoachInviteCodeMaxAggregateInputType
+  }
+
+  export type GetCoachInviteCodeAggregateType<T extends CoachInviteCodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateCoachInviteCode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCoachInviteCode[P]>
+      : GetScalarType<T[P], AggregateCoachInviteCode[P]>
+  }
+
+
+
+
+  export type CoachInviteCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CoachInviteCodeWhereInput
+    orderBy?: CoachInviteCodeOrderByWithAggregationInput | CoachInviteCodeOrderByWithAggregationInput[]
+    by: CoachInviteCodeScalarFieldEnum[] | CoachInviteCodeScalarFieldEnum
+    having?: CoachInviteCodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CoachInviteCodeCountAggregateInputType | true
+    _min?: CoachInviteCodeMinAggregateInputType
+    _max?: CoachInviteCodeMaxAggregateInputType
+  }
+
+  export type CoachInviteCodeGroupByOutputType = {
+    id: string
+    coachId: string
+    code: string
+    expiresAt: Date
+    usedAt: Date | null
+    usedById: string | null
+    createdAt: Date
+    _count: CoachInviteCodeCountAggregateOutputType | null
+    _min: CoachInviteCodeMinAggregateOutputType | null
+    _max: CoachInviteCodeMaxAggregateOutputType | null
+  }
+
+  type GetCoachInviteCodeGroupByPayload<T extends CoachInviteCodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CoachInviteCodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CoachInviteCodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CoachInviteCodeGroupByOutputType[P]>
+            : GetScalarType<T[P], CoachInviteCodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CoachInviteCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    coachId?: boolean
+    code?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    usedById?: boolean
+    createdAt?: boolean
+    coach?: boolean | UserDefaultArgs<ExtArgs>
+    usedBy?: boolean | CoachInviteCode$usedByArgs<ExtArgs>
+  }, ExtArgs["result"]["coachInviteCode"]>
+
+  export type CoachInviteCodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    coachId?: boolean
+    code?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    usedById?: boolean
+    createdAt?: boolean
+    coach?: boolean | UserDefaultArgs<ExtArgs>
+    usedBy?: boolean | CoachInviteCode$usedByArgs<ExtArgs>
+  }, ExtArgs["result"]["coachInviteCode"]>
+
+  export type CoachInviteCodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    coachId?: boolean
+    code?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    usedById?: boolean
+    createdAt?: boolean
+    coach?: boolean | UserDefaultArgs<ExtArgs>
+    usedBy?: boolean | CoachInviteCode$usedByArgs<ExtArgs>
+  }, ExtArgs["result"]["coachInviteCode"]>
+
+  export type CoachInviteCodeSelectScalar = {
+    id?: boolean
+    coachId?: boolean
+    code?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    usedById?: boolean
+    createdAt?: boolean
+  }
+
+  export type CoachInviteCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "coachId" | "code" | "expiresAt" | "usedAt" | "usedById" | "createdAt", ExtArgs["result"]["coachInviteCode"]>
+  export type CoachInviteCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    coach?: boolean | UserDefaultArgs<ExtArgs>
+    usedBy?: boolean | CoachInviteCode$usedByArgs<ExtArgs>
+  }
+  export type CoachInviteCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    coach?: boolean | UserDefaultArgs<ExtArgs>
+    usedBy?: boolean | CoachInviteCode$usedByArgs<ExtArgs>
+  }
+  export type CoachInviteCodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    coach?: boolean | UserDefaultArgs<ExtArgs>
+    usedBy?: boolean | CoachInviteCode$usedByArgs<ExtArgs>
+  }
+
+  export type $CoachInviteCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CoachInviteCode"
+    objects: {
+      coach: Prisma.$UserPayload<ExtArgs>
+      usedBy: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      coachId: string
+      code: string
+      expiresAt: Date
+      usedAt: Date | null
+      usedById: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["coachInviteCode"]>
+    composites: {}
+  }
+
+  type CoachInviteCodeGetPayload<S extends boolean | null | undefined | CoachInviteCodeDefaultArgs> = $Result.GetResult<Prisma.$CoachInviteCodePayload, S>
+
+  type CoachInviteCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CoachInviteCodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CoachInviteCodeCountAggregateInputType | true
+    }
+
+  export interface CoachInviteCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CoachInviteCode'], meta: { name: 'CoachInviteCode' } }
+    /**
+     * Find zero or one CoachInviteCode that matches the filter.
+     * @param {CoachInviteCodeFindUniqueArgs} args - Arguments to find a CoachInviteCode
+     * @example
+     * // Get one CoachInviteCode
+     * const coachInviteCode = await prisma.coachInviteCode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CoachInviteCodeFindUniqueArgs>(args: SelectSubset<T, CoachInviteCodeFindUniqueArgs<ExtArgs>>): Prisma__CoachInviteCodeClient<$Result.GetResult<Prisma.$CoachInviteCodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CoachInviteCode that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CoachInviteCodeFindUniqueOrThrowArgs} args - Arguments to find a CoachInviteCode
+     * @example
+     * // Get one CoachInviteCode
+     * const coachInviteCode = await prisma.coachInviteCode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CoachInviteCodeFindUniqueOrThrowArgs>(args: SelectSubset<T, CoachInviteCodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CoachInviteCodeClient<$Result.GetResult<Prisma.$CoachInviteCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CoachInviteCode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CoachInviteCodeFindFirstArgs} args - Arguments to find a CoachInviteCode
+     * @example
+     * // Get one CoachInviteCode
+     * const coachInviteCode = await prisma.coachInviteCode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CoachInviteCodeFindFirstArgs>(args?: SelectSubset<T, CoachInviteCodeFindFirstArgs<ExtArgs>>): Prisma__CoachInviteCodeClient<$Result.GetResult<Prisma.$CoachInviteCodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CoachInviteCode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CoachInviteCodeFindFirstOrThrowArgs} args - Arguments to find a CoachInviteCode
+     * @example
+     * // Get one CoachInviteCode
+     * const coachInviteCode = await prisma.coachInviteCode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CoachInviteCodeFindFirstOrThrowArgs>(args?: SelectSubset<T, CoachInviteCodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__CoachInviteCodeClient<$Result.GetResult<Prisma.$CoachInviteCodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CoachInviteCodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CoachInviteCodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CoachInviteCodes
+     * const coachInviteCodes = await prisma.coachInviteCode.findMany()
+     * 
+     * // Get first 10 CoachInviteCodes
+     * const coachInviteCodes = await prisma.coachInviteCode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const coachInviteCodeWithIdOnly = await prisma.coachInviteCode.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CoachInviteCodeFindManyArgs>(args?: SelectSubset<T, CoachInviteCodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoachInviteCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CoachInviteCode.
+     * @param {CoachInviteCodeCreateArgs} args - Arguments to create a CoachInviteCode.
+     * @example
+     * // Create one CoachInviteCode
+     * const CoachInviteCode = await prisma.coachInviteCode.create({
+     *   data: {
+     *     // ... data to create a CoachInviteCode
+     *   }
+     * })
+     * 
+     */
+    create<T extends CoachInviteCodeCreateArgs>(args: SelectSubset<T, CoachInviteCodeCreateArgs<ExtArgs>>): Prisma__CoachInviteCodeClient<$Result.GetResult<Prisma.$CoachInviteCodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CoachInviteCodes.
+     * @param {CoachInviteCodeCreateManyArgs} args - Arguments to create many CoachInviteCodes.
+     * @example
+     * // Create many CoachInviteCodes
+     * const coachInviteCode = await prisma.coachInviteCode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CoachInviteCodeCreateManyArgs>(args?: SelectSubset<T, CoachInviteCodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CoachInviteCodes and returns the data saved in the database.
+     * @param {CoachInviteCodeCreateManyAndReturnArgs} args - Arguments to create many CoachInviteCodes.
+     * @example
+     * // Create many CoachInviteCodes
+     * const coachInviteCode = await prisma.coachInviteCode.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CoachInviteCodes and only return the `id`
+     * const coachInviteCodeWithIdOnly = await prisma.coachInviteCode.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CoachInviteCodeCreateManyAndReturnArgs>(args?: SelectSubset<T, CoachInviteCodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoachInviteCodePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CoachInviteCode.
+     * @param {CoachInviteCodeDeleteArgs} args - Arguments to delete one CoachInviteCode.
+     * @example
+     * // Delete one CoachInviteCode
+     * const CoachInviteCode = await prisma.coachInviteCode.delete({
+     *   where: {
+     *     // ... filter to delete one CoachInviteCode
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CoachInviteCodeDeleteArgs>(args: SelectSubset<T, CoachInviteCodeDeleteArgs<ExtArgs>>): Prisma__CoachInviteCodeClient<$Result.GetResult<Prisma.$CoachInviteCodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CoachInviteCode.
+     * @param {CoachInviteCodeUpdateArgs} args - Arguments to update one CoachInviteCode.
+     * @example
+     * // Update one CoachInviteCode
+     * const coachInviteCode = await prisma.coachInviteCode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CoachInviteCodeUpdateArgs>(args: SelectSubset<T, CoachInviteCodeUpdateArgs<ExtArgs>>): Prisma__CoachInviteCodeClient<$Result.GetResult<Prisma.$CoachInviteCodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CoachInviteCodes.
+     * @param {CoachInviteCodeDeleteManyArgs} args - Arguments to filter CoachInviteCodes to delete.
+     * @example
+     * // Delete a few CoachInviteCodes
+     * const { count } = await prisma.coachInviteCode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CoachInviteCodeDeleteManyArgs>(args?: SelectSubset<T, CoachInviteCodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CoachInviteCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CoachInviteCodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CoachInviteCodes
+     * const coachInviteCode = await prisma.coachInviteCode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CoachInviteCodeUpdateManyArgs>(args: SelectSubset<T, CoachInviteCodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CoachInviteCodes and returns the data updated in the database.
+     * @param {CoachInviteCodeUpdateManyAndReturnArgs} args - Arguments to update many CoachInviteCodes.
+     * @example
+     * // Update many CoachInviteCodes
+     * const coachInviteCode = await prisma.coachInviteCode.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CoachInviteCodes and only return the `id`
+     * const coachInviteCodeWithIdOnly = await prisma.coachInviteCode.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CoachInviteCodeUpdateManyAndReturnArgs>(args: SelectSubset<T, CoachInviteCodeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoachInviteCodePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CoachInviteCode.
+     * @param {CoachInviteCodeUpsertArgs} args - Arguments to update or create a CoachInviteCode.
+     * @example
+     * // Update or create a CoachInviteCode
+     * const coachInviteCode = await prisma.coachInviteCode.upsert({
+     *   create: {
+     *     // ... data to create a CoachInviteCode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CoachInviteCode we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CoachInviteCodeUpsertArgs>(args: SelectSubset<T, CoachInviteCodeUpsertArgs<ExtArgs>>): Prisma__CoachInviteCodeClient<$Result.GetResult<Prisma.$CoachInviteCodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CoachInviteCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CoachInviteCodeCountArgs} args - Arguments to filter CoachInviteCodes to count.
+     * @example
+     * // Count the number of CoachInviteCodes
+     * const count = await prisma.coachInviteCode.count({
+     *   where: {
+     *     // ... the filter for the CoachInviteCodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends CoachInviteCodeCountArgs>(
+      args?: Subset<T, CoachInviteCodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CoachInviteCodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CoachInviteCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CoachInviteCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CoachInviteCodeAggregateArgs>(args: Subset<T, CoachInviteCodeAggregateArgs>): Prisma.PrismaPromise<GetCoachInviteCodeAggregateType<T>>
+
+    /**
+     * Group by CoachInviteCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CoachInviteCodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CoachInviteCodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CoachInviteCodeGroupByArgs['orderBy'] }
+        : { orderBy?: CoachInviteCodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CoachInviteCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCoachInviteCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CoachInviteCode model
+   */
+  readonly fields: CoachInviteCodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CoachInviteCode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CoachInviteCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    coach<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    usedBy<T extends CoachInviteCode$usedByArgs<ExtArgs> = {}>(args?: Subset<T, CoachInviteCode$usedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CoachInviteCode model
+   */
+  interface CoachInviteCodeFieldRefs {
+    readonly id: FieldRef<"CoachInviteCode", 'String'>
+    readonly coachId: FieldRef<"CoachInviteCode", 'String'>
+    readonly code: FieldRef<"CoachInviteCode", 'String'>
+    readonly expiresAt: FieldRef<"CoachInviteCode", 'DateTime'>
+    readonly usedAt: FieldRef<"CoachInviteCode", 'DateTime'>
+    readonly usedById: FieldRef<"CoachInviteCode", 'String'>
+    readonly createdAt: FieldRef<"CoachInviteCode", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CoachInviteCode findUnique
+   */
+  export type CoachInviteCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoachInviteCode
+     */
+    select?: CoachInviteCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CoachInviteCode
+     */
+    omit?: CoachInviteCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoachInviteCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which CoachInviteCode to fetch.
+     */
+    where: CoachInviteCodeWhereUniqueInput
+  }
+
+  /**
+   * CoachInviteCode findUniqueOrThrow
+   */
+  export type CoachInviteCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoachInviteCode
+     */
+    select?: CoachInviteCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CoachInviteCode
+     */
+    omit?: CoachInviteCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoachInviteCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which CoachInviteCode to fetch.
+     */
+    where: CoachInviteCodeWhereUniqueInput
+  }
+
+  /**
+   * CoachInviteCode findFirst
+   */
+  export type CoachInviteCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoachInviteCode
+     */
+    select?: CoachInviteCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CoachInviteCode
+     */
+    omit?: CoachInviteCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoachInviteCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which CoachInviteCode to fetch.
+     */
+    where?: CoachInviteCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CoachInviteCodes to fetch.
+     */
+    orderBy?: CoachInviteCodeOrderByWithRelationInput | CoachInviteCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CoachInviteCodes.
+     */
+    cursor?: CoachInviteCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CoachInviteCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CoachInviteCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CoachInviteCodes.
+     */
+    distinct?: CoachInviteCodeScalarFieldEnum | CoachInviteCodeScalarFieldEnum[]
+  }
+
+  /**
+   * CoachInviteCode findFirstOrThrow
+   */
+  export type CoachInviteCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoachInviteCode
+     */
+    select?: CoachInviteCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CoachInviteCode
+     */
+    omit?: CoachInviteCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoachInviteCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which CoachInviteCode to fetch.
+     */
+    where?: CoachInviteCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CoachInviteCodes to fetch.
+     */
+    orderBy?: CoachInviteCodeOrderByWithRelationInput | CoachInviteCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CoachInviteCodes.
+     */
+    cursor?: CoachInviteCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CoachInviteCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CoachInviteCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CoachInviteCodes.
+     */
+    distinct?: CoachInviteCodeScalarFieldEnum | CoachInviteCodeScalarFieldEnum[]
+  }
+
+  /**
+   * CoachInviteCode findMany
+   */
+  export type CoachInviteCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoachInviteCode
+     */
+    select?: CoachInviteCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CoachInviteCode
+     */
+    omit?: CoachInviteCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoachInviteCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which CoachInviteCodes to fetch.
+     */
+    where?: CoachInviteCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CoachInviteCodes to fetch.
+     */
+    orderBy?: CoachInviteCodeOrderByWithRelationInput | CoachInviteCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CoachInviteCodes.
+     */
+    cursor?: CoachInviteCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CoachInviteCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CoachInviteCodes.
+     */
+    skip?: number
+    distinct?: CoachInviteCodeScalarFieldEnum | CoachInviteCodeScalarFieldEnum[]
+  }
+
+  /**
+   * CoachInviteCode create
+   */
+  export type CoachInviteCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoachInviteCode
+     */
+    select?: CoachInviteCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CoachInviteCode
+     */
+    omit?: CoachInviteCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoachInviteCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CoachInviteCode.
+     */
+    data: XOR<CoachInviteCodeCreateInput, CoachInviteCodeUncheckedCreateInput>
+  }
+
+  /**
+   * CoachInviteCode createMany
+   */
+  export type CoachInviteCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CoachInviteCodes.
+     */
+    data: CoachInviteCodeCreateManyInput | CoachInviteCodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CoachInviteCode createManyAndReturn
+   */
+  export type CoachInviteCodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoachInviteCode
+     */
+    select?: CoachInviteCodeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CoachInviteCode
+     */
+    omit?: CoachInviteCodeOmit<ExtArgs> | null
+    /**
+     * The data used to create many CoachInviteCodes.
+     */
+    data: CoachInviteCodeCreateManyInput | CoachInviteCodeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoachInviteCodeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CoachInviteCode update
+   */
+  export type CoachInviteCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoachInviteCode
+     */
+    select?: CoachInviteCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CoachInviteCode
+     */
+    omit?: CoachInviteCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoachInviteCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CoachInviteCode.
+     */
+    data: XOR<CoachInviteCodeUpdateInput, CoachInviteCodeUncheckedUpdateInput>
+    /**
+     * Choose, which CoachInviteCode to update.
+     */
+    where: CoachInviteCodeWhereUniqueInput
+  }
+
+  /**
+   * CoachInviteCode updateMany
+   */
+  export type CoachInviteCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CoachInviteCodes.
+     */
+    data: XOR<CoachInviteCodeUpdateManyMutationInput, CoachInviteCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which CoachInviteCodes to update
+     */
+    where?: CoachInviteCodeWhereInput
+    /**
+     * Limit how many CoachInviteCodes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CoachInviteCode updateManyAndReturn
+   */
+  export type CoachInviteCodeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoachInviteCode
+     */
+    select?: CoachInviteCodeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CoachInviteCode
+     */
+    omit?: CoachInviteCodeOmit<ExtArgs> | null
+    /**
+     * The data used to update CoachInviteCodes.
+     */
+    data: XOR<CoachInviteCodeUpdateManyMutationInput, CoachInviteCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which CoachInviteCodes to update
+     */
+    where?: CoachInviteCodeWhereInput
+    /**
+     * Limit how many CoachInviteCodes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoachInviteCodeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CoachInviteCode upsert
+   */
+  export type CoachInviteCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoachInviteCode
+     */
+    select?: CoachInviteCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CoachInviteCode
+     */
+    omit?: CoachInviteCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoachInviteCodeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CoachInviteCode to update in case it exists.
+     */
+    where: CoachInviteCodeWhereUniqueInput
+    /**
+     * In case the CoachInviteCode found by the `where` argument doesn't exist, create a new CoachInviteCode with this data.
+     */
+    create: XOR<CoachInviteCodeCreateInput, CoachInviteCodeUncheckedCreateInput>
+    /**
+     * In case the CoachInviteCode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CoachInviteCodeUpdateInput, CoachInviteCodeUncheckedUpdateInput>
+  }
+
+  /**
+   * CoachInviteCode delete
+   */
+  export type CoachInviteCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoachInviteCode
+     */
+    select?: CoachInviteCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CoachInviteCode
+     */
+    omit?: CoachInviteCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoachInviteCodeInclude<ExtArgs> | null
+    /**
+     * Filter which CoachInviteCode to delete.
+     */
+    where: CoachInviteCodeWhereUniqueInput
+  }
+
+  /**
+   * CoachInviteCode deleteMany
+   */
+  export type CoachInviteCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CoachInviteCodes to delete
+     */
+    where?: CoachInviteCodeWhereInput
+    /**
+     * Limit how many CoachInviteCodes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CoachInviteCode.usedBy
+   */
+  export type CoachInviteCode$usedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * CoachInviteCode without action
+   */
+  export type CoachInviteCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoachInviteCode
+     */
+    select?: CoachInviteCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CoachInviteCode
+     */
+    omit?: CoachInviteCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoachInviteCodeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RegistrationCode
+   */
+
+  export type AggregateRegistrationCode = {
+    _count: RegistrationCodeCountAggregateOutputType | null
+    _avg: RegistrationCodeAvgAggregateOutputType | null
+    _sum: RegistrationCodeSumAggregateOutputType | null
+    _min: RegistrationCodeMinAggregateOutputType | null
+    _max: RegistrationCodeMaxAggregateOutputType | null
+  }
+
+  export type RegistrationCodeAvgAggregateOutputType = {
+    maxUses: number | null
+    useCount: number | null
+  }
+
+  export type RegistrationCodeSumAggregateOutputType = {
+    maxUses: number | null
+    useCount: number | null
+  }
+
+  export type RegistrationCodeMinAggregateOutputType = {
+    id: string | null
+    code: string | null
+    type: $Enums.InviteCodeType | null
+    createdByCoachId: string | null
+    expiresAt: Date | null
+    usedAt: Date | null
+    usedById: string | null
+    maxUses: number | null
+    useCount: number | null
+    createdAt: Date | null
+  }
+
+  export type RegistrationCodeMaxAggregateOutputType = {
+    id: string | null
+    code: string | null
+    type: $Enums.InviteCodeType | null
+    createdByCoachId: string | null
+    expiresAt: Date | null
+    usedAt: Date | null
+    usedById: string | null
+    maxUses: number | null
+    useCount: number | null
+    createdAt: Date | null
+  }
+
+  export type RegistrationCodeCountAggregateOutputType = {
+    id: number
+    code: number
+    type: number
+    createdByCoachId: number
+    expiresAt: number
+    usedAt: number
+    usedById: number
+    maxUses: number
+    useCount: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type RegistrationCodeAvgAggregateInputType = {
+    maxUses?: true
+    useCount?: true
+  }
+
+  export type RegistrationCodeSumAggregateInputType = {
+    maxUses?: true
+    useCount?: true
+  }
+
+  export type RegistrationCodeMinAggregateInputType = {
+    id?: true
+    code?: true
+    type?: true
+    createdByCoachId?: true
+    expiresAt?: true
+    usedAt?: true
+    usedById?: true
+    maxUses?: true
+    useCount?: true
+    createdAt?: true
+  }
+
+  export type RegistrationCodeMaxAggregateInputType = {
+    id?: true
+    code?: true
+    type?: true
+    createdByCoachId?: true
+    expiresAt?: true
+    usedAt?: true
+    usedById?: true
+    maxUses?: true
+    useCount?: true
+    createdAt?: true
+  }
+
+  export type RegistrationCodeCountAggregateInputType = {
+    id?: true
+    code?: true
+    type?: true
+    createdByCoachId?: true
+    expiresAt?: true
+    usedAt?: true
+    usedById?: true
+    maxUses?: true
+    useCount?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type RegistrationCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RegistrationCode to aggregate.
+     */
+    where?: RegistrationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RegistrationCodes to fetch.
+     */
+    orderBy?: RegistrationCodeOrderByWithRelationInput | RegistrationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RegistrationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RegistrationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RegistrationCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RegistrationCodes
+    **/
+    _count?: true | RegistrationCodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RegistrationCodeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RegistrationCodeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RegistrationCodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RegistrationCodeMaxAggregateInputType
+  }
+
+  export type GetRegistrationCodeAggregateType<T extends RegistrationCodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateRegistrationCode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRegistrationCode[P]>
+      : GetScalarType<T[P], AggregateRegistrationCode[P]>
+  }
+
+
+
+
+  export type RegistrationCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RegistrationCodeWhereInput
+    orderBy?: RegistrationCodeOrderByWithAggregationInput | RegistrationCodeOrderByWithAggregationInput[]
+    by: RegistrationCodeScalarFieldEnum[] | RegistrationCodeScalarFieldEnum
+    having?: RegistrationCodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RegistrationCodeCountAggregateInputType | true
+    _avg?: RegistrationCodeAvgAggregateInputType
+    _sum?: RegistrationCodeSumAggregateInputType
+    _min?: RegistrationCodeMinAggregateInputType
+    _max?: RegistrationCodeMaxAggregateInputType
+  }
+
+  export type RegistrationCodeGroupByOutputType = {
+    id: string
+    code: string
+    type: $Enums.InviteCodeType
+    createdByCoachId: string | null
+    expiresAt: Date
+    usedAt: Date | null
+    usedById: string | null
+    maxUses: number
+    useCount: number
+    createdAt: Date
+    _count: RegistrationCodeCountAggregateOutputType | null
+    _avg: RegistrationCodeAvgAggregateOutputType | null
+    _sum: RegistrationCodeSumAggregateOutputType | null
+    _min: RegistrationCodeMinAggregateOutputType | null
+    _max: RegistrationCodeMaxAggregateOutputType | null
+  }
+
+  type GetRegistrationCodeGroupByPayload<T extends RegistrationCodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RegistrationCodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RegistrationCodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RegistrationCodeGroupByOutputType[P]>
+            : GetScalarType<T[P], RegistrationCodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RegistrationCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    type?: boolean
+    createdByCoachId?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    usedById?: boolean
+    maxUses?: boolean
+    useCount?: boolean
+    createdAt?: boolean
+    createdByCoach?: boolean | RegistrationCode$createdByCoachArgs<ExtArgs>
+    usedBy?: boolean | RegistrationCode$usedByArgs<ExtArgs>
+  }, ExtArgs["result"]["registrationCode"]>
+
+  export type RegistrationCodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    type?: boolean
+    createdByCoachId?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    usedById?: boolean
+    maxUses?: boolean
+    useCount?: boolean
+    createdAt?: boolean
+    createdByCoach?: boolean | RegistrationCode$createdByCoachArgs<ExtArgs>
+    usedBy?: boolean | RegistrationCode$usedByArgs<ExtArgs>
+  }, ExtArgs["result"]["registrationCode"]>
+
+  export type RegistrationCodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    type?: boolean
+    createdByCoachId?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    usedById?: boolean
+    maxUses?: boolean
+    useCount?: boolean
+    createdAt?: boolean
+    createdByCoach?: boolean | RegistrationCode$createdByCoachArgs<ExtArgs>
+    usedBy?: boolean | RegistrationCode$usedByArgs<ExtArgs>
+  }, ExtArgs["result"]["registrationCode"]>
+
+  export type RegistrationCodeSelectScalar = {
+    id?: boolean
+    code?: boolean
+    type?: boolean
+    createdByCoachId?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    usedById?: boolean
+    maxUses?: boolean
+    useCount?: boolean
+    createdAt?: boolean
+  }
+
+  export type RegistrationCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "type" | "createdByCoachId" | "expiresAt" | "usedAt" | "usedById" | "maxUses" | "useCount" | "createdAt", ExtArgs["result"]["registrationCode"]>
+  export type RegistrationCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdByCoach?: boolean | RegistrationCode$createdByCoachArgs<ExtArgs>
+    usedBy?: boolean | RegistrationCode$usedByArgs<ExtArgs>
+  }
+  export type RegistrationCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdByCoach?: boolean | RegistrationCode$createdByCoachArgs<ExtArgs>
+    usedBy?: boolean | RegistrationCode$usedByArgs<ExtArgs>
+  }
+  export type RegistrationCodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdByCoach?: boolean | RegistrationCode$createdByCoachArgs<ExtArgs>
+    usedBy?: boolean | RegistrationCode$usedByArgs<ExtArgs>
+  }
+
+  export type $RegistrationCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RegistrationCode"
+    objects: {
+      createdByCoach: Prisma.$UserPayload<ExtArgs> | null
+      usedBy: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      code: string
+      type: $Enums.InviteCodeType
+      createdByCoachId: string | null
+      expiresAt: Date
+      usedAt: Date | null
+      usedById: string | null
+      maxUses: number
+      useCount: number
+      createdAt: Date
+    }, ExtArgs["result"]["registrationCode"]>
+    composites: {}
+  }
+
+  type RegistrationCodeGetPayload<S extends boolean | null | undefined | RegistrationCodeDefaultArgs> = $Result.GetResult<Prisma.$RegistrationCodePayload, S>
+
+  type RegistrationCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RegistrationCodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RegistrationCodeCountAggregateInputType | true
+    }
+
+  export interface RegistrationCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RegistrationCode'], meta: { name: 'RegistrationCode' } }
+    /**
+     * Find zero or one RegistrationCode that matches the filter.
+     * @param {RegistrationCodeFindUniqueArgs} args - Arguments to find a RegistrationCode
+     * @example
+     * // Get one RegistrationCode
+     * const registrationCode = await prisma.registrationCode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RegistrationCodeFindUniqueArgs>(args: SelectSubset<T, RegistrationCodeFindUniqueArgs<ExtArgs>>): Prisma__RegistrationCodeClient<$Result.GetResult<Prisma.$RegistrationCodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RegistrationCode that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RegistrationCodeFindUniqueOrThrowArgs} args - Arguments to find a RegistrationCode
+     * @example
+     * // Get one RegistrationCode
+     * const registrationCode = await prisma.registrationCode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RegistrationCodeFindUniqueOrThrowArgs>(args: SelectSubset<T, RegistrationCodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RegistrationCodeClient<$Result.GetResult<Prisma.$RegistrationCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RegistrationCode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RegistrationCodeFindFirstArgs} args - Arguments to find a RegistrationCode
+     * @example
+     * // Get one RegistrationCode
+     * const registrationCode = await prisma.registrationCode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RegistrationCodeFindFirstArgs>(args?: SelectSubset<T, RegistrationCodeFindFirstArgs<ExtArgs>>): Prisma__RegistrationCodeClient<$Result.GetResult<Prisma.$RegistrationCodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RegistrationCode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RegistrationCodeFindFirstOrThrowArgs} args - Arguments to find a RegistrationCode
+     * @example
+     * // Get one RegistrationCode
+     * const registrationCode = await prisma.registrationCode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RegistrationCodeFindFirstOrThrowArgs>(args?: SelectSubset<T, RegistrationCodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__RegistrationCodeClient<$Result.GetResult<Prisma.$RegistrationCodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RegistrationCodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RegistrationCodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RegistrationCodes
+     * const registrationCodes = await prisma.registrationCode.findMany()
+     * 
+     * // Get first 10 RegistrationCodes
+     * const registrationCodes = await prisma.registrationCode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const registrationCodeWithIdOnly = await prisma.registrationCode.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RegistrationCodeFindManyArgs>(args?: SelectSubset<T, RegistrationCodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RegistrationCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RegistrationCode.
+     * @param {RegistrationCodeCreateArgs} args - Arguments to create a RegistrationCode.
+     * @example
+     * // Create one RegistrationCode
+     * const RegistrationCode = await prisma.registrationCode.create({
+     *   data: {
+     *     // ... data to create a RegistrationCode
+     *   }
+     * })
+     * 
+     */
+    create<T extends RegistrationCodeCreateArgs>(args: SelectSubset<T, RegistrationCodeCreateArgs<ExtArgs>>): Prisma__RegistrationCodeClient<$Result.GetResult<Prisma.$RegistrationCodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RegistrationCodes.
+     * @param {RegistrationCodeCreateManyArgs} args - Arguments to create many RegistrationCodes.
+     * @example
+     * // Create many RegistrationCodes
+     * const registrationCode = await prisma.registrationCode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RegistrationCodeCreateManyArgs>(args?: SelectSubset<T, RegistrationCodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RegistrationCodes and returns the data saved in the database.
+     * @param {RegistrationCodeCreateManyAndReturnArgs} args - Arguments to create many RegistrationCodes.
+     * @example
+     * // Create many RegistrationCodes
+     * const registrationCode = await prisma.registrationCode.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RegistrationCodes and only return the `id`
+     * const registrationCodeWithIdOnly = await prisma.registrationCode.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RegistrationCodeCreateManyAndReturnArgs>(args?: SelectSubset<T, RegistrationCodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RegistrationCodePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RegistrationCode.
+     * @param {RegistrationCodeDeleteArgs} args - Arguments to delete one RegistrationCode.
+     * @example
+     * // Delete one RegistrationCode
+     * const RegistrationCode = await prisma.registrationCode.delete({
+     *   where: {
+     *     // ... filter to delete one RegistrationCode
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RegistrationCodeDeleteArgs>(args: SelectSubset<T, RegistrationCodeDeleteArgs<ExtArgs>>): Prisma__RegistrationCodeClient<$Result.GetResult<Prisma.$RegistrationCodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RegistrationCode.
+     * @param {RegistrationCodeUpdateArgs} args - Arguments to update one RegistrationCode.
+     * @example
+     * // Update one RegistrationCode
+     * const registrationCode = await prisma.registrationCode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RegistrationCodeUpdateArgs>(args: SelectSubset<T, RegistrationCodeUpdateArgs<ExtArgs>>): Prisma__RegistrationCodeClient<$Result.GetResult<Prisma.$RegistrationCodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RegistrationCodes.
+     * @param {RegistrationCodeDeleteManyArgs} args - Arguments to filter RegistrationCodes to delete.
+     * @example
+     * // Delete a few RegistrationCodes
+     * const { count } = await prisma.registrationCode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RegistrationCodeDeleteManyArgs>(args?: SelectSubset<T, RegistrationCodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RegistrationCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RegistrationCodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RegistrationCodes
+     * const registrationCode = await prisma.registrationCode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RegistrationCodeUpdateManyArgs>(args: SelectSubset<T, RegistrationCodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RegistrationCodes and returns the data updated in the database.
+     * @param {RegistrationCodeUpdateManyAndReturnArgs} args - Arguments to update many RegistrationCodes.
+     * @example
+     * // Update many RegistrationCodes
+     * const registrationCode = await prisma.registrationCode.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RegistrationCodes and only return the `id`
+     * const registrationCodeWithIdOnly = await prisma.registrationCode.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RegistrationCodeUpdateManyAndReturnArgs>(args: SelectSubset<T, RegistrationCodeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RegistrationCodePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RegistrationCode.
+     * @param {RegistrationCodeUpsertArgs} args - Arguments to update or create a RegistrationCode.
+     * @example
+     * // Update or create a RegistrationCode
+     * const registrationCode = await prisma.registrationCode.upsert({
+     *   create: {
+     *     // ... data to create a RegistrationCode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RegistrationCode we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RegistrationCodeUpsertArgs>(args: SelectSubset<T, RegistrationCodeUpsertArgs<ExtArgs>>): Prisma__RegistrationCodeClient<$Result.GetResult<Prisma.$RegistrationCodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RegistrationCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RegistrationCodeCountArgs} args - Arguments to filter RegistrationCodes to count.
+     * @example
+     * // Count the number of RegistrationCodes
+     * const count = await prisma.registrationCode.count({
+     *   where: {
+     *     // ... the filter for the RegistrationCodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends RegistrationCodeCountArgs>(
+      args?: Subset<T, RegistrationCodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RegistrationCodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RegistrationCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RegistrationCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RegistrationCodeAggregateArgs>(args: Subset<T, RegistrationCodeAggregateArgs>): Prisma.PrismaPromise<GetRegistrationCodeAggregateType<T>>
+
+    /**
+     * Group by RegistrationCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RegistrationCodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RegistrationCodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RegistrationCodeGroupByArgs['orderBy'] }
+        : { orderBy?: RegistrationCodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RegistrationCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRegistrationCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RegistrationCode model
+   */
+  readonly fields: RegistrationCodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RegistrationCode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RegistrationCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    createdByCoach<T extends RegistrationCode$createdByCoachArgs<ExtArgs> = {}>(args?: Subset<T, RegistrationCode$createdByCoachArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    usedBy<T extends RegistrationCode$usedByArgs<ExtArgs> = {}>(args?: Subset<T, RegistrationCode$usedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RegistrationCode model
+   */
+  interface RegistrationCodeFieldRefs {
+    readonly id: FieldRef<"RegistrationCode", 'String'>
+    readonly code: FieldRef<"RegistrationCode", 'String'>
+    readonly type: FieldRef<"RegistrationCode", 'InviteCodeType'>
+    readonly createdByCoachId: FieldRef<"RegistrationCode", 'String'>
+    readonly expiresAt: FieldRef<"RegistrationCode", 'DateTime'>
+    readonly usedAt: FieldRef<"RegistrationCode", 'DateTime'>
+    readonly usedById: FieldRef<"RegistrationCode", 'String'>
+    readonly maxUses: FieldRef<"RegistrationCode", 'Int'>
+    readonly useCount: FieldRef<"RegistrationCode", 'Int'>
+    readonly createdAt: FieldRef<"RegistrationCode", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RegistrationCode findUnique
+   */
+  export type RegistrationCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RegistrationCode
+     */
+    select?: RegistrationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RegistrationCode
+     */
+    omit?: RegistrationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which RegistrationCode to fetch.
+     */
+    where: RegistrationCodeWhereUniqueInput
+  }
+
+  /**
+   * RegistrationCode findUniqueOrThrow
+   */
+  export type RegistrationCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RegistrationCode
+     */
+    select?: RegistrationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RegistrationCode
+     */
+    omit?: RegistrationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which RegistrationCode to fetch.
+     */
+    where: RegistrationCodeWhereUniqueInput
+  }
+
+  /**
+   * RegistrationCode findFirst
+   */
+  export type RegistrationCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RegistrationCode
+     */
+    select?: RegistrationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RegistrationCode
+     */
+    omit?: RegistrationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which RegistrationCode to fetch.
+     */
+    where?: RegistrationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RegistrationCodes to fetch.
+     */
+    orderBy?: RegistrationCodeOrderByWithRelationInput | RegistrationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RegistrationCodes.
+     */
+    cursor?: RegistrationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RegistrationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RegistrationCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RegistrationCodes.
+     */
+    distinct?: RegistrationCodeScalarFieldEnum | RegistrationCodeScalarFieldEnum[]
+  }
+
+  /**
+   * RegistrationCode findFirstOrThrow
+   */
+  export type RegistrationCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RegistrationCode
+     */
+    select?: RegistrationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RegistrationCode
+     */
+    omit?: RegistrationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which RegistrationCode to fetch.
+     */
+    where?: RegistrationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RegistrationCodes to fetch.
+     */
+    orderBy?: RegistrationCodeOrderByWithRelationInput | RegistrationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RegistrationCodes.
+     */
+    cursor?: RegistrationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RegistrationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RegistrationCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RegistrationCodes.
+     */
+    distinct?: RegistrationCodeScalarFieldEnum | RegistrationCodeScalarFieldEnum[]
+  }
+
+  /**
+   * RegistrationCode findMany
+   */
+  export type RegistrationCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RegistrationCode
+     */
+    select?: RegistrationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RegistrationCode
+     */
+    omit?: RegistrationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which RegistrationCodes to fetch.
+     */
+    where?: RegistrationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RegistrationCodes to fetch.
+     */
+    orderBy?: RegistrationCodeOrderByWithRelationInput | RegistrationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RegistrationCodes.
+     */
+    cursor?: RegistrationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RegistrationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RegistrationCodes.
+     */
+    skip?: number
+    distinct?: RegistrationCodeScalarFieldEnum | RegistrationCodeScalarFieldEnum[]
+  }
+
+  /**
+   * RegistrationCode create
+   */
+  export type RegistrationCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RegistrationCode
+     */
+    select?: RegistrationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RegistrationCode
+     */
+    omit?: RegistrationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RegistrationCode.
+     */
+    data: XOR<RegistrationCodeCreateInput, RegistrationCodeUncheckedCreateInput>
+  }
+
+  /**
+   * RegistrationCode createMany
+   */
+  export type RegistrationCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RegistrationCodes.
+     */
+    data: RegistrationCodeCreateManyInput | RegistrationCodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RegistrationCode createManyAndReturn
+   */
+  export type RegistrationCodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RegistrationCode
+     */
+    select?: RegistrationCodeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RegistrationCode
+     */
+    omit?: RegistrationCodeOmit<ExtArgs> | null
+    /**
+     * The data used to create many RegistrationCodes.
+     */
+    data: RegistrationCodeCreateManyInput | RegistrationCodeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationCodeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RegistrationCode update
+   */
+  export type RegistrationCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RegistrationCode
+     */
+    select?: RegistrationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RegistrationCode
+     */
+    omit?: RegistrationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RegistrationCode.
+     */
+    data: XOR<RegistrationCodeUpdateInput, RegistrationCodeUncheckedUpdateInput>
+    /**
+     * Choose, which RegistrationCode to update.
+     */
+    where: RegistrationCodeWhereUniqueInput
+  }
+
+  /**
+   * RegistrationCode updateMany
+   */
+  export type RegistrationCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RegistrationCodes.
+     */
+    data: XOR<RegistrationCodeUpdateManyMutationInput, RegistrationCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which RegistrationCodes to update
+     */
+    where?: RegistrationCodeWhereInput
+    /**
+     * Limit how many RegistrationCodes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RegistrationCode updateManyAndReturn
+   */
+  export type RegistrationCodeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RegistrationCode
+     */
+    select?: RegistrationCodeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RegistrationCode
+     */
+    omit?: RegistrationCodeOmit<ExtArgs> | null
+    /**
+     * The data used to update RegistrationCodes.
+     */
+    data: XOR<RegistrationCodeUpdateManyMutationInput, RegistrationCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which RegistrationCodes to update
+     */
+    where?: RegistrationCodeWhereInput
+    /**
+     * Limit how many RegistrationCodes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationCodeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RegistrationCode upsert
+   */
+  export type RegistrationCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RegistrationCode
+     */
+    select?: RegistrationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RegistrationCode
+     */
+    omit?: RegistrationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationCodeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RegistrationCode to update in case it exists.
+     */
+    where: RegistrationCodeWhereUniqueInput
+    /**
+     * In case the RegistrationCode found by the `where` argument doesn't exist, create a new RegistrationCode with this data.
+     */
+    create: XOR<RegistrationCodeCreateInput, RegistrationCodeUncheckedCreateInput>
+    /**
+     * In case the RegistrationCode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RegistrationCodeUpdateInput, RegistrationCodeUncheckedUpdateInput>
+  }
+
+  /**
+   * RegistrationCode delete
+   */
+  export type RegistrationCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RegistrationCode
+     */
+    select?: RegistrationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RegistrationCode
+     */
+    omit?: RegistrationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationCodeInclude<ExtArgs> | null
+    /**
+     * Filter which RegistrationCode to delete.
+     */
+    where: RegistrationCodeWhereUniqueInput
+  }
+
+  /**
+   * RegistrationCode deleteMany
+   */
+  export type RegistrationCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RegistrationCodes to delete
+     */
+    where?: RegistrationCodeWhereInput
+    /**
+     * Limit how many RegistrationCodes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RegistrationCode.createdByCoach
+   */
+  export type RegistrationCode$createdByCoachArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * RegistrationCode.usedBy
+   */
+  export type RegistrationCode$usedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * RegistrationCode without action
+   */
+  export type RegistrationCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RegistrationCode
+     */
+    select?: RegistrationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RegistrationCode
+     */
+    omit?: RegistrationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationCodeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Subscription
+   */
+
+  export type AggregateSubscription = {
+    _count: SubscriptionCountAggregateOutputType | null
+    _avg: SubscriptionAvgAggregateOutputType | null
+    _sum: SubscriptionSumAggregateOutputType | null
+    _min: SubscriptionMinAggregateOutputType | null
+    _max: SubscriptionMaxAggregateOutputType | null
+  }
+
+  export type SubscriptionAvgAggregateOutputType = {
+    clientCodeCredits: number | null
+  }
+
+  export type SubscriptionSumAggregateOutputType = {
+    clientCodeCredits: number | null
+  }
+
+  export type SubscriptionMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    paypalSubscriptionId: string | null
+    paypalPlanId: string | null
+    status: $Enums.SubscriptionStatus | null
+    trialEndsAt: Date | null
+    currentPeriodEnd: Date | null
+    cancelAtPeriodEnd: boolean | null
+    clientCodeCredits: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SubscriptionMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    paypalSubscriptionId: string | null
+    paypalPlanId: string | null
+    status: $Enums.SubscriptionStatus | null
+    trialEndsAt: Date | null
+    currentPeriodEnd: Date | null
+    cancelAtPeriodEnd: boolean | null
+    clientCodeCredits: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SubscriptionCountAggregateOutputType = {
+    id: number
+    userId: number
+    paypalSubscriptionId: number
+    paypalPlanId: number
+    status: number
+    trialEndsAt: number
+    currentPeriodEnd: number
+    cancelAtPeriodEnd: number
+    clientCodeCredits: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SubscriptionAvgAggregateInputType = {
+    clientCodeCredits?: true
+  }
+
+  export type SubscriptionSumAggregateInputType = {
+    clientCodeCredits?: true
+  }
+
+  export type SubscriptionMinAggregateInputType = {
+    id?: true
+    userId?: true
+    paypalSubscriptionId?: true
+    paypalPlanId?: true
+    status?: true
+    trialEndsAt?: true
+    currentPeriodEnd?: true
+    cancelAtPeriodEnd?: true
+    clientCodeCredits?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SubscriptionMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    paypalSubscriptionId?: true
+    paypalPlanId?: true
+    status?: true
+    trialEndsAt?: true
+    currentPeriodEnd?: true
+    cancelAtPeriodEnd?: true
+    clientCodeCredits?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SubscriptionCountAggregateInputType = {
+    id?: true
+    userId?: true
+    paypalSubscriptionId?: true
+    paypalPlanId?: true
+    status?: true
+    trialEndsAt?: true
+    currentPeriodEnd?: true
+    cancelAtPeriodEnd?: true
+    clientCodeCredits?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SubscriptionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Subscription to aggregate.
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Subscriptions to fetch.
+     */
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Subscriptions
+    **/
+    _count?: true | SubscriptionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SubscriptionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SubscriptionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SubscriptionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SubscriptionMaxAggregateInputType
+  }
+
+  export type GetSubscriptionAggregateType<T extends SubscriptionAggregateArgs> = {
+        [P in keyof T & keyof AggregateSubscription]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSubscription[P]>
+      : GetScalarType<T[P], AggregateSubscription[P]>
+  }
+
+
+
+
+  export type SubscriptionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubscriptionWhereInput
+    orderBy?: SubscriptionOrderByWithAggregationInput | SubscriptionOrderByWithAggregationInput[]
+    by: SubscriptionScalarFieldEnum[] | SubscriptionScalarFieldEnum
+    having?: SubscriptionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SubscriptionCountAggregateInputType | true
+    _avg?: SubscriptionAvgAggregateInputType
+    _sum?: SubscriptionSumAggregateInputType
+    _min?: SubscriptionMinAggregateInputType
+    _max?: SubscriptionMaxAggregateInputType
+  }
+
+  export type SubscriptionGroupByOutputType = {
+    id: string
+    userId: string
+    paypalSubscriptionId: string | null
+    paypalPlanId: string | null
+    status: $Enums.SubscriptionStatus
+    trialEndsAt: Date | null
+    currentPeriodEnd: Date | null
+    cancelAtPeriodEnd: boolean
+    clientCodeCredits: number
+    createdAt: Date
+    updatedAt: Date
+    _count: SubscriptionCountAggregateOutputType | null
+    _avg: SubscriptionAvgAggregateOutputType | null
+    _sum: SubscriptionSumAggregateOutputType | null
+    _min: SubscriptionMinAggregateOutputType | null
+    _max: SubscriptionMaxAggregateOutputType | null
+  }
+
+  type GetSubscriptionGroupByPayload<T extends SubscriptionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SubscriptionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SubscriptionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SubscriptionGroupByOutputType[P]>
+            : GetScalarType<T[P], SubscriptionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SubscriptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    paypalSubscriptionId?: boolean
+    paypalPlanId?: boolean
+    status?: boolean
+    trialEndsAt?: boolean
+    currentPeriodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    clientCodeCredits?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subscription"]>
+
+  export type SubscriptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    paypalSubscriptionId?: boolean
+    paypalPlanId?: boolean
+    status?: boolean
+    trialEndsAt?: boolean
+    currentPeriodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    clientCodeCredits?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subscription"]>
+
+  export type SubscriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    paypalSubscriptionId?: boolean
+    paypalPlanId?: boolean
+    status?: boolean
+    trialEndsAt?: boolean
+    currentPeriodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    clientCodeCredits?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subscription"]>
+
+  export type SubscriptionSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    paypalSubscriptionId?: boolean
+    paypalPlanId?: boolean
+    status?: boolean
+    trialEndsAt?: boolean
+    currentPeriodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    clientCodeCredits?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "paypalSubscriptionId" | "paypalPlanId" | "status" | "trialEndsAt" | "currentPeriodEnd" | "cancelAtPeriodEnd" | "clientCodeCredits" | "createdAt" | "updatedAt", ExtArgs["result"]["subscription"]>
+  export type SubscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type SubscriptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type SubscriptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $SubscriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Subscription"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      paypalSubscriptionId: string | null
+      paypalPlanId: string | null
+      status: $Enums.SubscriptionStatus
+      trialEndsAt: Date | null
+      currentPeriodEnd: Date | null
+      cancelAtPeriodEnd: boolean
+      clientCodeCredits: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["subscription"]>
+    composites: {}
+  }
+
+  type SubscriptionGetPayload<S extends boolean | null | undefined | SubscriptionDefaultArgs> = $Result.GetResult<Prisma.$SubscriptionPayload, S>
+
+  type SubscriptionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SubscriptionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SubscriptionCountAggregateInputType | true
+    }
+
+  export interface SubscriptionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Subscription'], meta: { name: 'Subscription' } }
+    /**
+     * Find zero or one Subscription that matches the filter.
+     * @param {SubscriptionFindUniqueArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SubscriptionFindUniqueArgs>(args: SelectSubset<T, SubscriptionFindUniqueArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Subscription that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SubscriptionFindUniqueOrThrowArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SubscriptionFindUniqueOrThrowArgs>(args: SelectSubset<T, SubscriptionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Subscription that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionFindFirstArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SubscriptionFindFirstArgs>(args?: SelectSubset<T, SubscriptionFindFirstArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Subscription that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionFindFirstOrThrowArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SubscriptionFindFirstOrThrowArgs>(args?: SelectSubset<T, SubscriptionFindFirstOrThrowArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Subscriptions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Subscriptions
+     * const subscriptions = await prisma.subscription.findMany()
+     * 
+     * // Get first 10 Subscriptions
+     * const subscriptions = await prisma.subscription.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const subscriptionWithIdOnly = await prisma.subscription.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SubscriptionFindManyArgs>(args?: SelectSubset<T, SubscriptionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Subscription.
+     * @param {SubscriptionCreateArgs} args - Arguments to create a Subscription.
+     * @example
+     * // Create one Subscription
+     * const Subscription = await prisma.subscription.create({
+     *   data: {
+     *     // ... data to create a Subscription
+     *   }
+     * })
+     * 
+     */
+    create<T extends SubscriptionCreateArgs>(args: SelectSubset<T, SubscriptionCreateArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Subscriptions.
+     * @param {SubscriptionCreateManyArgs} args - Arguments to create many Subscriptions.
+     * @example
+     * // Create many Subscriptions
+     * const subscription = await prisma.subscription.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SubscriptionCreateManyArgs>(args?: SelectSubset<T, SubscriptionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Subscriptions and returns the data saved in the database.
+     * @param {SubscriptionCreateManyAndReturnArgs} args - Arguments to create many Subscriptions.
+     * @example
+     * // Create many Subscriptions
+     * const subscription = await prisma.subscription.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Subscriptions and only return the `id`
+     * const subscriptionWithIdOnly = await prisma.subscription.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SubscriptionCreateManyAndReturnArgs>(args?: SelectSubset<T, SubscriptionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Subscription.
+     * @param {SubscriptionDeleteArgs} args - Arguments to delete one Subscription.
+     * @example
+     * // Delete one Subscription
+     * const Subscription = await prisma.subscription.delete({
+     *   where: {
+     *     // ... filter to delete one Subscription
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SubscriptionDeleteArgs>(args: SelectSubset<T, SubscriptionDeleteArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Subscription.
+     * @param {SubscriptionUpdateArgs} args - Arguments to update one Subscription.
+     * @example
+     * // Update one Subscription
+     * const subscription = await prisma.subscription.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SubscriptionUpdateArgs>(args: SelectSubset<T, SubscriptionUpdateArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Subscriptions.
+     * @param {SubscriptionDeleteManyArgs} args - Arguments to filter Subscriptions to delete.
+     * @example
+     * // Delete a few Subscriptions
+     * const { count } = await prisma.subscription.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SubscriptionDeleteManyArgs>(args?: SelectSubset<T, SubscriptionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Subscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Subscriptions
+     * const subscription = await prisma.subscription.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SubscriptionUpdateManyArgs>(args: SelectSubset<T, SubscriptionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Subscriptions and returns the data updated in the database.
+     * @param {SubscriptionUpdateManyAndReturnArgs} args - Arguments to update many Subscriptions.
+     * @example
+     * // Update many Subscriptions
+     * const subscription = await prisma.subscription.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Subscriptions and only return the `id`
+     * const subscriptionWithIdOnly = await prisma.subscription.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SubscriptionUpdateManyAndReturnArgs>(args: SelectSubset<T, SubscriptionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Subscription.
+     * @param {SubscriptionUpsertArgs} args - Arguments to update or create a Subscription.
+     * @example
+     * // Update or create a Subscription
+     * const subscription = await prisma.subscription.upsert({
+     *   create: {
+     *     // ... data to create a Subscription
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Subscription we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SubscriptionUpsertArgs>(args: SelectSubset<T, SubscriptionUpsertArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Subscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionCountArgs} args - Arguments to filter Subscriptions to count.
+     * @example
+     * // Count the number of Subscriptions
+     * const count = await prisma.subscription.count({
+     *   where: {
+     *     // ... the filter for the Subscriptions we want to count
+     *   }
+     * })
+    **/
+    count<T extends SubscriptionCountArgs>(
+      args?: Subset<T, SubscriptionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SubscriptionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Subscription.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SubscriptionAggregateArgs>(args: Subset<T, SubscriptionAggregateArgs>): Prisma.PrismaPromise<GetSubscriptionAggregateType<T>>
+
+    /**
+     * Group by Subscription.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SubscriptionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SubscriptionGroupByArgs['orderBy'] }
+        : { orderBy?: SubscriptionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SubscriptionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSubscriptionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Subscription model
+   */
+  readonly fields: SubscriptionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Subscription.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SubscriptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Subscription model
+   */
+  interface SubscriptionFieldRefs {
+    readonly id: FieldRef<"Subscription", 'String'>
+    readonly userId: FieldRef<"Subscription", 'String'>
+    readonly paypalSubscriptionId: FieldRef<"Subscription", 'String'>
+    readonly paypalPlanId: FieldRef<"Subscription", 'String'>
+    readonly status: FieldRef<"Subscription", 'SubscriptionStatus'>
+    readonly trialEndsAt: FieldRef<"Subscription", 'DateTime'>
+    readonly currentPeriodEnd: FieldRef<"Subscription", 'DateTime'>
+    readonly cancelAtPeriodEnd: FieldRef<"Subscription", 'Boolean'>
+    readonly clientCodeCredits: FieldRef<"Subscription", 'Int'>
+    readonly createdAt: FieldRef<"Subscription", 'DateTime'>
+    readonly updatedAt: FieldRef<"Subscription", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Subscription findUnique
+   */
+  export type SubscriptionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscription to fetch.
+     */
+    where: SubscriptionWhereUniqueInput
+  }
+
+  /**
+   * Subscription findUniqueOrThrow
+   */
+  export type SubscriptionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscription to fetch.
+     */
+    where: SubscriptionWhereUniqueInput
+  }
+
+  /**
+   * Subscription findFirst
+   */
+  export type SubscriptionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscription to fetch.
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Subscriptions to fetch.
+     */
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Subscriptions.
+     */
+    cursor?: SubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Subscriptions.
+     */
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * Subscription findFirstOrThrow
+   */
+  export type SubscriptionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscription to fetch.
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Subscriptions to fetch.
+     */
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Subscriptions.
+     */
+    cursor?: SubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Subscriptions.
+     */
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * Subscription findMany
+   */
+  export type SubscriptionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscriptions to fetch.
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Subscriptions to fetch.
+     */
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Subscriptions.
+     */
+    cursor?: SubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Subscriptions.
+     */
+    skip?: number
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * Subscription create
+   */
+  export type SubscriptionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Subscription.
+     */
+    data: XOR<SubscriptionCreateInput, SubscriptionUncheckedCreateInput>
+  }
+
+  /**
+   * Subscription createMany
+   */
+  export type SubscriptionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Subscriptions.
+     */
+    data: SubscriptionCreateManyInput | SubscriptionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Subscription createManyAndReturn
+   */
+  export type SubscriptionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Subscriptions.
+     */
+    data: SubscriptionCreateManyInput | SubscriptionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Subscription update
+   */
+  export type SubscriptionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Subscription.
+     */
+    data: XOR<SubscriptionUpdateInput, SubscriptionUncheckedUpdateInput>
+    /**
+     * Choose, which Subscription to update.
+     */
+    where: SubscriptionWhereUniqueInput
+  }
+
+  /**
+   * Subscription updateMany
+   */
+  export type SubscriptionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Subscriptions.
+     */
+    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyInput>
+    /**
+     * Filter which Subscriptions to update
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * Limit how many Subscriptions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Subscription updateManyAndReturn
+   */
+  export type SubscriptionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * The data used to update Subscriptions.
+     */
+    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyInput>
+    /**
+     * Filter which Subscriptions to update
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * Limit how many Subscriptions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Subscription upsert
+   */
+  export type SubscriptionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Subscription to update in case it exists.
+     */
+    where: SubscriptionWhereUniqueInput
+    /**
+     * In case the Subscription found by the `where` argument doesn't exist, create a new Subscription with this data.
+     */
+    create: XOR<SubscriptionCreateInput, SubscriptionUncheckedCreateInput>
+    /**
+     * In case the Subscription was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SubscriptionUpdateInput, SubscriptionUncheckedUpdateInput>
+  }
+
+  /**
+   * Subscription delete
+   */
+  export type SubscriptionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter which Subscription to delete.
+     */
+    where: SubscriptionWhereUniqueInput
+  }
+
+  /**
+   * Subscription deleteMany
+   */
+  export type SubscriptionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Subscriptions to delete
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * Limit how many Subscriptions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Subscription without action
+   */
+  export type SubscriptionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
   }
 
 
@@ -25989,6 +29932,7 @@ export namespace Prisma {
     image: 'image',
     role: 'role',
     coachId: 'coachId',
+    passwordHash: 'passwordHash',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -26011,6 +29955,52 @@ export namespace Prisma {
   };
 
   export type UserProfileScalarFieldEnum = (typeof UserProfileScalarFieldEnum)[keyof typeof UserProfileScalarFieldEnum]
+
+
+  export const CoachInviteCodeScalarFieldEnum: {
+    id: 'id',
+    coachId: 'coachId',
+    code: 'code',
+    expiresAt: 'expiresAt',
+    usedAt: 'usedAt',
+    usedById: 'usedById',
+    createdAt: 'createdAt'
+  };
+
+  export type CoachInviteCodeScalarFieldEnum = (typeof CoachInviteCodeScalarFieldEnum)[keyof typeof CoachInviteCodeScalarFieldEnum]
+
+
+  export const RegistrationCodeScalarFieldEnum: {
+    id: 'id',
+    code: 'code',
+    type: 'type',
+    createdByCoachId: 'createdByCoachId',
+    expiresAt: 'expiresAt',
+    usedAt: 'usedAt',
+    usedById: 'usedById',
+    maxUses: 'maxUses',
+    useCount: 'useCount',
+    createdAt: 'createdAt'
+  };
+
+  export type RegistrationCodeScalarFieldEnum = (typeof RegistrationCodeScalarFieldEnum)[keyof typeof RegistrationCodeScalarFieldEnum]
+
+
+  export const SubscriptionScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    paypalSubscriptionId: 'paypalSubscriptionId',
+    paypalPlanId: 'paypalPlanId',
+    status: 'status',
+    trialEndsAt: 'trialEndsAt',
+    currentPeriodEnd: 'currentPeriodEnd',
+    cancelAtPeriodEnd: 'cancelAtPeriodEnd',
+    clientCodeCredits: 'clientCodeCredits',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
 
 
   export const PostScalarFieldEnum: {
@@ -26351,6 +30341,41 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'InviteCodeType'
+   */
+  export type EnumInviteCodeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InviteCodeType'>
+    
+
+
+  /**
+   * Reference to a field of type 'InviteCodeType[]'
+   */
+  export type ListEnumInviteCodeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InviteCodeType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SubscriptionStatus'
+   */
+  export type EnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'SubscriptionStatus[]'
+   */
+  export type ListEnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -26361,13 +30386,6 @@ export namespace Prisma {
    * Reference to a field of type 'QueryMode'
    */
   export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -26599,10 +30617,16 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     coachId?: StringNullableFilter<"User"> | string | null
+    passwordHash?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    coachCodes?: CoachInviteCodeListRelationFilter
+    usedInviteCode?: XOR<CoachInviteCodeNullableScalarRelationFilter, CoachInviteCodeWhereInput> | null
     coach?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     clients?: UserListRelationFilter
+    registrationCodes?: RegistrationCodeListRelationFilter
+    usedCode?: XOR<RegistrationCodeNullableScalarRelationFilter, RegistrationCodeWhereInput> | null
+    subscription?: XOR<SubscriptionNullableScalarRelationFilter, SubscriptionWhereInput> | null
     posts?: PostListRelationFilter
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
@@ -26625,10 +30649,16 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     role?: SortOrder
     coachId?: SortOrderInput | SortOrder
+    passwordHash?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    coachCodes?: CoachInviteCodeOrderByRelationAggregateInput
+    usedInviteCode?: CoachInviteCodeOrderByWithRelationInput
     coach?: UserOrderByWithRelationInput
     clients?: UserOrderByRelationAggregateInput
+    registrationCodes?: RegistrationCodeOrderByRelationAggregateInput
+    usedCode?: RegistrationCodeOrderByWithRelationInput
+    subscription?: SubscriptionOrderByWithRelationInput
     posts?: PostOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
@@ -26654,10 +30684,16 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     coachId?: StringNullableFilter<"User"> | string | null
+    passwordHash?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    coachCodes?: CoachInviteCodeListRelationFilter
+    usedInviteCode?: XOR<CoachInviteCodeNullableScalarRelationFilter, CoachInviteCodeWhereInput> | null
     coach?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     clients?: UserListRelationFilter
+    registrationCodes?: RegistrationCodeListRelationFilter
+    usedCode?: XOR<RegistrationCodeNullableScalarRelationFilter, RegistrationCodeWhereInput> | null
+    subscription?: XOR<SubscriptionNullableScalarRelationFilter, SubscriptionWhereInput> | null
     posts?: PostListRelationFilter
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
@@ -26680,6 +30716,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     role?: SortOrder
     coachId?: SortOrderInput | SortOrder
+    passwordHash?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -26698,6 +30735,7 @@ export namespace Prisma {
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
     coachId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    passwordHash?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -26787,6 +30825,246 @@ export namespace Prisma {
     activityFactor?: FloatWithAggregatesFilter<"UserProfile"> | number
     metabolicAdjustment?: FloatWithAggregatesFilter<"UserProfile"> | number
     updatedAt?: DateTimeWithAggregatesFilter<"UserProfile"> | Date | string
+  }
+
+  export type CoachInviteCodeWhereInput = {
+    AND?: CoachInviteCodeWhereInput | CoachInviteCodeWhereInput[]
+    OR?: CoachInviteCodeWhereInput[]
+    NOT?: CoachInviteCodeWhereInput | CoachInviteCodeWhereInput[]
+    id?: StringFilter<"CoachInviteCode"> | string
+    coachId?: StringFilter<"CoachInviteCode"> | string
+    code?: StringFilter<"CoachInviteCode"> | string
+    expiresAt?: DateTimeFilter<"CoachInviteCode"> | Date | string
+    usedAt?: DateTimeNullableFilter<"CoachInviteCode"> | Date | string | null
+    usedById?: StringNullableFilter<"CoachInviteCode"> | string | null
+    createdAt?: DateTimeFilter<"CoachInviteCode"> | Date | string
+    coach?: XOR<UserScalarRelationFilter, UserWhereInput>
+    usedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type CoachInviteCodeOrderByWithRelationInput = {
+    id?: SortOrder
+    coachId?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    usedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    coach?: UserOrderByWithRelationInput
+    usedBy?: UserOrderByWithRelationInput
+  }
+
+  export type CoachInviteCodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    code?: string
+    usedById?: string
+    AND?: CoachInviteCodeWhereInput | CoachInviteCodeWhereInput[]
+    OR?: CoachInviteCodeWhereInput[]
+    NOT?: CoachInviteCodeWhereInput | CoachInviteCodeWhereInput[]
+    coachId?: StringFilter<"CoachInviteCode"> | string
+    expiresAt?: DateTimeFilter<"CoachInviteCode"> | Date | string
+    usedAt?: DateTimeNullableFilter<"CoachInviteCode"> | Date | string | null
+    createdAt?: DateTimeFilter<"CoachInviteCode"> | Date | string
+    coach?: XOR<UserScalarRelationFilter, UserWhereInput>
+    usedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id" | "code" | "usedById">
+
+  export type CoachInviteCodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    coachId?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    usedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: CoachInviteCodeCountOrderByAggregateInput
+    _max?: CoachInviteCodeMaxOrderByAggregateInput
+    _min?: CoachInviteCodeMinOrderByAggregateInput
+  }
+
+  export type CoachInviteCodeScalarWhereWithAggregatesInput = {
+    AND?: CoachInviteCodeScalarWhereWithAggregatesInput | CoachInviteCodeScalarWhereWithAggregatesInput[]
+    OR?: CoachInviteCodeScalarWhereWithAggregatesInput[]
+    NOT?: CoachInviteCodeScalarWhereWithAggregatesInput | CoachInviteCodeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CoachInviteCode"> | string
+    coachId?: StringWithAggregatesFilter<"CoachInviteCode"> | string
+    code?: StringWithAggregatesFilter<"CoachInviteCode"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"CoachInviteCode"> | Date | string
+    usedAt?: DateTimeNullableWithAggregatesFilter<"CoachInviteCode"> | Date | string | null
+    usedById?: StringNullableWithAggregatesFilter<"CoachInviteCode"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"CoachInviteCode"> | Date | string
+  }
+
+  export type RegistrationCodeWhereInput = {
+    AND?: RegistrationCodeWhereInput | RegistrationCodeWhereInput[]
+    OR?: RegistrationCodeWhereInput[]
+    NOT?: RegistrationCodeWhereInput | RegistrationCodeWhereInput[]
+    id?: StringFilter<"RegistrationCode"> | string
+    code?: StringFilter<"RegistrationCode"> | string
+    type?: EnumInviteCodeTypeFilter<"RegistrationCode"> | $Enums.InviteCodeType
+    createdByCoachId?: StringNullableFilter<"RegistrationCode"> | string | null
+    expiresAt?: DateTimeFilter<"RegistrationCode"> | Date | string
+    usedAt?: DateTimeNullableFilter<"RegistrationCode"> | Date | string | null
+    usedById?: StringNullableFilter<"RegistrationCode"> | string | null
+    maxUses?: IntFilter<"RegistrationCode"> | number
+    useCount?: IntFilter<"RegistrationCode"> | number
+    createdAt?: DateTimeFilter<"RegistrationCode"> | Date | string
+    createdByCoach?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    usedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type RegistrationCodeOrderByWithRelationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
+    createdByCoachId?: SortOrderInput | SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    usedById?: SortOrderInput | SortOrder
+    maxUses?: SortOrder
+    useCount?: SortOrder
+    createdAt?: SortOrder
+    createdByCoach?: UserOrderByWithRelationInput
+    usedBy?: UserOrderByWithRelationInput
+  }
+
+  export type RegistrationCodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    code?: string
+    usedById?: string
+    AND?: RegistrationCodeWhereInput | RegistrationCodeWhereInput[]
+    OR?: RegistrationCodeWhereInput[]
+    NOT?: RegistrationCodeWhereInput | RegistrationCodeWhereInput[]
+    type?: EnumInviteCodeTypeFilter<"RegistrationCode"> | $Enums.InviteCodeType
+    createdByCoachId?: StringNullableFilter<"RegistrationCode"> | string | null
+    expiresAt?: DateTimeFilter<"RegistrationCode"> | Date | string
+    usedAt?: DateTimeNullableFilter<"RegistrationCode"> | Date | string | null
+    maxUses?: IntFilter<"RegistrationCode"> | number
+    useCount?: IntFilter<"RegistrationCode"> | number
+    createdAt?: DateTimeFilter<"RegistrationCode"> | Date | string
+    createdByCoach?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    usedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id" | "code" | "usedById">
+
+  export type RegistrationCodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
+    createdByCoachId?: SortOrderInput | SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    usedById?: SortOrderInput | SortOrder
+    maxUses?: SortOrder
+    useCount?: SortOrder
+    createdAt?: SortOrder
+    _count?: RegistrationCodeCountOrderByAggregateInput
+    _avg?: RegistrationCodeAvgOrderByAggregateInput
+    _max?: RegistrationCodeMaxOrderByAggregateInput
+    _min?: RegistrationCodeMinOrderByAggregateInput
+    _sum?: RegistrationCodeSumOrderByAggregateInput
+  }
+
+  export type RegistrationCodeScalarWhereWithAggregatesInput = {
+    AND?: RegistrationCodeScalarWhereWithAggregatesInput | RegistrationCodeScalarWhereWithAggregatesInput[]
+    OR?: RegistrationCodeScalarWhereWithAggregatesInput[]
+    NOT?: RegistrationCodeScalarWhereWithAggregatesInput | RegistrationCodeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RegistrationCode"> | string
+    code?: StringWithAggregatesFilter<"RegistrationCode"> | string
+    type?: EnumInviteCodeTypeWithAggregatesFilter<"RegistrationCode"> | $Enums.InviteCodeType
+    createdByCoachId?: StringNullableWithAggregatesFilter<"RegistrationCode"> | string | null
+    expiresAt?: DateTimeWithAggregatesFilter<"RegistrationCode"> | Date | string
+    usedAt?: DateTimeNullableWithAggregatesFilter<"RegistrationCode"> | Date | string | null
+    usedById?: StringNullableWithAggregatesFilter<"RegistrationCode"> | string | null
+    maxUses?: IntWithAggregatesFilter<"RegistrationCode"> | number
+    useCount?: IntWithAggregatesFilter<"RegistrationCode"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"RegistrationCode"> | Date | string
+  }
+
+  export type SubscriptionWhereInput = {
+    AND?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    OR?: SubscriptionWhereInput[]
+    NOT?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    id?: StringFilter<"Subscription"> | string
+    userId?: StringFilter<"Subscription"> | string
+    paypalSubscriptionId?: StringNullableFilter<"Subscription"> | string | null
+    paypalPlanId?: StringNullableFilter<"Subscription"> | string | null
+    status?: EnumSubscriptionStatusFilter<"Subscription"> | $Enums.SubscriptionStatus
+    trialEndsAt?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    currentPeriodEnd?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolFilter<"Subscription"> | boolean
+    clientCodeCredits?: IntFilter<"Subscription"> | number
+    createdAt?: DateTimeFilter<"Subscription"> | Date | string
+    updatedAt?: DateTimeFilter<"Subscription"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type SubscriptionOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    paypalSubscriptionId?: SortOrderInput | SortOrder
+    paypalPlanId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    trialEndsAt?: SortOrderInput | SortOrder
+    currentPeriodEnd?: SortOrderInput | SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    clientCodeCredits?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    paypalSubscriptionId?: string
+    AND?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    OR?: SubscriptionWhereInput[]
+    NOT?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    paypalPlanId?: StringNullableFilter<"Subscription"> | string | null
+    status?: EnumSubscriptionStatusFilter<"Subscription"> | $Enums.SubscriptionStatus
+    trialEndsAt?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    currentPeriodEnd?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolFilter<"Subscription"> | boolean
+    clientCodeCredits?: IntFilter<"Subscription"> | number
+    createdAt?: DateTimeFilter<"Subscription"> | Date | string
+    updatedAt?: DateTimeFilter<"Subscription"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId" | "paypalSubscriptionId">
+
+  export type SubscriptionOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    paypalSubscriptionId?: SortOrderInput | SortOrder
+    paypalPlanId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    trialEndsAt?: SortOrderInput | SortOrder
+    currentPeriodEnd?: SortOrderInput | SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    clientCodeCredits?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SubscriptionCountOrderByAggregateInput
+    _avg?: SubscriptionAvgOrderByAggregateInput
+    _max?: SubscriptionMaxOrderByAggregateInput
+    _min?: SubscriptionMinOrderByAggregateInput
+    _sum?: SubscriptionSumOrderByAggregateInput
+  }
+
+  export type SubscriptionScalarWhereWithAggregatesInput = {
+    AND?: SubscriptionScalarWhereWithAggregatesInput | SubscriptionScalarWhereWithAggregatesInput[]
+    OR?: SubscriptionScalarWhereWithAggregatesInput[]
+    NOT?: SubscriptionScalarWhereWithAggregatesInput | SubscriptionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Subscription"> | string
+    userId?: StringWithAggregatesFilter<"Subscription"> | string
+    paypalSubscriptionId?: StringNullableWithAggregatesFilter<"Subscription"> | string | null
+    paypalPlanId?: StringNullableWithAggregatesFilter<"Subscription"> | string | null
+    status?: EnumSubscriptionStatusWithAggregatesFilter<"Subscription"> | $Enums.SubscriptionStatus
+    trialEndsAt?: DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
+    currentPeriodEnd?: DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolWithAggregatesFilter<"Subscription"> | boolean
+    clientCodeCredits?: IntWithAggregatesFilter<"Subscription"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
   }
 
   export type PostWhereInput = {
@@ -28021,10 +32299,16 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     coach?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -28047,9 +32331,15 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -28071,10 +32361,16 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     coach?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -28097,9 +32393,15 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -28122,6 +32424,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -28133,6 +32436,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28145,6 +32449,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28243,6 +32548,260 @@ export namespace Prisma {
     goal?: EnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType
     activityFactor?: FloatFieldUpdateOperationsInput | number
     metabolicAdjustment?: FloatFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CoachInviteCodeCreateInput = {
+    id?: string
+    code: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+    coach: UserCreateNestedOneWithoutCoachCodesInput
+    usedBy?: UserCreateNestedOneWithoutUsedInviteCodeInput
+  }
+
+  export type CoachInviteCodeUncheckedCreateInput = {
+    id?: string
+    coachId: string
+    code: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    usedById?: string | null
+    createdAt?: Date | string
+  }
+
+  export type CoachInviteCodeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coach?: UserUpdateOneRequiredWithoutCoachCodesNestedInput
+    usedBy?: UserUpdateOneWithoutUsedInviteCodeNestedInput
+  }
+
+  export type CoachInviteCodeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    coachId?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    usedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CoachInviteCodeCreateManyInput = {
+    id?: string
+    coachId: string
+    code: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    usedById?: string | null
+    createdAt?: Date | string
+  }
+
+  export type CoachInviteCodeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CoachInviteCodeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    coachId?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    usedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RegistrationCodeCreateInput = {
+    id?: string
+    code: string
+    type: $Enums.InviteCodeType
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    maxUses?: number
+    useCount?: number
+    createdAt?: Date | string
+    createdByCoach?: UserCreateNestedOneWithoutRegistrationCodesInput
+    usedBy?: UserCreateNestedOneWithoutUsedCodeInput
+  }
+
+  export type RegistrationCodeUncheckedCreateInput = {
+    id?: string
+    code: string
+    type: $Enums.InviteCodeType
+    createdByCoachId?: string | null
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    usedById?: string | null
+    maxUses?: number
+    useCount?: number
+    createdAt?: Date | string
+  }
+
+  export type RegistrationCodeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumInviteCodeTypeFieldUpdateOperationsInput | $Enums.InviteCodeType
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    maxUses?: IntFieldUpdateOperationsInput | number
+    useCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByCoach?: UserUpdateOneWithoutRegistrationCodesNestedInput
+    usedBy?: UserUpdateOneWithoutUsedCodeNestedInput
+  }
+
+  export type RegistrationCodeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumInviteCodeTypeFieldUpdateOperationsInput | $Enums.InviteCodeType
+    createdByCoachId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    usedById?: NullableStringFieldUpdateOperationsInput | string | null
+    maxUses?: IntFieldUpdateOperationsInput | number
+    useCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RegistrationCodeCreateManyInput = {
+    id?: string
+    code: string
+    type: $Enums.InviteCodeType
+    createdByCoachId?: string | null
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    usedById?: string | null
+    maxUses?: number
+    useCount?: number
+    createdAt?: Date | string
+  }
+
+  export type RegistrationCodeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumInviteCodeTypeFieldUpdateOperationsInput | $Enums.InviteCodeType
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    maxUses?: IntFieldUpdateOperationsInput | number
+    useCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RegistrationCodeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumInviteCodeTypeFieldUpdateOperationsInput | $Enums.InviteCodeType
+    createdByCoachId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    usedById?: NullableStringFieldUpdateOperationsInput | string | null
+    maxUses?: IntFieldUpdateOperationsInput | number
+    useCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubscriptionCreateInput = {
+    id?: string
+    paypalSubscriptionId?: string | null
+    paypalPlanId?: string | null
+    status?: $Enums.SubscriptionStatus
+    trialEndsAt?: Date | string | null
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    clientCodeCredits?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutSubscriptionInput
+  }
+
+  export type SubscriptionUncheckedCreateInput = {
+    id?: string
+    userId: string
+    paypalSubscriptionId?: string | null
+    paypalPlanId?: string | null
+    status?: $Enums.SubscriptionStatus
+    trialEndsAt?: Date | string | null
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    clientCodeCredits?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SubscriptionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paypalSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    paypalPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    clientCodeCredits?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSubscriptionNestedInput
+  }
+
+  export type SubscriptionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    paypalSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    paypalPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    clientCodeCredits?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubscriptionCreateManyInput = {
+    id?: string
+    userId: string
+    paypalSubscriptionId?: string | null
+    paypalPlanId?: string | null
+    status?: $Enums.SubscriptionStatus
+    trialEndsAt?: Date | string | null
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    clientCodeCredits?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SubscriptionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paypalSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    paypalPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    clientCodeCredits?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubscriptionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    paypalSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    paypalPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    clientCodeCredits?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -29545,6 +34104,17 @@ export namespace Prisma {
     not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
+  export type CoachInviteCodeListRelationFilter = {
+    every?: CoachInviteCodeWhereInput
+    some?: CoachInviteCodeWhereInput
+    none?: CoachInviteCodeWhereInput
+  }
+
+  export type CoachInviteCodeNullableScalarRelationFilter = {
+    is?: CoachInviteCodeWhereInput | null
+    isNot?: CoachInviteCodeWhereInput | null
+  }
+
   export type UserNullableScalarRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
@@ -29554,6 +34124,22 @@ export namespace Prisma {
     every?: UserWhereInput
     some?: UserWhereInput
     none?: UserWhereInput
+  }
+
+  export type RegistrationCodeListRelationFilter = {
+    every?: RegistrationCodeWhereInput
+    some?: RegistrationCodeWhereInput
+    none?: RegistrationCodeWhereInput
+  }
+
+  export type RegistrationCodeNullableScalarRelationFilter = {
+    is?: RegistrationCodeWhereInput | null
+    isNot?: RegistrationCodeWhereInput | null
+  }
+
+  export type SubscriptionNullableScalarRelationFilter = {
+    is?: SubscriptionWhereInput | null
+    isNot?: SubscriptionWhereInput | null
   }
 
   export type PostListRelationFilter = {
@@ -29627,7 +34213,15 @@ export namespace Prisma {
     none?: MetabolicProfileWhereInput
   }
 
+  export type CoachInviteCodeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RegistrationCodeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -29683,6 +34277,7 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     coachId?: SortOrder
+    passwordHash?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -29695,6 +34290,7 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     coachId?: SortOrder
+    passwordHash?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -29707,6 +34303,7 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     coachId?: SortOrder
+    passwordHash?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -29910,6 +34507,182 @@ export namespace Prisma {
     _max?: NestedEnumGoalTypeFilter<$PrismaModel>
   }
 
+  export type CoachInviteCodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    coachId?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    usedById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CoachInviteCodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    coachId?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    usedById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CoachInviteCodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    coachId?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    usedById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumInviteCodeTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.InviteCodeType | EnumInviteCodeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InviteCodeType[] | ListEnumInviteCodeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InviteCodeType[] | ListEnumInviteCodeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInviteCodeTypeFilter<$PrismaModel> | $Enums.InviteCodeType
+  }
+
+  export type RegistrationCodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
+    createdByCoachId?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    usedById?: SortOrder
+    maxUses?: SortOrder
+    useCount?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RegistrationCodeAvgOrderByAggregateInput = {
+    maxUses?: SortOrder
+    useCount?: SortOrder
+  }
+
+  export type RegistrationCodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
+    createdByCoachId?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    usedById?: SortOrder
+    maxUses?: SortOrder
+    useCount?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RegistrationCodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
+    createdByCoachId?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    usedById?: SortOrder
+    maxUses?: SortOrder
+    useCount?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RegistrationCodeSumOrderByAggregateInput = {
+    maxUses?: SortOrder
+    useCount?: SortOrder
+  }
+
+  export type EnumInviteCodeTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InviteCodeType | EnumInviteCodeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InviteCodeType[] | ListEnumInviteCodeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InviteCodeType[] | ListEnumInviteCodeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInviteCodeTypeWithAggregatesFilter<$PrismaModel> | $Enums.InviteCodeType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInviteCodeTypeFilter<$PrismaModel>
+    _max?: NestedEnumInviteCodeTypeFilter<$PrismaModel>
+  }
+
+  export type EnumSubscriptionStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SubscriptionStatus | EnumSubscriptionStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSubscriptionStatusFilter<$PrismaModel> | $Enums.SubscriptionStatus
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type SubscriptionCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    paypalSubscriptionId?: SortOrder
+    paypalPlanId?: SortOrder
+    status?: SortOrder
+    trialEndsAt?: SortOrder
+    currentPeriodEnd?: SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    clientCodeCredits?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SubscriptionAvgOrderByAggregateInput = {
+    clientCodeCredits?: SortOrder
+  }
+
+  export type SubscriptionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    paypalSubscriptionId?: SortOrder
+    paypalPlanId?: SortOrder
+    status?: SortOrder
+    trialEndsAt?: SortOrder
+    currentPeriodEnd?: SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    clientCodeCredits?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SubscriptionMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    paypalSubscriptionId?: SortOrder
+    paypalPlanId?: SortOrder
+    status?: SortOrder
+    trialEndsAt?: SortOrder
+    currentPeriodEnd?: SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    clientCodeCredits?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SubscriptionSumOrderByAggregateInput = {
+    clientCodeCredits?: SortOrder
+  }
+
+  export type EnumSubscriptionStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SubscriptionStatus | EnumSubscriptionStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSubscriptionStatusWithAggregatesFilter<$PrismaModel> | $Enums.SubscriptionStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSubscriptionStatusFilter<$PrismaModel>
+    _max?: NestedEnumSubscriptionStatusFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type PostCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -30067,11 +34840,6 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type IngredientScalarRelationFilter = {
     is?: IngredientWhereInput
     isNot?: IngredientWhereInput
@@ -30112,14 +34880,6 @@ export namespace Prisma {
 
   export type UserIngredientOverrideSumOrderByAggregateInput = {
     customPricePerKg?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type MealRecipeListRelationFilter = {
@@ -30751,6 +35511,19 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSessionsInput, UserUpdateWithoutSessionsInput>, UserUncheckedUpdateWithoutSessionsInput>
   }
 
+  export type CoachInviteCodeCreateNestedManyWithoutCoachInput = {
+    create?: XOR<CoachInviteCodeCreateWithoutCoachInput, CoachInviteCodeUncheckedCreateWithoutCoachInput> | CoachInviteCodeCreateWithoutCoachInput[] | CoachInviteCodeUncheckedCreateWithoutCoachInput[]
+    connectOrCreate?: CoachInviteCodeCreateOrConnectWithoutCoachInput | CoachInviteCodeCreateOrConnectWithoutCoachInput[]
+    createMany?: CoachInviteCodeCreateManyCoachInputEnvelope
+    connect?: CoachInviteCodeWhereUniqueInput | CoachInviteCodeWhereUniqueInput[]
+  }
+
+  export type CoachInviteCodeCreateNestedOneWithoutUsedByInput = {
+    create?: XOR<CoachInviteCodeCreateWithoutUsedByInput, CoachInviteCodeUncheckedCreateWithoutUsedByInput>
+    connectOrCreate?: CoachInviteCodeCreateOrConnectWithoutUsedByInput
+    connect?: CoachInviteCodeWhereUniqueInput
+  }
+
   export type UserCreateNestedOneWithoutClientsInput = {
     create?: XOR<UserCreateWithoutClientsInput, UserUncheckedCreateWithoutClientsInput>
     connectOrCreate?: UserCreateOrConnectWithoutClientsInput
@@ -30762,6 +35535,25 @@ export namespace Prisma {
     connectOrCreate?: UserCreateOrConnectWithoutCoachInput | UserCreateOrConnectWithoutCoachInput[]
     createMany?: UserCreateManyCoachInputEnvelope
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput = {
+    create?: XOR<RegistrationCodeCreateWithoutCreatedByCoachInput, RegistrationCodeUncheckedCreateWithoutCreatedByCoachInput> | RegistrationCodeCreateWithoutCreatedByCoachInput[] | RegistrationCodeUncheckedCreateWithoutCreatedByCoachInput[]
+    connectOrCreate?: RegistrationCodeCreateOrConnectWithoutCreatedByCoachInput | RegistrationCodeCreateOrConnectWithoutCreatedByCoachInput[]
+    createMany?: RegistrationCodeCreateManyCreatedByCoachInputEnvelope
+    connect?: RegistrationCodeWhereUniqueInput | RegistrationCodeWhereUniqueInput[]
+  }
+
+  export type RegistrationCodeCreateNestedOneWithoutUsedByInput = {
+    create?: XOR<RegistrationCodeCreateWithoutUsedByInput, RegistrationCodeUncheckedCreateWithoutUsedByInput>
+    connectOrCreate?: RegistrationCodeCreateOrConnectWithoutUsedByInput
+    connect?: RegistrationCodeWhereUniqueInput
+  }
+
+  export type SubscriptionCreateNestedOneWithoutUserInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput
+    connect?: SubscriptionWhereUniqueInput
   }
 
   export type PostCreateNestedManyWithoutCreatedByInput = {
@@ -30847,11 +35639,43 @@ export namespace Prisma {
     connect?: MetabolicProfileWhereUniqueInput | MetabolicProfileWhereUniqueInput[]
   }
 
+  export type CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput = {
+    create?: XOR<CoachInviteCodeCreateWithoutCoachInput, CoachInviteCodeUncheckedCreateWithoutCoachInput> | CoachInviteCodeCreateWithoutCoachInput[] | CoachInviteCodeUncheckedCreateWithoutCoachInput[]
+    connectOrCreate?: CoachInviteCodeCreateOrConnectWithoutCoachInput | CoachInviteCodeCreateOrConnectWithoutCoachInput[]
+    createMany?: CoachInviteCodeCreateManyCoachInputEnvelope
+    connect?: CoachInviteCodeWhereUniqueInput | CoachInviteCodeWhereUniqueInput[]
+  }
+
+  export type CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput = {
+    create?: XOR<CoachInviteCodeCreateWithoutUsedByInput, CoachInviteCodeUncheckedCreateWithoutUsedByInput>
+    connectOrCreate?: CoachInviteCodeCreateOrConnectWithoutUsedByInput
+    connect?: CoachInviteCodeWhereUniqueInput
+  }
+
   export type UserUncheckedCreateNestedManyWithoutCoachInput = {
     create?: XOR<UserCreateWithoutCoachInput, UserUncheckedCreateWithoutCoachInput> | UserCreateWithoutCoachInput[] | UserUncheckedCreateWithoutCoachInput[]
     connectOrCreate?: UserCreateOrConnectWithoutCoachInput | UserCreateOrConnectWithoutCoachInput[]
     createMany?: UserCreateManyCoachInputEnvelope
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput = {
+    create?: XOR<RegistrationCodeCreateWithoutCreatedByCoachInput, RegistrationCodeUncheckedCreateWithoutCreatedByCoachInput> | RegistrationCodeCreateWithoutCreatedByCoachInput[] | RegistrationCodeUncheckedCreateWithoutCreatedByCoachInput[]
+    connectOrCreate?: RegistrationCodeCreateOrConnectWithoutCreatedByCoachInput | RegistrationCodeCreateOrConnectWithoutCreatedByCoachInput[]
+    createMany?: RegistrationCodeCreateManyCreatedByCoachInputEnvelope
+    connect?: RegistrationCodeWhereUniqueInput | RegistrationCodeWhereUniqueInput[]
+  }
+
+  export type RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput = {
+    create?: XOR<RegistrationCodeCreateWithoutUsedByInput, RegistrationCodeUncheckedCreateWithoutUsedByInput>
+    connectOrCreate?: RegistrationCodeCreateOrConnectWithoutUsedByInput
+    connect?: RegistrationCodeWhereUniqueInput
+  }
+
+  export type SubscriptionUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput
+    connect?: SubscriptionWhereUniqueInput
   }
 
   export type PostUncheckedCreateNestedManyWithoutCreatedByInput = {
@@ -30945,6 +35769,30 @@ export namespace Prisma {
     set?: $Enums.UserRole
   }
 
+  export type CoachInviteCodeUpdateManyWithoutCoachNestedInput = {
+    create?: XOR<CoachInviteCodeCreateWithoutCoachInput, CoachInviteCodeUncheckedCreateWithoutCoachInput> | CoachInviteCodeCreateWithoutCoachInput[] | CoachInviteCodeUncheckedCreateWithoutCoachInput[]
+    connectOrCreate?: CoachInviteCodeCreateOrConnectWithoutCoachInput | CoachInviteCodeCreateOrConnectWithoutCoachInput[]
+    upsert?: CoachInviteCodeUpsertWithWhereUniqueWithoutCoachInput | CoachInviteCodeUpsertWithWhereUniqueWithoutCoachInput[]
+    createMany?: CoachInviteCodeCreateManyCoachInputEnvelope
+    set?: CoachInviteCodeWhereUniqueInput | CoachInviteCodeWhereUniqueInput[]
+    disconnect?: CoachInviteCodeWhereUniqueInput | CoachInviteCodeWhereUniqueInput[]
+    delete?: CoachInviteCodeWhereUniqueInput | CoachInviteCodeWhereUniqueInput[]
+    connect?: CoachInviteCodeWhereUniqueInput | CoachInviteCodeWhereUniqueInput[]
+    update?: CoachInviteCodeUpdateWithWhereUniqueWithoutCoachInput | CoachInviteCodeUpdateWithWhereUniqueWithoutCoachInput[]
+    updateMany?: CoachInviteCodeUpdateManyWithWhereWithoutCoachInput | CoachInviteCodeUpdateManyWithWhereWithoutCoachInput[]
+    deleteMany?: CoachInviteCodeScalarWhereInput | CoachInviteCodeScalarWhereInput[]
+  }
+
+  export type CoachInviteCodeUpdateOneWithoutUsedByNestedInput = {
+    create?: XOR<CoachInviteCodeCreateWithoutUsedByInput, CoachInviteCodeUncheckedCreateWithoutUsedByInput>
+    connectOrCreate?: CoachInviteCodeCreateOrConnectWithoutUsedByInput
+    upsert?: CoachInviteCodeUpsertWithoutUsedByInput
+    disconnect?: CoachInviteCodeWhereInput | boolean
+    delete?: CoachInviteCodeWhereInput | boolean
+    connect?: CoachInviteCodeWhereUniqueInput
+    update?: XOR<XOR<CoachInviteCodeUpdateToOneWithWhereWithoutUsedByInput, CoachInviteCodeUpdateWithoutUsedByInput>, CoachInviteCodeUncheckedUpdateWithoutUsedByInput>
+  }
+
   export type UserUpdateOneWithoutClientsNestedInput = {
     create?: XOR<UserCreateWithoutClientsInput, UserUncheckedCreateWithoutClientsInput>
     connectOrCreate?: UserCreateOrConnectWithoutClientsInput
@@ -30967,6 +35815,40 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutCoachInput | UserUpdateWithWhereUniqueWithoutCoachInput[]
     updateMany?: UserUpdateManyWithWhereWithoutCoachInput | UserUpdateManyWithWhereWithoutCoachInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput = {
+    create?: XOR<RegistrationCodeCreateWithoutCreatedByCoachInput, RegistrationCodeUncheckedCreateWithoutCreatedByCoachInput> | RegistrationCodeCreateWithoutCreatedByCoachInput[] | RegistrationCodeUncheckedCreateWithoutCreatedByCoachInput[]
+    connectOrCreate?: RegistrationCodeCreateOrConnectWithoutCreatedByCoachInput | RegistrationCodeCreateOrConnectWithoutCreatedByCoachInput[]
+    upsert?: RegistrationCodeUpsertWithWhereUniqueWithoutCreatedByCoachInput | RegistrationCodeUpsertWithWhereUniqueWithoutCreatedByCoachInput[]
+    createMany?: RegistrationCodeCreateManyCreatedByCoachInputEnvelope
+    set?: RegistrationCodeWhereUniqueInput | RegistrationCodeWhereUniqueInput[]
+    disconnect?: RegistrationCodeWhereUniqueInput | RegistrationCodeWhereUniqueInput[]
+    delete?: RegistrationCodeWhereUniqueInput | RegistrationCodeWhereUniqueInput[]
+    connect?: RegistrationCodeWhereUniqueInput | RegistrationCodeWhereUniqueInput[]
+    update?: RegistrationCodeUpdateWithWhereUniqueWithoutCreatedByCoachInput | RegistrationCodeUpdateWithWhereUniqueWithoutCreatedByCoachInput[]
+    updateMany?: RegistrationCodeUpdateManyWithWhereWithoutCreatedByCoachInput | RegistrationCodeUpdateManyWithWhereWithoutCreatedByCoachInput[]
+    deleteMany?: RegistrationCodeScalarWhereInput | RegistrationCodeScalarWhereInput[]
+  }
+
+  export type RegistrationCodeUpdateOneWithoutUsedByNestedInput = {
+    create?: XOR<RegistrationCodeCreateWithoutUsedByInput, RegistrationCodeUncheckedCreateWithoutUsedByInput>
+    connectOrCreate?: RegistrationCodeCreateOrConnectWithoutUsedByInput
+    upsert?: RegistrationCodeUpsertWithoutUsedByInput
+    disconnect?: RegistrationCodeWhereInput | boolean
+    delete?: RegistrationCodeWhereInput | boolean
+    connect?: RegistrationCodeWhereUniqueInput
+    update?: XOR<XOR<RegistrationCodeUpdateToOneWithWhereWithoutUsedByInput, RegistrationCodeUpdateWithoutUsedByInput>, RegistrationCodeUncheckedUpdateWithoutUsedByInput>
+  }
+
+  export type SubscriptionUpdateOneWithoutUserNestedInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput
+    upsert?: SubscriptionUpsertWithoutUserInput
+    disconnect?: SubscriptionWhereInput | boolean
+    delete?: SubscriptionWhereInput | boolean
+    connect?: SubscriptionWhereUniqueInput
+    update?: XOR<XOR<SubscriptionUpdateToOneWithWhereWithoutUserInput, SubscriptionUpdateWithoutUserInput>, SubscriptionUncheckedUpdateWithoutUserInput>
   }
 
   export type PostUpdateManyWithoutCreatedByNestedInput = {
@@ -31133,6 +36015,30 @@ export namespace Prisma {
     deleteMany?: MetabolicProfileScalarWhereInput | MetabolicProfileScalarWhereInput[]
   }
 
+  export type CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput = {
+    create?: XOR<CoachInviteCodeCreateWithoutCoachInput, CoachInviteCodeUncheckedCreateWithoutCoachInput> | CoachInviteCodeCreateWithoutCoachInput[] | CoachInviteCodeUncheckedCreateWithoutCoachInput[]
+    connectOrCreate?: CoachInviteCodeCreateOrConnectWithoutCoachInput | CoachInviteCodeCreateOrConnectWithoutCoachInput[]
+    upsert?: CoachInviteCodeUpsertWithWhereUniqueWithoutCoachInput | CoachInviteCodeUpsertWithWhereUniqueWithoutCoachInput[]
+    createMany?: CoachInviteCodeCreateManyCoachInputEnvelope
+    set?: CoachInviteCodeWhereUniqueInput | CoachInviteCodeWhereUniqueInput[]
+    disconnect?: CoachInviteCodeWhereUniqueInput | CoachInviteCodeWhereUniqueInput[]
+    delete?: CoachInviteCodeWhereUniqueInput | CoachInviteCodeWhereUniqueInput[]
+    connect?: CoachInviteCodeWhereUniqueInput | CoachInviteCodeWhereUniqueInput[]
+    update?: CoachInviteCodeUpdateWithWhereUniqueWithoutCoachInput | CoachInviteCodeUpdateWithWhereUniqueWithoutCoachInput[]
+    updateMany?: CoachInviteCodeUpdateManyWithWhereWithoutCoachInput | CoachInviteCodeUpdateManyWithWhereWithoutCoachInput[]
+    deleteMany?: CoachInviteCodeScalarWhereInput | CoachInviteCodeScalarWhereInput[]
+  }
+
+  export type CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput = {
+    create?: XOR<CoachInviteCodeCreateWithoutUsedByInput, CoachInviteCodeUncheckedCreateWithoutUsedByInput>
+    connectOrCreate?: CoachInviteCodeCreateOrConnectWithoutUsedByInput
+    upsert?: CoachInviteCodeUpsertWithoutUsedByInput
+    disconnect?: CoachInviteCodeWhereInput | boolean
+    delete?: CoachInviteCodeWhereInput | boolean
+    connect?: CoachInviteCodeWhereUniqueInput
+    update?: XOR<XOR<CoachInviteCodeUpdateToOneWithWhereWithoutUsedByInput, CoachInviteCodeUpdateWithoutUsedByInput>, CoachInviteCodeUncheckedUpdateWithoutUsedByInput>
+  }
+
   export type UserUncheckedUpdateManyWithoutCoachNestedInput = {
     create?: XOR<UserCreateWithoutCoachInput, UserUncheckedCreateWithoutCoachInput> | UserCreateWithoutCoachInput[] | UserUncheckedCreateWithoutCoachInput[]
     connectOrCreate?: UserCreateOrConnectWithoutCoachInput | UserCreateOrConnectWithoutCoachInput[]
@@ -31145,6 +36051,40 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutCoachInput | UserUpdateWithWhereUniqueWithoutCoachInput[]
     updateMany?: UserUpdateManyWithWhereWithoutCoachInput | UserUpdateManyWithWhereWithoutCoachInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput = {
+    create?: XOR<RegistrationCodeCreateWithoutCreatedByCoachInput, RegistrationCodeUncheckedCreateWithoutCreatedByCoachInput> | RegistrationCodeCreateWithoutCreatedByCoachInput[] | RegistrationCodeUncheckedCreateWithoutCreatedByCoachInput[]
+    connectOrCreate?: RegistrationCodeCreateOrConnectWithoutCreatedByCoachInput | RegistrationCodeCreateOrConnectWithoutCreatedByCoachInput[]
+    upsert?: RegistrationCodeUpsertWithWhereUniqueWithoutCreatedByCoachInput | RegistrationCodeUpsertWithWhereUniqueWithoutCreatedByCoachInput[]
+    createMany?: RegistrationCodeCreateManyCreatedByCoachInputEnvelope
+    set?: RegistrationCodeWhereUniqueInput | RegistrationCodeWhereUniqueInput[]
+    disconnect?: RegistrationCodeWhereUniqueInput | RegistrationCodeWhereUniqueInput[]
+    delete?: RegistrationCodeWhereUniqueInput | RegistrationCodeWhereUniqueInput[]
+    connect?: RegistrationCodeWhereUniqueInput | RegistrationCodeWhereUniqueInput[]
+    update?: RegistrationCodeUpdateWithWhereUniqueWithoutCreatedByCoachInput | RegistrationCodeUpdateWithWhereUniqueWithoutCreatedByCoachInput[]
+    updateMany?: RegistrationCodeUpdateManyWithWhereWithoutCreatedByCoachInput | RegistrationCodeUpdateManyWithWhereWithoutCreatedByCoachInput[]
+    deleteMany?: RegistrationCodeScalarWhereInput | RegistrationCodeScalarWhereInput[]
+  }
+
+  export type RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput = {
+    create?: XOR<RegistrationCodeCreateWithoutUsedByInput, RegistrationCodeUncheckedCreateWithoutUsedByInput>
+    connectOrCreate?: RegistrationCodeCreateOrConnectWithoutUsedByInput
+    upsert?: RegistrationCodeUpsertWithoutUsedByInput
+    disconnect?: RegistrationCodeWhereInput | boolean
+    delete?: RegistrationCodeWhereInput | boolean
+    connect?: RegistrationCodeWhereUniqueInput
+    update?: XOR<XOR<RegistrationCodeUpdateToOneWithWhereWithoutUsedByInput, RegistrationCodeUpdateWithoutUsedByInput>, RegistrationCodeUncheckedUpdateWithoutUsedByInput>
+  }
+
+  export type SubscriptionUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput
+    upsert?: SubscriptionUpsertWithoutUserInput
+    disconnect?: SubscriptionWhereInput | boolean
+    delete?: SubscriptionWhereInput | boolean
+    connect?: SubscriptionWhereUniqueInput
+    update?: XOR<XOR<SubscriptionUpdateToOneWithWhereWithoutUserInput, SubscriptionUpdateWithoutUserInput>, SubscriptionUncheckedUpdateWithoutUserInput>
   }
 
   export type PostUncheckedUpdateManyWithoutCreatedByNestedInput = {
@@ -31357,6 +36297,94 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProfileInput, UserUpdateWithoutProfileInput>, UserUncheckedUpdateWithoutProfileInput>
   }
 
+  export type UserCreateNestedOneWithoutCoachCodesInput = {
+    create?: XOR<UserCreateWithoutCoachCodesInput, UserUncheckedCreateWithoutCoachCodesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCoachCodesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutUsedInviteCodeInput = {
+    create?: XOR<UserCreateWithoutUsedInviteCodeInput, UserUncheckedCreateWithoutUsedInviteCodeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUsedInviteCodeInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutCoachCodesNestedInput = {
+    create?: XOR<UserCreateWithoutCoachCodesInput, UserUncheckedCreateWithoutCoachCodesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCoachCodesInput
+    upsert?: UserUpsertWithoutCoachCodesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCoachCodesInput, UserUpdateWithoutCoachCodesInput>, UserUncheckedUpdateWithoutCoachCodesInput>
+  }
+
+  export type UserUpdateOneWithoutUsedInviteCodeNestedInput = {
+    create?: XOR<UserCreateWithoutUsedInviteCodeInput, UserUncheckedCreateWithoutUsedInviteCodeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUsedInviteCodeInput
+    upsert?: UserUpsertWithoutUsedInviteCodeInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUsedInviteCodeInput, UserUpdateWithoutUsedInviteCodeInput>, UserUncheckedUpdateWithoutUsedInviteCodeInput>
+  }
+
+  export type UserCreateNestedOneWithoutRegistrationCodesInput = {
+    create?: XOR<UserCreateWithoutRegistrationCodesInput, UserUncheckedCreateWithoutRegistrationCodesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRegistrationCodesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutUsedCodeInput = {
+    create?: XOR<UserCreateWithoutUsedCodeInput, UserUncheckedCreateWithoutUsedCodeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUsedCodeInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumInviteCodeTypeFieldUpdateOperationsInput = {
+    set?: $Enums.InviteCodeType
+  }
+
+  export type UserUpdateOneWithoutRegistrationCodesNestedInput = {
+    create?: XOR<UserCreateWithoutRegistrationCodesInput, UserUncheckedCreateWithoutRegistrationCodesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRegistrationCodesInput
+    upsert?: UserUpsertWithoutRegistrationCodesInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRegistrationCodesInput, UserUpdateWithoutRegistrationCodesInput>, UserUncheckedUpdateWithoutRegistrationCodesInput>
+  }
+
+  export type UserUpdateOneWithoutUsedCodeNestedInput = {
+    create?: XOR<UserCreateWithoutUsedCodeInput, UserUncheckedCreateWithoutUsedCodeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUsedCodeInput
+    upsert?: UserUpsertWithoutUsedCodeInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUsedCodeInput, UserUpdateWithoutUsedCodeInput>, UserUncheckedUpdateWithoutUsedCodeInput>
+  }
+
+  export type UserCreateNestedOneWithoutSubscriptionInput = {
+    create?: XOR<UserCreateWithoutSubscriptionInput, UserUncheckedCreateWithoutSubscriptionInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSubscriptionInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumSubscriptionStatusFieldUpdateOperationsInput = {
+    set?: $Enums.SubscriptionStatus
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type UserUpdateOneRequiredWithoutSubscriptionNestedInput = {
+    create?: XOR<UserCreateWithoutSubscriptionInput, UserUncheckedCreateWithoutSubscriptionInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSubscriptionInput
+    upsert?: UserUpsertWithoutSubscriptionInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSubscriptionInput, UserUpdateWithoutSubscriptionInput>, UserUncheckedUpdateWithoutSubscriptionInput>
+  }
+
   export type UserCreateNestedOneWithoutPostsInput = {
     create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
@@ -31465,10 +36493,6 @@ export namespace Prisma {
     create?: XOR<IngredientCreateWithoutUserIngredientOverridesInput, IngredientUncheckedCreateWithoutUserIngredientOverridesInput>
     connectOrCreate?: IngredientCreateOrConnectWithoutUserIngredientOverridesInput
     connect?: IngredientWhereUniqueInput
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type UserUpdateOneRequiredWithoutIngredientOverridesNestedInput = {
@@ -32271,6 +37295,53 @@ export namespace Prisma {
     _min?: NestedEnumGoalTypeFilter<$PrismaModel>
     _max?: NestedEnumGoalTypeFilter<$PrismaModel>
   }
+
+  export type NestedEnumInviteCodeTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.InviteCodeType | EnumInviteCodeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InviteCodeType[] | ListEnumInviteCodeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InviteCodeType[] | ListEnumInviteCodeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInviteCodeTypeFilter<$PrismaModel> | $Enums.InviteCodeType
+  }
+
+  export type NestedEnumInviteCodeTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InviteCodeType | EnumInviteCodeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InviteCodeType[] | ListEnumInviteCodeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InviteCodeType[] | ListEnumInviteCodeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInviteCodeTypeWithAggregatesFilter<$PrismaModel> | $Enums.InviteCodeType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInviteCodeTypeFilter<$PrismaModel>
+    _max?: NestedEnumInviteCodeTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSubscriptionStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SubscriptionStatus | EnumSubscriptionStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSubscriptionStatusFilter<$PrismaModel> | $Enums.SubscriptionStatus
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedEnumSubscriptionStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SubscriptionStatus | EnumSubscriptionStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SubscriptionStatus[] | ListEnumSubscriptionStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSubscriptionStatusWithAggregatesFilter<$PrismaModel> | $Enums.SubscriptionStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSubscriptionStatusFilter<$PrismaModel>
+    _max?: NestedEnumSubscriptionStatusFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -32293,19 +37364,6 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumMealTypeFilter<$PrismaModel = never> = {
@@ -32349,10 +37407,16 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     coach?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -32374,9 +37438,15 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -32413,10 +37483,16 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     coach?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -32438,9 +37514,15 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -32461,10 +37543,16 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     coach?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -32486,9 +37574,15 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -32525,10 +37619,16 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     coach?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -32550,9 +37650,15 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -32566,6 +37672,57 @@ export namespace Prisma {
     metabolicProfiles?: MetabolicProfileUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type CoachInviteCodeCreateWithoutCoachInput = {
+    id?: string
+    code: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+    usedBy?: UserCreateNestedOneWithoutUsedInviteCodeInput
+  }
+
+  export type CoachInviteCodeUncheckedCreateWithoutCoachInput = {
+    id?: string
+    code: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    usedById?: string | null
+    createdAt?: Date | string
+  }
+
+  export type CoachInviteCodeCreateOrConnectWithoutCoachInput = {
+    where: CoachInviteCodeWhereUniqueInput
+    create: XOR<CoachInviteCodeCreateWithoutCoachInput, CoachInviteCodeUncheckedCreateWithoutCoachInput>
+  }
+
+  export type CoachInviteCodeCreateManyCoachInputEnvelope = {
+    data: CoachInviteCodeCreateManyCoachInput | CoachInviteCodeCreateManyCoachInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CoachInviteCodeCreateWithoutUsedByInput = {
+    id?: string
+    code: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+    coach: UserCreateNestedOneWithoutCoachCodesInput
+  }
+
+  export type CoachInviteCodeUncheckedCreateWithoutUsedByInput = {
+    id?: string
+    coachId: string
+    code: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type CoachInviteCodeCreateOrConnectWithoutUsedByInput = {
+    where: CoachInviteCodeWhereUniqueInput
+    create: XOR<CoachInviteCodeCreateWithoutUsedByInput, CoachInviteCodeUncheckedCreateWithoutUsedByInput>
+  }
+
   export type UserCreateWithoutClientsInput = {
     id?: string
     email: string
@@ -32573,9 +37730,15 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     coach?: UserCreateNestedOneWithoutClientsInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -32598,8 +37761,14 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -32626,9 +37795,15 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -32650,9 +37825,15 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -32675,6 +37856,100 @@ export namespace Prisma {
   export type UserCreateManyCoachInputEnvelope = {
     data: UserCreateManyCoachInput | UserCreateManyCoachInput[]
     skipDuplicates?: boolean
+  }
+
+  export type RegistrationCodeCreateWithoutCreatedByCoachInput = {
+    id?: string
+    code: string
+    type: $Enums.InviteCodeType
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    maxUses?: number
+    useCount?: number
+    createdAt?: Date | string
+    usedBy?: UserCreateNestedOneWithoutUsedCodeInput
+  }
+
+  export type RegistrationCodeUncheckedCreateWithoutCreatedByCoachInput = {
+    id?: string
+    code: string
+    type: $Enums.InviteCodeType
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    usedById?: string | null
+    maxUses?: number
+    useCount?: number
+    createdAt?: Date | string
+  }
+
+  export type RegistrationCodeCreateOrConnectWithoutCreatedByCoachInput = {
+    where: RegistrationCodeWhereUniqueInput
+    create: XOR<RegistrationCodeCreateWithoutCreatedByCoachInput, RegistrationCodeUncheckedCreateWithoutCreatedByCoachInput>
+  }
+
+  export type RegistrationCodeCreateManyCreatedByCoachInputEnvelope = {
+    data: RegistrationCodeCreateManyCreatedByCoachInput | RegistrationCodeCreateManyCreatedByCoachInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RegistrationCodeCreateWithoutUsedByInput = {
+    id?: string
+    code: string
+    type: $Enums.InviteCodeType
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    maxUses?: number
+    useCount?: number
+    createdAt?: Date | string
+    createdByCoach?: UserCreateNestedOneWithoutRegistrationCodesInput
+  }
+
+  export type RegistrationCodeUncheckedCreateWithoutUsedByInput = {
+    id?: string
+    code: string
+    type: $Enums.InviteCodeType
+    createdByCoachId?: string | null
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    maxUses?: number
+    useCount?: number
+    createdAt?: Date | string
+  }
+
+  export type RegistrationCodeCreateOrConnectWithoutUsedByInput = {
+    where: RegistrationCodeWhereUniqueInput
+    create: XOR<RegistrationCodeCreateWithoutUsedByInput, RegistrationCodeUncheckedCreateWithoutUsedByInput>
+  }
+
+  export type SubscriptionCreateWithoutUserInput = {
+    id?: string
+    paypalSubscriptionId?: string | null
+    paypalPlanId?: string | null
+    status?: $Enums.SubscriptionStatus
+    trialEndsAt?: Date | string | null
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    clientCodeCredits?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SubscriptionUncheckedCreateWithoutUserInput = {
+    id?: string
+    paypalSubscriptionId?: string | null
+    paypalPlanId?: string | null
+    status?: $Enums.SubscriptionStatus
+    trialEndsAt?: Date | string | null
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    clientCodeCredits?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SubscriptionCreateOrConnectWithoutUserInput = {
+    where: SubscriptionWhereUniqueInput
+    create: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
   }
 
   export type PostCreateWithoutCreatedByInput = {
@@ -33047,6 +38322,64 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CoachInviteCodeUpsertWithWhereUniqueWithoutCoachInput = {
+    where: CoachInviteCodeWhereUniqueInput
+    update: XOR<CoachInviteCodeUpdateWithoutCoachInput, CoachInviteCodeUncheckedUpdateWithoutCoachInput>
+    create: XOR<CoachInviteCodeCreateWithoutCoachInput, CoachInviteCodeUncheckedCreateWithoutCoachInput>
+  }
+
+  export type CoachInviteCodeUpdateWithWhereUniqueWithoutCoachInput = {
+    where: CoachInviteCodeWhereUniqueInput
+    data: XOR<CoachInviteCodeUpdateWithoutCoachInput, CoachInviteCodeUncheckedUpdateWithoutCoachInput>
+  }
+
+  export type CoachInviteCodeUpdateManyWithWhereWithoutCoachInput = {
+    where: CoachInviteCodeScalarWhereInput
+    data: XOR<CoachInviteCodeUpdateManyMutationInput, CoachInviteCodeUncheckedUpdateManyWithoutCoachInput>
+  }
+
+  export type CoachInviteCodeScalarWhereInput = {
+    AND?: CoachInviteCodeScalarWhereInput | CoachInviteCodeScalarWhereInput[]
+    OR?: CoachInviteCodeScalarWhereInput[]
+    NOT?: CoachInviteCodeScalarWhereInput | CoachInviteCodeScalarWhereInput[]
+    id?: StringFilter<"CoachInviteCode"> | string
+    coachId?: StringFilter<"CoachInviteCode"> | string
+    code?: StringFilter<"CoachInviteCode"> | string
+    expiresAt?: DateTimeFilter<"CoachInviteCode"> | Date | string
+    usedAt?: DateTimeNullableFilter<"CoachInviteCode"> | Date | string | null
+    usedById?: StringNullableFilter<"CoachInviteCode"> | string | null
+    createdAt?: DateTimeFilter<"CoachInviteCode"> | Date | string
+  }
+
+  export type CoachInviteCodeUpsertWithoutUsedByInput = {
+    update: XOR<CoachInviteCodeUpdateWithoutUsedByInput, CoachInviteCodeUncheckedUpdateWithoutUsedByInput>
+    create: XOR<CoachInviteCodeCreateWithoutUsedByInput, CoachInviteCodeUncheckedCreateWithoutUsedByInput>
+    where?: CoachInviteCodeWhereInput
+  }
+
+  export type CoachInviteCodeUpdateToOneWithWhereWithoutUsedByInput = {
+    where?: CoachInviteCodeWhereInput
+    data: XOR<CoachInviteCodeUpdateWithoutUsedByInput, CoachInviteCodeUncheckedUpdateWithoutUsedByInput>
+  }
+
+  export type CoachInviteCodeUpdateWithoutUsedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coach?: UserUpdateOneRequiredWithoutCoachCodesNestedInput
+  }
+
+  export type CoachInviteCodeUncheckedUpdateWithoutUsedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    coachId?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserUpsertWithoutClientsInput = {
     update: XOR<UserUpdateWithoutClientsInput, UserUncheckedUpdateWithoutClientsInput>
     create: XOR<UserCreateWithoutClientsInput, UserUncheckedCreateWithoutClientsInput>
@@ -33065,9 +38398,15 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     coach?: UserUpdateOneWithoutClientsNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -33090,8 +38429,14 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -33133,8 +38478,113 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     coachId?: StringNullableFilter<"User"> | string | null
+    passwordHash?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+  }
+
+  export type RegistrationCodeUpsertWithWhereUniqueWithoutCreatedByCoachInput = {
+    where: RegistrationCodeWhereUniqueInput
+    update: XOR<RegistrationCodeUpdateWithoutCreatedByCoachInput, RegistrationCodeUncheckedUpdateWithoutCreatedByCoachInput>
+    create: XOR<RegistrationCodeCreateWithoutCreatedByCoachInput, RegistrationCodeUncheckedCreateWithoutCreatedByCoachInput>
+  }
+
+  export type RegistrationCodeUpdateWithWhereUniqueWithoutCreatedByCoachInput = {
+    where: RegistrationCodeWhereUniqueInput
+    data: XOR<RegistrationCodeUpdateWithoutCreatedByCoachInput, RegistrationCodeUncheckedUpdateWithoutCreatedByCoachInput>
+  }
+
+  export type RegistrationCodeUpdateManyWithWhereWithoutCreatedByCoachInput = {
+    where: RegistrationCodeScalarWhereInput
+    data: XOR<RegistrationCodeUpdateManyMutationInput, RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachInput>
+  }
+
+  export type RegistrationCodeScalarWhereInput = {
+    AND?: RegistrationCodeScalarWhereInput | RegistrationCodeScalarWhereInput[]
+    OR?: RegistrationCodeScalarWhereInput[]
+    NOT?: RegistrationCodeScalarWhereInput | RegistrationCodeScalarWhereInput[]
+    id?: StringFilter<"RegistrationCode"> | string
+    code?: StringFilter<"RegistrationCode"> | string
+    type?: EnumInviteCodeTypeFilter<"RegistrationCode"> | $Enums.InviteCodeType
+    createdByCoachId?: StringNullableFilter<"RegistrationCode"> | string | null
+    expiresAt?: DateTimeFilter<"RegistrationCode"> | Date | string
+    usedAt?: DateTimeNullableFilter<"RegistrationCode"> | Date | string | null
+    usedById?: StringNullableFilter<"RegistrationCode"> | string | null
+    maxUses?: IntFilter<"RegistrationCode"> | number
+    useCount?: IntFilter<"RegistrationCode"> | number
+    createdAt?: DateTimeFilter<"RegistrationCode"> | Date | string
+  }
+
+  export type RegistrationCodeUpsertWithoutUsedByInput = {
+    update: XOR<RegistrationCodeUpdateWithoutUsedByInput, RegistrationCodeUncheckedUpdateWithoutUsedByInput>
+    create: XOR<RegistrationCodeCreateWithoutUsedByInput, RegistrationCodeUncheckedCreateWithoutUsedByInput>
+    where?: RegistrationCodeWhereInput
+  }
+
+  export type RegistrationCodeUpdateToOneWithWhereWithoutUsedByInput = {
+    where?: RegistrationCodeWhereInput
+    data: XOR<RegistrationCodeUpdateWithoutUsedByInput, RegistrationCodeUncheckedUpdateWithoutUsedByInput>
+  }
+
+  export type RegistrationCodeUpdateWithoutUsedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumInviteCodeTypeFieldUpdateOperationsInput | $Enums.InviteCodeType
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    maxUses?: IntFieldUpdateOperationsInput | number
+    useCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByCoach?: UserUpdateOneWithoutRegistrationCodesNestedInput
+  }
+
+  export type RegistrationCodeUncheckedUpdateWithoutUsedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumInviteCodeTypeFieldUpdateOperationsInput | $Enums.InviteCodeType
+    createdByCoachId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    maxUses?: IntFieldUpdateOperationsInput | number
+    useCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubscriptionUpsertWithoutUserInput = {
+    update: XOR<SubscriptionUpdateWithoutUserInput, SubscriptionUncheckedUpdateWithoutUserInput>
+    create: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
+    where?: SubscriptionWhereInput
+  }
+
+  export type SubscriptionUpdateToOneWithWhereWithoutUserInput = {
+    where?: SubscriptionWhereInput
+    data: XOR<SubscriptionUpdateWithoutUserInput, SubscriptionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SubscriptionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paypalSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    paypalPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    clientCodeCredits?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubscriptionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paypalSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    paypalPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    clientCodeCredits?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PostUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -33511,10 +38961,16 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     coach?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -33536,9 +38992,15 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -33575,10 +39037,16 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     coach?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -33600,12 +39068,698 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUncheckedUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUncheckedUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUncheckedUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutCoachCodesInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
+    coach?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    posts?: PostCreateNestedManyWithoutCreatedByInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    profile?: UserProfileCreateNestedOneWithoutUserInput
+    recipes?: RecipeCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCoachCodesInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    coachId?: string | null
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
+    clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
+    recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogUncheckedCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogUncheckedCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogUncheckedCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCoachCodesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCoachCodesInput, UserUncheckedCreateWithoutCoachCodesInput>
+  }
+
+  export type UserCreateWithoutUsedInviteCodeInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    coach?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    posts?: PostCreateNestedManyWithoutCreatedByInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    profile?: UserProfileCreateNestedOneWithoutUserInput
+    recipes?: RecipeCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUsedInviteCodeInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    coachId?: string | null
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
+    recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogUncheckedCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogUncheckedCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogUncheckedCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUsedInviteCodeInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUsedInviteCodeInput, UserUncheckedCreateWithoutUsedInviteCodeInput>
+  }
+
+  export type UserUpsertWithoutCoachCodesInput = {
+    update: XOR<UserUpdateWithoutCoachCodesInput, UserUncheckedUpdateWithoutCoachCodesInput>
+    create: XOR<UserCreateWithoutCoachCodesInput, UserUncheckedCreateWithoutCoachCodesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCoachCodesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCoachCodesInput, UserUncheckedUpdateWithoutCoachCodesInput>
+  }
+
+  export type UserUpdateWithoutCoachCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
+    coach?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCoachCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUncheckedUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUncheckedUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUncheckedUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUpsertWithoutUsedInviteCodeInput = {
+    update: XOR<UserUpdateWithoutUsedInviteCodeInput, UserUncheckedUpdateWithoutUsedInviteCodeInput>
+    create: XOR<UserCreateWithoutUsedInviteCodeInput, UserUncheckedCreateWithoutUsedInviteCodeInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUsedInviteCodeInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUsedInviteCodeInput, UserUncheckedUpdateWithoutUsedInviteCodeInput>
+  }
+
+  export type UserUpdateWithoutUsedInviteCodeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    coach?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUsedInviteCodeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUncheckedUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUncheckedUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUncheckedUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutRegistrationCodesInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
+    coach?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    posts?: PostCreateNestedManyWithoutCreatedByInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    profile?: UserProfileCreateNestedOneWithoutUserInput
+    recipes?: RecipeCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutRegistrationCodesInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    coachId?: string | null
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
+    clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
+    recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogUncheckedCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogUncheckedCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogUncheckedCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutRegistrationCodesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRegistrationCodesInput, UserUncheckedCreateWithoutRegistrationCodesInput>
+  }
+
+  export type UserCreateWithoutUsedCodeInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
+    coach?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    posts?: PostCreateNestedManyWithoutCreatedByInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    profile?: UserProfileCreateNestedOneWithoutUserInput
+    recipes?: RecipeCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUsedCodeInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    coachId?: string | null
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
+    clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
+    recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogUncheckedCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogUncheckedCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogUncheckedCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUsedCodeInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUsedCodeInput, UserUncheckedCreateWithoutUsedCodeInput>
+  }
+
+  export type UserUpsertWithoutRegistrationCodesInput = {
+    update: XOR<UserUpdateWithoutRegistrationCodesInput, UserUncheckedUpdateWithoutRegistrationCodesInput>
+    create: XOR<UserCreateWithoutRegistrationCodesInput, UserUncheckedCreateWithoutRegistrationCodesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRegistrationCodesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRegistrationCodesInput, UserUncheckedUpdateWithoutRegistrationCodesInput>
+  }
+
+  export type UserUpdateWithoutRegistrationCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
+    coach?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRegistrationCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUncheckedUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUncheckedUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUncheckedUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUpsertWithoutUsedCodeInput = {
+    update: XOR<UserUpdateWithoutUsedCodeInput, UserUncheckedUpdateWithoutUsedCodeInput>
+    create: XOR<UserCreateWithoutUsedCodeInput, UserUncheckedCreateWithoutUsedCodeInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUsedCodeInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUsedCodeInput, UserUncheckedUpdateWithoutUsedCodeInput>
+  }
+
+  export type UserUpdateWithoutUsedCodeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
+    coach?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUsedCodeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUncheckedUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUncheckedUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUncheckedUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutSubscriptionInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
+    coach?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    posts?: PostCreateNestedManyWithoutCreatedByInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    profile?: UserProfileCreateNestedOneWithoutUserInput
+    recipes?: RecipeCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSubscriptionInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    coachId?: string | null
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
+    clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
+    recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogUncheckedCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogUncheckedCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogUncheckedCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSubscriptionInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSubscriptionInput, UserUncheckedCreateWithoutSubscriptionInput>
+  }
+
+  export type UserUpsertWithoutSubscriptionInput = {
+    update: XOR<UserUpdateWithoutSubscriptionInput, UserUncheckedUpdateWithoutSubscriptionInput>
+    create: XOR<UserCreateWithoutSubscriptionInput, UserUncheckedCreateWithoutSubscriptionInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSubscriptionInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSubscriptionInput, UserUncheckedUpdateWithoutSubscriptionInput>
+  }
+
+  export type UserUpdateWithoutSubscriptionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
+    coach?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSubscriptionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
     recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
     nutritionPlans?: NutritionPlanUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -33623,10 +39777,16 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     coach?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -33648,9 +39808,15 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -33687,10 +39853,16 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     coach?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -33712,9 +39884,15 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -33823,10 +40001,16 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     coach?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -33848,9 +40032,15 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -33926,10 +40116,16 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     coach?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -33951,9 +40147,15 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -34019,10 +40221,16 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     coach?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -34044,9 +40252,15 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -34129,10 +40343,16 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     coach?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -34154,9 +40374,15 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -34404,10 +40630,16 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     coach?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -34429,9 +40661,15 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -34490,10 +40728,16 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     coach?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -34515,9 +40759,15 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -34898,10 +41148,16 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     coach?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -34923,9 +41179,15 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -34962,10 +41224,16 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     coach?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -34987,9 +41255,15 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -35010,10 +41284,16 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     coach?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -35035,9 +41315,15 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -35110,10 +41396,16 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     coach?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -35135,9 +41427,15 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -35174,10 +41472,16 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     coach?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -35199,9 +41503,15 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -35289,10 +41599,16 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     coach?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -35314,9 +41630,15 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -35467,10 +41789,16 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     coach?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -35492,9 +41820,15 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -35531,10 +41865,16 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     coach?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -35556,9 +41896,15 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -35579,10 +41925,16 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
     coach?: UserCreateNestedOneWithoutClientsInput
     clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -35604,9 +41956,15 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     coachId?: string | null
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -35643,10 +42001,16 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     coach?: UserUpdateOneWithoutClientsNestedInput
     clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -35668,9 +42032,15 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -35684,6 +42054,15 @@ export namespace Prisma {
     metabolicProfiles?: MetabolicProfileUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type CoachInviteCodeCreateManyCoachInput = {
+    id?: string
+    code: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    usedById?: string | null
+    createdAt?: Date | string
+  }
+
   export type UserCreateManyCoachInput = {
     id?: string
     email: string
@@ -35691,8 +42070,21 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     role?: $Enums.UserRole
+    passwordHash?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type RegistrationCodeCreateManyCreatedByCoachInput = {
+    id?: string
+    code: string
+    type: $Enums.InviteCodeType
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    usedById?: string | null
+    maxUses?: number
+    useCount?: number
+    createdAt?: Date | string
   }
 
   export type PostCreateManyCreatedByInput = {
@@ -35805,6 +42197,33 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type CoachInviteCodeUpdateWithoutCoachInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedBy?: UserUpdateOneWithoutUsedInviteCodeNestedInput
+  }
+
+  export type CoachInviteCodeUncheckedUpdateWithoutCoachInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    usedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CoachInviteCodeUncheckedUpdateManyWithoutCoachInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    usedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserUpdateWithoutCoachInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -35812,9 +42231,15 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
     clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -35836,9 +42261,15 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -35860,8 +42291,45 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RegistrationCodeUpdateWithoutCreatedByCoachInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumInviteCodeTypeFieldUpdateOperationsInput | $Enums.InviteCodeType
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    maxUses?: IntFieldUpdateOperationsInput | number
+    useCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedBy?: UserUpdateOneWithoutUsedCodeNestedInput
+  }
+
+  export type RegistrationCodeUncheckedUpdateWithoutCreatedByCoachInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumInviteCodeTypeFieldUpdateOperationsInput | $Enums.InviteCodeType
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    usedById?: NullableStringFieldUpdateOperationsInput | string | null
+    maxUses?: IntFieldUpdateOperationsInput | number
+    useCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumInviteCodeTypeFieldUpdateOperationsInput | $Enums.InviteCodeType
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    usedById?: NullableStringFieldUpdateOperationsInput | string | null
+    maxUses?: IntFieldUpdateOperationsInput | number
+    useCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PostUpdateWithoutCreatedByInput = {

@@ -178,24 +178,54 @@ function QuickAction({ icon, label, href, accent }: {
 // ─── Main Dashboard ───────────────────────────────────────────────────────────
 
 export default function Dashboard() {
-  const today     = new Date()
+ // estable durante toda la vida del componente
+const { today, weekStart, weekEnd, thirtyDaysAgo } = useMemo(() => {
+  const now = new Date()
+
+  // Normalizar a medianoche local — crítico para @db.Date
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+
   const weekStart = getMondayOfWeek(today)
   const weekEnd   = new Date(weekStart)
   weekEnd.setDate(weekStart.getDate() + 6)
 
-  // ── Data fetching ──────────────────────────────────────────────────────────
-  const { data: profile  } = api.userProfile.getSummary.useQuery()
-  const { data: todayLog } = api.dailyLog.getDay.useQuery({ date: today })
-  const { data: weekly   } = api.dailyLog.getWeeklySummary.useQuery({ weekStart })
-  const { data: weekLogs } = api.dailyLog.getRange.useQuery({ from: weekStart, to: weekEnd })
-
-  // Last 30 days for weight sparkline — reuse getRange from dailyLog
   const thirtyDaysAgo = new Date(today)
   thirtyDaysAgo.setDate(today.getDate() - 29)
-  const { data: monthLogs } = api.dailyLog.getRange.useQuery({
-    from: thirtyDaysAgo,
-    to:   today,
-  })
+
+  return { today, weekStart, weekEnd, thirtyDaysAgo }
+}, []) // [] = se calcula solo una vez al montar
+  
+  weekEnd.setDate(weekStart.getDate() + 6)
+
+  // ── Data fetching ──────────────────────────────────────────────────────────
+ const { data: profile  } = api.userProfile.getSummary.useQuery(
+  undefined,
+  { staleTime: 60_000 }  // 1 minuto
+)
+const { data: todayLog } = api.dailyLog.getDay.useQuery(
+  { date: today },
+  { staleTime: 30_000 }  // 30 segundos
+)
+const { data: weekly   } = api.dailyLog.getWeeklySummary.useQuery(
+  { weekStart },
+  { staleTime: 60_000 }
+)
+const { data: weekLogs } = api.dailyLog.getRange.useQuery(
+  { from: weekStart, to: weekEnd },
+  { staleTime: 60_000 }
+)
+const { data: monthLogs } = api.dailyLog.getRange.useQuery(
+  { from: thirtyDaysAgo, to: today },
+  { staleTime: 300_000 } // 5 minutos
+)
+
+  // // Last 30 days for weight sparkline — reuse getRange from dailyLog
+  // const thirtyDaysAgo = new Date(today)
+  // thirtyDaysAgo.setDate(today.getDate() - 29)
+  // const { data: monthLogs } = api.dailyLog.getRange.useQuery({
+  //   from: thirtyDaysAgo,
+  //   to:   today,
+  // })
 
   // ── Derived values ─────────────────────────────────────────────────────────
 

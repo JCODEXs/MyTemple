@@ -42,11 +42,15 @@ export interface WeightCheckResult {
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
-
+// después de los imports, antes del service
+function toDateOnly(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate())
+}
 /**
  * Convierte UserProfile de Prisma al ProfileInput del dominio puro.
  * Este es el único punto donde Prisma y el dominio se tocan.
  */
+
 function toProfileInput(
   profile: {
     age: number
@@ -79,7 +83,7 @@ export const DailyEnergyService = {
   async logDay(userId: string, input: LogDayInput): Promise<LogDayResult> {
     const profile = await db.userProfile.findUnique({ where: { userId } })
     if (!profile) throw new Error("UserProfile not found for userId: " + userId)
-
+const normalizedDate = toDateOnly(input.date) 
     const profileInput = toProfileInput(profile)
 
     // Construir TrainingInput para el motor si hay workout
@@ -121,7 +125,7 @@ export const DailyEnergyService = {
         const workout = await tx.workout.create({
           data: {
             userId,
-            date: input.date,
+            date: normalizedDate,
             type: input.workout.type,
             durationMinutes: input.workout.durationMinutes,
             intensityFactor: input.workout.intensityFactor,
@@ -136,12 +140,12 @@ export const DailyEnergyService = {
         where: {
           userId_date: {
             userId,
-            date: input.date,
+            date: normalizedDate,
           },
         },
         create: {
           userId,
-          date: input.date,
+          date: normalizedDate,
           caloriesIn: input.caloriesIn,
           proteinGrams: input.proteinGrams,
           carbsGrams: input.carbsGrams,
@@ -183,8 +187,9 @@ export const DailyEnergyService = {
    * Si no existe, retorna null.
    */
   async getDay(userId: string, date: Date) {
+    const normalizedDate = toDateOnly(date)
     const log = await db.dailyLog.findUnique({
-      where: { userId_date: { userId, date } },
+      where: { userId_date: { userId, date:normalizedDate } },
       include: { workouts: true },
     })
 
@@ -266,14 +271,15 @@ export const DailyEnergyService = {
     const delta = newFactor - previousFactor
 
     // Persistir nuevo factor + guardar WeightLog
+    const normalizedDate = toDateOnly(date)
     await db.$transaction([
       db.userProfile.update({
         where: { userId },
         data: { metabolicAdjustment: newFactor },
       }),
       db.weightLog.upsert({
-        where: { userId_date: { userId, date } },
-        create: { userId, date, weightKg: realWeightKg },
+        where: { userId_date: { userId, date:normalizedDate } },
+        create: { userId, date:normalizedDate, weightKg: realWeightKg },
         update: { weightKg: realWeightKg },
       }),
     ])

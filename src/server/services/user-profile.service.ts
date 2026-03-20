@@ -21,9 +21,16 @@ export const UserProfileService = {
 
   async get(userId: string) {
     return db.userProfile.findUnique({
-    where: { userId },
-    include: { user: { select: { name: true, email: true } } }
-  })
+  where: { userId },
+  include: {
+    user: {
+      select: {
+        id: true, name: true, email: true, role: true,
+        coach: { select: { id: true, name: true, email: true } },
+      },
+    },
+  },
+})
   },
 
   async create(userId: string, input: CreateProfileInput) {

@@ -157,6 +157,7 @@ exports.Prisma.UserScalarFieldEnum = {
   image: 'image',
   role: 'role',
   coachId: 'coachId',
+  passwordHash: 'passwordHash',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -172,6 +173,43 @@ exports.Prisma.UserProfileScalarFieldEnum = {
   goal: 'goal',
   activityFactor: 'activityFactor',
   metabolicAdjustment: 'metabolicAdjustment',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CoachInviteCodeScalarFieldEnum = {
+  id: 'id',
+  coachId: 'coachId',
+  code: 'code',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  usedById: 'usedById',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.RegistrationCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  type: 'type',
+  createdByCoachId: 'createdByCoachId',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  usedById: 'usedById',
+  maxUses: 'maxUses',
+  useCount: 'useCount',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.SubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  paypalSubscriptionId: 'paypalSubscriptionId',
+  paypalPlanId: 'paypalPlanId',
+  status: 'status',
+  trialEndsAt: 'trialEndsAt',
+  currentPeriodEnd: 'currentPeriodEnd',
+  cancelAtPeriodEnd: 'cancelAtPeriodEnd',
+  clientCodeCredits: 'clientCodeCredits',
+  createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
@@ -366,6 +404,18 @@ exports.GoalType = exports.$Enums.GoalType = {
   MAINTENANCE: 'MAINTENANCE'
 };
 
+exports.InviteCodeType = exports.$Enums.InviteCodeType = {
+  COACH: 'COACH',
+  CLIENT: 'CLIENT'
+};
+
+exports.SubscriptionStatus = exports.$Enums.SubscriptionStatus = {
+  ACTIVE: 'ACTIVE',
+  CANCELLED: 'CANCELLED',
+  PAST_DUE: 'PAST_DUE',
+  TRIAL: 'TRIAL'
+};
+
 exports.MealType = exports.$Enums.MealType = {
   BREAKFAST: 'BREAKFAST',
   LUNCH: 'LUNCH',
@@ -388,6 +438,9 @@ exports.Prisma.ModelName = {
   VerificationToken: 'VerificationToken',
   User: 'User',
   UserProfile: 'UserProfile',
+  CoachInviteCode: 'CoachInviteCode',
+  RegistrationCode: 'RegistrationCode',
+  Subscription: 'Subscription',
   Post: 'Post',
   Ingredient: 'Ingredient',
   UserIngredientOverride: 'UserIngredientOverride',

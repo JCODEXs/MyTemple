@@ -91,16 +91,22 @@ model VerificationToken {
 //////////////////////////////////////////////////////
 
 model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  emailVerified DateTime?
-  name          String?
-  image         String?
-  role          UserRole  @default(USER)
+  id             String            @id @default(cuid())
+  email          String            @unique
+  emailVerified  DateTime?
+  name           String?
+  image          String?
+  role           UserRole          @default(USER)
+  coachCodes     CoachInviteCode[] @relation("CoachCodes")
+  usedInviteCode CoachInviteCode?  @relation("UsedCodes")
 
-  coachId String?
-  coach   User?   @relation("CoachClients", fields: [coachId], references: [id])
-  clients User[]  @relation("CoachClients")
+  coachId           String?
+  coach             User?              @relation("CoachClients", fields: [coachId], references: [id])
+  clients           User[]             @relation("CoachClients")
+  passwordHash      String?
+  registrationCodes RegistrationCode[] @relation("CoachRegistrationCodes")
+  usedCode          RegistrationCode?  @relation("UsedRegistrationCode")
+  subscription      Subscription?
 
   posts Post[]
 
@@ -148,6 +154,66 @@ model UserProfile {
   metabolicAdjustment Float @default(1.0)
 
   updatedAt DateTime @updatedAt
+}
+
+model CoachInviteCode {
+  id      String @id @default(cuid())
+  coachId String
+  coach   User   @relation("CoachCodes", fields: [coachId], references: [id], onDelete: Cascade)
+
+  code      String    @unique // 8 caracteres alfanuméricos
+  expiresAt DateTime
+  usedAt    DateTime?
+  usedById  String?   @unique
+  usedBy    User?     @relation("UsedCodes", fields: [usedById], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+///////////////////////
+////SubscriptionStatus
+////////////////////////
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  PAST_DUE
+  TRIAL
+}
+
+enum InviteCodeType {
+  COACH
+  CLIENT
+}
+
+model RegistrationCode {
+  id               String         @id @default(cuid())
+  code             String         @unique
+  type             InviteCodeType
+  createdByCoachId String?
+  createdByCoach   User?          @relation("CoachRegistrationCodes", fields: [createdByCoachId], references: [id])
+  expiresAt        DateTime
+  usedAt           DateTime?
+  usedById         String?        @unique
+  usedBy           User?          @relation("UsedRegistrationCode", fields: [usedById], references: [id])
+  maxUses          Int            @default(1)
+  useCount         Int            @default(0)
+  createdAt        DateTime       @default(now())
+}
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  userId               String             @unique
+  user                 User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  paypalSubscriptionId String?            @unique
+  paypalPlanId         String?
+  status               SubscriptionStatus @default(TRIAL)
+  trialEndsAt          DateTime?
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean            @default(false)
+  clientCodeCredits    Int                @default(5)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
 }
 
 //////////////////////////////////////////////////////
