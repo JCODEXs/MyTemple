@@ -1,0 +1,11 @@
+-- AlterTable
+ALTER TABLE "Recipe" ADD COLUMN     "category" TEXT,
+ADD COLUMN     "imageUrl" TEXT,
+ADD COLUMN     "isHealthy" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "isLowCarb" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "isPrivate" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "isQuickMeal" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "isSpicy" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "isVegan" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "isVegetarian" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "steps" TEXT;
