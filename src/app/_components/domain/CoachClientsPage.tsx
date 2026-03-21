@@ -144,7 +144,10 @@ export default function CoachClientsPage() {
   const [search,       setSearch]       = useState("")
   const [unlinkTarget, setUnlinkTarget] = useState<string | null>(null)
 
-  const { data: clients = [], isLoading } = api.coach.getClients.useQuery()
+  const { data: clients = [], isLoading } = api.coach.getClients.useQuery(
+    undefined,
+    { staleTime: 10 * 60_000 }  // 10 minutos — lento
+  )
 
   const unlinkClient = api.coach.unlinkClient.useMutation({
     onSuccess: () => {

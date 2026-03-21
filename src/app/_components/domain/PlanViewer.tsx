@@ -232,16 +232,19 @@ export default function PlanViewer() {
   const [selectedDay,    setSelectedDay]    = useState<PlanDay | null>(null)
   const [deleteTarget,   setDeleteTarget]   = useState<string | null>(null)
 
-  const { data: plans = [], isLoading } = api.nutritionPlan.getAll.useQuery()
+  const { data: plans = [], isLoading } = api.nutritionPlan.getAll.useQuery(
+    undefined,
+    { staleTime: 10 * 60_000 }  // 10 minutos — lento
+  )
   const { data: planFull } = api.nutritionPlan.getOne.useQuery(
     { planId: selectedPlanId! },
-    { enabled: !!selectedPlanId }
+    { enabled: !!selectedPlanId, staleTime: 10 * 60_000 }
   )
 
   // Real log for selected day
   const { data: realLog } = api.dailyLog.getDay.useQuery(
     { date: selectedDay ? new Date(selectedDay.date) : new Date() },
-    { enabled: !!selectedDay }
+    { enabled: !!selectedDay, staleTime: 30_000 }  // 30 segundos — tiempo real
   )
 
   const deletePlan = api.nutritionPlan.delete.useMutation({

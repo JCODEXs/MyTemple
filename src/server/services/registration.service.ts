@@ -194,4 +194,29 @@ export const RegistrationService = {
       expiresAt:  record.expiresAt,
     }
   },
+ /**
+   * Actualiza el nombre y/o email de un usuario.
+   */
+    async updateAccount(userId: string, input: { name?: string; email?: string }) {
+    // Si cambia el email, verificar que no esté en uso
+    if (input.email) {
+      const existing = await db.user.findFirst({
+        where: { email: input.email, NOT: { id: userId } },
+        select: { id: true },
+      })
+      if (existing) {
+        throw new TRPCError({ code: "CONFLICT", message: "Este email ya está en uso." })
+      }
+    }
+
+    return db.user.update({
+      where: { id: userId },
+      data: {
+        ...(input.name  && { name:  input.name  }),
+        ...(input.email && { email: input.email, emailVerified: null }),
+      },
+      select: { id: true, name: true, email: true },
+    })
+  },
 }
+

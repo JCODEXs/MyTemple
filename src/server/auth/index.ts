@@ -1,18 +1,3 @@
-// import NextAuth from "next-auth";
-// import { cache } from "react";
-
-// import { authConfig } from "./config";
-
-// const { auth: uncachedAuth, handlers, signIn, signOut } = NextAuth(authConfig);
-
-// const auth = cache(uncachedAuth);
-
-// export { auth, handlers, signIn, signOut };
-
-// ─────────────────────────────────────────────────────────────────────────────
-// src/server/auth.ts  —  reemplazar el archivo completo
-// ─────────────────────────────────────────────────────────────────────────────
-
 import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import Credentials from "next-auth/providers/credentials"
@@ -31,10 +16,14 @@ const loginSchema = z.object({
 })
 
 // ─── Auth config ──────────────────────────────────────────────────────────────
+// NOTE: Credentials provider in Auth.js v5 always produces a JWE (JWT) session
+// cookie regardless of the strategy setting. Using strategy:"jwt" so auth()
+// decodes it directly from the cookie — no DB session-table lookup needed.
+// The PrismaAdapter is still used for OAuth User/Account records.
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter:  PrismaAdapter(db),
-  session:  { strategy: "database" },
+  session:  { strategy: "jwt" },
 
   providers: [
     // ── Email + contraseña ────────────────────────────────────────────────────
@@ -63,6 +52,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           email: user.email,
           name:  user.name,
           image: user.image,
+          role:  user.role,   // pass role so jwt callback can store it in the token
         }
       },
     }),
@@ -93,31 +83,53 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     newUser: "/setup",
   },
 
-  callbacks: {
-    async session({ session, user }) {
-      if (session.user) {
-        session.user.id   = user.id
-        session.user.role = (user as { role?: string }).role ?? "USER"
-      }
-      return session
-    },
-
-    async signIn({ user, account }) {
-      // Bloquear coaches con suscripción vencida
-      if (user.id) {
-        const dbUser = await db.user.findUnique({
-          where:   { id: user.id },
-          include: { subscription: true },
-        })
-
-        if (
-          dbUser?.role === "COACH" &&
-          dbUser.subscription?.status === "PAST_DUE"
-        ) {
-          return "/auth/signin?error=SubscriptionExpired"
-        }
-      }
-      return true
-    },
+callbacks: {
+  // Runs on every sign-in and on every session refresh.
+  // We persist id + role into the JWT so auth() can expose them without a DB hit.
+  jwt: async ({ token, user }) => {
+    if (user?.id) {
+      token.id = user.id
+      // user.role is set by the credentials authorize callback.
+      // For OAuth sign-ins, fetch it from DB once (on first login).
+      token.role = (user as { role?: string }).role
+        ?? (await db.user.findUnique({
+              where:  { id: user.id },
+              select: { role: true },
+            }).then((u) => u?.role ?? "USER"))
+    }
+    return token
   },
+
+  // Expose id + role on session.user so server components can read them.
+  session: ({ session, token }) => ({
+    ...session,
+    user: {
+      ...session.user,
+      id:   token.id   as string,
+      role: token.role as string ?? "USER",
+    },
+  }),
+
+  async signIn({ user }) {
+    if (!user.id) return true  // permitir siempre si no hay id
+
+    try {
+      const dbUser = await db.user.findUnique({
+        where:  { id: user.id },
+        select: { role: true, subscription: { select: { status: true } } },
+      })
+
+      if (
+        dbUser?.role === "COACH" &&
+        dbUser.subscription?.status === "PAST_DUE"
+      ) {
+        return "/auth/signin?error=SubscriptionExpired"
+      }
+    } catch {
+      // Si falla el check, permitir igual — no bloquear el login
+    }
+
+    return true
+  },
+},
 })

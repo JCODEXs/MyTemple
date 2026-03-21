@@ -3,9 +3,16 @@
 import { useMemo } from "react"
 import { useRouter } from "next/navigation"
 import { api } from "@/trpc/react"
+import { useSession } from "next-auth/react"
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
+export function UserInfo() {
+  const { data: session, status } = useSession()
 
+  if (status === "loading") return null
+
+  return <div>{session?.user.name}</div>
+}
 function getMondayOfWeek(d = new Date()) {
   const day  = d.getDay()
   const diff = (day === 0 ? -6 : 1 - day)
@@ -194,30 +201,30 @@ const { today, weekStart, weekEnd, thirtyDaysAgo } = useMemo(() => {
 
   return { today, weekStart, weekEnd, thirtyDaysAgo }
 }, []) // [] = se calcula solo una vez al montar
-  
-  weekEnd.setDate(weekStart.getDate() + 6)
 
   // ── Data fetching ──────────────────────────────────────────────────────────
- const { data: profile  } = api.userProfile.getSummary.useQuery(
-  undefined,
-  { staleTime: 60_000 }  // 1 minuto
-)
-const { data: todayLog } = api.dailyLog.getDay.useQuery(
-  { date: today },
-  { staleTime: 30_000 }  // 30 segundos
-)
-const { data: weekly   } = api.dailyLog.getWeeklySummary.useQuery(
-  { weekStart },
-  { staleTime: 60_000 }
-)
-const { data: weekLogs } = api.dailyLog.getRange.useQuery(
-  { from: weekStart, to: weekEnd },
-  { staleTime: 60_000 }
-)
-const { data: monthLogs } = api.dailyLog.getRange.useQuery(
-  { from: thirtyDaysAgo, to: today },
-  { staleTime: 300_000 } // 5 minutos
-)
+  const { data: profile  } = api.userProfile.getSummary.useQuery(
+    undefined,
+    { staleTime: 10 * 60_000 }  // 10 minutos — cambia poco
+  )
+  const userName = UserInfo()
+  const { data: todayLog } = api.dailyLog.getDay.useQuery(
+    { date: today },
+    { staleTime: 30_000 }       // 30 segundos — tiempo real
+  )
+  const { data: weekly   } = api.dailyLog.getWeeklySummary.useQuery(
+    { weekStart },
+    { staleTime: 5 * 60_000 }   // 5 minutos — moderado
+  )
+  const { data: weekLogs } = api.dailyLog.getRange.useQuery(
+    { from: weekStart, to: weekEnd },
+    { staleTime: 5 * 60_000 }   // 5 minutos — moderado
+  )
+  const { data: monthLogs } = api.dailyLog.getRange.useQuery(
+    { from: thirtyDaysAgo, to: today },
+    { staleTime: 5 * 60_000 }   // 5 minutos — moderado
+  )
+
 
   // // Last 30 days for weight sparkline — reuse getRange from dailyLog
   // const thirtyDaysAgo = new Date(today)
@@ -297,7 +304,7 @@ const { data: monthLogs } = api.dailyLog.getRange.useQuery(
               {today.toLocaleDateString("es-CO", { weekday: "long", day: "numeric", month: "long" })}
             </p>
             <h1 className="text-2xl font-black text-white">
-              Hola, {profile?.user?.name?.split(" ")[0] ?? "atleta"} ⚡
+              Hola, {userName ?? "atleta"} ⚡
             </h1>
           </div>
           <div className="flex items-center gap-2">

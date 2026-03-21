@@ -28,7 +28,6 @@ export default function RegisterPage() {
   const [code,     setCode]     = useState("")
   const [preview,  setPreview]  = useState<CodePreview | null>(null)
   const [error,    setError]    = useState<string | null>(null)
-  const [success,  setSuccess]  = useState(false)
 
   // Preview del código en tiempo real
   const previewQuery = api.auth.previewCode.useQuery(
@@ -46,19 +45,19 @@ export default function RegisterPage() {
 
   const register = api.auth.register.useMutation({
     onSuccess: async (data) => {
-      // Auto sign-in después del registro
+      const destination = data.requiresPayment ? "/auth/subscribe" : "/setup"
+      // Use redirect:false so NextAuth writes the DB session before we navigate.
+      // (Using `redirectTo` takes a v5 code path that skips DB session creation.)
       const res = await signIn("credentials", {
         email,
         password,
         redirect: false,
+        callbackUrl: destination,
       })
-
       if (res?.ok) {
-        if (data.requiresPayment) {
-          router.push("/auth/subscribe")  // → checkout PayPal (Fase 2)
-        } else {
-          router.push("/setup")           // → onboarding de perfil
-        }
+        router.push(destination)
+      } else {
+        setError("Cuenta creada, pero el inicio de sesión falló. Por favor inicia sesión manualmente.")
       }
     },
     onError: (e) => setError(e.message),

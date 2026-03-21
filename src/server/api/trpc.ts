@@ -108,7 +108,8 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
  * guarantee that a user querying is authorized, but you can still access user session data if they
  * are logged in.
  */
-export const publicProcedure = t.procedure.use(timingMiddleware);
+// export const publicProcedure = t.procedure.use(timingMiddleware);
+export const publicProcedure = t.procedure
 
 /**
  * Protected (authenticated) procedure
@@ -131,3 +132,18 @@ export const protectedProcedure = t.procedure
       },
     });
   });
+
+
+export const coachProcedure = protectedProcedure.use(({ ctx, next }) => {
+  if (ctx.session.user.role !== "COACH" && ctx.session.user.role !== "ADMIN") {
+    throw new TRPCError({ code: "FORBIDDEN", message: "Coach access required." })
+  }
+  return next({ ctx })
+})
+
+export const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
+  if (ctx.session.user.role !== "ADMIN") {
+    throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required." })
+  }
+  return next({ ctx })
+})

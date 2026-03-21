@@ -246,8 +246,14 @@ export default function PlanBuilder() {
   const [suggestion, setSuggestion] = useState<Suggestion | null>(null)
   const [draftDays,  setDraftDays]  = useState<DraftDay[]>([])
 
-  const { data: allRecipes = [] } = api.recipe.getAll.useQuery()
-  const { data: profile         } = api.userProfile.getSummary.useQuery()
+  const { data: allRecipes = [] } = api.recipe.getAll.useQuery(
+    undefined,
+    { staleTime: 10 * 60_000 }  // 10 minutos — lento
+  )
+  const { data: profile         } = api.userProfile.getSummary.useQuery(
+    undefined,
+    { staleTime: 10 * 60_000 }  // 10 minutos — lento
+  )
 
   const generate = api.nutritionPlan.generateSuggestion.useMutation({
     onSuccess: (data) => {

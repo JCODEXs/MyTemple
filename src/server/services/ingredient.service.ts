@@ -40,29 +40,50 @@ export const IngredientService = {
       db.userIngredientOverride.findMany({ where: { userId } }),
     ])
 
-    const overrideMap = new Map(
-      overrides.map((o) => [o.ingredientId, o])
-    )
+    // Shortcut: the vast majority of users have no overrides yet.
+    // Skip Map construction entirely and return a clean mapping.
+    if (overrides.length === 0) {
+      return ingredients.map((ing) => ({
+        id:               ing.id,
+        name:             ing.name,
+        emoji:            ing.emoji,
+        imageUrl:         ing.imageUrl,
+        kcalPer100g:      ing.kcalPer100g,
+        proteinPer100g:   ing.proteinPer100g,
+        carbsPer100g:     ing.carbsPer100g,
+        fatPer100g:       ing.fatPer100g,
+        fiberPer100g:     ing.fiberPer100g,
+        sodiumMgPer100g:  ing.sodiumMgPer100g,
+        defaultPricePerKg: ing.defaultPricePerKg,
+        customPricePerKg: null,
+        effectivePrice:   ing.defaultPricePerKg,
+        isActive:         true,
+        hasOverride:      false,
+      }))
+    }
+
+    // With overrides — O(1) lookup via Map
+    const overrideMap = new Map(overrides.map((o) => [o.ingredientId, o]))
 
     return ingredients.map((ing) => {
       const override = overrideMap.get(ing.id) ?? null
 
       return {
-        id: ing.id,
-        name: ing.name,
-        emoji: ing.emoji,
-        imageUrl: ing.imageUrl,
-        kcalPer100g: ing.kcalPer100g,
-        proteinPer100g: ing.proteinPer100g,
-        carbsPer100g: ing.carbsPer100g,
-        fatPer100g: ing.fatPer100g,
-        fiberPer100g: ing.fiberPer100g,
-        sodiumMgPer100g: ing.sodiumMgPer100g,
+        id:               ing.id,
+        name:             ing.name,
+        emoji:            ing.emoji,
+        imageUrl:         ing.imageUrl,
+        kcalPer100g:      ing.kcalPer100g,
+        proteinPer100g:   ing.proteinPer100g,
+        carbsPer100g:     ing.carbsPer100g,
+        fatPer100g:       ing.fatPer100g,
+        fiberPer100g:     ing.fiberPer100g,
+        sodiumMgPer100g:  ing.sodiumMgPer100g,
         defaultPricePerKg: ing.defaultPricePerKg,
         customPricePerKg: override?.customPricePerKg ?? null,
-        effectivePrice: override?.customPricePerKg ?? ing.defaultPricePerKg,
-        isActive: override?.isActive ?? true,
-        hasOverride: override !== null,
+        effectivePrice:   override?.customPricePerKg ?? ing.defaultPricePerKg,
+        isActive:         override?.isActive ?? true,
+        hasOverride:      override !== null,
       }
     })
   },

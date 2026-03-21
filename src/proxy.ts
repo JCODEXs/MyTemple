@@ -49,11 +49,128 @@
 // }
 
 
-// src/middleware.ts
-export { default } from "next-auth/middleware"
+// // src/middleware.ts
+// export { default } from "next-auth/middleware"
 
-export const config = {
-  matcher: ["/dashboard/:path*", "/log/:path*", "/weight/:path*", "/recipes/:path*"],
+// export const config = {
+//   matcher: ["/dashboard/:path*", "/log/:path*", "/weight/:path*", "/recipes/:path*"],
+// }
+
+
+// import { NextResponse, type NextRequest } from "next/server"
+// import { withAuth } from "next-auth/middleware"
+
+// // Simple in-memory rate limiter (para producción usar Upstash Redis)
+// const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
+
+// function rateLimit(ip: string, limit = 60, windowMs = 60_000): boolean {
+//   const now    = Date.now()
+//   const entry  = rateLimitMap.get(ip)
+
+//   if (!entry || now > entry.resetAt) {
+//     rateLimitMap.set(ip, { count: 1, resetAt: now + windowMs })
+//     return true
+//   }
+
+//   if (entry.count >= limit) return false
+
+//   entry.count++
+//   return true
+// }
+
+// export default withAuth(
+//   function middleware(req: NextRequest) {
+//     // Rate limit solo en REST API (/api/v1/*)
+//     if (req.nextUrl.pathname.startsWith("/api/v1/")) {
+//       const ip      = req.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown"
+//       const allowed = rateLimit(ip, 60, 60_000) // 60 req/min por IP
+
+//       if (!allowed) {
+//         return NextResponse.json(
+//           { error: "Too many requests" },
+//           {
+//             status: 429,
+//             headers: { "Retry-After": "60" },
+//           }
+//         )
+//       }
+//     }
+
+//     return NextResponse.next()
+//   },
+//   {
+//     callbacks: { authorized: ({ token }) => !!token },
+//   }
+// )
+
+// export const config = {
+//   matcher: [
+//     "/dashboard/:path*",
+//     "/log/:path*",
+//     "/weight/:path*",
+//     "/recipes/:path*",
+//     "/ingredients/:path*",
+//     "/plans/:path*",
+//     "/profile/:path*",
+//     "/messages/:path*",
+//     "/coach/:path*",
+//     "/superadmin/:path*",
+//     "/api/v1/:path*",
+//   ],
+// }
+import { auth } from "@/server/auth"
+import { NextResponse, type NextRequest } from "next/server"
+
+// ⚠️ still not production safe, but ok for now
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
+
+function rateLimit(ip: string, limit = 60, windowMs = 60_000): boolean {
+  const now = Date.now()
+  const entry = rateLimitMap.get(ip)
+
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + windowMs })
+    return true
+  }
+
+  if (entry.count >= limit) return false
+
+  entry.count++
+  return true
 }
 
+export default auth((req: NextRequest & { auth?: any }) => {
+  const { nextUrl } = req
+  const { pathname } = nextUrl
 
+  const ip =
+    req.ip ??
+    req.headers.get("x-forwarded-for")?.split(",")[0] ??
+    "unknown"
+
+  // 🔒 Rate limit API
+  if (pathname.startsWith("/api/v1")) {
+    const allowed = rateLimit(ip)
+
+    if (!allowed) {
+      return NextResponse.json(
+        { error: "Too many requests" },
+        { status: 429, headers: { "Retry-After": "60" } }
+      )
+    }
+  }
+
+  // 🔐 Protect dashboard
+  if (pathname.startsWith("/dashboard") && !req.auth) {
+    return NextResponse.redirect(new URL("/auth/signin", nextUrl))
+  }
+
+  return NextResponse.next()
+})
+
+export const config = {
+  matcher: [
+    "/dashboard/:path*",
+    "/api/v1/:path*",
+  ],
+}

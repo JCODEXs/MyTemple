@@ -4,6 +4,7 @@ import { type Metadata } from "next";
 import { Geist, Figtree } from "next/font/google";
 
 import { TRPCReactProvider } from "@/trpc/react";
+import { Toaster } from "sonner";
 import { cn } from "@/lib/utils";
 
 const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
@@ -25,7 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn(geist.variable, "font-sans", figtree.variable)}>
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          {children}
+          <Toaster richColors position="top-right" />
+        </TRPCReactProvider>
       </body>
     </html>
   );

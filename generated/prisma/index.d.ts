@@ -59,6 +59,26 @@ export type Subscription = $Result.DefaultSelection<Prisma.$SubscriptionPayload>
  */
 export type Post = $Result.DefaultSelection<Prisma.$PostPayload>
 /**
+ * Model PostReaction
+ * 
+ */
+export type PostReaction = $Result.DefaultSelection<Prisma.$PostReactionPayload>
+/**
+ * Model Comment
+ * 
+ */
+export type Comment = $Result.DefaultSelection<Prisma.$CommentPayload>
+/**
+ * Model Challenge
+ * 
+ */
+export type Challenge = $Result.DefaultSelection<Prisma.$ChallengePayload>
+/**
+ * Model DirectMessage
+ * 
+ */
+export type DirectMessage = $Result.DefaultSelection<Prisma.$DirectMessagePayload>
+/**
  * Model Ingredient
  * 
  */
@@ -199,6 +219,27 @@ export const InviteCodeType: {
 
 export type InviteCodeType = (typeof InviteCodeType)[keyof typeof InviteCodeType]
 
+
+export const PostType: {
+  CHECKIN: 'CHECKIN',
+  ACHIEVEMENT: 'ACHIEVEMENT',
+  QUESTION: 'QUESTION',
+  CHALLENGE: 'CHALLENGE',
+  SHARE: 'SHARE',
+  FREE: 'FREE'
+};
+
+export type PostType = (typeof PostType)[keyof typeof PostType]
+
+
+export const PostVisibility: {
+  PRIVATE: 'PRIVATE',
+  COACH_GROUP: 'COACH_GROUP',
+  PUBLIC: 'PUBLIC'
+};
+
+export type PostVisibility = (typeof PostVisibility)[keyof typeof PostVisibility]
+
 }
 
 export type UserRole = $Enums.UserRole
@@ -228,6 +269,14 @@ export const SubscriptionStatus: typeof $Enums.SubscriptionStatus
 export type InviteCodeType = $Enums.InviteCodeType
 
 export const InviteCodeType: typeof $Enums.InviteCodeType
+
+export type PostType = $Enums.PostType
+
+export const PostType: typeof $Enums.PostType
+
+export type PostVisibility = $Enums.PostVisibility
+
+export const PostVisibility: typeof $Enums.PostVisibility
 
 /**
  * ##  Prisma Client ʲˢ
@@ -436,6 +485,46 @@ export class PrismaClient<
     * ```
     */
   get post(): Prisma.PostDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.postReaction`: Exposes CRUD operations for the **PostReaction** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PostReactions
+    * const postReactions = await prisma.postReaction.findMany()
+    * ```
+    */
+  get postReaction(): Prisma.PostReactionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.comment`: Exposes CRUD operations for the **Comment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Comments
+    * const comments = await prisma.comment.findMany()
+    * ```
+    */
+  get comment(): Prisma.CommentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.challenge`: Exposes CRUD operations for the **Challenge** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Challenges
+    * const challenges = await prisma.challenge.findMany()
+    * ```
+    */
+  get challenge(): Prisma.ChallengeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.directMessage`: Exposes CRUD operations for the **DirectMessage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DirectMessages
+    * const directMessages = await prisma.directMessage.findMany()
+    * ```
+    */
+  get directMessage(): Prisma.DirectMessageDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.ingredient`: Exposes CRUD operations for the **Ingredient** model.
@@ -1026,6 +1115,10 @@ export namespace Prisma {
     RegistrationCode: 'RegistrationCode',
     Subscription: 'Subscription',
     Post: 'Post',
+    PostReaction: 'PostReaction',
+    Comment: 'Comment',
+    Challenge: 'Challenge',
+    DirectMessage: 'DirectMessage',
     Ingredient: 'Ingredient',
     UserIngredientOverride: 'UserIngredientOverride',
     Recipe: 'Recipe',
@@ -1058,7 +1151,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "session" | "verificationToken" | "user" | "userProfile" | "coachInviteCode" | "registrationCode" | "subscription" | "post" | "ingredient" | "userIngredientOverride" | "recipe" | "recipeIngredient" | "nutritionPlan" | "planDay" | "meal" | "mealRecipe" | "metabolicProfile" | "dailyLog" | "workout" | "workoutSession" | "hydrationLog" | "weightLog"
+      modelProps: "account" | "session" | "verificationToken" | "user" | "userProfile" | "coachInviteCode" | "registrationCode" | "subscription" | "post" | "postReaction" | "comment" | "challenge" | "directMessage" | "ingredient" | "userIngredientOverride" | "recipe" | "recipeIngredient" | "nutritionPlan" | "planDay" | "meal" | "mealRecipe" | "metabolicProfile" | "dailyLog" | "workout" | "workoutSession" | "hydrationLog" | "weightLog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1725,6 +1818,302 @@ export namespace Prisma {
           count: {
             args: Prisma.PostCountArgs<ExtArgs>
             result: $Utils.Optional<PostCountAggregateOutputType> | number
+          }
+        }
+      }
+      PostReaction: {
+        payload: Prisma.$PostReactionPayload<ExtArgs>
+        fields: Prisma.PostReactionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PostReactionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostReactionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PostReactionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostReactionPayload>
+          }
+          findFirst: {
+            args: Prisma.PostReactionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostReactionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PostReactionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostReactionPayload>
+          }
+          findMany: {
+            args: Prisma.PostReactionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostReactionPayload>[]
+          }
+          create: {
+            args: Prisma.PostReactionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostReactionPayload>
+          }
+          createMany: {
+            args: Prisma.PostReactionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PostReactionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostReactionPayload>[]
+          }
+          delete: {
+            args: Prisma.PostReactionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostReactionPayload>
+          }
+          update: {
+            args: Prisma.PostReactionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostReactionPayload>
+          }
+          deleteMany: {
+            args: Prisma.PostReactionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PostReactionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PostReactionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostReactionPayload>[]
+          }
+          upsert: {
+            args: Prisma.PostReactionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostReactionPayload>
+          }
+          aggregate: {
+            args: Prisma.PostReactionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePostReaction>
+          }
+          groupBy: {
+            args: Prisma.PostReactionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PostReactionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PostReactionCountArgs<ExtArgs>
+            result: $Utils.Optional<PostReactionCountAggregateOutputType> | number
+          }
+        }
+      }
+      Comment: {
+        payload: Prisma.$CommentPayload<ExtArgs>
+        fields: Prisma.CommentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CommentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CommentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          findFirst: {
+            args: Prisma.CommentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CommentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          findMany: {
+            args: Prisma.CommentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>[]
+          }
+          create: {
+            args: Prisma.CommentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          createMany: {
+            args: Prisma.CommentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CommentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>[]
+          }
+          delete: {
+            args: Prisma.CommentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          update: {
+            args: Prisma.CommentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          deleteMany: {
+            args: Prisma.CommentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CommentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CommentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>[]
+          }
+          upsert: {
+            args: Prisma.CommentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          aggregate: {
+            args: Prisma.CommentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateComment>
+          }
+          groupBy: {
+            args: Prisma.CommentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CommentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CommentCountArgs<ExtArgs>
+            result: $Utils.Optional<CommentCountAggregateOutputType> | number
+          }
+        }
+      }
+      Challenge: {
+        payload: Prisma.$ChallengePayload<ExtArgs>
+        fields: Prisma.ChallengeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ChallengeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChallengePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ChallengeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChallengePayload>
+          }
+          findFirst: {
+            args: Prisma.ChallengeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChallengePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ChallengeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChallengePayload>
+          }
+          findMany: {
+            args: Prisma.ChallengeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChallengePayload>[]
+          }
+          create: {
+            args: Prisma.ChallengeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChallengePayload>
+          }
+          createMany: {
+            args: Prisma.ChallengeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ChallengeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChallengePayload>[]
+          }
+          delete: {
+            args: Prisma.ChallengeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChallengePayload>
+          }
+          update: {
+            args: Prisma.ChallengeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChallengePayload>
+          }
+          deleteMany: {
+            args: Prisma.ChallengeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ChallengeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ChallengeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChallengePayload>[]
+          }
+          upsert: {
+            args: Prisma.ChallengeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChallengePayload>
+          }
+          aggregate: {
+            args: Prisma.ChallengeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateChallenge>
+          }
+          groupBy: {
+            args: Prisma.ChallengeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ChallengeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ChallengeCountArgs<ExtArgs>
+            result: $Utils.Optional<ChallengeCountAggregateOutputType> | number
+          }
+        }
+      }
+      DirectMessage: {
+        payload: Prisma.$DirectMessagePayload<ExtArgs>
+        fields: Prisma.DirectMessageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DirectMessageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectMessagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DirectMessageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectMessagePayload>
+          }
+          findFirst: {
+            args: Prisma.DirectMessageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectMessagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DirectMessageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectMessagePayload>
+          }
+          findMany: {
+            args: Prisma.DirectMessageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectMessagePayload>[]
+          }
+          create: {
+            args: Prisma.DirectMessageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectMessagePayload>
+          }
+          createMany: {
+            args: Prisma.DirectMessageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DirectMessageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectMessagePayload>[]
+          }
+          delete: {
+            args: Prisma.DirectMessageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectMessagePayload>
+          }
+          update: {
+            args: Prisma.DirectMessageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectMessagePayload>
+          }
+          deleteMany: {
+            args: Prisma.DirectMessageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DirectMessageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DirectMessageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectMessagePayload>[]
+          }
+          upsert: {
+            args: Prisma.DirectMessageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectMessagePayload>
+          }
+          aggregate: {
+            args: Prisma.DirectMessageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDirectMessage>
+          }
+          groupBy: {
+            args: Prisma.DirectMessageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DirectMessageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DirectMessageCountArgs<ExtArgs>
+            result: $Utils.Optional<DirectMessageCountAggregateOutputType> | number
           }
         }
       }
@@ -2869,6 +3258,10 @@ export namespace Prisma {
     registrationCode?: RegistrationCodeOmit
     subscription?: SubscriptionOmit
     post?: PostOmit
+    postReaction?: PostReactionOmit
+    comment?: CommentOmit
+    challenge?: ChallengeOmit
+    directMessage?: DirectMessageOmit
     ingredient?: IngredientOmit
     userIngredientOverride?: UserIngredientOverrideOmit
     recipe?: RecipeOmit
@@ -2967,6 +3360,11 @@ export namespace Prisma {
     clients: number
     registrationCodes: number
     posts: number
+    postReactions: number
+    comments: number
+    challenges: number
+    sentMessages: number
+    receivedMessages: number
     accounts: number
     sessions: number
     recipes: number
@@ -2984,6 +3382,11 @@ export namespace Prisma {
     clients?: boolean | UserCountOutputTypeCountClientsArgs
     registrationCodes?: boolean | UserCountOutputTypeCountRegistrationCodesArgs
     posts?: boolean | UserCountOutputTypeCountPostsArgs
+    postReactions?: boolean | UserCountOutputTypeCountPostReactionsArgs
+    comments?: boolean | UserCountOutputTypeCountCommentsArgs
+    challenges?: boolean | UserCountOutputTypeCountChallengesArgs
+    sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
+    receivedMessages?: boolean | UserCountOutputTypeCountReceivedMessagesArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     recipes?: boolean | UserCountOutputTypeCountRecipesArgs
@@ -3033,6 +3436,41 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PostWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPostReactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PostReactionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountChallengesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChallengeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSentMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DirectMessageWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReceivedMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DirectMessageWhereInput
   }
 
   /**
@@ -3103,6 +3541,108 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountMetabolicProfilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MetabolicProfileWhereInput
+  }
+
+
+  /**
+   * Count Type PostCountOutputType
+   */
+
+  export type PostCountOutputType = {
+    reactions: number
+    comments: number
+  }
+
+  export type PostCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    reactions?: boolean | PostCountOutputTypeCountReactionsArgs
+    comments?: boolean | PostCountOutputTypeCountCommentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PostCountOutputType without action
+   */
+  export type PostCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostCountOutputType
+     */
+    select?: PostCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PostCountOutputType without action
+   */
+  export type PostCountOutputTypeCountReactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PostReactionWhereInput
+  }
+
+  /**
+   * PostCountOutputType without action
+   */
+  export type PostCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentWhereInput
+  }
+
+
+  /**
+   * Count Type CommentCountOutputType
+   */
+
+  export type CommentCountOutputType = {
+    replies: number
+  }
+
+  export type CommentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    replies?: boolean | CommentCountOutputTypeCountRepliesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CommentCountOutputType without action
+   */
+  export type CommentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentCountOutputType
+     */
+    select?: CommentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CommentCountOutputType without action
+   */
+  export type CommentCountOutputTypeCountRepliesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentWhereInput
+  }
+
+
+  /**
+   * Count Type ChallengeCountOutputType
+   */
+
+  export type ChallengeCountOutputType = {
+    posts: number
+  }
+
+  export type ChallengeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    posts?: boolean | ChallengeCountOutputTypeCountPostsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ChallengeCountOutputType without action
+   */
+  export type ChallengeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChallengeCountOutputType
+     */
+    select?: ChallengeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ChallengeCountOutputType without action
+   */
+  export type ChallengeCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PostWhereInput
   }
 
 
@@ -6754,6 +7294,11 @@ export namespace Prisma {
     usedCode?: boolean | User$usedCodeArgs<ExtArgs>
     subscription?: boolean | User$subscriptionArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
+    postReactions?: boolean | User$postReactionsArgs<ExtArgs>
+    comments?: boolean | User$commentsArgs<ExtArgs>
+    challenges?: boolean | User$challengesArgs<ExtArgs>
+    sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
+    receivedMessages?: boolean | User$receivedMessagesArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     profile?: boolean | User$profileArgs<ExtArgs>
@@ -6819,6 +7364,11 @@ export namespace Prisma {
     usedCode?: boolean | User$usedCodeArgs<ExtArgs>
     subscription?: boolean | User$subscriptionArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
+    postReactions?: boolean | User$postReactionsArgs<ExtArgs>
+    comments?: boolean | User$commentsArgs<ExtArgs>
+    challenges?: boolean | User$challengesArgs<ExtArgs>
+    sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
+    receivedMessages?: boolean | User$receivedMessagesArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     profile?: boolean | User$profileArgs<ExtArgs>
@@ -6850,6 +7400,11 @@ export namespace Prisma {
       usedCode: Prisma.$RegistrationCodePayload<ExtArgs> | null
       subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
       posts: Prisma.$PostPayload<ExtArgs>[]
+      postReactions: Prisma.$PostReactionPayload<ExtArgs>[]
+      comments: Prisma.$CommentPayload<ExtArgs>[]
+      challenges: Prisma.$ChallengePayload<ExtArgs>[]
+      sentMessages: Prisma.$DirectMessagePayload<ExtArgs>[]
+      receivedMessages: Prisma.$DirectMessagePayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       profile: Prisma.$UserProfilePayload<ExtArgs> | null
@@ -7275,6 +7830,11 @@ export namespace Prisma {
     usedCode<T extends User$usedCodeArgs<ExtArgs> = {}>(args?: Subset<T, User$usedCodeArgs<ExtArgs>>): Prisma__RegistrationCodeClient<$Result.GetResult<Prisma.$RegistrationCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     subscription<T extends User$subscriptionArgs<ExtArgs> = {}>(args?: Subset<T, User$subscriptionArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    postReactions<T extends User$postReactionsArgs<ExtArgs> = {}>(args?: Subset<T, User$postReactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    challenges<T extends User$challengesArgs<ExtArgs> = {}>(args?: Subset<T, User$challengesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sentMessages<T extends User$sentMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    receivedMessages<T extends User$receivedMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$receivedMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     profile<T extends User$profileArgs<ExtArgs> = {}>(args?: Subset<T, User$profileArgs<ExtArgs>>): Prisma__UserProfileClient<$Result.GetResult<Prisma.$UserProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -7890,6 +8450,126 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
+   * User.postReactions
+   */
+  export type User$postReactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostReaction
+     */
+    select?: PostReactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostReaction
+     */
+    omit?: PostReactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostReactionInclude<ExtArgs> | null
+    where?: PostReactionWhereInput
+    orderBy?: PostReactionOrderByWithRelationInput | PostReactionOrderByWithRelationInput[]
+    cursor?: PostReactionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PostReactionScalarFieldEnum | PostReactionScalarFieldEnum[]
+  }
+
+  /**
+   * User.comments
+   */
+  export type User$commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    where?: CommentWhereInput
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    cursor?: CommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * User.challenges
+   */
+  export type User$challengesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    where?: ChallengeWhereInput
+    orderBy?: ChallengeOrderByWithRelationInput | ChallengeOrderByWithRelationInput[]
+    cursor?: ChallengeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChallengeScalarFieldEnum | ChallengeScalarFieldEnum[]
+  }
+
+  /**
+   * User.sentMessages
+   */
+  export type User$sentMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DirectMessage
+     */
+    select?: DirectMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DirectMessage
+     */
+    omit?: DirectMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectMessageInclude<ExtArgs> | null
+    where?: DirectMessageWhereInput
+    orderBy?: DirectMessageOrderByWithRelationInput | DirectMessageOrderByWithRelationInput[]
+    cursor?: DirectMessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DirectMessageScalarFieldEnum | DirectMessageScalarFieldEnum[]
+  }
+
+  /**
+   * User.receivedMessages
+   */
+  export type User$receivedMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DirectMessage
+     */
+    select?: DirectMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DirectMessage
+     */
+    omit?: DirectMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectMessageInclude<ExtArgs> | null
+    where?: DirectMessageWhereInput
+    orderBy?: DirectMessageOrderByWithRelationInput | DirectMessageOrderByWithRelationInput[]
+    cursor?: DirectMessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DirectMessageScalarFieldEnum | DirectMessageScalarFieldEnum[]
   }
 
   /**
@@ -12861,69 +13541,165 @@ export namespace Prisma {
   }
 
   export type PostAvgAggregateOutputType = {
-    id: number | null
+    kcalIn: number | null
+    kcalOut: number | null
+    balance: number | null
+    weightKg: number | null
+    proteinG: number | null
   }
 
   export type PostSumAggregateOutputType = {
-    id: number | null
+    kcalIn: number | null
+    kcalOut: number | null
+    balance: number | null
+    weightKg: number | null
+    proteinG: number | null
   }
 
   export type PostMinAggregateOutputType = {
-    id: number | null
-    name: string | null
+    id: string | null
+    userId: string | null
+    type: $Enums.PostType | null
+    visibility: $Enums.PostVisibility | null
+    content: string | null
+    kcalIn: number | null
+    kcalOut: number | null
+    balance: number | null
+    weightKg: number | null
+    proteinG: number | null
+    recipeId: string | null
+    planId: string | null
+    dailyLogId: string | null
+    featuredBy: string | null
+    featuredAt: Date | null
+    challengeId: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    createdById: string | null
   }
 
   export type PostMaxAggregateOutputType = {
-    id: number | null
-    name: string | null
+    id: string | null
+    userId: string | null
+    type: $Enums.PostType | null
+    visibility: $Enums.PostVisibility | null
+    content: string | null
+    kcalIn: number | null
+    kcalOut: number | null
+    balance: number | null
+    weightKg: number | null
+    proteinG: number | null
+    recipeId: string | null
+    planId: string | null
+    dailyLogId: string | null
+    featuredBy: string | null
+    featuredAt: Date | null
+    challengeId: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    createdById: string | null
   }
 
   export type PostCountAggregateOutputType = {
     id: number
-    name: number
+    userId: number
+    type: number
+    visibility: number
+    content: number
+    imageUrls: number
+    kcalIn: number
+    kcalOut: number
+    balance: number
+    weightKg: number
+    proteinG: number
+    recipeId: number
+    planId: number
+    dailyLogId: number
+    featuredBy: number
+    featuredAt: number
+    challengeId: number
     createdAt: number
     updatedAt: number
-    createdById: number
     _all: number
   }
 
 
   export type PostAvgAggregateInputType = {
-    id?: true
+    kcalIn?: true
+    kcalOut?: true
+    balance?: true
+    weightKg?: true
+    proteinG?: true
   }
 
   export type PostSumAggregateInputType = {
-    id?: true
+    kcalIn?: true
+    kcalOut?: true
+    balance?: true
+    weightKg?: true
+    proteinG?: true
   }
 
   export type PostMinAggregateInputType = {
     id?: true
-    name?: true
+    userId?: true
+    type?: true
+    visibility?: true
+    content?: true
+    kcalIn?: true
+    kcalOut?: true
+    balance?: true
+    weightKg?: true
+    proteinG?: true
+    recipeId?: true
+    planId?: true
+    dailyLogId?: true
+    featuredBy?: true
+    featuredAt?: true
+    challengeId?: true
     createdAt?: true
     updatedAt?: true
-    createdById?: true
   }
 
   export type PostMaxAggregateInputType = {
     id?: true
-    name?: true
+    userId?: true
+    type?: true
+    visibility?: true
+    content?: true
+    kcalIn?: true
+    kcalOut?: true
+    balance?: true
+    weightKg?: true
+    proteinG?: true
+    recipeId?: true
+    planId?: true
+    dailyLogId?: true
+    featuredBy?: true
+    featuredAt?: true
+    challengeId?: true
     createdAt?: true
     updatedAt?: true
-    createdById?: true
   }
 
   export type PostCountAggregateInputType = {
     id?: true
-    name?: true
+    userId?: true
+    type?: true
+    visibility?: true
+    content?: true
+    imageUrls?: true
+    kcalIn?: true
+    kcalOut?: true
+    balance?: true
+    weightKg?: true
+    proteinG?: true
+    recipeId?: true
+    planId?: true
+    dailyLogId?: true
+    featuredBy?: true
+    featuredAt?: true
+    challengeId?: true
     createdAt?: true
     updatedAt?: true
-    createdById?: true
     _all?: true
   }
 
@@ -13014,11 +13790,25 @@ export namespace Prisma {
   }
 
   export type PostGroupByOutputType = {
-    id: number
-    name: string
+    id: string
+    userId: string
+    type: $Enums.PostType
+    visibility: $Enums.PostVisibility
+    content: string | null
+    imageUrls: string[]
+    kcalIn: number | null
+    kcalOut: number | null
+    balance: number | null
+    weightKg: number | null
+    proteinG: number | null
+    recipeId: string | null
+    planId: string | null
+    dailyLogId: string | null
+    featuredBy: string | null
+    featuredAt: Date | null
+    challengeId: string | null
     createdAt: Date
     updatedAt: Date
-    createdById: string
     _count: PostCountAggregateOutputType | null
     _avg: PostAvgAggregateOutputType | null
     _sum: PostSumAggregateOutputType | null
@@ -13042,61 +13832,146 @@ export namespace Prisma {
 
   export type PostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    userId?: boolean
+    type?: boolean
+    visibility?: boolean
+    content?: boolean
+    imageUrls?: boolean
+    kcalIn?: boolean
+    kcalOut?: boolean
+    balance?: boolean
+    weightKg?: boolean
+    proteinG?: boolean
+    recipeId?: boolean
+    planId?: boolean
+    dailyLogId?: boolean
+    featuredBy?: boolean
+    featuredAt?: boolean
+    challengeId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    createdById?: boolean
-    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    challenge?: boolean | Post$challengeArgs<ExtArgs>
+    reactions?: boolean | Post$reactionsArgs<ExtArgs>
+    comments?: boolean | Post$commentsArgs<ExtArgs>
+    _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
   export type PostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    userId?: boolean
+    type?: boolean
+    visibility?: boolean
+    content?: boolean
+    imageUrls?: boolean
+    kcalIn?: boolean
+    kcalOut?: boolean
+    balance?: boolean
+    weightKg?: boolean
+    proteinG?: boolean
+    recipeId?: boolean
+    planId?: boolean
+    dailyLogId?: boolean
+    featuredBy?: boolean
+    featuredAt?: boolean
+    challengeId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    createdById?: boolean
-    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    challenge?: boolean | Post$challengeArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
   export type PostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    userId?: boolean
+    type?: boolean
+    visibility?: boolean
+    content?: boolean
+    imageUrls?: boolean
+    kcalIn?: boolean
+    kcalOut?: boolean
+    balance?: boolean
+    weightKg?: boolean
+    proteinG?: boolean
+    recipeId?: boolean
+    planId?: boolean
+    dailyLogId?: boolean
+    featuredBy?: boolean
+    featuredAt?: boolean
+    challengeId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    createdById?: boolean
-    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    challenge?: boolean | Post$challengeArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
   export type PostSelectScalar = {
     id?: boolean
-    name?: boolean
+    userId?: boolean
+    type?: boolean
+    visibility?: boolean
+    content?: boolean
+    imageUrls?: boolean
+    kcalIn?: boolean
+    kcalOut?: boolean
+    balance?: boolean
+    weightKg?: boolean
+    proteinG?: boolean
+    recipeId?: boolean
+    planId?: boolean
+    dailyLogId?: boolean
+    featuredBy?: boolean
+    featuredAt?: boolean
+    challengeId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    createdById?: boolean
   }
 
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "createdById", ExtArgs["result"]["post"]>
+  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "visibility" | "content" | "imageUrls" | "kcalIn" | "kcalOut" | "balance" | "weightKg" | "proteinG" | "recipeId" | "planId" | "dailyLogId" | "featuredBy" | "featuredAt" | "challengeId" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    challenge?: boolean | Post$challengeArgs<ExtArgs>
+    reactions?: boolean | Post$reactionsArgs<ExtArgs>
+    comments?: boolean | Post$commentsArgs<ExtArgs>
+    _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    challenge?: boolean | Post$challengeArgs<ExtArgs>
   }
   export type PostIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    challenge?: boolean | Post$challengeArgs<ExtArgs>
   }
 
   export type $PostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Post"
     objects: {
-      createdBy: Prisma.$UserPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+      challenge: Prisma.$ChallengePayload<ExtArgs> | null
+      reactions: Prisma.$PostReactionPayload<ExtArgs>[]
+      comments: Prisma.$CommentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: number
-      name: string
+      id: string
+      userId: string
+      type: $Enums.PostType
+      visibility: $Enums.PostVisibility
+      content: string | null
+      imageUrls: string[]
+      kcalIn: number | null
+      kcalOut: number | null
+      balance: number | null
+      weightKg: number | null
+      proteinG: number | null
+      recipeId: string | null
+      planId: string | null
+      dailyLogId: string | null
+      featuredBy: string | null
+      featuredAt: Date | null
+      challengeId: string | null
       createdAt: Date
       updatedAt: Date
-      createdById: string
     }, ExtArgs["result"]["post"]>
     composites: {}
   }
@@ -13491,7 +14366,10 @@ export namespace Prisma {
    */
   export interface Prisma__PostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    challenge<T extends Post$challengeArgs<ExtArgs> = {}>(args?: Subset<T, Post$challengeArgs<ExtArgs>>): Prisma__ChallengeClient<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    reactions<T extends Post$reactionsArgs<ExtArgs> = {}>(args?: Subset<T, Post$reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    comments<T extends Post$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Post$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13521,11 +14399,25 @@ export namespace Prisma {
    * Fields of the Post model
    */
   interface PostFieldRefs {
-    readonly id: FieldRef<"Post", 'Int'>
-    readonly name: FieldRef<"Post", 'String'>
+    readonly id: FieldRef<"Post", 'String'>
+    readonly userId: FieldRef<"Post", 'String'>
+    readonly type: FieldRef<"Post", 'PostType'>
+    readonly visibility: FieldRef<"Post", 'PostVisibility'>
+    readonly content: FieldRef<"Post", 'String'>
+    readonly imageUrls: FieldRef<"Post", 'String[]'>
+    readonly kcalIn: FieldRef<"Post", 'Float'>
+    readonly kcalOut: FieldRef<"Post", 'Float'>
+    readonly balance: FieldRef<"Post", 'Float'>
+    readonly weightKg: FieldRef<"Post", 'Float'>
+    readonly proteinG: FieldRef<"Post", 'Float'>
+    readonly recipeId: FieldRef<"Post", 'String'>
+    readonly planId: FieldRef<"Post", 'String'>
+    readonly dailyLogId: FieldRef<"Post", 'String'>
+    readonly featuredBy: FieldRef<"Post", 'String'>
+    readonly featuredAt: FieldRef<"Post", 'DateTime'>
+    readonly challengeId: FieldRef<"Post", 'String'>
     readonly createdAt: FieldRef<"Post", 'DateTime'>
     readonly updatedAt: FieldRef<"Post", 'DateTime'>
-    readonly createdById: FieldRef<"Post", 'String'>
   }
     
 
@@ -13922,6 +14814,73 @@ export namespace Prisma {
   }
 
   /**
+   * Post.challenge
+   */
+  export type Post$challengeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    where?: ChallengeWhereInput
+  }
+
+  /**
+   * Post.reactions
+   */
+  export type Post$reactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostReaction
+     */
+    select?: PostReactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostReaction
+     */
+    omit?: PostReactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostReactionInclude<ExtArgs> | null
+    where?: PostReactionWhereInput
+    orderBy?: PostReactionOrderByWithRelationInput | PostReactionOrderByWithRelationInput[]
+    cursor?: PostReactionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PostReactionScalarFieldEnum | PostReactionScalarFieldEnum[]
+  }
+
+  /**
+   * Post.comments
+   */
+  export type Post$commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    where?: CommentWhereInput
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    cursor?: CommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
    * Post without action
    */
   export type PostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13937,6 +14896,4449 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PostInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PostReaction
+   */
+
+  export type AggregatePostReaction = {
+    _count: PostReactionCountAggregateOutputType | null
+    _min: PostReactionMinAggregateOutputType | null
+    _max: PostReactionMaxAggregateOutputType | null
+  }
+
+  export type PostReactionMinAggregateOutputType = {
+    id: string | null
+    postId: string | null
+    userId: string | null
+    emoji: string | null
+  }
+
+  export type PostReactionMaxAggregateOutputType = {
+    id: string | null
+    postId: string | null
+    userId: string | null
+    emoji: string | null
+  }
+
+  export type PostReactionCountAggregateOutputType = {
+    id: number
+    postId: number
+    userId: number
+    emoji: number
+    _all: number
+  }
+
+
+  export type PostReactionMinAggregateInputType = {
+    id?: true
+    postId?: true
+    userId?: true
+    emoji?: true
+  }
+
+  export type PostReactionMaxAggregateInputType = {
+    id?: true
+    postId?: true
+    userId?: true
+    emoji?: true
+  }
+
+  export type PostReactionCountAggregateInputType = {
+    id?: true
+    postId?: true
+    userId?: true
+    emoji?: true
+    _all?: true
+  }
+
+  export type PostReactionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PostReaction to aggregate.
+     */
+    where?: PostReactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PostReactions to fetch.
+     */
+    orderBy?: PostReactionOrderByWithRelationInput | PostReactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PostReactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PostReactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PostReactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PostReactions
+    **/
+    _count?: true | PostReactionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PostReactionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PostReactionMaxAggregateInputType
+  }
+
+  export type GetPostReactionAggregateType<T extends PostReactionAggregateArgs> = {
+        [P in keyof T & keyof AggregatePostReaction]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePostReaction[P]>
+      : GetScalarType<T[P], AggregatePostReaction[P]>
+  }
+
+
+
+
+  export type PostReactionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PostReactionWhereInput
+    orderBy?: PostReactionOrderByWithAggregationInput | PostReactionOrderByWithAggregationInput[]
+    by: PostReactionScalarFieldEnum[] | PostReactionScalarFieldEnum
+    having?: PostReactionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PostReactionCountAggregateInputType | true
+    _min?: PostReactionMinAggregateInputType
+    _max?: PostReactionMaxAggregateInputType
+  }
+
+  export type PostReactionGroupByOutputType = {
+    id: string
+    postId: string
+    userId: string
+    emoji: string
+    _count: PostReactionCountAggregateOutputType | null
+    _min: PostReactionMinAggregateOutputType | null
+    _max: PostReactionMaxAggregateOutputType | null
+  }
+
+  type GetPostReactionGroupByPayload<T extends PostReactionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PostReactionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PostReactionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PostReactionGroupByOutputType[P]>
+            : GetScalarType<T[P], PostReactionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PostReactionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    postId?: boolean
+    userId?: boolean
+    emoji?: boolean
+    post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["postReaction"]>
+
+  export type PostReactionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    postId?: boolean
+    userId?: boolean
+    emoji?: boolean
+    post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["postReaction"]>
+
+  export type PostReactionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    postId?: boolean
+    userId?: boolean
+    emoji?: boolean
+    post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["postReaction"]>
+
+  export type PostReactionSelectScalar = {
+    id?: boolean
+    postId?: boolean
+    userId?: boolean
+    emoji?: boolean
+  }
+
+  export type PostReactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "postId" | "userId" | "emoji", ExtArgs["result"]["postReaction"]>
+  export type PostReactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PostReactionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PostReactionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PostReactionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PostReaction"
+    objects: {
+      post: Prisma.$PostPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      postId: string
+      userId: string
+      emoji: string
+    }, ExtArgs["result"]["postReaction"]>
+    composites: {}
+  }
+
+  type PostReactionGetPayload<S extends boolean | null | undefined | PostReactionDefaultArgs> = $Result.GetResult<Prisma.$PostReactionPayload, S>
+
+  type PostReactionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PostReactionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PostReactionCountAggregateInputType | true
+    }
+
+  export interface PostReactionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PostReaction'], meta: { name: 'PostReaction' } }
+    /**
+     * Find zero or one PostReaction that matches the filter.
+     * @param {PostReactionFindUniqueArgs} args - Arguments to find a PostReaction
+     * @example
+     * // Get one PostReaction
+     * const postReaction = await prisma.postReaction.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PostReactionFindUniqueArgs>(args: SelectSubset<T, PostReactionFindUniqueArgs<ExtArgs>>): Prisma__PostReactionClient<$Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PostReaction that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PostReactionFindUniqueOrThrowArgs} args - Arguments to find a PostReaction
+     * @example
+     * // Get one PostReaction
+     * const postReaction = await prisma.postReaction.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PostReactionFindUniqueOrThrowArgs>(args: SelectSubset<T, PostReactionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PostReactionClient<$Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PostReaction that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostReactionFindFirstArgs} args - Arguments to find a PostReaction
+     * @example
+     * // Get one PostReaction
+     * const postReaction = await prisma.postReaction.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PostReactionFindFirstArgs>(args?: SelectSubset<T, PostReactionFindFirstArgs<ExtArgs>>): Prisma__PostReactionClient<$Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PostReaction that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostReactionFindFirstOrThrowArgs} args - Arguments to find a PostReaction
+     * @example
+     * // Get one PostReaction
+     * const postReaction = await prisma.postReaction.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PostReactionFindFirstOrThrowArgs>(args?: SelectSubset<T, PostReactionFindFirstOrThrowArgs<ExtArgs>>): Prisma__PostReactionClient<$Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PostReactions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostReactionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PostReactions
+     * const postReactions = await prisma.postReaction.findMany()
+     * 
+     * // Get first 10 PostReactions
+     * const postReactions = await prisma.postReaction.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const postReactionWithIdOnly = await prisma.postReaction.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PostReactionFindManyArgs>(args?: SelectSubset<T, PostReactionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PostReaction.
+     * @param {PostReactionCreateArgs} args - Arguments to create a PostReaction.
+     * @example
+     * // Create one PostReaction
+     * const PostReaction = await prisma.postReaction.create({
+     *   data: {
+     *     // ... data to create a PostReaction
+     *   }
+     * })
+     * 
+     */
+    create<T extends PostReactionCreateArgs>(args: SelectSubset<T, PostReactionCreateArgs<ExtArgs>>): Prisma__PostReactionClient<$Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PostReactions.
+     * @param {PostReactionCreateManyArgs} args - Arguments to create many PostReactions.
+     * @example
+     * // Create many PostReactions
+     * const postReaction = await prisma.postReaction.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PostReactionCreateManyArgs>(args?: SelectSubset<T, PostReactionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PostReactions and returns the data saved in the database.
+     * @param {PostReactionCreateManyAndReturnArgs} args - Arguments to create many PostReactions.
+     * @example
+     * // Create many PostReactions
+     * const postReaction = await prisma.postReaction.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PostReactions and only return the `id`
+     * const postReactionWithIdOnly = await prisma.postReaction.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PostReactionCreateManyAndReturnArgs>(args?: SelectSubset<T, PostReactionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PostReaction.
+     * @param {PostReactionDeleteArgs} args - Arguments to delete one PostReaction.
+     * @example
+     * // Delete one PostReaction
+     * const PostReaction = await prisma.postReaction.delete({
+     *   where: {
+     *     // ... filter to delete one PostReaction
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PostReactionDeleteArgs>(args: SelectSubset<T, PostReactionDeleteArgs<ExtArgs>>): Prisma__PostReactionClient<$Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PostReaction.
+     * @param {PostReactionUpdateArgs} args - Arguments to update one PostReaction.
+     * @example
+     * // Update one PostReaction
+     * const postReaction = await prisma.postReaction.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PostReactionUpdateArgs>(args: SelectSubset<T, PostReactionUpdateArgs<ExtArgs>>): Prisma__PostReactionClient<$Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PostReactions.
+     * @param {PostReactionDeleteManyArgs} args - Arguments to filter PostReactions to delete.
+     * @example
+     * // Delete a few PostReactions
+     * const { count } = await prisma.postReaction.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PostReactionDeleteManyArgs>(args?: SelectSubset<T, PostReactionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PostReactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostReactionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PostReactions
+     * const postReaction = await prisma.postReaction.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PostReactionUpdateManyArgs>(args: SelectSubset<T, PostReactionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PostReactions and returns the data updated in the database.
+     * @param {PostReactionUpdateManyAndReturnArgs} args - Arguments to update many PostReactions.
+     * @example
+     * // Update many PostReactions
+     * const postReaction = await prisma.postReaction.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PostReactions and only return the `id`
+     * const postReactionWithIdOnly = await prisma.postReaction.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PostReactionUpdateManyAndReturnArgs>(args: SelectSubset<T, PostReactionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PostReaction.
+     * @param {PostReactionUpsertArgs} args - Arguments to update or create a PostReaction.
+     * @example
+     * // Update or create a PostReaction
+     * const postReaction = await prisma.postReaction.upsert({
+     *   create: {
+     *     // ... data to create a PostReaction
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PostReaction we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PostReactionUpsertArgs>(args: SelectSubset<T, PostReactionUpsertArgs<ExtArgs>>): Prisma__PostReactionClient<$Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PostReactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostReactionCountArgs} args - Arguments to filter PostReactions to count.
+     * @example
+     * // Count the number of PostReactions
+     * const count = await prisma.postReaction.count({
+     *   where: {
+     *     // ... the filter for the PostReactions we want to count
+     *   }
+     * })
+    **/
+    count<T extends PostReactionCountArgs>(
+      args?: Subset<T, PostReactionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PostReactionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PostReaction.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostReactionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PostReactionAggregateArgs>(args: Subset<T, PostReactionAggregateArgs>): Prisma.PrismaPromise<GetPostReactionAggregateType<T>>
+
+    /**
+     * Group by PostReaction.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostReactionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PostReactionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PostReactionGroupByArgs['orderBy'] }
+        : { orderBy?: PostReactionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PostReactionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostReactionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PostReaction model
+   */
+  readonly fields: PostReactionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PostReaction.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PostReactionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    post<T extends PostDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PostDefaultArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PostReaction model
+   */
+  interface PostReactionFieldRefs {
+    readonly id: FieldRef<"PostReaction", 'String'>
+    readonly postId: FieldRef<"PostReaction", 'String'>
+    readonly userId: FieldRef<"PostReaction", 'String'>
+    readonly emoji: FieldRef<"PostReaction", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PostReaction findUnique
+   */
+  export type PostReactionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostReaction
+     */
+    select?: PostReactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostReaction
+     */
+    omit?: PostReactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostReactionInclude<ExtArgs> | null
+    /**
+     * Filter, which PostReaction to fetch.
+     */
+    where: PostReactionWhereUniqueInput
+  }
+
+  /**
+   * PostReaction findUniqueOrThrow
+   */
+  export type PostReactionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostReaction
+     */
+    select?: PostReactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostReaction
+     */
+    omit?: PostReactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostReactionInclude<ExtArgs> | null
+    /**
+     * Filter, which PostReaction to fetch.
+     */
+    where: PostReactionWhereUniqueInput
+  }
+
+  /**
+   * PostReaction findFirst
+   */
+  export type PostReactionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostReaction
+     */
+    select?: PostReactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostReaction
+     */
+    omit?: PostReactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostReactionInclude<ExtArgs> | null
+    /**
+     * Filter, which PostReaction to fetch.
+     */
+    where?: PostReactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PostReactions to fetch.
+     */
+    orderBy?: PostReactionOrderByWithRelationInput | PostReactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PostReactions.
+     */
+    cursor?: PostReactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PostReactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PostReactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PostReactions.
+     */
+    distinct?: PostReactionScalarFieldEnum | PostReactionScalarFieldEnum[]
+  }
+
+  /**
+   * PostReaction findFirstOrThrow
+   */
+  export type PostReactionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostReaction
+     */
+    select?: PostReactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostReaction
+     */
+    omit?: PostReactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostReactionInclude<ExtArgs> | null
+    /**
+     * Filter, which PostReaction to fetch.
+     */
+    where?: PostReactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PostReactions to fetch.
+     */
+    orderBy?: PostReactionOrderByWithRelationInput | PostReactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PostReactions.
+     */
+    cursor?: PostReactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PostReactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PostReactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PostReactions.
+     */
+    distinct?: PostReactionScalarFieldEnum | PostReactionScalarFieldEnum[]
+  }
+
+  /**
+   * PostReaction findMany
+   */
+  export type PostReactionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostReaction
+     */
+    select?: PostReactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostReaction
+     */
+    omit?: PostReactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostReactionInclude<ExtArgs> | null
+    /**
+     * Filter, which PostReactions to fetch.
+     */
+    where?: PostReactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PostReactions to fetch.
+     */
+    orderBy?: PostReactionOrderByWithRelationInput | PostReactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PostReactions.
+     */
+    cursor?: PostReactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PostReactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PostReactions.
+     */
+    skip?: number
+    distinct?: PostReactionScalarFieldEnum | PostReactionScalarFieldEnum[]
+  }
+
+  /**
+   * PostReaction create
+   */
+  export type PostReactionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostReaction
+     */
+    select?: PostReactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostReaction
+     */
+    omit?: PostReactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostReactionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PostReaction.
+     */
+    data: XOR<PostReactionCreateInput, PostReactionUncheckedCreateInput>
+  }
+
+  /**
+   * PostReaction createMany
+   */
+  export type PostReactionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PostReactions.
+     */
+    data: PostReactionCreateManyInput | PostReactionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PostReaction createManyAndReturn
+   */
+  export type PostReactionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostReaction
+     */
+    select?: PostReactionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostReaction
+     */
+    omit?: PostReactionOmit<ExtArgs> | null
+    /**
+     * The data used to create many PostReactions.
+     */
+    data: PostReactionCreateManyInput | PostReactionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostReactionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PostReaction update
+   */
+  export type PostReactionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostReaction
+     */
+    select?: PostReactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostReaction
+     */
+    omit?: PostReactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostReactionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PostReaction.
+     */
+    data: XOR<PostReactionUpdateInput, PostReactionUncheckedUpdateInput>
+    /**
+     * Choose, which PostReaction to update.
+     */
+    where: PostReactionWhereUniqueInput
+  }
+
+  /**
+   * PostReaction updateMany
+   */
+  export type PostReactionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PostReactions.
+     */
+    data: XOR<PostReactionUpdateManyMutationInput, PostReactionUncheckedUpdateManyInput>
+    /**
+     * Filter which PostReactions to update
+     */
+    where?: PostReactionWhereInput
+    /**
+     * Limit how many PostReactions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PostReaction updateManyAndReturn
+   */
+  export type PostReactionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostReaction
+     */
+    select?: PostReactionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostReaction
+     */
+    omit?: PostReactionOmit<ExtArgs> | null
+    /**
+     * The data used to update PostReactions.
+     */
+    data: XOR<PostReactionUpdateManyMutationInput, PostReactionUncheckedUpdateManyInput>
+    /**
+     * Filter which PostReactions to update
+     */
+    where?: PostReactionWhereInput
+    /**
+     * Limit how many PostReactions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostReactionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PostReaction upsert
+   */
+  export type PostReactionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostReaction
+     */
+    select?: PostReactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostReaction
+     */
+    omit?: PostReactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostReactionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PostReaction to update in case it exists.
+     */
+    where: PostReactionWhereUniqueInput
+    /**
+     * In case the PostReaction found by the `where` argument doesn't exist, create a new PostReaction with this data.
+     */
+    create: XOR<PostReactionCreateInput, PostReactionUncheckedCreateInput>
+    /**
+     * In case the PostReaction was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PostReactionUpdateInput, PostReactionUncheckedUpdateInput>
+  }
+
+  /**
+   * PostReaction delete
+   */
+  export type PostReactionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostReaction
+     */
+    select?: PostReactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostReaction
+     */
+    omit?: PostReactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostReactionInclude<ExtArgs> | null
+    /**
+     * Filter which PostReaction to delete.
+     */
+    where: PostReactionWhereUniqueInput
+  }
+
+  /**
+   * PostReaction deleteMany
+   */
+  export type PostReactionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PostReactions to delete
+     */
+    where?: PostReactionWhereInput
+    /**
+     * Limit how many PostReactions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PostReaction without action
+   */
+  export type PostReactionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostReaction
+     */
+    select?: PostReactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostReaction
+     */
+    omit?: PostReactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostReactionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Comment
+   */
+
+  export type AggregateComment = {
+    _count: CommentCountAggregateOutputType | null
+    _min: CommentMinAggregateOutputType | null
+    _max: CommentMaxAggregateOutputType | null
+  }
+
+  export type CommentMinAggregateOutputType = {
+    id: string | null
+    postId: string | null
+    userId: string | null
+    parentId: string | null
+    content: string | null
+    imageUrl: string | null
+    createdAt: Date | null
+  }
+
+  export type CommentMaxAggregateOutputType = {
+    id: string | null
+    postId: string | null
+    userId: string | null
+    parentId: string | null
+    content: string | null
+    imageUrl: string | null
+    createdAt: Date | null
+  }
+
+  export type CommentCountAggregateOutputType = {
+    id: number
+    postId: number
+    userId: number
+    parentId: number
+    content: number
+    imageUrl: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type CommentMinAggregateInputType = {
+    id?: true
+    postId?: true
+    userId?: true
+    parentId?: true
+    content?: true
+    imageUrl?: true
+    createdAt?: true
+  }
+
+  export type CommentMaxAggregateInputType = {
+    id?: true
+    postId?: true
+    userId?: true
+    parentId?: true
+    content?: true
+    imageUrl?: true
+    createdAt?: true
+  }
+
+  export type CommentCountAggregateInputType = {
+    id?: true
+    postId?: true
+    userId?: true
+    parentId?: true
+    content?: true
+    imageUrl?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type CommentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Comment to aggregate.
+     */
+    where?: CommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Comments to fetch.
+     */
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Comments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Comments
+    **/
+    _count?: true | CommentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CommentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CommentMaxAggregateInputType
+  }
+
+  export type GetCommentAggregateType<T extends CommentAggregateArgs> = {
+        [P in keyof T & keyof AggregateComment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateComment[P]>
+      : GetScalarType<T[P], AggregateComment[P]>
+  }
+
+
+
+
+  export type CommentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentWhereInput
+    orderBy?: CommentOrderByWithAggregationInput | CommentOrderByWithAggregationInput[]
+    by: CommentScalarFieldEnum[] | CommentScalarFieldEnum
+    having?: CommentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CommentCountAggregateInputType | true
+    _min?: CommentMinAggregateInputType
+    _max?: CommentMaxAggregateInputType
+  }
+
+  export type CommentGroupByOutputType = {
+    id: string
+    postId: string
+    userId: string
+    parentId: string | null
+    content: string
+    imageUrl: string | null
+    createdAt: Date
+    _count: CommentCountAggregateOutputType | null
+    _min: CommentMinAggregateOutputType | null
+    _max: CommentMaxAggregateOutputType | null
+  }
+
+  type GetCommentGroupByPayload<T extends CommentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CommentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CommentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CommentGroupByOutputType[P]>
+            : GetScalarType<T[P], CommentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CommentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    postId?: boolean
+    userId?: boolean
+    parentId?: boolean
+    content?: boolean
+    imageUrl?: boolean
+    createdAt?: boolean
+    post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    parent?: boolean | Comment$parentArgs<ExtArgs>
+    replies?: boolean | Comment$repliesArgs<ExtArgs>
+    _count?: boolean | CommentCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comment"]>
+
+  export type CommentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    postId?: boolean
+    userId?: boolean
+    parentId?: boolean
+    content?: boolean
+    imageUrl?: boolean
+    createdAt?: boolean
+    post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    parent?: boolean | Comment$parentArgs<ExtArgs>
+  }, ExtArgs["result"]["comment"]>
+
+  export type CommentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    postId?: boolean
+    userId?: boolean
+    parentId?: boolean
+    content?: boolean
+    imageUrl?: boolean
+    createdAt?: boolean
+    post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    parent?: boolean | Comment$parentArgs<ExtArgs>
+  }, ExtArgs["result"]["comment"]>
+
+  export type CommentSelectScalar = {
+    id?: boolean
+    postId?: boolean
+    userId?: boolean
+    parentId?: boolean
+    content?: boolean
+    imageUrl?: boolean
+    createdAt?: boolean
+  }
+
+  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "postId" | "userId" | "parentId" | "content" | "imageUrl" | "createdAt", ExtArgs["result"]["comment"]>
+  export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    parent?: boolean | Comment$parentArgs<ExtArgs>
+    replies?: boolean | Comment$repliesArgs<ExtArgs>
+    _count?: boolean | CommentCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    parent?: boolean | Comment$parentArgs<ExtArgs>
+  }
+  export type CommentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    parent?: boolean | Comment$parentArgs<ExtArgs>
+  }
+
+  export type $CommentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Comment"
+    objects: {
+      post: Prisma.$PostPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+      parent: Prisma.$CommentPayload<ExtArgs> | null
+      replies: Prisma.$CommentPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      postId: string
+      userId: string
+      parentId: string | null
+      content: string
+      imageUrl: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["comment"]>
+    composites: {}
+  }
+
+  type CommentGetPayload<S extends boolean | null | undefined | CommentDefaultArgs> = $Result.GetResult<Prisma.$CommentPayload, S>
+
+  type CommentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CommentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CommentCountAggregateInputType | true
+    }
+
+  export interface CommentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Comment'], meta: { name: 'Comment' } }
+    /**
+     * Find zero or one Comment that matches the filter.
+     * @param {CommentFindUniqueArgs} args - Arguments to find a Comment
+     * @example
+     * // Get one Comment
+     * const comment = await prisma.comment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CommentFindUniqueArgs>(args: SelectSubset<T, CommentFindUniqueArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Comment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CommentFindUniqueOrThrowArgs} args - Arguments to find a Comment
+     * @example
+     * // Get one Comment
+     * const comment = await prisma.comment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CommentFindUniqueOrThrowArgs>(args: SelectSubset<T, CommentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Comment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentFindFirstArgs} args - Arguments to find a Comment
+     * @example
+     * // Get one Comment
+     * const comment = await prisma.comment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CommentFindFirstArgs>(args?: SelectSubset<T, CommentFindFirstArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Comment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentFindFirstOrThrowArgs} args - Arguments to find a Comment
+     * @example
+     * // Get one Comment
+     * const comment = await prisma.comment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CommentFindFirstOrThrowArgs>(args?: SelectSubset<T, CommentFindFirstOrThrowArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Comments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Comments
+     * const comments = await prisma.comment.findMany()
+     * 
+     * // Get first 10 Comments
+     * const comments = await prisma.comment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const commentWithIdOnly = await prisma.comment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CommentFindManyArgs>(args?: SelectSubset<T, CommentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Comment.
+     * @param {CommentCreateArgs} args - Arguments to create a Comment.
+     * @example
+     * // Create one Comment
+     * const Comment = await prisma.comment.create({
+     *   data: {
+     *     // ... data to create a Comment
+     *   }
+     * })
+     * 
+     */
+    create<T extends CommentCreateArgs>(args: SelectSubset<T, CommentCreateArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Comments.
+     * @param {CommentCreateManyArgs} args - Arguments to create many Comments.
+     * @example
+     * // Create many Comments
+     * const comment = await prisma.comment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CommentCreateManyArgs>(args?: SelectSubset<T, CommentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Comments and returns the data saved in the database.
+     * @param {CommentCreateManyAndReturnArgs} args - Arguments to create many Comments.
+     * @example
+     * // Create many Comments
+     * const comment = await prisma.comment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Comments and only return the `id`
+     * const commentWithIdOnly = await prisma.comment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CommentCreateManyAndReturnArgs>(args?: SelectSubset<T, CommentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Comment.
+     * @param {CommentDeleteArgs} args - Arguments to delete one Comment.
+     * @example
+     * // Delete one Comment
+     * const Comment = await prisma.comment.delete({
+     *   where: {
+     *     // ... filter to delete one Comment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CommentDeleteArgs>(args: SelectSubset<T, CommentDeleteArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Comment.
+     * @param {CommentUpdateArgs} args - Arguments to update one Comment.
+     * @example
+     * // Update one Comment
+     * const comment = await prisma.comment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CommentUpdateArgs>(args: SelectSubset<T, CommentUpdateArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Comments.
+     * @param {CommentDeleteManyArgs} args - Arguments to filter Comments to delete.
+     * @example
+     * // Delete a few Comments
+     * const { count } = await prisma.comment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CommentDeleteManyArgs>(args?: SelectSubset<T, CommentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Comments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Comments
+     * const comment = await prisma.comment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CommentUpdateManyArgs>(args: SelectSubset<T, CommentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Comments and returns the data updated in the database.
+     * @param {CommentUpdateManyAndReturnArgs} args - Arguments to update many Comments.
+     * @example
+     * // Update many Comments
+     * const comment = await prisma.comment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Comments and only return the `id`
+     * const commentWithIdOnly = await prisma.comment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CommentUpdateManyAndReturnArgs>(args: SelectSubset<T, CommentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Comment.
+     * @param {CommentUpsertArgs} args - Arguments to update or create a Comment.
+     * @example
+     * // Update or create a Comment
+     * const comment = await prisma.comment.upsert({
+     *   create: {
+     *     // ... data to create a Comment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Comment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CommentUpsertArgs>(args: SelectSubset<T, CommentUpsertArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Comments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentCountArgs} args - Arguments to filter Comments to count.
+     * @example
+     * // Count the number of Comments
+     * const count = await prisma.comment.count({
+     *   where: {
+     *     // ... the filter for the Comments we want to count
+     *   }
+     * })
+    **/
+    count<T extends CommentCountArgs>(
+      args?: Subset<T, CommentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CommentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Comment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CommentAggregateArgs>(args: Subset<T, CommentAggregateArgs>): Prisma.PrismaPromise<GetCommentAggregateType<T>>
+
+    /**
+     * Group by Comment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CommentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CommentGroupByArgs['orderBy'] }
+        : { orderBy?: CommentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CommentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCommentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Comment model
+   */
+  readonly fields: CommentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Comment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CommentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    post<T extends PostDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PostDefaultArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    parent<T extends Comment$parentArgs<ExtArgs> = {}>(args?: Subset<T, Comment$parentArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    replies<T extends Comment$repliesArgs<ExtArgs> = {}>(args?: Subset<T, Comment$repliesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Comment model
+   */
+  interface CommentFieldRefs {
+    readonly id: FieldRef<"Comment", 'String'>
+    readonly postId: FieldRef<"Comment", 'String'>
+    readonly userId: FieldRef<"Comment", 'String'>
+    readonly parentId: FieldRef<"Comment", 'String'>
+    readonly content: FieldRef<"Comment", 'String'>
+    readonly imageUrl: FieldRef<"Comment", 'String'>
+    readonly createdAt: FieldRef<"Comment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Comment findUnique
+   */
+  export type CommentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comment to fetch.
+     */
+    where: CommentWhereUniqueInput
+  }
+
+  /**
+   * Comment findUniqueOrThrow
+   */
+  export type CommentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comment to fetch.
+     */
+    where: CommentWhereUniqueInput
+  }
+
+  /**
+   * Comment findFirst
+   */
+  export type CommentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comment to fetch.
+     */
+    where?: CommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Comments to fetch.
+     */
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Comments.
+     */
+    cursor?: CommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Comments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Comments.
+     */
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * Comment findFirstOrThrow
+   */
+  export type CommentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comment to fetch.
+     */
+    where?: CommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Comments to fetch.
+     */
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Comments.
+     */
+    cursor?: CommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Comments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Comments.
+     */
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * Comment findMany
+   */
+  export type CommentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comments to fetch.
+     */
+    where?: CommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Comments to fetch.
+     */
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Comments.
+     */
+    cursor?: CommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Comments.
+     */
+    skip?: number
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * Comment create
+   */
+  export type CommentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Comment.
+     */
+    data: XOR<CommentCreateInput, CommentUncheckedCreateInput>
+  }
+
+  /**
+   * Comment createMany
+   */
+  export type CommentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Comments.
+     */
+    data: CommentCreateManyInput | CommentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Comment createManyAndReturn
+   */
+  export type CommentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * The data used to create many Comments.
+     */
+    data: CommentCreateManyInput | CommentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Comment update
+   */
+  export type CommentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Comment.
+     */
+    data: XOR<CommentUpdateInput, CommentUncheckedUpdateInput>
+    /**
+     * Choose, which Comment to update.
+     */
+    where: CommentWhereUniqueInput
+  }
+
+  /**
+   * Comment updateMany
+   */
+  export type CommentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Comments.
+     */
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyInput>
+    /**
+     * Filter which Comments to update
+     */
+    where?: CommentWhereInput
+    /**
+     * Limit how many Comments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Comment updateManyAndReturn
+   */
+  export type CommentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * The data used to update Comments.
+     */
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyInput>
+    /**
+     * Filter which Comments to update
+     */
+    where?: CommentWhereInput
+    /**
+     * Limit how many Comments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Comment upsert
+   */
+  export type CommentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Comment to update in case it exists.
+     */
+    where: CommentWhereUniqueInput
+    /**
+     * In case the Comment found by the `where` argument doesn't exist, create a new Comment with this data.
+     */
+    create: XOR<CommentCreateInput, CommentUncheckedCreateInput>
+    /**
+     * In case the Comment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CommentUpdateInput, CommentUncheckedUpdateInput>
+  }
+
+  /**
+   * Comment delete
+   */
+  export type CommentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter which Comment to delete.
+     */
+    where: CommentWhereUniqueInput
+  }
+
+  /**
+   * Comment deleteMany
+   */
+  export type CommentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Comments to delete
+     */
+    where?: CommentWhereInput
+    /**
+     * Limit how many Comments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Comment.parent
+   */
+  export type Comment$parentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    where?: CommentWhereInput
+  }
+
+  /**
+   * Comment.replies
+   */
+  export type Comment$repliesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    where?: CommentWhereInput
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    cursor?: CommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * Comment without action
+   */
+  export type CommentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Challenge
+   */
+
+  export type AggregateChallenge = {
+    _count: ChallengeCountAggregateOutputType | null
+    _min: ChallengeMinAggregateOutputType | null
+    _max: ChallengeMaxAggregateOutputType | null
+  }
+
+  export type ChallengeMinAggregateOutputType = {
+    id: string | null
+    coachId: string | null
+    title: string | null
+    description: string | null
+    imageUrl: string | null
+    startsAt: Date | null
+    endsAt: Date | null
+    targetAll: boolean | null
+    createdAt: Date | null
+  }
+
+  export type ChallengeMaxAggregateOutputType = {
+    id: string | null
+    coachId: string | null
+    title: string | null
+    description: string | null
+    imageUrl: string | null
+    startsAt: Date | null
+    endsAt: Date | null
+    targetAll: boolean | null
+    createdAt: Date | null
+  }
+
+  export type ChallengeCountAggregateOutputType = {
+    id: number
+    coachId: number
+    title: number
+    description: number
+    imageUrl: number
+    startsAt: number
+    endsAt: number
+    targetAll: number
+    targetIds: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ChallengeMinAggregateInputType = {
+    id?: true
+    coachId?: true
+    title?: true
+    description?: true
+    imageUrl?: true
+    startsAt?: true
+    endsAt?: true
+    targetAll?: true
+    createdAt?: true
+  }
+
+  export type ChallengeMaxAggregateInputType = {
+    id?: true
+    coachId?: true
+    title?: true
+    description?: true
+    imageUrl?: true
+    startsAt?: true
+    endsAt?: true
+    targetAll?: true
+    createdAt?: true
+  }
+
+  export type ChallengeCountAggregateInputType = {
+    id?: true
+    coachId?: true
+    title?: true
+    description?: true
+    imageUrl?: true
+    startsAt?: true
+    endsAt?: true
+    targetAll?: true
+    targetIds?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ChallengeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Challenge to aggregate.
+     */
+    where?: ChallengeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Challenges to fetch.
+     */
+    orderBy?: ChallengeOrderByWithRelationInput | ChallengeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ChallengeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Challenges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Challenges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Challenges
+    **/
+    _count?: true | ChallengeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ChallengeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ChallengeMaxAggregateInputType
+  }
+
+  export type GetChallengeAggregateType<T extends ChallengeAggregateArgs> = {
+        [P in keyof T & keyof AggregateChallenge]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateChallenge[P]>
+      : GetScalarType<T[P], AggregateChallenge[P]>
+  }
+
+
+
+
+  export type ChallengeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChallengeWhereInput
+    orderBy?: ChallengeOrderByWithAggregationInput | ChallengeOrderByWithAggregationInput[]
+    by: ChallengeScalarFieldEnum[] | ChallengeScalarFieldEnum
+    having?: ChallengeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ChallengeCountAggregateInputType | true
+    _min?: ChallengeMinAggregateInputType
+    _max?: ChallengeMaxAggregateInputType
+  }
+
+  export type ChallengeGroupByOutputType = {
+    id: string
+    coachId: string
+    title: string
+    description: string
+    imageUrl: string | null
+    startsAt: Date
+    endsAt: Date
+    targetAll: boolean
+    targetIds: string[]
+    createdAt: Date
+    _count: ChallengeCountAggregateOutputType | null
+    _min: ChallengeMinAggregateOutputType | null
+    _max: ChallengeMaxAggregateOutputType | null
+  }
+
+  type GetChallengeGroupByPayload<T extends ChallengeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ChallengeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ChallengeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ChallengeGroupByOutputType[P]>
+            : GetScalarType<T[P], ChallengeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ChallengeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    coachId?: boolean
+    title?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    startsAt?: boolean
+    endsAt?: boolean
+    targetAll?: boolean
+    targetIds?: boolean
+    createdAt?: boolean
+    coach?: boolean | UserDefaultArgs<ExtArgs>
+    posts?: boolean | Challenge$postsArgs<ExtArgs>
+    _count?: boolean | ChallengeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["challenge"]>
+
+  export type ChallengeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    coachId?: boolean
+    title?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    startsAt?: boolean
+    endsAt?: boolean
+    targetAll?: boolean
+    targetIds?: boolean
+    createdAt?: boolean
+    coach?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["challenge"]>
+
+  export type ChallengeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    coachId?: boolean
+    title?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    startsAt?: boolean
+    endsAt?: boolean
+    targetAll?: boolean
+    targetIds?: boolean
+    createdAt?: boolean
+    coach?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["challenge"]>
+
+  export type ChallengeSelectScalar = {
+    id?: boolean
+    coachId?: boolean
+    title?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    startsAt?: boolean
+    endsAt?: boolean
+    targetAll?: boolean
+    targetIds?: boolean
+    createdAt?: boolean
+  }
+
+  export type ChallengeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "coachId" | "title" | "description" | "imageUrl" | "startsAt" | "endsAt" | "targetAll" | "targetIds" | "createdAt", ExtArgs["result"]["challenge"]>
+  export type ChallengeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    coach?: boolean | UserDefaultArgs<ExtArgs>
+    posts?: boolean | Challenge$postsArgs<ExtArgs>
+    _count?: boolean | ChallengeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ChallengeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    coach?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ChallengeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    coach?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ChallengePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Challenge"
+    objects: {
+      coach: Prisma.$UserPayload<ExtArgs>
+      posts: Prisma.$PostPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      coachId: string
+      title: string
+      description: string
+      imageUrl: string | null
+      startsAt: Date
+      endsAt: Date
+      targetAll: boolean
+      targetIds: string[]
+      createdAt: Date
+    }, ExtArgs["result"]["challenge"]>
+    composites: {}
+  }
+
+  type ChallengeGetPayload<S extends boolean | null | undefined | ChallengeDefaultArgs> = $Result.GetResult<Prisma.$ChallengePayload, S>
+
+  type ChallengeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ChallengeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ChallengeCountAggregateInputType | true
+    }
+
+  export interface ChallengeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Challenge'], meta: { name: 'Challenge' } }
+    /**
+     * Find zero or one Challenge that matches the filter.
+     * @param {ChallengeFindUniqueArgs} args - Arguments to find a Challenge
+     * @example
+     * // Get one Challenge
+     * const challenge = await prisma.challenge.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ChallengeFindUniqueArgs>(args: SelectSubset<T, ChallengeFindUniqueArgs<ExtArgs>>): Prisma__ChallengeClient<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Challenge that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ChallengeFindUniqueOrThrowArgs} args - Arguments to find a Challenge
+     * @example
+     * // Get one Challenge
+     * const challenge = await prisma.challenge.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ChallengeFindUniqueOrThrowArgs>(args: SelectSubset<T, ChallengeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ChallengeClient<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Challenge that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChallengeFindFirstArgs} args - Arguments to find a Challenge
+     * @example
+     * // Get one Challenge
+     * const challenge = await prisma.challenge.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ChallengeFindFirstArgs>(args?: SelectSubset<T, ChallengeFindFirstArgs<ExtArgs>>): Prisma__ChallengeClient<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Challenge that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChallengeFindFirstOrThrowArgs} args - Arguments to find a Challenge
+     * @example
+     * // Get one Challenge
+     * const challenge = await prisma.challenge.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ChallengeFindFirstOrThrowArgs>(args?: SelectSubset<T, ChallengeFindFirstOrThrowArgs<ExtArgs>>): Prisma__ChallengeClient<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Challenges that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChallengeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Challenges
+     * const challenges = await prisma.challenge.findMany()
+     * 
+     * // Get first 10 Challenges
+     * const challenges = await prisma.challenge.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const challengeWithIdOnly = await prisma.challenge.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ChallengeFindManyArgs>(args?: SelectSubset<T, ChallengeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Challenge.
+     * @param {ChallengeCreateArgs} args - Arguments to create a Challenge.
+     * @example
+     * // Create one Challenge
+     * const Challenge = await prisma.challenge.create({
+     *   data: {
+     *     // ... data to create a Challenge
+     *   }
+     * })
+     * 
+     */
+    create<T extends ChallengeCreateArgs>(args: SelectSubset<T, ChallengeCreateArgs<ExtArgs>>): Prisma__ChallengeClient<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Challenges.
+     * @param {ChallengeCreateManyArgs} args - Arguments to create many Challenges.
+     * @example
+     * // Create many Challenges
+     * const challenge = await prisma.challenge.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ChallengeCreateManyArgs>(args?: SelectSubset<T, ChallengeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Challenges and returns the data saved in the database.
+     * @param {ChallengeCreateManyAndReturnArgs} args - Arguments to create many Challenges.
+     * @example
+     * // Create many Challenges
+     * const challenge = await prisma.challenge.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Challenges and only return the `id`
+     * const challengeWithIdOnly = await prisma.challenge.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ChallengeCreateManyAndReturnArgs>(args?: SelectSubset<T, ChallengeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Challenge.
+     * @param {ChallengeDeleteArgs} args - Arguments to delete one Challenge.
+     * @example
+     * // Delete one Challenge
+     * const Challenge = await prisma.challenge.delete({
+     *   where: {
+     *     // ... filter to delete one Challenge
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ChallengeDeleteArgs>(args: SelectSubset<T, ChallengeDeleteArgs<ExtArgs>>): Prisma__ChallengeClient<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Challenge.
+     * @param {ChallengeUpdateArgs} args - Arguments to update one Challenge.
+     * @example
+     * // Update one Challenge
+     * const challenge = await prisma.challenge.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ChallengeUpdateArgs>(args: SelectSubset<T, ChallengeUpdateArgs<ExtArgs>>): Prisma__ChallengeClient<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Challenges.
+     * @param {ChallengeDeleteManyArgs} args - Arguments to filter Challenges to delete.
+     * @example
+     * // Delete a few Challenges
+     * const { count } = await prisma.challenge.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ChallengeDeleteManyArgs>(args?: SelectSubset<T, ChallengeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Challenges.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChallengeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Challenges
+     * const challenge = await prisma.challenge.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ChallengeUpdateManyArgs>(args: SelectSubset<T, ChallengeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Challenges and returns the data updated in the database.
+     * @param {ChallengeUpdateManyAndReturnArgs} args - Arguments to update many Challenges.
+     * @example
+     * // Update many Challenges
+     * const challenge = await prisma.challenge.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Challenges and only return the `id`
+     * const challengeWithIdOnly = await prisma.challenge.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ChallengeUpdateManyAndReturnArgs>(args: SelectSubset<T, ChallengeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Challenge.
+     * @param {ChallengeUpsertArgs} args - Arguments to update or create a Challenge.
+     * @example
+     * // Update or create a Challenge
+     * const challenge = await prisma.challenge.upsert({
+     *   create: {
+     *     // ... data to create a Challenge
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Challenge we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ChallengeUpsertArgs>(args: SelectSubset<T, ChallengeUpsertArgs<ExtArgs>>): Prisma__ChallengeClient<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Challenges.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChallengeCountArgs} args - Arguments to filter Challenges to count.
+     * @example
+     * // Count the number of Challenges
+     * const count = await prisma.challenge.count({
+     *   where: {
+     *     // ... the filter for the Challenges we want to count
+     *   }
+     * })
+    **/
+    count<T extends ChallengeCountArgs>(
+      args?: Subset<T, ChallengeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ChallengeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Challenge.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChallengeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ChallengeAggregateArgs>(args: Subset<T, ChallengeAggregateArgs>): Prisma.PrismaPromise<GetChallengeAggregateType<T>>
+
+    /**
+     * Group by Challenge.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChallengeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ChallengeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ChallengeGroupByArgs['orderBy'] }
+        : { orderBy?: ChallengeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ChallengeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetChallengeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Challenge model
+   */
+  readonly fields: ChallengeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Challenge.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ChallengeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    coach<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    posts<T extends Challenge$postsArgs<ExtArgs> = {}>(args?: Subset<T, Challenge$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Challenge model
+   */
+  interface ChallengeFieldRefs {
+    readonly id: FieldRef<"Challenge", 'String'>
+    readonly coachId: FieldRef<"Challenge", 'String'>
+    readonly title: FieldRef<"Challenge", 'String'>
+    readonly description: FieldRef<"Challenge", 'String'>
+    readonly imageUrl: FieldRef<"Challenge", 'String'>
+    readonly startsAt: FieldRef<"Challenge", 'DateTime'>
+    readonly endsAt: FieldRef<"Challenge", 'DateTime'>
+    readonly targetAll: FieldRef<"Challenge", 'Boolean'>
+    readonly targetIds: FieldRef<"Challenge", 'String[]'>
+    readonly createdAt: FieldRef<"Challenge", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Challenge findUnique
+   */
+  export type ChallengeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which Challenge to fetch.
+     */
+    where: ChallengeWhereUniqueInput
+  }
+
+  /**
+   * Challenge findUniqueOrThrow
+   */
+  export type ChallengeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which Challenge to fetch.
+     */
+    where: ChallengeWhereUniqueInput
+  }
+
+  /**
+   * Challenge findFirst
+   */
+  export type ChallengeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which Challenge to fetch.
+     */
+    where?: ChallengeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Challenges to fetch.
+     */
+    orderBy?: ChallengeOrderByWithRelationInput | ChallengeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Challenges.
+     */
+    cursor?: ChallengeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Challenges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Challenges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Challenges.
+     */
+    distinct?: ChallengeScalarFieldEnum | ChallengeScalarFieldEnum[]
+  }
+
+  /**
+   * Challenge findFirstOrThrow
+   */
+  export type ChallengeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which Challenge to fetch.
+     */
+    where?: ChallengeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Challenges to fetch.
+     */
+    orderBy?: ChallengeOrderByWithRelationInput | ChallengeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Challenges.
+     */
+    cursor?: ChallengeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Challenges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Challenges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Challenges.
+     */
+    distinct?: ChallengeScalarFieldEnum | ChallengeScalarFieldEnum[]
+  }
+
+  /**
+   * Challenge findMany
+   */
+  export type ChallengeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which Challenges to fetch.
+     */
+    where?: ChallengeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Challenges to fetch.
+     */
+    orderBy?: ChallengeOrderByWithRelationInput | ChallengeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Challenges.
+     */
+    cursor?: ChallengeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Challenges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Challenges.
+     */
+    skip?: number
+    distinct?: ChallengeScalarFieldEnum | ChallengeScalarFieldEnum[]
+  }
+
+  /**
+   * Challenge create
+   */
+  export type ChallengeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Challenge.
+     */
+    data: XOR<ChallengeCreateInput, ChallengeUncheckedCreateInput>
+  }
+
+  /**
+   * Challenge createMany
+   */
+  export type ChallengeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Challenges.
+     */
+    data: ChallengeCreateManyInput | ChallengeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Challenge createManyAndReturn
+   */
+  export type ChallengeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * The data used to create many Challenges.
+     */
+    data: ChallengeCreateManyInput | ChallengeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Challenge update
+   */
+  export type ChallengeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Challenge.
+     */
+    data: XOR<ChallengeUpdateInput, ChallengeUncheckedUpdateInput>
+    /**
+     * Choose, which Challenge to update.
+     */
+    where: ChallengeWhereUniqueInput
+  }
+
+  /**
+   * Challenge updateMany
+   */
+  export type ChallengeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Challenges.
+     */
+    data: XOR<ChallengeUpdateManyMutationInput, ChallengeUncheckedUpdateManyInput>
+    /**
+     * Filter which Challenges to update
+     */
+    where?: ChallengeWhereInput
+    /**
+     * Limit how many Challenges to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Challenge updateManyAndReturn
+   */
+  export type ChallengeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * The data used to update Challenges.
+     */
+    data: XOR<ChallengeUpdateManyMutationInput, ChallengeUncheckedUpdateManyInput>
+    /**
+     * Filter which Challenges to update
+     */
+    where?: ChallengeWhereInput
+    /**
+     * Limit how many Challenges to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Challenge upsert
+   */
+  export type ChallengeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Challenge to update in case it exists.
+     */
+    where: ChallengeWhereUniqueInput
+    /**
+     * In case the Challenge found by the `where` argument doesn't exist, create a new Challenge with this data.
+     */
+    create: XOR<ChallengeCreateInput, ChallengeUncheckedCreateInput>
+    /**
+     * In case the Challenge was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ChallengeUpdateInput, ChallengeUncheckedUpdateInput>
+  }
+
+  /**
+   * Challenge delete
+   */
+  export type ChallengeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    /**
+     * Filter which Challenge to delete.
+     */
+    where: ChallengeWhereUniqueInput
+  }
+
+  /**
+   * Challenge deleteMany
+   */
+  export type ChallengeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Challenges to delete
+     */
+    where?: ChallengeWhereInput
+    /**
+     * Limit how many Challenges to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Challenge.posts
+   */
+  export type Challenge$postsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    where?: PostWhereInput
+    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
+    cursor?: PostWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
+   * Challenge without action
+   */
+  export type ChallengeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DirectMessage
+   */
+
+  export type AggregateDirectMessage = {
+    _count: DirectMessageCountAggregateOutputType | null
+    _min: DirectMessageMinAggregateOutputType | null
+    _max: DirectMessageMaxAggregateOutputType | null
+  }
+
+  export type DirectMessageMinAggregateOutputType = {
+    id: string | null
+    fromId: string | null
+    toId: string | null
+    content: string | null
+    imageUrl: string | null
+    readAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type DirectMessageMaxAggregateOutputType = {
+    id: string | null
+    fromId: string | null
+    toId: string | null
+    content: string | null
+    imageUrl: string | null
+    readAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type DirectMessageCountAggregateOutputType = {
+    id: number
+    fromId: number
+    toId: number
+    content: number
+    imageUrl: number
+    readAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type DirectMessageMinAggregateInputType = {
+    id?: true
+    fromId?: true
+    toId?: true
+    content?: true
+    imageUrl?: true
+    readAt?: true
+    createdAt?: true
+  }
+
+  export type DirectMessageMaxAggregateInputType = {
+    id?: true
+    fromId?: true
+    toId?: true
+    content?: true
+    imageUrl?: true
+    readAt?: true
+    createdAt?: true
+  }
+
+  export type DirectMessageCountAggregateInputType = {
+    id?: true
+    fromId?: true
+    toId?: true
+    content?: true
+    imageUrl?: true
+    readAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type DirectMessageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DirectMessage to aggregate.
+     */
+    where?: DirectMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DirectMessages to fetch.
+     */
+    orderBy?: DirectMessageOrderByWithRelationInput | DirectMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DirectMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DirectMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DirectMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DirectMessages
+    **/
+    _count?: true | DirectMessageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DirectMessageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DirectMessageMaxAggregateInputType
+  }
+
+  export type GetDirectMessageAggregateType<T extends DirectMessageAggregateArgs> = {
+        [P in keyof T & keyof AggregateDirectMessage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDirectMessage[P]>
+      : GetScalarType<T[P], AggregateDirectMessage[P]>
+  }
+
+
+
+
+  export type DirectMessageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DirectMessageWhereInput
+    orderBy?: DirectMessageOrderByWithAggregationInput | DirectMessageOrderByWithAggregationInput[]
+    by: DirectMessageScalarFieldEnum[] | DirectMessageScalarFieldEnum
+    having?: DirectMessageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DirectMessageCountAggregateInputType | true
+    _min?: DirectMessageMinAggregateInputType
+    _max?: DirectMessageMaxAggregateInputType
+  }
+
+  export type DirectMessageGroupByOutputType = {
+    id: string
+    fromId: string
+    toId: string
+    content: string
+    imageUrl: string | null
+    readAt: Date | null
+    createdAt: Date
+    _count: DirectMessageCountAggregateOutputType | null
+    _min: DirectMessageMinAggregateOutputType | null
+    _max: DirectMessageMaxAggregateOutputType | null
+  }
+
+  type GetDirectMessageGroupByPayload<T extends DirectMessageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DirectMessageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DirectMessageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DirectMessageGroupByOutputType[P]>
+            : GetScalarType<T[P], DirectMessageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DirectMessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fromId?: boolean
+    toId?: boolean
+    content?: boolean
+    imageUrl?: boolean
+    readAt?: boolean
+    createdAt?: boolean
+    from?: boolean | UserDefaultArgs<ExtArgs>
+    to?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["directMessage"]>
+
+  export type DirectMessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fromId?: boolean
+    toId?: boolean
+    content?: boolean
+    imageUrl?: boolean
+    readAt?: boolean
+    createdAt?: boolean
+    from?: boolean | UserDefaultArgs<ExtArgs>
+    to?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["directMessage"]>
+
+  export type DirectMessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fromId?: boolean
+    toId?: boolean
+    content?: boolean
+    imageUrl?: boolean
+    readAt?: boolean
+    createdAt?: boolean
+    from?: boolean | UserDefaultArgs<ExtArgs>
+    to?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["directMessage"]>
+
+  export type DirectMessageSelectScalar = {
+    id?: boolean
+    fromId?: boolean
+    toId?: boolean
+    content?: boolean
+    imageUrl?: boolean
+    readAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type DirectMessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fromId" | "toId" | "content" | "imageUrl" | "readAt" | "createdAt", ExtArgs["result"]["directMessage"]>
+  export type DirectMessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    from?: boolean | UserDefaultArgs<ExtArgs>
+    to?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DirectMessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    from?: boolean | UserDefaultArgs<ExtArgs>
+    to?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DirectMessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    from?: boolean | UserDefaultArgs<ExtArgs>
+    to?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $DirectMessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DirectMessage"
+    objects: {
+      from: Prisma.$UserPayload<ExtArgs>
+      to: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      fromId: string
+      toId: string
+      content: string
+      imageUrl: string | null
+      readAt: Date | null
+      createdAt: Date
+    }, ExtArgs["result"]["directMessage"]>
+    composites: {}
+  }
+
+  type DirectMessageGetPayload<S extends boolean | null | undefined | DirectMessageDefaultArgs> = $Result.GetResult<Prisma.$DirectMessagePayload, S>
+
+  type DirectMessageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DirectMessageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DirectMessageCountAggregateInputType | true
+    }
+
+  export interface DirectMessageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DirectMessage'], meta: { name: 'DirectMessage' } }
+    /**
+     * Find zero or one DirectMessage that matches the filter.
+     * @param {DirectMessageFindUniqueArgs} args - Arguments to find a DirectMessage
+     * @example
+     * // Get one DirectMessage
+     * const directMessage = await prisma.directMessage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DirectMessageFindUniqueArgs>(args: SelectSubset<T, DirectMessageFindUniqueArgs<ExtArgs>>): Prisma__DirectMessageClient<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DirectMessage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DirectMessageFindUniqueOrThrowArgs} args - Arguments to find a DirectMessage
+     * @example
+     * // Get one DirectMessage
+     * const directMessage = await prisma.directMessage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DirectMessageFindUniqueOrThrowArgs>(args: SelectSubset<T, DirectMessageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DirectMessageClient<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DirectMessage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DirectMessageFindFirstArgs} args - Arguments to find a DirectMessage
+     * @example
+     * // Get one DirectMessage
+     * const directMessage = await prisma.directMessage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DirectMessageFindFirstArgs>(args?: SelectSubset<T, DirectMessageFindFirstArgs<ExtArgs>>): Prisma__DirectMessageClient<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DirectMessage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DirectMessageFindFirstOrThrowArgs} args - Arguments to find a DirectMessage
+     * @example
+     * // Get one DirectMessage
+     * const directMessage = await prisma.directMessage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DirectMessageFindFirstOrThrowArgs>(args?: SelectSubset<T, DirectMessageFindFirstOrThrowArgs<ExtArgs>>): Prisma__DirectMessageClient<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DirectMessages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DirectMessageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DirectMessages
+     * const directMessages = await prisma.directMessage.findMany()
+     * 
+     * // Get first 10 DirectMessages
+     * const directMessages = await prisma.directMessage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const directMessageWithIdOnly = await prisma.directMessage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DirectMessageFindManyArgs>(args?: SelectSubset<T, DirectMessageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DirectMessage.
+     * @param {DirectMessageCreateArgs} args - Arguments to create a DirectMessage.
+     * @example
+     * // Create one DirectMessage
+     * const DirectMessage = await prisma.directMessage.create({
+     *   data: {
+     *     // ... data to create a DirectMessage
+     *   }
+     * })
+     * 
+     */
+    create<T extends DirectMessageCreateArgs>(args: SelectSubset<T, DirectMessageCreateArgs<ExtArgs>>): Prisma__DirectMessageClient<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DirectMessages.
+     * @param {DirectMessageCreateManyArgs} args - Arguments to create many DirectMessages.
+     * @example
+     * // Create many DirectMessages
+     * const directMessage = await prisma.directMessage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DirectMessageCreateManyArgs>(args?: SelectSubset<T, DirectMessageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DirectMessages and returns the data saved in the database.
+     * @param {DirectMessageCreateManyAndReturnArgs} args - Arguments to create many DirectMessages.
+     * @example
+     * // Create many DirectMessages
+     * const directMessage = await prisma.directMessage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DirectMessages and only return the `id`
+     * const directMessageWithIdOnly = await prisma.directMessage.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DirectMessageCreateManyAndReturnArgs>(args?: SelectSubset<T, DirectMessageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DirectMessage.
+     * @param {DirectMessageDeleteArgs} args - Arguments to delete one DirectMessage.
+     * @example
+     * // Delete one DirectMessage
+     * const DirectMessage = await prisma.directMessage.delete({
+     *   where: {
+     *     // ... filter to delete one DirectMessage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DirectMessageDeleteArgs>(args: SelectSubset<T, DirectMessageDeleteArgs<ExtArgs>>): Prisma__DirectMessageClient<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DirectMessage.
+     * @param {DirectMessageUpdateArgs} args - Arguments to update one DirectMessage.
+     * @example
+     * // Update one DirectMessage
+     * const directMessage = await prisma.directMessage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DirectMessageUpdateArgs>(args: SelectSubset<T, DirectMessageUpdateArgs<ExtArgs>>): Prisma__DirectMessageClient<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DirectMessages.
+     * @param {DirectMessageDeleteManyArgs} args - Arguments to filter DirectMessages to delete.
+     * @example
+     * // Delete a few DirectMessages
+     * const { count } = await prisma.directMessage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DirectMessageDeleteManyArgs>(args?: SelectSubset<T, DirectMessageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DirectMessages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DirectMessageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DirectMessages
+     * const directMessage = await prisma.directMessage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DirectMessageUpdateManyArgs>(args: SelectSubset<T, DirectMessageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DirectMessages and returns the data updated in the database.
+     * @param {DirectMessageUpdateManyAndReturnArgs} args - Arguments to update many DirectMessages.
+     * @example
+     * // Update many DirectMessages
+     * const directMessage = await prisma.directMessage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DirectMessages and only return the `id`
+     * const directMessageWithIdOnly = await prisma.directMessage.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DirectMessageUpdateManyAndReturnArgs>(args: SelectSubset<T, DirectMessageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DirectMessage.
+     * @param {DirectMessageUpsertArgs} args - Arguments to update or create a DirectMessage.
+     * @example
+     * // Update or create a DirectMessage
+     * const directMessage = await prisma.directMessage.upsert({
+     *   create: {
+     *     // ... data to create a DirectMessage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DirectMessage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DirectMessageUpsertArgs>(args: SelectSubset<T, DirectMessageUpsertArgs<ExtArgs>>): Prisma__DirectMessageClient<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DirectMessages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DirectMessageCountArgs} args - Arguments to filter DirectMessages to count.
+     * @example
+     * // Count the number of DirectMessages
+     * const count = await prisma.directMessage.count({
+     *   where: {
+     *     // ... the filter for the DirectMessages we want to count
+     *   }
+     * })
+    **/
+    count<T extends DirectMessageCountArgs>(
+      args?: Subset<T, DirectMessageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DirectMessageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DirectMessage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DirectMessageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DirectMessageAggregateArgs>(args: Subset<T, DirectMessageAggregateArgs>): Prisma.PrismaPromise<GetDirectMessageAggregateType<T>>
+
+    /**
+     * Group by DirectMessage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DirectMessageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DirectMessageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DirectMessageGroupByArgs['orderBy'] }
+        : { orderBy?: DirectMessageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DirectMessageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDirectMessageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DirectMessage model
+   */
+  readonly fields: DirectMessageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DirectMessage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DirectMessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    from<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    to<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DirectMessage model
+   */
+  interface DirectMessageFieldRefs {
+    readonly id: FieldRef<"DirectMessage", 'String'>
+    readonly fromId: FieldRef<"DirectMessage", 'String'>
+    readonly toId: FieldRef<"DirectMessage", 'String'>
+    readonly content: FieldRef<"DirectMessage", 'String'>
+    readonly imageUrl: FieldRef<"DirectMessage", 'String'>
+    readonly readAt: FieldRef<"DirectMessage", 'DateTime'>
+    readonly createdAt: FieldRef<"DirectMessage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DirectMessage findUnique
+   */
+  export type DirectMessageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DirectMessage
+     */
+    select?: DirectMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DirectMessage
+     */
+    omit?: DirectMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which DirectMessage to fetch.
+     */
+    where: DirectMessageWhereUniqueInput
+  }
+
+  /**
+   * DirectMessage findUniqueOrThrow
+   */
+  export type DirectMessageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DirectMessage
+     */
+    select?: DirectMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DirectMessage
+     */
+    omit?: DirectMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which DirectMessage to fetch.
+     */
+    where: DirectMessageWhereUniqueInput
+  }
+
+  /**
+   * DirectMessage findFirst
+   */
+  export type DirectMessageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DirectMessage
+     */
+    select?: DirectMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DirectMessage
+     */
+    omit?: DirectMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which DirectMessage to fetch.
+     */
+    where?: DirectMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DirectMessages to fetch.
+     */
+    orderBy?: DirectMessageOrderByWithRelationInput | DirectMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DirectMessages.
+     */
+    cursor?: DirectMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DirectMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DirectMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DirectMessages.
+     */
+    distinct?: DirectMessageScalarFieldEnum | DirectMessageScalarFieldEnum[]
+  }
+
+  /**
+   * DirectMessage findFirstOrThrow
+   */
+  export type DirectMessageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DirectMessage
+     */
+    select?: DirectMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DirectMessage
+     */
+    omit?: DirectMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which DirectMessage to fetch.
+     */
+    where?: DirectMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DirectMessages to fetch.
+     */
+    orderBy?: DirectMessageOrderByWithRelationInput | DirectMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DirectMessages.
+     */
+    cursor?: DirectMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DirectMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DirectMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DirectMessages.
+     */
+    distinct?: DirectMessageScalarFieldEnum | DirectMessageScalarFieldEnum[]
+  }
+
+  /**
+   * DirectMessage findMany
+   */
+  export type DirectMessageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DirectMessage
+     */
+    select?: DirectMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DirectMessage
+     */
+    omit?: DirectMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which DirectMessages to fetch.
+     */
+    where?: DirectMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DirectMessages to fetch.
+     */
+    orderBy?: DirectMessageOrderByWithRelationInput | DirectMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DirectMessages.
+     */
+    cursor?: DirectMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DirectMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DirectMessages.
+     */
+    skip?: number
+    distinct?: DirectMessageScalarFieldEnum | DirectMessageScalarFieldEnum[]
+  }
+
+  /**
+   * DirectMessage create
+   */
+  export type DirectMessageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DirectMessage
+     */
+    select?: DirectMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DirectMessage
+     */
+    omit?: DirectMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectMessageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DirectMessage.
+     */
+    data: XOR<DirectMessageCreateInput, DirectMessageUncheckedCreateInput>
+  }
+
+  /**
+   * DirectMessage createMany
+   */
+  export type DirectMessageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DirectMessages.
+     */
+    data: DirectMessageCreateManyInput | DirectMessageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DirectMessage createManyAndReturn
+   */
+  export type DirectMessageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DirectMessage
+     */
+    select?: DirectMessageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DirectMessage
+     */
+    omit?: DirectMessageOmit<ExtArgs> | null
+    /**
+     * The data used to create many DirectMessages.
+     */
+    data: DirectMessageCreateManyInput | DirectMessageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectMessageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DirectMessage update
+   */
+  export type DirectMessageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DirectMessage
+     */
+    select?: DirectMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DirectMessage
+     */
+    omit?: DirectMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectMessageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DirectMessage.
+     */
+    data: XOR<DirectMessageUpdateInput, DirectMessageUncheckedUpdateInput>
+    /**
+     * Choose, which DirectMessage to update.
+     */
+    where: DirectMessageWhereUniqueInput
+  }
+
+  /**
+   * DirectMessage updateMany
+   */
+  export type DirectMessageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DirectMessages.
+     */
+    data: XOR<DirectMessageUpdateManyMutationInput, DirectMessageUncheckedUpdateManyInput>
+    /**
+     * Filter which DirectMessages to update
+     */
+    where?: DirectMessageWhereInput
+    /**
+     * Limit how many DirectMessages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DirectMessage updateManyAndReturn
+   */
+  export type DirectMessageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DirectMessage
+     */
+    select?: DirectMessageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DirectMessage
+     */
+    omit?: DirectMessageOmit<ExtArgs> | null
+    /**
+     * The data used to update DirectMessages.
+     */
+    data: XOR<DirectMessageUpdateManyMutationInput, DirectMessageUncheckedUpdateManyInput>
+    /**
+     * Filter which DirectMessages to update
+     */
+    where?: DirectMessageWhereInput
+    /**
+     * Limit how many DirectMessages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectMessageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DirectMessage upsert
+   */
+  export type DirectMessageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DirectMessage
+     */
+    select?: DirectMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DirectMessage
+     */
+    omit?: DirectMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectMessageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DirectMessage to update in case it exists.
+     */
+    where: DirectMessageWhereUniqueInput
+    /**
+     * In case the DirectMessage found by the `where` argument doesn't exist, create a new DirectMessage with this data.
+     */
+    create: XOR<DirectMessageCreateInput, DirectMessageUncheckedCreateInput>
+    /**
+     * In case the DirectMessage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DirectMessageUpdateInput, DirectMessageUncheckedUpdateInput>
+  }
+
+  /**
+   * DirectMessage delete
+   */
+  export type DirectMessageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DirectMessage
+     */
+    select?: DirectMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DirectMessage
+     */
+    omit?: DirectMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectMessageInclude<ExtArgs> | null
+    /**
+     * Filter which DirectMessage to delete.
+     */
+    where: DirectMessageWhereUniqueInput
+  }
+
+  /**
+   * DirectMessage deleteMany
+   */
+  export type DirectMessageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DirectMessages to delete
+     */
+    where?: DirectMessageWhereInput
+    /**
+     * Limit how many DirectMessages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DirectMessage without action
+   */
+  export type DirectMessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DirectMessage
+     */
+    select?: DirectMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DirectMessage
+     */
+    omit?: DirectMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectMessageInclude<ExtArgs> | null
   }
 
 
@@ -30005,13 +35407,79 @@ export namespace Prisma {
 
   export const PostScalarFieldEnum: {
     id: 'id',
-    name: 'name',
+    userId: 'userId',
+    type: 'type',
+    visibility: 'visibility',
+    content: 'content',
+    imageUrls: 'imageUrls',
+    kcalIn: 'kcalIn',
+    kcalOut: 'kcalOut',
+    balance: 'balance',
+    weightKg: 'weightKg',
+    proteinG: 'proteinG',
+    recipeId: 'recipeId',
+    planId: 'planId',
+    dailyLogId: 'dailyLogId',
+    featuredBy: 'featuredBy',
+    featuredAt: 'featuredAt',
+    challengeId: 'challengeId',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    createdById: 'createdById'
+    updatedAt: 'updatedAt'
   };
 
   export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
+
+
+  export const PostReactionScalarFieldEnum: {
+    id: 'id',
+    postId: 'postId',
+    userId: 'userId',
+    emoji: 'emoji'
+  };
+
+  export type PostReactionScalarFieldEnum = (typeof PostReactionScalarFieldEnum)[keyof typeof PostReactionScalarFieldEnum]
+
+
+  export const CommentScalarFieldEnum: {
+    id: 'id',
+    postId: 'postId',
+    userId: 'userId',
+    parentId: 'parentId',
+    content: 'content',
+    imageUrl: 'imageUrl',
+    createdAt: 'createdAt'
+  };
+
+  export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
+
+
+  export const ChallengeScalarFieldEnum: {
+    id: 'id',
+    coachId: 'coachId',
+    title: 'title',
+    description: 'description',
+    imageUrl: 'imageUrl',
+    startsAt: 'startsAt',
+    endsAt: 'endsAt',
+    targetAll: 'targetAll',
+    targetIds: 'targetIds',
+    createdAt: 'createdAt'
+  };
+
+  export type ChallengeScalarFieldEnum = (typeof ChallengeScalarFieldEnum)[keyof typeof ChallengeScalarFieldEnum]
+
+
+  export const DirectMessageScalarFieldEnum: {
+    id: 'id',
+    fromId: 'fromId',
+    toId: 'toId',
+    content: 'content',
+    imageUrl: 'imageUrl',
+    readAt: 'readAt',
+    createdAt: 'createdAt'
+  };
+
+  export type DirectMessageScalarFieldEnum = (typeof DirectMessageScalarFieldEnum)[keyof typeof DirectMessageScalarFieldEnum]
 
 
   export const IngredientScalarFieldEnum: {
@@ -30376,6 +35844,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'PostType'
+   */
+  export type EnumPostTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PostType'>
+    
+
+
+  /**
+   * Reference to a field of type 'PostType[]'
+   */
+  export type ListEnumPostTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PostType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PostVisibility'
+   */
+  export type EnumPostVisibilityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PostVisibility'>
+    
+
+
+  /**
+   * Reference to a field of type 'PostVisibility[]'
+   */
+  export type ListEnumPostVisibilityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PostVisibility[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -30628,6 +36124,11 @@ export namespace Prisma {
     usedCode?: XOR<RegistrationCodeNullableScalarRelationFilter, RegistrationCodeWhereInput> | null
     subscription?: XOR<SubscriptionNullableScalarRelationFilter, SubscriptionWhereInput> | null
     posts?: PostListRelationFilter
+    postReactions?: PostReactionListRelationFilter
+    comments?: CommentListRelationFilter
+    challenges?: ChallengeListRelationFilter
+    sentMessages?: DirectMessageListRelationFilter
+    receivedMessages?: DirectMessageListRelationFilter
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     profile?: XOR<UserProfileNullableScalarRelationFilter, UserProfileWhereInput> | null
@@ -30660,6 +36161,11 @@ export namespace Prisma {
     usedCode?: RegistrationCodeOrderByWithRelationInput
     subscription?: SubscriptionOrderByWithRelationInput
     posts?: PostOrderByRelationAggregateInput
+    postReactions?: PostReactionOrderByRelationAggregateInput
+    comments?: CommentOrderByRelationAggregateInput
+    challenges?: ChallengeOrderByRelationAggregateInput
+    sentMessages?: DirectMessageOrderByRelationAggregateInput
+    receivedMessages?: DirectMessageOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     profile?: UserProfileOrderByWithRelationInput
@@ -30695,6 +36201,11 @@ export namespace Prisma {
     usedCode?: XOR<RegistrationCodeNullableScalarRelationFilter, RegistrationCodeWhereInput> | null
     subscription?: XOR<SubscriptionNullableScalarRelationFilter, SubscriptionWhereInput> | null
     posts?: PostListRelationFilter
+    postReactions?: PostReactionListRelationFilter
+    comments?: CommentListRelationFilter
+    challenges?: ChallengeListRelationFilter
+    sentMessages?: DirectMessageListRelationFilter
+    receivedMessages?: DirectMessageListRelationFilter
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     profile?: XOR<UserProfileNullableScalarRelationFilter, UserProfileWhereInput> | null
@@ -31071,41 +36582,106 @@ export namespace Prisma {
     AND?: PostWhereInput | PostWhereInput[]
     OR?: PostWhereInput[]
     NOT?: PostWhereInput | PostWhereInput[]
-    id?: IntFilter<"Post"> | number
-    name?: StringFilter<"Post"> | string
+    id?: StringFilter<"Post"> | string
+    userId?: StringFilter<"Post"> | string
+    type?: EnumPostTypeFilter<"Post"> | $Enums.PostType
+    visibility?: EnumPostVisibilityFilter<"Post"> | $Enums.PostVisibility
+    content?: StringNullableFilter<"Post"> | string | null
+    imageUrls?: StringNullableListFilter<"Post">
+    kcalIn?: FloatNullableFilter<"Post"> | number | null
+    kcalOut?: FloatNullableFilter<"Post"> | number | null
+    balance?: FloatNullableFilter<"Post"> | number | null
+    weightKg?: FloatNullableFilter<"Post"> | number | null
+    proteinG?: FloatNullableFilter<"Post"> | number | null
+    recipeId?: StringNullableFilter<"Post"> | string | null
+    planId?: StringNullableFilter<"Post"> | string | null
+    dailyLogId?: StringNullableFilter<"Post"> | string | null
+    featuredBy?: StringNullableFilter<"Post"> | string | null
+    featuredAt?: DateTimeNullableFilter<"Post"> | Date | string | null
+    challengeId?: StringNullableFilter<"Post"> | string | null
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
-    createdById?: StringFilter<"Post"> | string
-    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    challenge?: XOR<ChallengeNullableScalarRelationFilter, ChallengeWhereInput> | null
+    reactions?: PostReactionListRelationFilter
+    comments?: CommentListRelationFilter
   }
 
   export type PostOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    visibility?: SortOrder
+    content?: SortOrderInput | SortOrder
+    imageUrls?: SortOrder
+    kcalIn?: SortOrderInput | SortOrder
+    kcalOut?: SortOrderInput | SortOrder
+    balance?: SortOrderInput | SortOrder
+    weightKg?: SortOrderInput | SortOrder
+    proteinG?: SortOrderInput | SortOrder
+    recipeId?: SortOrderInput | SortOrder
+    planId?: SortOrderInput | SortOrder
+    dailyLogId?: SortOrderInput | SortOrder
+    featuredBy?: SortOrderInput | SortOrder
+    featuredAt?: SortOrderInput | SortOrder
+    challengeId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    createdById?: SortOrder
-    createdBy?: UserOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+    challenge?: ChallengeOrderByWithRelationInput
+    reactions?: PostReactionOrderByRelationAggregateInput
+    comments?: CommentOrderByRelationAggregateInput
   }
 
   export type PostWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    id?: string
     AND?: PostWhereInput | PostWhereInput[]
     OR?: PostWhereInput[]
     NOT?: PostWhereInput | PostWhereInput[]
-    name?: StringFilter<"Post"> | string
+    userId?: StringFilter<"Post"> | string
+    type?: EnumPostTypeFilter<"Post"> | $Enums.PostType
+    visibility?: EnumPostVisibilityFilter<"Post"> | $Enums.PostVisibility
+    content?: StringNullableFilter<"Post"> | string | null
+    imageUrls?: StringNullableListFilter<"Post">
+    kcalIn?: FloatNullableFilter<"Post"> | number | null
+    kcalOut?: FloatNullableFilter<"Post"> | number | null
+    balance?: FloatNullableFilter<"Post"> | number | null
+    weightKg?: FloatNullableFilter<"Post"> | number | null
+    proteinG?: FloatNullableFilter<"Post"> | number | null
+    recipeId?: StringNullableFilter<"Post"> | string | null
+    planId?: StringNullableFilter<"Post"> | string | null
+    dailyLogId?: StringNullableFilter<"Post"> | string | null
+    featuredBy?: StringNullableFilter<"Post"> | string | null
+    featuredAt?: DateTimeNullableFilter<"Post"> | Date | string | null
+    challengeId?: StringNullableFilter<"Post"> | string | null
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
-    createdById?: StringFilter<"Post"> | string
-    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    challenge?: XOR<ChallengeNullableScalarRelationFilter, ChallengeWhereInput> | null
+    reactions?: PostReactionListRelationFilter
+    comments?: CommentListRelationFilter
   }, "id">
 
   export type PostOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    visibility?: SortOrder
+    content?: SortOrderInput | SortOrder
+    imageUrls?: SortOrder
+    kcalIn?: SortOrderInput | SortOrder
+    kcalOut?: SortOrderInput | SortOrder
+    balance?: SortOrderInput | SortOrder
+    weightKg?: SortOrderInput | SortOrder
+    proteinG?: SortOrderInput | SortOrder
+    recipeId?: SortOrderInput | SortOrder
+    planId?: SortOrderInput | SortOrder
+    dailyLogId?: SortOrderInput | SortOrder
+    featuredBy?: SortOrderInput | SortOrder
+    featuredAt?: SortOrderInput | SortOrder
+    challengeId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    createdById?: SortOrder
     _count?: PostCountOrderByAggregateInput
     _avg?: PostAvgOrderByAggregateInput
     _max?: PostMaxOrderByAggregateInput
@@ -31117,11 +36693,304 @@ export namespace Prisma {
     AND?: PostScalarWhereWithAggregatesInput | PostScalarWhereWithAggregatesInput[]
     OR?: PostScalarWhereWithAggregatesInput[]
     NOT?: PostScalarWhereWithAggregatesInput | PostScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Post"> | number
-    name?: StringWithAggregatesFilter<"Post"> | string
+    id?: StringWithAggregatesFilter<"Post"> | string
+    userId?: StringWithAggregatesFilter<"Post"> | string
+    type?: EnumPostTypeWithAggregatesFilter<"Post"> | $Enums.PostType
+    visibility?: EnumPostVisibilityWithAggregatesFilter<"Post"> | $Enums.PostVisibility
+    content?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    imageUrls?: StringNullableListFilter<"Post">
+    kcalIn?: FloatNullableWithAggregatesFilter<"Post"> | number | null
+    kcalOut?: FloatNullableWithAggregatesFilter<"Post"> | number | null
+    balance?: FloatNullableWithAggregatesFilter<"Post"> | number | null
+    weightKg?: FloatNullableWithAggregatesFilter<"Post"> | number | null
+    proteinG?: FloatNullableWithAggregatesFilter<"Post"> | number | null
+    recipeId?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    planId?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    dailyLogId?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    featuredBy?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    featuredAt?: DateTimeNullableWithAggregatesFilter<"Post"> | Date | string | null
+    challengeId?: StringNullableWithAggregatesFilter<"Post"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
-    createdById?: StringWithAggregatesFilter<"Post"> | string
+  }
+
+  export type PostReactionWhereInput = {
+    AND?: PostReactionWhereInput | PostReactionWhereInput[]
+    OR?: PostReactionWhereInput[]
+    NOT?: PostReactionWhereInput | PostReactionWhereInput[]
+    id?: StringFilter<"PostReaction"> | string
+    postId?: StringFilter<"PostReaction"> | string
+    userId?: StringFilter<"PostReaction"> | string
+    emoji?: StringFilter<"PostReaction"> | string
+    post?: XOR<PostScalarRelationFilter, PostWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type PostReactionOrderByWithRelationInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    emoji?: SortOrder
+    post?: PostOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type PostReactionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    postId_userId_emoji?: PostReactionPostIdUserIdEmojiCompoundUniqueInput
+    AND?: PostReactionWhereInput | PostReactionWhereInput[]
+    OR?: PostReactionWhereInput[]
+    NOT?: PostReactionWhereInput | PostReactionWhereInput[]
+    postId?: StringFilter<"PostReaction"> | string
+    userId?: StringFilter<"PostReaction"> | string
+    emoji?: StringFilter<"PostReaction"> | string
+    post?: XOR<PostScalarRelationFilter, PostWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "postId_userId_emoji">
+
+  export type PostReactionOrderByWithAggregationInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    emoji?: SortOrder
+    _count?: PostReactionCountOrderByAggregateInput
+    _max?: PostReactionMaxOrderByAggregateInput
+    _min?: PostReactionMinOrderByAggregateInput
+  }
+
+  export type PostReactionScalarWhereWithAggregatesInput = {
+    AND?: PostReactionScalarWhereWithAggregatesInput | PostReactionScalarWhereWithAggregatesInput[]
+    OR?: PostReactionScalarWhereWithAggregatesInput[]
+    NOT?: PostReactionScalarWhereWithAggregatesInput | PostReactionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PostReaction"> | string
+    postId?: StringWithAggregatesFilter<"PostReaction"> | string
+    userId?: StringWithAggregatesFilter<"PostReaction"> | string
+    emoji?: StringWithAggregatesFilter<"PostReaction"> | string
+  }
+
+  export type CommentWhereInput = {
+    AND?: CommentWhereInput | CommentWhereInput[]
+    OR?: CommentWhereInput[]
+    NOT?: CommentWhereInput | CommentWhereInput[]
+    id?: StringFilter<"Comment"> | string
+    postId?: StringFilter<"Comment"> | string
+    userId?: StringFilter<"Comment"> | string
+    parentId?: StringNullableFilter<"Comment"> | string | null
+    content?: StringFilter<"Comment"> | string
+    imageUrl?: StringNullableFilter<"Comment"> | string | null
+    createdAt?: DateTimeFilter<"Comment"> | Date | string
+    post?: XOR<PostScalarRelationFilter, PostWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    parent?: XOR<CommentNullableScalarRelationFilter, CommentWhereInput> | null
+    replies?: CommentListRelationFilter
+  }
+
+  export type CommentOrderByWithRelationInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    parentId?: SortOrderInput | SortOrder
+    content?: SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    post?: PostOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+    parent?: CommentOrderByWithRelationInput
+    replies?: CommentOrderByRelationAggregateInput
+  }
+
+  export type CommentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CommentWhereInput | CommentWhereInput[]
+    OR?: CommentWhereInput[]
+    NOT?: CommentWhereInput | CommentWhereInput[]
+    postId?: StringFilter<"Comment"> | string
+    userId?: StringFilter<"Comment"> | string
+    parentId?: StringNullableFilter<"Comment"> | string | null
+    content?: StringFilter<"Comment"> | string
+    imageUrl?: StringNullableFilter<"Comment"> | string | null
+    createdAt?: DateTimeFilter<"Comment"> | Date | string
+    post?: XOR<PostScalarRelationFilter, PostWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    parent?: XOR<CommentNullableScalarRelationFilter, CommentWhereInput> | null
+    replies?: CommentListRelationFilter
+  }, "id">
+
+  export type CommentOrderByWithAggregationInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    parentId?: SortOrderInput | SortOrder
+    content?: SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: CommentCountOrderByAggregateInput
+    _max?: CommentMaxOrderByAggregateInput
+    _min?: CommentMinOrderByAggregateInput
+  }
+
+  export type CommentScalarWhereWithAggregatesInput = {
+    AND?: CommentScalarWhereWithAggregatesInput | CommentScalarWhereWithAggregatesInput[]
+    OR?: CommentScalarWhereWithAggregatesInput[]
+    NOT?: CommentScalarWhereWithAggregatesInput | CommentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Comment"> | string
+    postId?: StringWithAggregatesFilter<"Comment"> | string
+    userId?: StringWithAggregatesFilter<"Comment"> | string
+    parentId?: StringNullableWithAggregatesFilter<"Comment"> | string | null
+    content?: StringWithAggregatesFilter<"Comment"> | string
+    imageUrl?: StringNullableWithAggregatesFilter<"Comment"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
+  }
+
+  export type ChallengeWhereInput = {
+    AND?: ChallengeWhereInput | ChallengeWhereInput[]
+    OR?: ChallengeWhereInput[]
+    NOT?: ChallengeWhereInput | ChallengeWhereInput[]
+    id?: StringFilter<"Challenge"> | string
+    coachId?: StringFilter<"Challenge"> | string
+    title?: StringFilter<"Challenge"> | string
+    description?: StringFilter<"Challenge"> | string
+    imageUrl?: StringNullableFilter<"Challenge"> | string | null
+    startsAt?: DateTimeFilter<"Challenge"> | Date | string
+    endsAt?: DateTimeFilter<"Challenge"> | Date | string
+    targetAll?: BoolFilter<"Challenge"> | boolean
+    targetIds?: StringNullableListFilter<"Challenge">
+    createdAt?: DateTimeFilter<"Challenge"> | Date | string
+    coach?: XOR<UserScalarRelationFilter, UserWhereInput>
+    posts?: PostListRelationFilter
+  }
+
+  export type ChallengeOrderByWithRelationInput = {
+    id?: SortOrder
+    coachId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrder
+    targetAll?: SortOrder
+    targetIds?: SortOrder
+    createdAt?: SortOrder
+    coach?: UserOrderByWithRelationInput
+    posts?: PostOrderByRelationAggregateInput
+  }
+
+  export type ChallengeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ChallengeWhereInput | ChallengeWhereInput[]
+    OR?: ChallengeWhereInput[]
+    NOT?: ChallengeWhereInput | ChallengeWhereInput[]
+    coachId?: StringFilter<"Challenge"> | string
+    title?: StringFilter<"Challenge"> | string
+    description?: StringFilter<"Challenge"> | string
+    imageUrl?: StringNullableFilter<"Challenge"> | string | null
+    startsAt?: DateTimeFilter<"Challenge"> | Date | string
+    endsAt?: DateTimeFilter<"Challenge"> | Date | string
+    targetAll?: BoolFilter<"Challenge"> | boolean
+    targetIds?: StringNullableListFilter<"Challenge">
+    createdAt?: DateTimeFilter<"Challenge"> | Date | string
+    coach?: XOR<UserScalarRelationFilter, UserWhereInput>
+    posts?: PostListRelationFilter
+  }, "id">
+
+  export type ChallengeOrderByWithAggregationInput = {
+    id?: SortOrder
+    coachId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrder
+    targetAll?: SortOrder
+    targetIds?: SortOrder
+    createdAt?: SortOrder
+    _count?: ChallengeCountOrderByAggregateInput
+    _max?: ChallengeMaxOrderByAggregateInput
+    _min?: ChallengeMinOrderByAggregateInput
+  }
+
+  export type ChallengeScalarWhereWithAggregatesInput = {
+    AND?: ChallengeScalarWhereWithAggregatesInput | ChallengeScalarWhereWithAggregatesInput[]
+    OR?: ChallengeScalarWhereWithAggregatesInput[]
+    NOT?: ChallengeScalarWhereWithAggregatesInput | ChallengeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Challenge"> | string
+    coachId?: StringWithAggregatesFilter<"Challenge"> | string
+    title?: StringWithAggregatesFilter<"Challenge"> | string
+    description?: StringWithAggregatesFilter<"Challenge"> | string
+    imageUrl?: StringNullableWithAggregatesFilter<"Challenge"> | string | null
+    startsAt?: DateTimeWithAggregatesFilter<"Challenge"> | Date | string
+    endsAt?: DateTimeWithAggregatesFilter<"Challenge"> | Date | string
+    targetAll?: BoolWithAggregatesFilter<"Challenge"> | boolean
+    targetIds?: StringNullableListFilter<"Challenge">
+    createdAt?: DateTimeWithAggregatesFilter<"Challenge"> | Date | string
+  }
+
+  export type DirectMessageWhereInput = {
+    AND?: DirectMessageWhereInput | DirectMessageWhereInput[]
+    OR?: DirectMessageWhereInput[]
+    NOT?: DirectMessageWhereInput | DirectMessageWhereInput[]
+    id?: StringFilter<"DirectMessage"> | string
+    fromId?: StringFilter<"DirectMessage"> | string
+    toId?: StringFilter<"DirectMessage"> | string
+    content?: StringFilter<"DirectMessage"> | string
+    imageUrl?: StringNullableFilter<"DirectMessage"> | string | null
+    readAt?: DateTimeNullableFilter<"DirectMessage"> | Date | string | null
+    createdAt?: DateTimeFilter<"DirectMessage"> | Date | string
+    from?: XOR<UserScalarRelationFilter, UserWhereInput>
+    to?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type DirectMessageOrderByWithRelationInput = {
+    id?: SortOrder
+    fromId?: SortOrder
+    toId?: SortOrder
+    content?: SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    readAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    from?: UserOrderByWithRelationInput
+    to?: UserOrderByWithRelationInput
+  }
+
+  export type DirectMessageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DirectMessageWhereInput | DirectMessageWhereInput[]
+    OR?: DirectMessageWhereInput[]
+    NOT?: DirectMessageWhereInput | DirectMessageWhereInput[]
+    fromId?: StringFilter<"DirectMessage"> | string
+    toId?: StringFilter<"DirectMessage"> | string
+    content?: StringFilter<"DirectMessage"> | string
+    imageUrl?: StringNullableFilter<"DirectMessage"> | string | null
+    readAt?: DateTimeNullableFilter<"DirectMessage"> | Date | string | null
+    createdAt?: DateTimeFilter<"DirectMessage"> | Date | string
+    from?: XOR<UserScalarRelationFilter, UserWhereInput>
+    to?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type DirectMessageOrderByWithAggregationInput = {
+    id?: SortOrder
+    fromId?: SortOrder
+    toId?: SortOrder
+    content?: SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    readAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: DirectMessageCountOrderByAggregateInput
+    _max?: DirectMessageMaxOrderByAggregateInput
+    _min?: DirectMessageMinOrderByAggregateInput
+  }
+
+  export type DirectMessageScalarWhereWithAggregatesInput = {
+    AND?: DirectMessageScalarWhereWithAggregatesInput | DirectMessageScalarWhereWithAggregatesInput[]
+    OR?: DirectMessageScalarWhereWithAggregatesInput[]
+    NOT?: DirectMessageScalarWhereWithAggregatesInput | DirectMessageScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DirectMessage"> | string
+    fromId?: StringWithAggregatesFilter<"DirectMessage"> | string
+    toId?: StringWithAggregatesFilter<"DirectMessage"> | string
+    content?: StringWithAggregatesFilter<"DirectMessage"> | string
+    imageUrl?: StringNullableWithAggregatesFilter<"DirectMessage"> | string | null
+    readAt?: DateTimeNullableWithAggregatesFilter<"DirectMessage"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"DirectMessage"> | Date | string
   }
 
   export type IngredientWhereInput = {
@@ -32309,7 +38178,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -32340,7 +38214,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -32371,7 +38250,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -32402,7 +38286,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -32806,55 +38695,443 @@ export namespace Prisma {
   }
 
   export type PostCreateInput = {
-    name: string
+    id?: string
+    type: $Enums.PostType
+    visibility?: $Enums.PostVisibility
+    content?: string | null
+    imageUrls?: PostCreateimageUrlsInput | string[]
+    kcalIn?: number | null
+    kcalOut?: number | null
+    balance?: number | null
+    weightKg?: number | null
+    proteinG?: number | null
+    recipeId?: string | null
+    planId?: string | null
+    dailyLogId?: string | null
+    featuredBy?: string | null
+    featuredAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    createdBy: UserCreateNestedOneWithoutPostsInput
+    user: UserCreateNestedOneWithoutPostsInput
+    challenge?: ChallengeCreateNestedOneWithoutPostsInput
+    reactions?: PostReactionCreateNestedManyWithoutPostInput
+    comments?: CommentCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateInput = {
-    id?: number
-    name: string
+    id?: string
+    userId: string
+    type: $Enums.PostType
+    visibility?: $Enums.PostVisibility
+    content?: string | null
+    imageUrls?: PostCreateimageUrlsInput | string[]
+    kcalIn?: number | null
+    kcalOut?: number | null
+    balance?: number | null
+    weightKg?: number | null
+    proteinG?: number | null
+    recipeId?: string | null
+    planId?: string | null
+    dailyLogId?: string | null
+    featuredBy?: string | null
+    featuredAt?: Date | string | null
+    challengeId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    createdById: string
+    reactions?: PostReactionUncheckedCreateNestedManyWithoutPostInput
+    comments?: CommentUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+    visibility?: EnumPostVisibilityFieldUpdateOperationsInput | $Enums.PostVisibility
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: PostUpdateimageUrlsInput | string[]
+    kcalIn?: NullableFloatFieldUpdateOperationsInput | number | null
+    kcalOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    balance?: NullableFloatFieldUpdateOperationsInput | number | null
+    weightKg?: NullableFloatFieldUpdateOperationsInput | number | null
+    proteinG?: NullableFloatFieldUpdateOperationsInput | number | null
+    recipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    dailyLogId?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: UserUpdateOneRequiredWithoutPostsNestedInput
+    user?: UserUpdateOneRequiredWithoutPostsNestedInput
+    challenge?: ChallengeUpdateOneWithoutPostsNestedInput
+    reactions?: PostReactionUpdateManyWithoutPostNestedInput
+    comments?: CommentUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+    visibility?: EnumPostVisibilityFieldUpdateOperationsInput | $Enums.PostVisibility
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: PostUpdateimageUrlsInput | string[]
+    kcalIn?: NullableFloatFieldUpdateOperationsInput | number | null
+    kcalOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    balance?: NullableFloatFieldUpdateOperationsInput | number | null
+    weightKg?: NullableFloatFieldUpdateOperationsInput | number | null
+    proteinG?: NullableFloatFieldUpdateOperationsInput | number | null
+    recipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    dailyLogId?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    challengeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdById?: StringFieldUpdateOperationsInput | string
+    reactions?: PostReactionUncheckedUpdateManyWithoutPostNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type PostCreateManyInput = {
-    id?: number
-    name: string
+    id?: string
+    userId: string
+    type: $Enums.PostType
+    visibility?: $Enums.PostVisibility
+    content?: string | null
+    imageUrls?: PostCreateimageUrlsInput | string[]
+    kcalIn?: number | null
+    kcalOut?: number | null
+    balance?: number | null
+    weightKg?: number | null
+    proteinG?: number | null
+    recipeId?: string | null
+    planId?: string | null
+    dailyLogId?: string | null
+    featuredBy?: string | null
+    featuredAt?: Date | string | null
+    challengeId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    createdById: string
   }
 
   export type PostUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+    visibility?: EnumPostVisibilityFieldUpdateOperationsInput | $Enums.PostVisibility
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: PostUpdateimageUrlsInput | string[]
+    kcalIn?: NullableFloatFieldUpdateOperationsInput | number | null
+    kcalOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    balance?: NullableFloatFieldUpdateOperationsInput | number | null
+    weightKg?: NullableFloatFieldUpdateOperationsInput | number | null
+    proteinG?: NullableFloatFieldUpdateOperationsInput | number | null
+    recipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    dailyLogId?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PostUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+    visibility?: EnumPostVisibilityFieldUpdateOperationsInput | $Enums.PostVisibility
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: PostUpdateimageUrlsInput | string[]
+    kcalIn?: NullableFloatFieldUpdateOperationsInput | number | null
+    kcalOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    balance?: NullableFloatFieldUpdateOperationsInput | number | null
+    weightKg?: NullableFloatFieldUpdateOperationsInput | number | null
+    proteinG?: NullableFloatFieldUpdateOperationsInput | number | null
+    recipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    dailyLogId?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    challengeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdById?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PostReactionCreateInput = {
+    id?: string
+    emoji: string
+    post: PostCreateNestedOneWithoutReactionsInput
+    user: UserCreateNestedOneWithoutPostReactionsInput
+  }
+
+  export type PostReactionUncheckedCreateInput = {
+    id?: string
+    postId: string
+    userId: string
+    emoji: string
+  }
+
+  export type PostReactionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    post?: PostUpdateOneRequiredWithoutReactionsNestedInput
+    user?: UserUpdateOneRequiredWithoutPostReactionsNestedInput
+  }
+
+  export type PostReactionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PostReactionCreateManyInput = {
+    id?: string
+    postId: string
+    userId: string
+    emoji: string
+  }
+
+  export type PostReactionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PostReactionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CommentCreateInput = {
+    id?: string
+    content: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+    post: PostCreateNestedOneWithoutCommentsInput
+    user: UserCreateNestedOneWithoutCommentsInput
+    parent?: CommentCreateNestedOneWithoutRepliesInput
+    replies?: CommentCreateNestedManyWithoutParentInput
+  }
+
+  export type CommentUncheckedCreateInput = {
+    id?: string
+    postId: string
+    userId: string
+    parentId?: string | null
+    content: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+    replies?: CommentUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type CommentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: PostUpdateOneRequiredWithoutCommentsNestedInput
+    user?: UserUpdateOneRequiredWithoutCommentsNestedInput
+    parent?: CommentUpdateOneWithoutRepliesNestedInput
+    replies?: CommentUpdateManyWithoutParentNestedInput
+  }
+
+  export type CommentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type CommentCreateManyInput = {
+    id?: string
+    postId: string
+    userId: string
+    parentId?: string | null
+    content: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+  }
+
+  export type CommentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChallengeCreateInput = {
+    id?: string
+    title: string
+    description: string
+    imageUrl?: string | null
+    startsAt: Date | string
+    endsAt: Date | string
+    targetAll?: boolean
+    targetIds?: ChallengeCreatetargetIdsInput | string[]
+    createdAt?: Date | string
+    coach: UserCreateNestedOneWithoutChallengesInput
+    posts?: PostCreateNestedManyWithoutChallengeInput
+  }
+
+  export type ChallengeUncheckedCreateInput = {
+    id?: string
+    coachId: string
+    title: string
+    description: string
+    imageUrl?: string | null
+    startsAt: Date | string
+    endsAt: Date | string
+    targetAll?: boolean
+    targetIds?: ChallengeCreatetargetIdsInput | string[]
+    createdAt?: Date | string
+    posts?: PostUncheckedCreateNestedManyWithoutChallengeInput
+  }
+
+  export type ChallengeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targetAll?: BoolFieldUpdateOperationsInput | boolean
+    targetIds?: ChallengeUpdatetargetIdsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coach?: UserUpdateOneRequiredWithoutChallengesNestedInput
+    posts?: PostUpdateManyWithoutChallengeNestedInput
+  }
+
+  export type ChallengeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    coachId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targetAll?: BoolFieldUpdateOperationsInput | boolean
+    targetIds?: ChallengeUpdatetargetIdsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUncheckedUpdateManyWithoutChallengeNestedInput
+  }
+
+  export type ChallengeCreateManyInput = {
+    id?: string
+    coachId: string
+    title: string
+    description: string
+    imageUrl?: string | null
+    startsAt: Date | string
+    endsAt: Date | string
+    targetAll?: boolean
+    targetIds?: ChallengeCreatetargetIdsInput | string[]
+    createdAt?: Date | string
+  }
+
+  export type ChallengeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targetAll?: BoolFieldUpdateOperationsInput | boolean
+    targetIds?: ChallengeUpdatetargetIdsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChallengeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    coachId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targetAll?: BoolFieldUpdateOperationsInput | boolean
+    targetIds?: ChallengeUpdatetargetIdsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DirectMessageCreateInput = {
+    id?: string
+    content: string
+    imageUrl?: string | null
+    readAt?: Date | string | null
+    createdAt?: Date | string
+    from: UserCreateNestedOneWithoutSentMessagesInput
+    to: UserCreateNestedOneWithoutReceivedMessagesInput
+  }
+
+  export type DirectMessageUncheckedCreateInput = {
+    id?: string
+    fromId: string
+    toId: string
+    content: string
+    imageUrl?: string | null
+    readAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type DirectMessageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    from?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
+    to?: UserUpdateOneRequiredWithoutReceivedMessagesNestedInput
+  }
+
+  export type DirectMessageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fromId?: StringFieldUpdateOperationsInput | string
+    toId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DirectMessageCreateManyInput = {
+    id?: string
+    fromId: string
+    toId: string
+    content: string
+    imageUrl?: string | null
+    readAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type DirectMessageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DirectMessageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fromId?: StringFieldUpdateOperationsInput | string
+    toId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IngredientCreateInput = {
@@ -34148,6 +40425,30 @@ export namespace Prisma {
     none?: PostWhereInput
   }
 
+  export type PostReactionListRelationFilter = {
+    every?: PostReactionWhereInput
+    some?: PostReactionWhereInput
+    none?: PostReactionWhereInput
+  }
+
+  export type CommentListRelationFilter = {
+    every?: CommentWhereInput
+    some?: CommentWhereInput
+    none?: CommentWhereInput
+  }
+
+  export type ChallengeListRelationFilter = {
+    every?: ChallengeWhereInput
+    some?: ChallengeWhereInput
+    none?: ChallengeWhereInput
+  }
+
+  export type DirectMessageListRelationFilter = {
+    every?: DirectMessageWhereInput
+    some?: DirectMessageWhereInput
+    none?: DirectMessageWhereInput
+  }
+
   export type AccountListRelationFilter = {
     every?: AccountWhereInput
     some?: AccountWhereInput
@@ -34226,6 +40527,22 @@ export namespace Prisma {
   }
 
   export type PostOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PostReactionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CommentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ChallengeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DirectMessageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -34683,36 +41000,265 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type EnumPostTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PostType | EnumPostTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PostType[] | ListEnumPostTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PostType[] | ListEnumPostTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPostTypeFilter<$PrismaModel> | $Enums.PostType
+  }
+
+  export type EnumPostVisibilityFilter<$PrismaModel = never> = {
+    equals?: $Enums.PostVisibility | EnumPostVisibilityFieldRefInput<$PrismaModel>
+    in?: $Enums.PostVisibility[] | ListEnumPostVisibilityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PostVisibility[] | ListEnumPostVisibilityFieldRefInput<$PrismaModel>
+    not?: NestedEnumPostVisibilityFilter<$PrismaModel> | $Enums.PostVisibility
+  }
+
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type ChallengeNullableScalarRelationFilter = {
+    is?: ChallengeWhereInput | null
+    isNot?: ChallengeWhereInput | null
+  }
+
   export type PostCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    visibility?: SortOrder
+    content?: SortOrder
+    imageUrls?: SortOrder
+    kcalIn?: SortOrder
+    kcalOut?: SortOrder
+    balance?: SortOrder
+    weightKg?: SortOrder
+    proteinG?: SortOrder
+    recipeId?: SortOrder
+    planId?: SortOrder
+    dailyLogId?: SortOrder
+    featuredBy?: SortOrder
+    featuredAt?: SortOrder
+    challengeId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    createdById?: SortOrder
   }
 
   export type PostAvgOrderByAggregateInput = {
-    id?: SortOrder
+    kcalIn?: SortOrder
+    kcalOut?: SortOrder
+    balance?: SortOrder
+    weightKg?: SortOrder
+    proteinG?: SortOrder
   }
 
   export type PostMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    visibility?: SortOrder
+    content?: SortOrder
+    kcalIn?: SortOrder
+    kcalOut?: SortOrder
+    balance?: SortOrder
+    weightKg?: SortOrder
+    proteinG?: SortOrder
+    recipeId?: SortOrder
+    planId?: SortOrder
+    dailyLogId?: SortOrder
+    featuredBy?: SortOrder
+    featuredAt?: SortOrder
+    challengeId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    createdById?: SortOrder
   }
 
   export type PostMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    visibility?: SortOrder
+    content?: SortOrder
+    kcalIn?: SortOrder
+    kcalOut?: SortOrder
+    balance?: SortOrder
+    weightKg?: SortOrder
+    proteinG?: SortOrder
+    recipeId?: SortOrder
+    planId?: SortOrder
+    dailyLogId?: SortOrder
+    featuredBy?: SortOrder
+    featuredAt?: SortOrder
+    challengeId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    createdById?: SortOrder
   }
 
   export type PostSumOrderByAggregateInput = {
+    kcalIn?: SortOrder
+    kcalOut?: SortOrder
+    balance?: SortOrder
+    weightKg?: SortOrder
+    proteinG?: SortOrder
+  }
+
+  export type EnumPostTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PostType | EnumPostTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PostType[] | ListEnumPostTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PostType[] | ListEnumPostTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPostTypeWithAggregatesFilter<$PrismaModel> | $Enums.PostType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPostTypeFilter<$PrismaModel>
+    _max?: NestedEnumPostTypeFilter<$PrismaModel>
+  }
+
+  export type EnumPostVisibilityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PostVisibility | EnumPostVisibilityFieldRefInput<$PrismaModel>
+    in?: $Enums.PostVisibility[] | ListEnumPostVisibilityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PostVisibility[] | ListEnumPostVisibilityFieldRefInput<$PrismaModel>
+    not?: NestedEnumPostVisibilityWithAggregatesFilter<$PrismaModel> | $Enums.PostVisibility
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPostVisibilityFilter<$PrismaModel>
+    _max?: NestedEnumPostVisibilityFilter<$PrismaModel>
+  }
+
+  export type PostScalarRelationFilter = {
+    is?: PostWhereInput
+    isNot?: PostWhereInput
+  }
+
+  export type PostReactionPostIdUserIdEmojiCompoundUniqueInput = {
+    postId: string
+    userId: string
+    emoji: string
+  }
+
+  export type PostReactionCountOrderByAggregateInput = {
     id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    emoji?: SortOrder
+  }
+
+  export type PostReactionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    emoji?: SortOrder
+  }
+
+  export type PostReactionMinOrderByAggregateInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    emoji?: SortOrder
+  }
+
+  export type CommentNullableScalarRelationFilter = {
+    is?: CommentWhereInput | null
+    isNot?: CommentWhereInput | null
+  }
+
+  export type CommentCountOrderByAggregateInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    parentId?: SortOrder
+    content?: SortOrder
+    imageUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CommentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    parentId?: SortOrder
+    content?: SortOrder
+    imageUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CommentMinOrderByAggregateInput = {
+    id?: SortOrder
+    postId?: SortOrder
+    userId?: SortOrder
+    parentId?: SortOrder
+    content?: SortOrder
+    imageUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ChallengeCountOrderByAggregateInput = {
+    id?: SortOrder
+    coachId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrder
+    targetAll?: SortOrder
+    targetIds?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ChallengeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    coachId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrder
+    targetAll?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ChallengeMinOrderByAggregateInput = {
+    id?: SortOrder
+    coachId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrder
+    targetAll?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DirectMessageCountOrderByAggregateInput = {
+    id?: SortOrder
+    fromId?: SortOrder
+    toId?: SortOrder
+    content?: SortOrder
+    imageUrl?: SortOrder
+    readAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DirectMessageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    fromId?: SortOrder
+    toId?: SortOrder
+    content?: SortOrder
+    imageUrl?: SortOrder
+    readAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DirectMessageMinOrderByAggregateInput = {
+    id?: SortOrder
+    fromId?: SortOrder
+    toId?: SortOrder
+    content?: SortOrder
+    imageUrl?: SortOrder
+    readAt?: SortOrder
+    createdAt?: SortOrder
   }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -35556,11 +42102,46 @@ export namespace Prisma {
     connect?: SubscriptionWhereUniqueInput
   }
 
-  export type PostCreateNestedManyWithoutCreatedByInput = {
-    create?: XOR<PostCreateWithoutCreatedByInput, PostUncheckedCreateWithoutCreatedByInput> | PostCreateWithoutCreatedByInput[] | PostUncheckedCreateWithoutCreatedByInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutCreatedByInput | PostCreateOrConnectWithoutCreatedByInput[]
-    createMany?: PostCreateManyCreatedByInputEnvelope
+  export type PostCreateNestedManyWithoutUserInput = {
+    create?: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput> | PostCreateWithoutUserInput[] | PostUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutUserInput | PostCreateOrConnectWithoutUserInput[]
+    createMany?: PostCreateManyUserInputEnvelope
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type PostReactionCreateNestedManyWithoutUserInput = {
+    create?: XOR<PostReactionCreateWithoutUserInput, PostReactionUncheckedCreateWithoutUserInput> | PostReactionCreateWithoutUserInput[] | PostReactionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PostReactionCreateOrConnectWithoutUserInput | PostReactionCreateOrConnectWithoutUserInput[]
+    createMany?: PostReactionCreateManyUserInputEnvelope
+    connect?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+  }
+
+  export type CommentCreateNestedManyWithoutUserInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type ChallengeCreateNestedManyWithoutCoachInput = {
+    create?: XOR<ChallengeCreateWithoutCoachInput, ChallengeUncheckedCreateWithoutCoachInput> | ChallengeCreateWithoutCoachInput[] | ChallengeUncheckedCreateWithoutCoachInput[]
+    connectOrCreate?: ChallengeCreateOrConnectWithoutCoachInput | ChallengeCreateOrConnectWithoutCoachInput[]
+    createMany?: ChallengeCreateManyCoachInputEnvelope
+    connect?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+  }
+
+  export type DirectMessageCreateNestedManyWithoutFromInput = {
+    create?: XOR<DirectMessageCreateWithoutFromInput, DirectMessageUncheckedCreateWithoutFromInput> | DirectMessageCreateWithoutFromInput[] | DirectMessageUncheckedCreateWithoutFromInput[]
+    connectOrCreate?: DirectMessageCreateOrConnectWithoutFromInput | DirectMessageCreateOrConnectWithoutFromInput[]
+    createMany?: DirectMessageCreateManyFromInputEnvelope
+    connect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+  }
+
+  export type DirectMessageCreateNestedManyWithoutToInput = {
+    create?: XOR<DirectMessageCreateWithoutToInput, DirectMessageUncheckedCreateWithoutToInput> | DirectMessageCreateWithoutToInput[] | DirectMessageUncheckedCreateWithoutToInput[]
+    connectOrCreate?: DirectMessageCreateOrConnectWithoutToInput | DirectMessageCreateOrConnectWithoutToInput[]
+    createMany?: DirectMessageCreateManyToInputEnvelope
+    connect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
   }
 
   export type AccountCreateNestedManyWithoutUserInput = {
@@ -35678,11 +42259,46 @@ export namespace Prisma {
     connect?: SubscriptionWhereUniqueInput
   }
 
-  export type PostUncheckedCreateNestedManyWithoutCreatedByInput = {
-    create?: XOR<PostCreateWithoutCreatedByInput, PostUncheckedCreateWithoutCreatedByInput> | PostCreateWithoutCreatedByInput[] | PostUncheckedCreateWithoutCreatedByInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutCreatedByInput | PostCreateOrConnectWithoutCreatedByInput[]
-    createMany?: PostCreateManyCreatedByInputEnvelope
+  export type PostUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput> | PostCreateWithoutUserInput[] | PostUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutUserInput | PostCreateOrConnectWithoutUserInput[]
+    createMany?: PostCreateManyUserInputEnvelope
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type PostReactionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PostReactionCreateWithoutUserInput, PostReactionUncheckedCreateWithoutUserInput> | PostReactionCreateWithoutUserInput[] | PostReactionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PostReactionCreateOrConnectWithoutUserInput | PostReactionCreateOrConnectWithoutUserInput[]
+    createMany?: PostReactionCreateManyUserInputEnvelope
+    connect?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+  }
+
+  export type CommentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type ChallengeUncheckedCreateNestedManyWithoutCoachInput = {
+    create?: XOR<ChallengeCreateWithoutCoachInput, ChallengeUncheckedCreateWithoutCoachInput> | ChallengeCreateWithoutCoachInput[] | ChallengeUncheckedCreateWithoutCoachInput[]
+    connectOrCreate?: ChallengeCreateOrConnectWithoutCoachInput | ChallengeCreateOrConnectWithoutCoachInput[]
+    createMany?: ChallengeCreateManyCoachInputEnvelope
+    connect?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+  }
+
+  export type DirectMessageUncheckedCreateNestedManyWithoutFromInput = {
+    create?: XOR<DirectMessageCreateWithoutFromInput, DirectMessageUncheckedCreateWithoutFromInput> | DirectMessageCreateWithoutFromInput[] | DirectMessageUncheckedCreateWithoutFromInput[]
+    connectOrCreate?: DirectMessageCreateOrConnectWithoutFromInput | DirectMessageCreateOrConnectWithoutFromInput[]
+    createMany?: DirectMessageCreateManyFromInputEnvelope
+    connect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+  }
+
+  export type DirectMessageUncheckedCreateNestedManyWithoutToInput = {
+    create?: XOR<DirectMessageCreateWithoutToInput, DirectMessageUncheckedCreateWithoutToInput> | DirectMessageCreateWithoutToInput[] | DirectMessageUncheckedCreateWithoutToInput[]
+    connectOrCreate?: DirectMessageCreateOrConnectWithoutToInput | DirectMessageCreateOrConnectWithoutToInput[]
+    createMany?: DirectMessageCreateManyToInputEnvelope
+    connect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
   }
 
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
@@ -35851,18 +42467,88 @@ export namespace Prisma {
     update?: XOR<XOR<SubscriptionUpdateToOneWithWhereWithoutUserInput, SubscriptionUpdateWithoutUserInput>, SubscriptionUncheckedUpdateWithoutUserInput>
   }
 
-  export type PostUpdateManyWithoutCreatedByNestedInput = {
-    create?: XOR<PostCreateWithoutCreatedByInput, PostUncheckedCreateWithoutCreatedByInput> | PostCreateWithoutCreatedByInput[] | PostUncheckedCreateWithoutCreatedByInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutCreatedByInput | PostCreateOrConnectWithoutCreatedByInput[]
-    upsert?: PostUpsertWithWhereUniqueWithoutCreatedByInput | PostUpsertWithWhereUniqueWithoutCreatedByInput[]
-    createMany?: PostCreateManyCreatedByInputEnvelope
+  export type PostUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput> | PostCreateWithoutUserInput[] | PostUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutUserInput | PostCreateOrConnectWithoutUserInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutUserInput | PostUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PostCreateManyUserInputEnvelope
     set?: PostWhereUniqueInput | PostWhereUniqueInput[]
     disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
     delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    update?: PostUpdateWithWhereUniqueWithoutCreatedByInput | PostUpdateWithWhereUniqueWithoutCreatedByInput[]
-    updateMany?: PostUpdateManyWithWhereWithoutCreatedByInput | PostUpdateManyWithWhereWithoutCreatedByInput[]
+    update?: PostUpdateWithWhereUniqueWithoutUserInput | PostUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutUserInput | PostUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type PostReactionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PostReactionCreateWithoutUserInput, PostReactionUncheckedCreateWithoutUserInput> | PostReactionCreateWithoutUserInput[] | PostReactionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PostReactionCreateOrConnectWithoutUserInput | PostReactionCreateOrConnectWithoutUserInput[]
+    upsert?: PostReactionUpsertWithWhereUniqueWithoutUserInput | PostReactionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PostReactionCreateManyUserInputEnvelope
+    set?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    disconnect?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    delete?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    connect?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    update?: PostReactionUpdateWithWhereUniqueWithoutUserInput | PostReactionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PostReactionUpdateManyWithWhereWithoutUserInput | PostReactionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PostReactionScalarWhereInput | PostReactionScalarWhereInput[]
+  }
+
+  export type CommentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutUserInput | CommentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type ChallengeUpdateManyWithoutCoachNestedInput = {
+    create?: XOR<ChallengeCreateWithoutCoachInput, ChallengeUncheckedCreateWithoutCoachInput> | ChallengeCreateWithoutCoachInput[] | ChallengeUncheckedCreateWithoutCoachInput[]
+    connectOrCreate?: ChallengeCreateOrConnectWithoutCoachInput | ChallengeCreateOrConnectWithoutCoachInput[]
+    upsert?: ChallengeUpsertWithWhereUniqueWithoutCoachInput | ChallengeUpsertWithWhereUniqueWithoutCoachInput[]
+    createMany?: ChallengeCreateManyCoachInputEnvelope
+    set?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    disconnect?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    delete?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    connect?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    update?: ChallengeUpdateWithWhereUniqueWithoutCoachInput | ChallengeUpdateWithWhereUniqueWithoutCoachInput[]
+    updateMany?: ChallengeUpdateManyWithWhereWithoutCoachInput | ChallengeUpdateManyWithWhereWithoutCoachInput[]
+    deleteMany?: ChallengeScalarWhereInput | ChallengeScalarWhereInput[]
+  }
+
+  export type DirectMessageUpdateManyWithoutFromNestedInput = {
+    create?: XOR<DirectMessageCreateWithoutFromInput, DirectMessageUncheckedCreateWithoutFromInput> | DirectMessageCreateWithoutFromInput[] | DirectMessageUncheckedCreateWithoutFromInput[]
+    connectOrCreate?: DirectMessageCreateOrConnectWithoutFromInput | DirectMessageCreateOrConnectWithoutFromInput[]
+    upsert?: DirectMessageUpsertWithWhereUniqueWithoutFromInput | DirectMessageUpsertWithWhereUniqueWithoutFromInput[]
+    createMany?: DirectMessageCreateManyFromInputEnvelope
+    set?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    disconnect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    delete?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    connect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    update?: DirectMessageUpdateWithWhereUniqueWithoutFromInput | DirectMessageUpdateWithWhereUniqueWithoutFromInput[]
+    updateMany?: DirectMessageUpdateManyWithWhereWithoutFromInput | DirectMessageUpdateManyWithWhereWithoutFromInput[]
+    deleteMany?: DirectMessageScalarWhereInput | DirectMessageScalarWhereInput[]
+  }
+
+  export type DirectMessageUpdateManyWithoutToNestedInput = {
+    create?: XOR<DirectMessageCreateWithoutToInput, DirectMessageUncheckedCreateWithoutToInput> | DirectMessageCreateWithoutToInput[] | DirectMessageUncheckedCreateWithoutToInput[]
+    connectOrCreate?: DirectMessageCreateOrConnectWithoutToInput | DirectMessageCreateOrConnectWithoutToInput[]
+    upsert?: DirectMessageUpsertWithWhereUniqueWithoutToInput | DirectMessageUpsertWithWhereUniqueWithoutToInput[]
+    createMany?: DirectMessageCreateManyToInputEnvelope
+    set?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    disconnect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    delete?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    connect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    update?: DirectMessageUpdateWithWhereUniqueWithoutToInput | DirectMessageUpdateWithWhereUniqueWithoutToInput[]
+    updateMany?: DirectMessageUpdateManyWithWhereWithoutToInput | DirectMessageUpdateManyWithWhereWithoutToInput[]
+    deleteMany?: DirectMessageScalarWhereInput | DirectMessageScalarWhereInput[]
   }
 
   export type AccountUpdateManyWithoutUserNestedInput = {
@@ -36087,18 +42773,88 @@ export namespace Prisma {
     update?: XOR<XOR<SubscriptionUpdateToOneWithWhereWithoutUserInput, SubscriptionUpdateWithoutUserInput>, SubscriptionUncheckedUpdateWithoutUserInput>
   }
 
-  export type PostUncheckedUpdateManyWithoutCreatedByNestedInput = {
-    create?: XOR<PostCreateWithoutCreatedByInput, PostUncheckedCreateWithoutCreatedByInput> | PostCreateWithoutCreatedByInput[] | PostUncheckedCreateWithoutCreatedByInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutCreatedByInput | PostCreateOrConnectWithoutCreatedByInput[]
-    upsert?: PostUpsertWithWhereUniqueWithoutCreatedByInput | PostUpsertWithWhereUniqueWithoutCreatedByInput[]
-    createMany?: PostCreateManyCreatedByInputEnvelope
+  export type PostUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput> | PostCreateWithoutUserInput[] | PostUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutUserInput | PostCreateOrConnectWithoutUserInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutUserInput | PostUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PostCreateManyUserInputEnvelope
     set?: PostWhereUniqueInput | PostWhereUniqueInput[]
     disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
     delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    update?: PostUpdateWithWhereUniqueWithoutCreatedByInput | PostUpdateWithWhereUniqueWithoutCreatedByInput[]
-    updateMany?: PostUpdateManyWithWhereWithoutCreatedByInput | PostUpdateManyWithWhereWithoutCreatedByInput[]
+    update?: PostUpdateWithWhereUniqueWithoutUserInput | PostUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutUserInput | PostUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type PostReactionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PostReactionCreateWithoutUserInput, PostReactionUncheckedCreateWithoutUserInput> | PostReactionCreateWithoutUserInput[] | PostReactionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PostReactionCreateOrConnectWithoutUserInput | PostReactionCreateOrConnectWithoutUserInput[]
+    upsert?: PostReactionUpsertWithWhereUniqueWithoutUserInput | PostReactionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PostReactionCreateManyUserInputEnvelope
+    set?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    disconnect?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    delete?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    connect?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    update?: PostReactionUpdateWithWhereUniqueWithoutUserInput | PostReactionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PostReactionUpdateManyWithWhereWithoutUserInput | PostReactionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PostReactionScalarWhereInput | PostReactionScalarWhereInput[]
+  }
+
+  export type CommentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutUserInput | CommentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type ChallengeUncheckedUpdateManyWithoutCoachNestedInput = {
+    create?: XOR<ChallengeCreateWithoutCoachInput, ChallengeUncheckedCreateWithoutCoachInput> | ChallengeCreateWithoutCoachInput[] | ChallengeUncheckedCreateWithoutCoachInput[]
+    connectOrCreate?: ChallengeCreateOrConnectWithoutCoachInput | ChallengeCreateOrConnectWithoutCoachInput[]
+    upsert?: ChallengeUpsertWithWhereUniqueWithoutCoachInput | ChallengeUpsertWithWhereUniqueWithoutCoachInput[]
+    createMany?: ChallengeCreateManyCoachInputEnvelope
+    set?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    disconnect?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    delete?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    connect?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    update?: ChallengeUpdateWithWhereUniqueWithoutCoachInput | ChallengeUpdateWithWhereUniqueWithoutCoachInput[]
+    updateMany?: ChallengeUpdateManyWithWhereWithoutCoachInput | ChallengeUpdateManyWithWhereWithoutCoachInput[]
+    deleteMany?: ChallengeScalarWhereInput | ChallengeScalarWhereInput[]
+  }
+
+  export type DirectMessageUncheckedUpdateManyWithoutFromNestedInput = {
+    create?: XOR<DirectMessageCreateWithoutFromInput, DirectMessageUncheckedCreateWithoutFromInput> | DirectMessageCreateWithoutFromInput[] | DirectMessageUncheckedCreateWithoutFromInput[]
+    connectOrCreate?: DirectMessageCreateOrConnectWithoutFromInput | DirectMessageCreateOrConnectWithoutFromInput[]
+    upsert?: DirectMessageUpsertWithWhereUniqueWithoutFromInput | DirectMessageUpsertWithWhereUniqueWithoutFromInput[]
+    createMany?: DirectMessageCreateManyFromInputEnvelope
+    set?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    disconnect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    delete?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    connect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    update?: DirectMessageUpdateWithWhereUniqueWithoutFromInput | DirectMessageUpdateWithWhereUniqueWithoutFromInput[]
+    updateMany?: DirectMessageUpdateManyWithWhereWithoutFromInput | DirectMessageUpdateManyWithWhereWithoutFromInput[]
+    deleteMany?: DirectMessageScalarWhereInput | DirectMessageScalarWhereInput[]
+  }
+
+  export type DirectMessageUncheckedUpdateManyWithoutToNestedInput = {
+    create?: XOR<DirectMessageCreateWithoutToInput, DirectMessageUncheckedCreateWithoutToInput> | DirectMessageCreateWithoutToInput[] | DirectMessageUncheckedCreateWithoutToInput[]
+    connectOrCreate?: DirectMessageCreateOrConnectWithoutToInput | DirectMessageCreateOrConnectWithoutToInput[]
+    upsert?: DirectMessageUpsertWithWhereUniqueWithoutToInput | DirectMessageUpsertWithWhereUniqueWithoutToInput[]
+    createMany?: DirectMessageCreateManyToInputEnvelope
+    set?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    disconnect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    delete?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    connect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+    update?: DirectMessageUpdateWithWhereUniqueWithoutToInput | DirectMessageUpdateWithWhereUniqueWithoutToInput[]
+    updateMany?: DirectMessageUpdateManyWithWhereWithoutToInput | DirectMessageUpdateManyWithWhereWithoutToInput[]
+    deleteMany?: DirectMessageScalarWhereInput | DirectMessageScalarWhereInput[]
   }
 
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
@@ -36385,10 +43141,61 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSubscriptionInput, UserUpdateWithoutSubscriptionInput>, UserUncheckedUpdateWithoutSubscriptionInput>
   }
 
+  export type PostCreateimageUrlsInput = {
+    set: string[]
+  }
+
   export type UserCreateNestedOneWithoutPostsInput = {
     create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type ChallengeCreateNestedOneWithoutPostsInput = {
+    create?: XOR<ChallengeCreateWithoutPostsInput, ChallengeUncheckedCreateWithoutPostsInput>
+    connectOrCreate?: ChallengeCreateOrConnectWithoutPostsInput
+    connect?: ChallengeWhereUniqueInput
+  }
+
+  export type PostReactionCreateNestedManyWithoutPostInput = {
+    create?: XOR<PostReactionCreateWithoutPostInput, PostReactionUncheckedCreateWithoutPostInput> | PostReactionCreateWithoutPostInput[] | PostReactionUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: PostReactionCreateOrConnectWithoutPostInput | PostReactionCreateOrConnectWithoutPostInput[]
+    createMany?: PostReactionCreateManyPostInputEnvelope
+    connect?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+  }
+
+  export type CommentCreateNestedManyWithoutPostInput = {
+    create?: XOR<CommentCreateWithoutPostInput, CommentUncheckedCreateWithoutPostInput> | CommentCreateWithoutPostInput[] | CommentUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutPostInput | CommentCreateOrConnectWithoutPostInput[]
+    createMany?: CommentCreateManyPostInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type PostReactionUncheckedCreateNestedManyWithoutPostInput = {
+    create?: XOR<PostReactionCreateWithoutPostInput, PostReactionUncheckedCreateWithoutPostInput> | PostReactionCreateWithoutPostInput[] | PostReactionUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: PostReactionCreateOrConnectWithoutPostInput | PostReactionCreateOrConnectWithoutPostInput[]
+    createMany?: PostReactionCreateManyPostInputEnvelope
+    connect?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+  }
+
+  export type CommentUncheckedCreateNestedManyWithoutPostInput = {
+    create?: XOR<CommentCreateWithoutPostInput, CommentUncheckedCreateWithoutPostInput> | CommentCreateWithoutPostInput[] | CommentUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutPostInput | CommentCreateOrConnectWithoutPostInput[]
+    createMany?: CommentCreateManyPostInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type EnumPostTypeFieldUpdateOperationsInput = {
+    set?: $Enums.PostType
+  }
+
+  export type EnumPostVisibilityFieldUpdateOperationsInput = {
+    set?: $Enums.PostVisibility
+  }
+
+  export type PostUpdateimageUrlsInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type UserUpdateOneRequiredWithoutPostsNestedInput = {
@@ -36397,6 +43204,279 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutPostsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type ChallengeUpdateOneWithoutPostsNestedInput = {
+    create?: XOR<ChallengeCreateWithoutPostsInput, ChallengeUncheckedCreateWithoutPostsInput>
+    connectOrCreate?: ChallengeCreateOrConnectWithoutPostsInput
+    upsert?: ChallengeUpsertWithoutPostsInput
+    disconnect?: ChallengeWhereInput | boolean
+    delete?: ChallengeWhereInput | boolean
+    connect?: ChallengeWhereUniqueInput
+    update?: XOR<XOR<ChallengeUpdateToOneWithWhereWithoutPostsInput, ChallengeUpdateWithoutPostsInput>, ChallengeUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type PostReactionUpdateManyWithoutPostNestedInput = {
+    create?: XOR<PostReactionCreateWithoutPostInput, PostReactionUncheckedCreateWithoutPostInput> | PostReactionCreateWithoutPostInput[] | PostReactionUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: PostReactionCreateOrConnectWithoutPostInput | PostReactionCreateOrConnectWithoutPostInput[]
+    upsert?: PostReactionUpsertWithWhereUniqueWithoutPostInput | PostReactionUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: PostReactionCreateManyPostInputEnvelope
+    set?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    disconnect?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    delete?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    connect?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    update?: PostReactionUpdateWithWhereUniqueWithoutPostInput | PostReactionUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: PostReactionUpdateManyWithWhereWithoutPostInput | PostReactionUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: PostReactionScalarWhereInput | PostReactionScalarWhereInput[]
+  }
+
+  export type CommentUpdateManyWithoutPostNestedInput = {
+    create?: XOR<CommentCreateWithoutPostInput, CommentUncheckedCreateWithoutPostInput> | CommentCreateWithoutPostInput[] | CommentUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutPostInput | CommentCreateOrConnectWithoutPostInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutPostInput | CommentUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: CommentCreateManyPostInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutPostInput | CommentUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutPostInput | CommentUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type PostReactionUncheckedUpdateManyWithoutPostNestedInput = {
+    create?: XOR<PostReactionCreateWithoutPostInput, PostReactionUncheckedCreateWithoutPostInput> | PostReactionCreateWithoutPostInput[] | PostReactionUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: PostReactionCreateOrConnectWithoutPostInput | PostReactionCreateOrConnectWithoutPostInput[]
+    upsert?: PostReactionUpsertWithWhereUniqueWithoutPostInput | PostReactionUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: PostReactionCreateManyPostInputEnvelope
+    set?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    disconnect?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    delete?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    connect?: PostReactionWhereUniqueInput | PostReactionWhereUniqueInput[]
+    update?: PostReactionUpdateWithWhereUniqueWithoutPostInput | PostReactionUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: PostReactionUpdateManyWithWhereWithoutPostInput | PostReactionUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: PostReactionScalarWhereInput | PostReactionScalarWhereInput[]
+  }
+
+  export type CommentUncheckedUpdateManyWithoutPostNestedInput = {
+    create?: XOR<CommentCreateWithoutPostInput, CommentUncheckedCreateWithoutPostInput> | CommentCreateWithoutPostInput[] | CommentUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutPostInput | CommentCreateOrConnectWithoutPostInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutPostInput | CommentUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: CommentCreateManyPostInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutPostInput | CommentUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutPostInput | CommentUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type PostCreateNestedOneWithoutReactionsInput = {
+    create?: XOR<PostCreateWithoutReactionsInput, PostUncheckedCreateWithoutReactionsInput>
+    connectOrCreate?: PostCreateOrConnectWithoutReactionsInput
+    connect?: PostWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutPostReactionsInput = {
+    create?: XOR<UserCreateWithoutPostReactionsInput, UserUncheckedCreateWithoutPostReactionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPostReactionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PostUpdateOneRequiredWithoutReactionsNestedInput = {
+    create?: XOR<PostCreateWithoutReactionsInput, PostUncheckedCreateWithoutReactionsInput>
+    connectOrCreate?: PostCreateOrConnectWithoutReactionsInput
+    upsert?: PostUpsertWithoutReactionsInput
+    connect?: PostWhereUniqueInput
+    update?: XOR<XOR<PostUpdateToOneWithWhereWithoutReactionsInput, PostUpdateWithoutReactionsInput>, PostUncheckedUpdateWithoutReactionsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutPostReactionsNestedInput = {
+    create?: XOR<UserCreateWithoutPostReactionsInput, UserUncheckedCreateWithoutPostReactionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPostReactionsInput
+    upsert?: UserUpsertWithoutPostReactionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostReactionsInput, UserUpdateWithoutPostReactionsInput>, UserUncheckedUpdateWithoutPostReactionsInput>
+  }
+
+  export type PostCreateNestedOneWithoutCommentsInput = {
+    create?: XOR<PostCreateWithoutCommentsInput, PostUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: PostCreateOrConnectWithoutCommentsInput
+    connect?: PostWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCommentsInput = {
+    create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CommentCreateNestedOneWithoutRepliesInput = {
+    create?: XOR<CommentCreateWithoutRepliesInput, CommentUncheckedCreateWithoutRepliesInput>
+    connectOrCreate?: CommentCreateOrConnectWithoutRepliesInput
+    connect?: CommentWhereUniqueInput
+  }
+
+  export type CommentCreateNestedManyWithoutParentInput = {
+    create?: XOR<CommentCreateWithoutParentInput, CommentUncheckedCreateWithoutParentInput> | CommentCreateWithoutParentInput[] | CommentUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutParentInput | CommentCreateOrConnectWithoutParentInput[]
+    createMany?: CommentCreateManyParentInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type CommentUncheckedCreateNestedManyWithoutParentInput = {
+    create?: XOR<CommentCreateWithoutParentInput, CommentUncheckedCreateWithoutParentInput> | CommentCreateWithoutParentInput[] | CommentUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutParentInput | CommentCreateOrConnectWithoutParentInput[]
+    createMany?: CommentCreateManyParentInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type PostUpdateOneRequiredWithoutCommentsNestedInput = {
+    create?: XOR<PostCreateWithoutCommentsInput, PostUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: PostCreateOrConnectWithoutCommentsInput
+    upsert?: PostUpsertWithoutCommentsInput
+    connect?: PostWhereUniqueInput
+    update?: XOR<XOR<PostUpdateToOneWithWhereWithoutCommentsInput, PostUpdateWithoutCommentsInput>, PostUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutCommentsNestedInput = {
+    create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
+    upsert?: UserUpsertWithoutCommentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentsInput, UserUpdateWithoutCommentsInput>, UserUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type CommentUpdateOneWithoutRepliesNestedInput = {
+    create?: XOR<CommentCreateWithoutRepliesInput, CommentUncheckedCreateWithoutRepliesInput>
+    connectOrCreate?: CommentCreateOrConnectWithoutRepliesInput
+    upsert?: CommentUpsertWithoutRepliesInput
+    disconnect?: CommentWhereInput | boolean
+    delete?: CommentWhereInput | boolean
+    connect?: CommentWhereUniqueInput
+    update?: XOR<XOR<CommentUpdateToOneWithWhereWithoutRepliesInput, CommentUpdateWithoutRepliesInput>, CommentUncheckedUpdateWithoutRepliesInput>
+  }
+
+  export type CommentUpdateManyWithoutParentNestedInput = {
+    create?: XOR<CommentCreateWithoutParentInput, CommentUncheckedCreateWithoutParentInput> | CommentCreateWithoutParentInput[] | CommentUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutParentInput | CommentCreateOrConnectWithoutParentInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutParentInput | CommentUpsertWithWhereUniqueWithoutParentInput[]
+    createMany?: CommentCreateManyParentInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutParentInput | CommentUpdateWithWhereUniqueWithoutParentInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutParentInput | CommentUpdateManyWithWhereWithoutParentInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type CommentUncheckedUpdateManyWithoutParentNestedInput = {
+    create?: XOR<CommentCreateWithoutParentInput, CommentUncheckedCreateWithoutParentInput> | CommentCreateWithoutParentInput[] | CommentUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutParentInput | CommentCreateOrConnectWithoutParentInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutParentInput | CommentUpsertWithWhereUniqueWithoutParentInput[]
+    createMany?: CommentCreateManyParentInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutParentInput | CommentUpdateWithWhereUniqueWithoutParentInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutParentInput | CommentUpdateManyWithWhereWithoutParentInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type ChallengeCreatetargetIdsInput = {
+    set: string[]
+  }
+
+  export type UserCreateNestedOneWithoutChallengesInput = {
+    create?: XOR<UserCreateWithoutChallengesInput, UserUncheckedCreateWithoutChallengesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutChallengesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PostCreateNestedManyWithoutChallengeInput = {
+    create?: XOR<PostCreateWithoutChallengeInput, PostUncheckedCreateWithoutChallengeInput> | PostCreateWithoutChallengeInput[] | PostUncheckedCreateWithoutChallengeInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutChallengeInput | PostCreateOrConnectWithoutChallengeInput[]
+    createMany?: PostCreateManyChallengeInputEnvelope
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type PostUncheckedCreateNestedManyWithoutChallengeInput = {
+    create?: XOR<PostCreateWithoutChallengeInput, PostUncheckedCreateWithoutChallengeInput> | PostCreateWithoutChallengeInput[] | PostUncheckedCreateWithoutChallengeInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutChallengeInput | PostCreateOrConnectWithoutChallengeInput[]
+    createMany?: PostCreateManyChallengeInputEnvelope
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type ChallengeUpdatetargetIdsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UserUpdateOneRequiredWithoutChallengesNestedInput = {
+    create?: XOR<UserCreateWithoutChallengesInput, UserUncheckedCreateWithoutChallengesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutChallengesInput
+    upsert?: UserUpsertWithoutChallengesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutChallengesInput, UserUpdateWithoutChallengesInput>, UserUncheckedUpdateWithoutChallengesInput>
+  }
+
+  export type PostUpdateManyWithoutChallengeNestedInput = {
+    create?: XOR<PostCreateWithoutChallengeInput, PostUncheckedCreateWithoutChallengeInput> | PostCreateWithoutChallengeInput[] | PostUncheckedCreateWithoutChallengeInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutChallengeInput | PostCreateOrConnectWithoutChallengeInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutChallengeInput | PostUpsertWithWhereUniqueWithoutChallengeInput[]
+    createMany?: PostCreateManyChallengeInputEnvelope
+    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    update?: PostUpdateWithWhereUniqueWithoutChallengeInput | PostUpdateWithWhereUniqueWithoutChallengeInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutChallengeInput | PostUpdateManyWithWhereWithoutChallengeInput[]
+    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type PostUncheckedUpdateManyWithoutChallengeNestedInput = {
+    create?: XOR<PostCreateWithoutChallengeInput, PostUncheckedCreateWithoutChallengeInput> | PostCreateWithoutChallengeInput[] | PostUncheckedCreateWithoutChallengeInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutChallengeInput | PostCreateOrConnectWithoutChallengeInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutChallengeInput | PostUpsertWithWhereUniqueWithoutChallengeInput[]
+    createMany?: PostCreateManyChallengeInputEnvelope
+    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    update?: PostUpdateWithWhereUniqueWithoutChallengeInput | PostUpdateWithWhereUniqueWithoutChallengeInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutChallengeInput | PostUpdateManyWithWhereWithoutChallengeInput[]
+    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutSentMessagesInput = {
+    create?: XOR<UserCreateWithoutSentMessagesInput, UserUncheckedCreateWithoutSentMessagesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSentMessagesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutReceivedMessagesInput = {
+    create?: XOR<UserCreateWithoutReceivedMessagesInput, UserUncheckedCreateWithoutReceivedMessagesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReceivedMessagesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutSentMessagesNestedInput = {
+    create?: XOR<UserCreateWithoutSentMessagesInput, UserUncheckedCreateWithoutSentMessagesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSentMessagesInput
+    upsert?: UserUpsertWithoutSentMessagesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSentMessagesInput, UserUpdateWithoutSentMessagesInput>, UserUncheckedUpdateWithoutSentMessagesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutReceivedMessagesNestedInput = {
+    create?: XOR<UserCreateWithoutReceivedMessagesInput, UserUncheckedCreateWithoutReceivedMessagesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReceivedMessagesInput
+    upsert?: UserUpsertWithoutReceivedMessagesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReceivedMessagesInput, UserUpdateWithoutReceivedMessagesInput>, UserUncheckedUpdateWithoutReceivedMessagesInput>
   }
 
   export type RecipeIngredientCreateNestedManyWithoutIngredientInput = {
@@ -37342,6 +44422,40 @@ export namespace Prisma {
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
   }
+
+  export type NestedEnumPostTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PostType | EnumPostTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PostType[] | ListEnumPostTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PostType[] | ListEnumPostTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPostTypeFilter<$PrismaModel> | $Enums.PostType
+  }
+
+  export type NestedEnumPostVisibilityFilter<$PrismaModel = never> = {
+    equals?: $Enums.PostVisibility | EnumPostVisibilityFieldRefInput<$PrismaModel>
+    in?: $Enums.PostVisibility[] | ListEnumPostVisibilityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PostVisibility[] | ListEnumPostVisibilityFieldRefInput<$PrismaModel>
+    not?: NestedEnumPostVisibilityFilter<$PrismaModel> | $Enums.PostVisibility
+  }
+
+  export type NestedEnumPostTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PostType | EnumPostTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PostType[] | ListEnumPostTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PostType[] | ListEnumPostTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPostTypeWithAggregatesFilter<$PrismaModel> | $Enums.PostType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPostTypeFilter<$PrismaModel>
+    _max?: NestedEnumPostTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPostVisibilityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PostVisibility | EnumPostVisibilityFieldRefInput<$PrismaModel>
+    in?: $Enums.PostVisibility[] | ListEnumPostVisibilityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PostVisibility[] | ListEnumPostVisibilityFieldRefInput<$PrismaModel>
+    not?: NestedEnumPostVisibilityWithAggregatesFilter<$PrismaModel> | $Enums.PostVisibility
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPostVisibilityFilter<$PrismaModel>
+    _max?: NestedEnumPostVisibilityFilter<$PrismaModel>
+  }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -37417,7 +44531,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
     recipes?: RecipeCreateNestedManyWithoutUserInput
@@ -37447,7 +44566,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
     recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
@@ -37493,7 +44617,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
     recipes?: RecipeUpdateManyWithoutUserNestedInput
@@ -37523,7 +44652,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
     recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
@@ -37553,7 +44687,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
     recipes?: RecipeCreateNestedManyWithoutUserInput
@@ -37583,7 +44722,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
     recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
@@ -37629,7 +44773,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
     recipes?: RecipeUpdateManyWithoutUserNestedInput
@@ -37659,7 +44808,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
     recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
@@ -37739,7 +44893,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -37769,7 +44928,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -37804,7 +44968,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -37834,7 +45003,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -37952,26 +45126,203 @@ export namespace Prisma {
     create: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
   }
 
-  export type PostCreateWithoutCreatedByInput = {
-    name: string
+  export type PostCreateWithoutUserInput = {
+    id?: string
+    type: $Enums.PostType
+    visibility?: $Enums.PostVisibility
+    content?: string | null
+    imageUrls?: PostCreateimageUrlsInput | string[]
+    kcalIn?: number | null
+    kcalOut?: number | null
+    balance?: number | null
+    weightKg?: number | null
+    proteinG?: number | null
+    recipeId?: string | null
+    planId?: string | null
+    dailyLogId?: string | null
+    featuredBy?: string | null
+    featuredAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    challenge?: ChallengeCreateNestedOneWithoutPostsInput
+    reactions?: PostReactionCreateNestedManyWithoutPostInput
+    comments?: CommentCreateNestedManyWithoutPostInput
   }
 
-  export type PostUncheckedCreateWithoutCreatedByInput = {
-    id?: number
-    name: string
+  export type PostUncheckedCreateWithoutUserInput = {
+    id?: string
+    type: $Enums.PostType
+    visibility?: $Enums.PostVisibility
+    content?: string | null
+    imageUrls?: PostCreateimageUrlsInput | string[]
+    kcalIn?: number | null
+    kcalOut?: number | null
+    balance?: number | null
+    weightKg?: number | null
+    proteinG?: number | null
+    recipeId?: string | null
+    planId?: string | null
+    dailyLogId?: string | null
+    featuredBy?: string | null
+    featuredAt?: Date | string | null
+    challengeId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    reactions?: PostReactionUncheckedCreateNestedManyWithoutPostInput
+    comments?: CommentUncheckedCreateNestedManyWithoutPostInput
   }
 
-  export type PostCreateOrConnectWithoutCreatedByInput = {
+  export type PostCreateOrConnectWithoutUserInput = {
     where: PostWhereUniqueInput
-    create: XOR<PostCreateWithoutCreatedByInput, PostUncheckedCreateWithoutCreatedByInput>
+    create: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput>
   }
 
-  export type PostCreateManyCreatedByInputEnvelope = {
-    data: PostCreateManyCreatedByInput | PostCreateManyCreatedByInput[]
+  export type PostCreateManyUserInputEnvelope = {
+    data: PostCreateManyUserInput | PostCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PostReactionCreateWithoutUserInput = {
+    id?: string
+    emoji: string
+    post: PostCreateNestedOneWithoutReactionsInput
+  }
+
+  export type PostReactionUncheckedCreateWithoutUserInput = {
+    id?: string
+    postId: string
+    emoji: string
+  }
+
+  export type PostReactionCreateOrConnectWithoutUserInput = {
+    where: PostReactionWhereUniqueInput
+    create: XOR<PostReactionCreateWithoutUserInput, PostReactionUncheckedCreateWithoutUserInput>
+  }
+
+  export type PostReactionCreateManyUserInputEnvelope = {
+    data: PostReactionCreateManyUserInput | PostReactionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommentCreateWithoutUserInput = {
+    id?: string
+    content: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+    post: PostCreateNestedOneWithoutCommentsInput
+    parent?: CommentCreateNestedOneWithoutRepliesInput
+    replies?: CommentCreateNestedManyWithoutParentInput
+  }
+
+  export type CommentUncheckedCreateWithoutUserInput = {
+    id?: string
+    postId: string
+    parentId?: string | null
+    content: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+    replies?: CommentUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type CommentCreateOrConnectWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    create: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput>
+  }
+
+  export type CommentCreateManyUserInputEnvelope = {
+    data: CommentCreateManyUserInput | CommentCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ChallengeCreateWithoutCoachInput = {
+    id?: string
+    title: string
+    description: string
+    imageUrl?: string | null
+    startsAt: Date | string
+    endsAt: Date | string
+    targetAll?: boolean
+    targetIds?: ChallengeCreatetargetIdsInput | string[]
+    createdAt?: Date | string
+    posts?: PostCreateNestedManyWithoutChallengeInput
+  }
+
+  export type ChallengeUncheckedCreateWithoutCoachInput = {
+    id?: string
+    title: string
+    description: string
+    imageUrl?: string | null
+    startsAt: Date | string
+    endsAt: Date | string
+    targetAll?: boolean
+    targetIds?: ChallengeCreatetargetIdsInput | string[]
+    createdAt?: Date | string
+    posts?: PostUncheckedCreateNestedManyWithoutChallengeInput
+  }
+
+  export type ChallengeCreateOrConnectWithoutCoachInput = {
+    where: ChallengeWhereUniqueInput
+    create: XOR<ChallengeCreateWithoutCoachInput, ChallengeUncheckedCreateWithoutCoachInput>
+  }
+
+  export type ChallengeCreateManyCoachInputEnvelope = {
+    data: ChallengeCreateManyCoachInput | ChallengeCreateManyCoachInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DirectMessageCreateWithoutFromInput = {
+    id?: string
+    content: string
+    imageUrl?: string | null
+    readAt?: Date | string | null
+    createdAt?: Date | string
+    to: UserCreateNestedOneWithoutReceivedMessagesInput
+  }
+
+  export type DirectMessageUncheckedCreateWithoutFromInput = {
+    id?: string
+    toId: string
+    content: string
+    imageUrl?: string | null
+    readAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type DirectMessageCreateOrConnectWithoutFromInput = {
+    where: DirectMessageWhereUniqueInput
+    create: XOR<DirectMessageCreateWithoutFromInput, DirectMessageUncheckedCreateWithoutFromInput>
+  }
+
+  export type DirectMessageCreateManyFromInputEnvelope = {
+    data: DirectMessageCreateManyFromInput | DirectMessageCreateManyFromInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DirectMessageCreateWithoutToInput = {
+    id?: string
+    content: string
+    imageUrl?: string | null
+    readAt?: Date | string | null
+    createdAt?: Date | string
+    from: UserCreateNestedOneWithoutSentMessagesInput
+  }
+
+  export type DirectMessageUncheckedCreateWithoutToInput = {
+    id?: string
+    fromId: string
+    content: string
+    imageUrl?: string | null
+    readAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type DirectMessageCreateOrConnectWithoutToInput = {
+    where: DirectMessageWhereUniqueInput
+    create: XOR<DirectMessageCreateWithoutToInput, DirectMessageUncheckedCreateWithoutToInput>
+  }
+
+  export type DirectMessageCreateManyToInputEnvelope = {
+    data: DirectMessageCreateManyToInput | DirectMessageCreateManyToInput[]
     skipDuplicates?: boolean
   }
 
@@ -38407,7 +45758,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -38437,7 +45793,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -38587,31 +45948,177 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PostUpsertWithWhereUniqueWithoutCreatedByInput = {
+  export type PostUpsertWithWhereUniqueWithoutUserInput = {
     where: PostWhereUniqueInput
-    update: XOR<PostUpdateWithoutCreatedByInput, PostUncheckedUpdateWithoutCreatedByInput>
-    create: XOR<PostCreateWithoutCreatedByInput, PostUncheckedCreateWithoutCreatedByInput>
+    update: XOR<PostUpdateWithoutUserInput, PostUncheckedUpdateWithoutUserInput>
+    create: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput>
   }
 
-  export type PostUpdateWithWhereUniqueWithoutCreatedByInput = {
+  export type PostUpdateWithWhereUniqueWithoutUserInput = {
     where: PostWhereUniqueInput
-    data: XOR<PostUpdateWithoutCreatedByInput, PostUncheckedUpdateWithoutCreatedByInput>
+    data: XOR<PostUpdateWithoutUserInput, PostUncheckedUpdateWithoutUserInput>
   }
 
-  export type PostUpdateManyWithWhereWithoutCreatedByInput = {
+  export type PostUpdateManyWithWhereWithoutUserInput = {
     where: PostScalarWhereInput
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutCreatedByInput>
+    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutUserInput>
   }
 
   export type PostScalarWhereInput = {
     AND?: PostScalarWhereInput | PostScalarWhereInput[]
     OR?: PostScalarWhereInput[]
     NOT?: PostScalarWhereInput | PostScalarWhereInput[]
-    id?: IntFilter<"Post"> | number
-    name?: StringFilter<"Post"> | string
+    id?: StringFilter<"Post"> | string
+    userId?: StringFilter<"Post"> | string
+    type?: EnumPostTypeFilter<"Post"> | $Enums.PostType
+    visibility?: EnumPostVisibilityFilter<"Post"> | $Enums.PostVisibility
+    content?: StringNullableFilter<"Post"> | string | null
+    imageUrls?: StringNullableListFilter<"Post">
+    kcalIn?: FloatNullableFilter<"Post"> | number | null
+    kcalOut?: FloatNullableFilter<"Post"> | number | null
+    balance?: FloatNullableFilter<"Post"> | number | null
+    weightKg?: FloatNullableFilter<"Post"> | number | null
+    proteinG?: FloatNullableFilter<"Post"> | number | null
+    recipeId?: StringNullableFilter<"Post"> | string | null
+    planId?: StringNullableFilter<"Post"> | string | null
+    dailyLogId?: StringNullableFilter<"Post"> | string | null
+    featuredBy?: StringNullableFilter<"Post"> | string | null
+    featuredAt?: DateTimeNullableFilter<"Post"> | Date | string | null
+    challengeId?: StringNullableFilter<"Post"> | string | null
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
-    createdById?: StringFilter<"Post"> | string
+  }
+
+  export type PostReactionUpsertWithWhereUniqueWithoutUserInput = {
+    where: PostReactionWhereUniqueInput
+    update: XOR<PostReactionUpdateWithoutUserInput, PostReactionUncheckedUpdateWithoutUserInput>
+    create: XOR<PostReactionCreateWithoutUserInput, PostReactionUncheckedCreateWithoutUserInput>
+  }
+
+  export type PostReactionUpdateWithWhereUniqueWithoutUserInput = {
+    where: PostReactionWhereUniqueInput
+    data: XOR<PostReactionUpdateWithoutUserInput, PostReactionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PostReactionUpdateManyWithWhereWithoutUserInput = {
+    where: PostReactionScalarWhereInput
+    data: XOR<PostReactionUpdateManyMutationInput, PostReactionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PostReactionScalarWhereInput = {
+    AND?: PostReactionScalarWhereInput | PostReactionScalarWhereInput[]
+    OR?: PostReactionScalarWhereInput[]
+    NOT?: PostReactionScalarWhereInput | PostReactionScalarWhereInput[]
+    id?: StringFilter<"PostReaction"> | string
+    postId?: StringFilter<"PostReaction"> | string
+    userId?: StringFilter<"PostReaction"> | string
+    emoji?: StringFilter<"PostReaction"> | string
+  }
+
+  export type CommentUpsertWithWhereUniqueWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    update: XOR<CommentUpdateWithoutUserInput, CommentUncheckedUpdateWithoutUserInput>
+    create: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput>
+  }
+
+  export type CommentUpdateWithWhereUniqueWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    data: XOR<CommentUpdateWithoutUserInput, CommentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CommentUpdateManyWithWhereWithoutUserInput = {
+    where: CommentScalarWhereInput
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CommentScalarWhereInput = {
+    AND?: CommentScalarWhereInput | CommentScalarWhereInput[]
+    OR?: CommentScalarWhereInput[]
+    NOT?: CommentScalarWhereInput | CommentScalarWhereInput[]
+    id?: StringFilter<"Comment"> | string
+    postId?: StringFilter<"Comment"> | string
+    userId?: StringFilter<"Comment"> | string
+    parentId?: StringNullableFilter<"Comment"> | string | null
+    content?: StringFilter<"Comment"> | string
+    imageUrl?: StringNullableFilter<"Comment"> | string | null
+    createdAt?: DateTimeFilter<"Comment"> | Date | string
+  }
+
+  export type ChallengeUpsertWithWhereUniqueWithoutCoachInput = {
+    where: ChallengeWhereUniqueInput
+    update: XOR<ChallengeUpdateWithoutCoachInput, ChallengeUncheckedUpdateWithoutCoachInput>
+    create: XOR<ChallengeCreateWithoutCoachInput, ChallengeUncheckedCreateWithoutCoachInput>
+  }
+
+  export type ChallengeUpdateWithWhereUniqueWithoutCoachInput = {
+    where: ChallengeWhereUniqueInput
+    data: XOR<ChallengeUpdateWithoutCoachInput, ChallengeUncheckedUpdateWithoutCoachInput>
+  }
+
+  export type ChallengeUpdateManyWithWhereWithoutCoachInput = {
+    where: ChallengeScalarWhereInput
+    data: XOR<ChallengeUpdateManyMutationInput, ChallengeUncheckedUpdateManyWithoutCoachInput>
+  }
+
+  export type ChallengeScalarWhereInput = {
+    AND?: ChallengeScalarWhereInput | ChallengeScalarWhereInput[]
+    OR?: ChallengeScalarWhereInput[]
+    NOT?: ChallengeScalarWhereInput | ChallengeScalarWhereInput[]
+    id?: StringFilter<"Challenge"> | string
+    coachId?: StringFilter<"Challenge"> | string
+    title?: StringFilter<"Challenge"> | string
+    description?: StringFilter<"Challenge"> | string
+    imageUrl?: StringNullableFilter<"Challenge"> | string | null
+    startsAt?: DateTimeFilter<"Challenge"> | Date | string
+    endsAt?: DateTimeFilter<"Challenge"> | Date | string
+    targetAll?: BoolFilter<"Challenge"> | boolean
+    targetIds?: StringNullableListFilter<"Challenge">
+    createdAt?: DateTimeFilter<"Challenge"> | Date | string
+  }
+
+  export type DirectMessageUpsertWithWhereUniqueWithoutFromInput = {
+    where: DirectMessageWhereUniqueInput
+    update: XOR<DirectMessageUpdateWithoutFromInput, DirectMessageUncheckedUpdateWithoutFromInput>
+    create: XOR<DirectMessageCreateWithoutFromInput, DirectMessageUncheckedCreateWithoutFromInput>
+  }
+
+  export type DirectMessageUpdateWithWhereUniqueWithoutFromInput = {
+    where: DirectMessageWhereUniqueInput
+    data: XOR<DirectMessageUpdateWithoutFromInput, DirectMessageUncheckedUpdateWithoutFromInput>
+  }
+
+  export type DirectMessageUpdateManyWithWhereWithoutFromInput = {
+    where: DirectMessageScalarWhereInput
+    data: XOR<DirectMessageUpdateManyMutationInput, DirectMessageUncheckedUpdateManyWithoutFromInput>
+  }
+
+  export type DirectMessageScalarWhereInput = {
+    AND?: DirectMessageScalarWhereInput | DirectMessageScalarWhereInput[]
+    OR?: DirectMessageScalarWhereInput[]
+    NOT?: DirectMessageScalarWhereInput | DirectMessageScalarWhereInput[]
+    id?: StringFilter<"DirectMessage"> | string
+    fromId?: StringFilter<"DirectMessage"> | string
+    toId?: StringFilter<"DirectMessage"> | string
+    content?: StringFilter<"DirectMessage"> | string
+    imageUrl?: StringNullableFilter<"DirectMessage"> | string | null
+    readAt?: DateTimeNullableFilter<"DirectMessage"> | Date | string | null
+    createdAt?: DateTimeFilter<"DirectMessage"> | Date | string
+  }
+
+  export type DirectMessageUpsertWithWhereUniqueWithoutToInput = {
+    where: DirectMessageWhereUniqueInput
+    update: XOR<DirectMessageUpdateWithoutToInput, DirectMessageUncheckedUpdateWithoutToInput>
+    create: XOR<DirectMessageCreateWithoutToInput, DirectMessageUncheckedCreateWithoutToInput>
+  }
+
+  export type DirectMessageUpdateWithWhereUniqueWithoutToInput = {
+    where: DirectMessageWhereUniqueInput
+    data: XOR<DirectMessageUpdateWithoutToInput, DirectMessageUncheckedUpdateWithoutToInput>
+  }
+
+  export type DirectMessageUpdateManyWithWhereWithoutToInput = {
+    where: DirectMessageScalarWhereInput
+    data: XOR<DirectMessageUpdateManyMutationInput, DirectMessageUncheckedUpdateManyWithoutToInput>
   }
 
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
@@ -38971,7 +46478,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     recipes?: RecipeCreateNestedManyWithoutUserInput
@@ -39001,7 +46513,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
@@ -39047,7 +46564,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     recipes?: RecipeUpdateManyWithoutUserNestedInput
@@ -39077,7 +46599,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
@@ -39106,7 +46633,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -39136,7 +46668,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -39171,7 +46708,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -39201,7 +46743,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -39247,7 +46794,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -39277,7 +46829,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -39318,7 +46875,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -39348,7 +46910,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -39378,7 +46945,12 @@ export namespace Prisma {
     clients?: UserCreateNestedManyWithoutCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -39408,7 +46980,12 @@ export namespace Prisma {
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -39443,7 +47020,12 @@ export namespace Prisma {
     clients?: UserCreateNestedManyWithoutCoachInput
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -39473,7 +47055,12 @@ export namespace Prisma {
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -39519,7 +47106,12 @@ export namespace Prisma {
     clients?: UserUpdateManyWithoutCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -39549,7 +47141,12 @@ export namespace Prisma {
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -39590,7 +47187,12 @@ export namespace Prisma {
     clients?: UserUpdateManyWithoutCoachNestedInput
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -39620,7 +47222,12 @@ export namespace Prisma {
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -39650,7 +47257,12 @@ export namespace Prisma {
     clients?: UserCreateNestedManyWithoutCoachInput
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -39680,7 +47292,12 @@ export namespace Prisma {
     clients?: UserUncheckedCreateNestedManyWithoutCoachInput
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -39726,7 +47343,12 @@ export namespace Prisma {
     clients?: UserUpdateManyWithoutCoachNestedInput
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -39756,7 +47378,12 @@ export namespace Prisma {
     clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -39787,6 +47414,11 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -39817,6 +47449,11 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -39833,6 +47470,89 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutPostsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
+  }
+
+  export type ChallengeCreateWithoutPostsInput = {
+    id?: string
+    title: string
+    description: string
+    imageUrl?: string | null
+    startsAt: Date | string
+    endsAt: Date | string
+    targetAll?: boolean
+    targetIds?: ChallengeCreatetargetIdsInput | string[]
+    createdAt?: Date | string
+    coach: UserCreateNestedOneWithoutChallengesInput
+  }
+
+  export type ChallengeUncheckedCreateWithoutPostsInput = {
+    id?: string
+    coachId: string
+    title: string
+    description: string
+    imageUrl?: string | null
+    startsAt: Date | string
+    endsAt: Date | string
+    targetAll?: boolean
+    targetIds?: ChallengeCreatetargetIdsInput | string[]
+    createdAt?: Date | string
+  }
+
+  export type ChallengeCreateOrConnectWithoutPostsInput = {
+    where: ChallengeWhereUniqueInput
+    create: XOR<ChallengeCreateWithoutPostsInput, ChallengeUncheckedCreateWithoutPostsInput>
+  }
+
+  export type PostReactionCreateWithoutPostInput = {
+    id?: string
+    emoji: string
+    user: UserCreateNestedOneWithoutPostReactionsInput
+  }
+
+  export type PostReactionUncheckedCreateWithoutPostInput = {
+    id?: string
+    userId: string
+    emoji: string
+  }
+
+  export type PostReactionCreateOrConnectWithoutPostInput = {
+    where: PostReactionWhereUniqueInput
+    create: XOR<PostReactionCreateWithoutPostInput, PostReactionUncheckedCreateWithoutPostInput>
+  }
+
+  export type PostReactionCreateManyPostInputEnvelope = {
+    data: PostReactionCreateManyPostInput | PostReactionCreateManyPostInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommentCreateWithoutPostInput = {
+    id?: string
+    content: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutCommentsInput
+    parent?: CommentCreateNestedOneWithoutRepliesInput
+    replies?: CommentCreateNestedManyWithoutParentInput
+  }
+
+  export type CommentUncheckedCreateWithoutPostInput = {
+    id?: string
+    userId: string
+    parentId?: string | null
+    content: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+    replies?: CommentUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type CommentCreateOrConnectWithoutPostInput = {
+    where: CommentWhereUniqueInput
+    create: XOR<CommentCreateWithoutPostInput, CommentUncheckedCreateWithoutPostInput>
+  }
+
+  export type CommentCreateManyPostInputEnvelope = {
+    data: CommentCreateManyPostInput | CommentCreateManyPostInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutPostsInput = {
@@ -39863,6 +47583,11 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -39893,6 +47618,1250 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUncheckedUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUncheckedUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUncheckedUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ChallengeUpsertWithoutPostsInput = {
+    update: XOR<ChallengeUpdateWithoutPostsInput, ChallengeUncheckedUpdateWithoutPostsInput>
+    create: XOR<ChallengeCreateWithoutPostsInput, ChallengeUncheckedCreateWithoutPostsInput>
+    where?: ChallengeWhereInput
+  }
+
+  export type ChallengeUpdateToOneWithWhereWithoutPostsInput = {
+    where?: ChallengeWhereInput
+    data: XOR<ChallengeUpdateWithoutPostsInput, ChallengeUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type ChallengeUpdateWithoutPostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targetAll?: BoolFieldUpdateOperationsInput | boolean
+    targetIds?: ChallengeUpdatetargetIdsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coach?: UserUpdateOneRequiredWithoutChallengesNestedInput
+  }
+
+  export type ChallengeUncheckedUpdateWithoutPostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    coachId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targetAll?: BoolFieldUpdateOperationsInput | boolean
+    targetIds?: ChallengeUpdatetargetIdsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PostReactionUpsertWithWhereUniqueWithoutPostInput = {
+    where: PostReactionWhereUniqueInput
+    update: XOR<PostReactionUpdateWithoutPostInput, PostReactionUncheckedUpdateWithoutPostInput>
+    create: XOR<PostReactionCreateWithoutPostInput, PostReactionUncheckedCreateWithoutPostInput>
+  }
+
+  export type PostReactionUpdateWithWhereUniqueWithoutPostInput = {
+    where: PostReactionWhereUniqueInput
+    data: XOR<PostReactionUpdateWithoutPostInput, PostReactionUncheckedUpdateWithoutPostInput>
+  }
+
+  export type PostReactionUpdateManyWithWhereWithoutPostInput = {
+    where: PostReactionScalarWhereInput
+    data: XOR<PostReactionUpdateManyMutationInput, PostReactionUncheckedUpdateManyWithoutPostInput>
+  }
+
+  export type CommentUpsertWithWhereUniqueWithoutPostInput = {
+    where: CommentWhereUniqueInput
+    update: XOR<CommentUpdateWithoutPostInput, CommentUncheckedUpdateWithoutPostInput>
+    create: XOR<CommentCreateWithoutPostInput, CommentUncheckedCreateWithoutPostInput>
+  }
+
+  export type CommentUpdateWithWhereUniqueWithoutPostInput = {
+    where: CommentWhereUniqueInput
+    data: XOR<CommentUpdateWithoutPostInput, CommentUncheckedUpdateWithoutPostInput>
+  }
+
+  export type CommentUpdateManyWithWhereWithoutPostInput = {
+    where: CommentScalarWhereInput
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutPostInput>
+  }
+
+  export type PostCreateWithoutReactionsInput = {
+    id?: string
+    type: $Enums.PostType
+    visibility?: $Enums.PostVisibility
+    content?: string | null
+    imageUrls?: PostCreateimageUrlsInput | string[]
+    kcalIn?: number | null
+    kcalOut?: number | null
+    balance?: number | null
+    weightKg?: number | null
+    proteinG?: number | null
+    recipeId?: string | null
+    planId?: string | null
+    dailyLogId?: string | null
+    featuredBy?: string | null
+    featuredAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPostsInput
+    challenge?: ChallengeCreateNestedOneWithoutPostsInput
+    comments?: CommentCreateNestedManyWithoutPostInput
+  }
+
+  export type PostUncheckedCreateWithoutReactionsInput = {
+    id?: string
+    userId: string
+    type: $Enums.PostType
+    visibility?: $Enums.PostVisibility
+    content?: string | null
+    imageUrls?: PostCreateimageUrlsInput | string[]
+    kcalIn?: number | null
+    kcalOut?: number | null
+    balance?: number | null
+    weightKg?: number | null
+    proteinG?: number | null
+    recipeId?: string | null
+    planId?: string | null
+    dailyLogId?: string | null
+    featuredBy?: string | null
+    featuredAt?: Date | string | null
+    challengeId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    comments?: CommentUncheckedCreateNestedManyWithoutPostInput
+  }
+
+  export type PostCreateOrConnectWithoutReactionsInput = {
+    where: PostWhereUniqueInput
+    create: XOR<PostCreateWithoutReactionsInput, PostUncheckedCreateWithoutReactionsInput>
+  }
+
+  export type UserCreateWithoutPostReactionsInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
+    coach?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    profile?: UserProfileCreateNestedOneWithoutUserInput
+    recipes?: RecipeCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPostReactionsInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    coachId?: string | null
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
+    clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
+    recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogUncheckedCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogUncheckedCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogUncheckedCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPostReactionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPostReactionsInput, UserUncheckedCreateWithoutPostReactionsInput>
+  }
+
+  export type PostUpsertWithoutReactionsInput = {
+    update: XOR<PostUpdateWithoutReactionsInput, PostUncheckedUpdateWithoutReactionsInput>
+    create: XOR<PostCreateWithoutReactionsInput, PostUncheckedCreateWithoutReactionsInput>
+    where?: PostWhereInput
+  }
+
+  export type PostUpdateToOneWithWhereWithoutReactionsInput = {
+    where?: PostWhereInput
+    data: XOR<PostUpdateWithoutReactionsInput, PostUncheckedUpdateWithoutReactionsInput>
+  }
+
+  export type PostUpdateWithoutReactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+    visibility?: EnumPostVisibilityFieldUpdateOperationsInput | $Enums.PostVisibility
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: PostUpdateimageUrlsInput | string[]
+    kcalIn?: NullableFloatFieldUpdateOperationsInput | number | null
+    kcalOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    balance?: NullableFloatFieldUpdateOperationsInput | number | null
+    weightKg?: NullableFloatFieldUpdateOperationsInput | number | null
+    proteinG?: NullableFloatFieldUpdateOperationsInput | number | null
+    recipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    dailyLogId?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPostsNestedInput
+    challenge?: ChallengeUpdateOneWithoutPostsNestedInput
+    comments?: CommentUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutReactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+    visibility?: EnumPostVisibilityFieldUpdateOperationsInput | $Enums.PostVisibility
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: PostUpdateimageUrlsInput | string[]
+    kcalIn?: NullableFloatFieldUpdateOperationsInput | number | null
+    kcalOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    balance?: NullableFloatFieldUpdateOperationsInput | number | null
+    weightKg?: NullableFloatFieldUpdateOperationsInput | number | null
+    proteinG?: NullableFloatFieldUpdateOperationsInput | number | null
+    recipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    dailyLogId?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    challengeId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
+  }
+
+  export type UserUpsertWithoutPostReactionsInput = {
+    update: XOR<UserUpdateWithoutPostReactionsInput, UserUncheckedUpdateWithoutPostReactionsInput>
+    create: XOR<UserCreateWithoutPostReactionsInput, UserUncheckedCreateWithoutPostReactionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPostReactionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPostReactionsInput, UserUncheckedUpdateWithoutPostReactionsInput>
+  }
+
+  export type UserUpdateWithoutPostReactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
+    coach?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPostReactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUncheckedUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUncheckedUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUncheckedUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type PostCreateWithoutCommentsInput = {
+    id?: string
+    type: $Enums.PostType
+    visibility?: $Enums.PostVisibility
+    content?: string | null
+    imageUrls?: PostCreateimageUrlsInput | string[]
+    kcalIn?: number | null
+    kcalOut?: number | null
+    balance?: number | null
+    weightKg?: number | null
+    proteinG?: number | null
+    recipeId?: string | null
+    planId?: string | null
+    dailyLogId?: string | null
+    featuredBy?: string | null
+    featuredAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPostsInput
+    challenge?: ChallengeCreateNestedOneWithoutPostsInput
+    reactions?: PostReactionCreateNestedManyWithoutPostInput
+  }
+
+  export type PostUncheckedCreateWithoutCommentsInput = {
+    id?: string
+    userId: string
+    type: $Enums.PostType
+    visibility?: $Enums.PostVisibility
+    content?: string | null
+    imageUrls?: PostCreateimageUrlsInput | string[]
+    kcalIn?: number | null
+    kcalOut?: number | null
+    balance?: number | null
+    weightKg?: number | null
+    proteinG?: number | null
+    recipeId?: string | null
+    planId?: string | null
+    dailyLogId?: string | null
+    featuredBy?: string | null
+    featuredAt?: Date | string | null
+    challengeId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reactions?: PostReactionUncheckedCreateNestedManyWithoutPostInput
+  }
+
+  export type PostCreateOrConnectWithoutCommentsInput = {
+    where: PostWhereUniqueInput
+    create: XOR<PostCreateWithoutCommentsInput, PostUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type UserCreateWithoutCommentsInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
+    coach?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    profile?: UserProfileCreateNestedOneWithoutUserInput
+    recipes?: RecipeCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCommentsInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    coachId?: string | null
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
+    clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
+    recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogUncheckedCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogUncheckedCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogUncheckedCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCommentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type CommentCreateWithoutRepliesInput = {
+    id?: string
+    content: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+    post: PostCreateNestedOneWithoutCommentsInput
+    user: UserCreateNestedOneWithoutCommentsInput
+    parent?: CommentCreateNestedOneWithoutRepliesInput
+  }
+
+  export type CommentUncheckedCreateWithoutRepliesInput = {
+    id?: string
+    postId: string
+    userId: string
+    parentId?: string | null
+    content: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+  }
+
+  export type CommentCreateOrConnectWithoutRepliesInput = {
+    where: CommentWhereUniqueInput
+    create: XOR<CommentCreateWithoutRepliesInput, CommentUncheckedCreateWithoutRepliesInput>
+  }
+
+  export type CommentCreateWithoutParentInput = {
+    id?: string
+    content: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+    post: PostCreateNestedOneWithoutCommentsInput
+    user: UserCreateNestedOneWithoutCommentsInput
+    replies?: CommentCreateNestedManyWithoutParentInput
+  }
+
+  export type CommentUncheckedCreateWithoutParentInput = {
+    id?: string
+    postId: string
+    userId: string
+    content: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+    replies?: CommentUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type CommentCreateOrConnectWithoutParentInput = {
+    where: CommentWhereUniqueInput
+    create: XOR<CommentCreateWithoutParentInput, CommentUncheckedCreateWithoutParentInput>
+  }
+
+  export type CommentCreateManyParentInputEnvelope = {
+    data: CommentCreateManyParentInput | CommentCreateManyParentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PostUpsertWithoutCommentsInput = {
+    update: XOR<PostUpdateWithoutCommentsInput, PostUncheckedUpdateWithoutCommentsInput>
+    create: XOR<PostCreateWithoutCommentsInput, PostUncheckedCreateWithoutCommentsInput>
+    where?: PostWhereInput
+  }
+
+  export type PostUpdateToOneWithWhereWithoutCommentsInput = {
+    where?: PostWhereInput
+    data: XOR<PostUpdateWithoutCommentsInput, PostUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type PostUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+    visibility?: EnumPostVisibilityFieldUpdateOperationsInput | $Enums.PostVisibility
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: PostUpdateimageUrlsInput | string[]
+    kcalIn?: NullableFloatFieldUpdateOperationsInput | number | null
+    kcalOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    balance?: NullableFloatFieldUpdateOperationsInput | number | null
+    weightKg?: NullableFloatFieldUpdateOperationsInput | number | null
+    proteinG?: NullableFloatFieldUpdateOperationsInput | number | null
+    recipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    dailyLogId?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPostsNestedInput
+    challenge?: ChallengeUpdateOneWithoutPostsNestedInput
+    reactions?: PostReactionUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+    visibility?: EnumPostVisibilityFieldUpdateOperationsInput | $Enums.PostVisibility
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: PostUpdateimageUrlsInput | string[]
+    kcalIn?: NullableFloatFieldUpdateOperationsInput | number | null
+    kcalOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    balance?: NullableFloatFieldUpdateOperationsInput | number | null
+    weightKg?: NullableFloatFieldUpdateOperationsInput | number | null
+    proteinG?: NullableFloatFieldUpdateOperationsInput | number | null
+    recipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    dailyLogId?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    challengeId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reactions?: PostReactionUncheckedUpdateManyWithoutPostNestedInput
+  }
+
+  export type UserUpsertWithoutCommentsInput = {
+    update: XOR<UserUpdateWithoutCommentsInput, UserUncheckedUpdateWithoutCommentsInput>
+    create: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCommentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCommentsInput, UserUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type UserUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
+    coach?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUncheckedUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUncheckedUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUncheckedUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type CommentUpsertWithoutRepliesInput = {
+    update: XOR<CommentUpdateWithoutRepliesInput, CommentUncheckedUpdateWithoutRepliesInput>
+    create: XOR<CommentCreateWithoutRepliesInput, CommentUncheckedCreateWithoutRepliesInput>
+    where?: CommentWhereInput
+  }
+
+  export type CommentUpdateToOneWithWhereWithoutRepliesInput = {
+    where?: CommentWhereInput
+    data: XOR<CommentUpdateWithoutRepliesInput, CommentUncheckedUpdateWithoutRepliesInput>
+  }
+
+  export type CommentUpdateWithoutRepliesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: PostUpdateOneRequiredWithoutCommentsNestedInput
+    user?: UserUpdateOneRequiredWithoutCommentsNestedInput
+    parent?: CommentUpdateOneWithoutRepliesNestedInput
+  }
+
+  export type CommentUncheckedUpdateWithoutRepliesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommentUpsertWithWhereUniqueWithoutParentInput = {
+    where: CommentWhereUniqueInput
+    update: XOR<CommentUpdateWithoutParentInput, CommentUncheckedUpdateWithoutParentInput>
+    create: XOR<CommentCreateWithoutParentInput, CommentUncheckedCreateWithoutParentInput>
+  }
+
+  export type CommentUpdateWithWhereUniqueWithoutParentInput = {
+    where: CommentWhereUniqueInput
+    data: XOR<CommentUpdateWithoutParentInput, CommentUncheckedUpdateWithoutParentInput>
+  }
+
+  export type CommentUpdateManyWithWhereWithoutParentInput = {
+    where: CommentScalarWhereInput
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutParentInput>
+  }
+
+  export type UserCreateWithoutChallengesInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
+    coach?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    profile?: UserProfileCreateNestedOneWithoutUserInput
+    recipes?: RecipeCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutChallengesInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    coachId?: string | null
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
+    clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
+    recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogUncheckedCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogUncheckedCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogUncheckedCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutChallengesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutChallengesInput, UserUncheckedCreateWithoutChallengesInput>
+  }
+
+  export type PostCreateWithoutChallengeInput = {
+    id?: string
+    type: $Enums.PostType
+    visibility?: $Enums.PostVisibility
+    content?: string | null
+    imageUrls?: PostCreateimageUrlsInput | string[]
+    kcalIn?: number | null
+    kcalOut?: number | null
+    balance?: number | null
+    weightKg?: number | null
+    proteinG?: number | null
+    recipeId?: string | null
+    planId?: string | null
+    dailyLogId?: string | null
+    featuredBy?: string | null
+    featuredAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPostsInput
+    reactions?: PostReactionCreateNestedManyWithoutPostInput
+    comments?: CommentCreateNestedManyWithoutPostInput
+  }
+
+  export type PostUncheckedCreateWithoutChallengeInput = {
+    id?: string
+    userId: string
+    type: $Enums.PostType
+    visibility?: $Enums.PostVisibility
+    content?: string | null
+    imageUrls?: PostCreateimageUrlsInput | string[]
+    kcalIn?: number | null
+    kcalOut?: number | null
+    balance?: number | null
+    weightKg?: number | null
+    proteinG?: number | null
+    recipeId?: string | null
+    planId?: string | null
+    dailyLogId?: string | null
+    featuredBy?: string | null
+    featuredAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reactions?: PostReactionUncheckedCreateNestedManyWithoutPostInput
+    comments?: CommentUncheckedCreateNestedManyWithoutPostInput
+  }
+
+  export type PostCreateOrConnectWithoutChallengeInput = {
+    where: PostWhereUniqueInput
+    create: XOR<PostCreateWithoutChallengeInput, PostUncheckedCreateWithoutChallengeInput>
+  }
+
+  export type PostCreateManyChallengeInputEnvelope = {
+    data: PostCreateManyChallengeInput | PostCreateManyChallengeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutChallengesInput = {
+    update: XOR<UserUpdateWithoutChallengesInput, UserUncheckedUpdateWithoutChallengesInput>
+    create: XOR<UserCreateWithoutChallengesInput, UserUncheckedCreateWithoutChallengesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutChallengesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutChallengesInput, UserUncheckedUpdateWithoutChallengesInput>
+  }
+
+  export type UserUpdateWithoutChallengesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
+    coach?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutChallengesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUncheckedUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUncheckedUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUncheckedUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type PostUpsertWithWhereUniqueWithoutChallengeInput = {
+    where: PostWhereUniqueInput
+    update: XOR<PostUpdateWithoutChallengeInput, PostUncheckedUpdateWithoutChallengeInput>
+    create: XOR<PostCreateWithoutChallengeInput, PostUncheckedCreateWithoutChallengeInput>
+  }
+
+  export type PostUpdateWithWhereUniqueWithoutChallengeInput = {
+    where: PostWhereUniqueInput
+    data: XOR<PostUpdateWithoutChallengeInput, PostUncheckedUpdateWithoutChallengeInput>
+  }
+
+  export type PostUpdateManyWithWhereWithoutChallengeInput = {
+    where: PostScalarWhereInput
+    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutChallengeInput>
+  }
+
+  export type UserCreateWithoutSentMessagesInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
+    coach?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    profile?: UserProfileCreateNestedOneWithoutUserInput
+    recipes?: RecipeCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSentMessagesInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    coachId?: string | null
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
+    clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
+    recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogUncheckedCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogUncheckedCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogUncheckedCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSentMessagesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSentMessagesInput, UserUncheckedCreateWithoutSentMessagesInput>
+  }
+
+  export type UserCreateWithoutReceivedMessagesInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
+    coach?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    profile?: UserProfileCreateNestedOneWithoutUserInput
+    recipes?: RecipeCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutReceivedMessagesInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    coachId?: string | null
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
+    clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
+    recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogUncheckedCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogUncheckedCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogUncheckedCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutReceivedMessagesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReceivedMessagesInput, UserUncheckedCreateWithoutReceivedMessagesInput>
+  }
+
+  export type UserUpsertWithoutSentMessagesInput = {
+    update: XOR<UserUpdateWithoutSentMessagesInput, UserUncheckedUpdateWithoutSentMessagesInput>
+    create: XOR<UserCreateWithoutSentMessagesInput, UserUncheckedCreateWithoutSentMessagesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSentMessagesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSentMessagesInput, UserUncheckedUpdateWithoutSentMessagesInput>
+  }
+
+  export type UserUpdateWithoutSentMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
+    coach?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSentMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUncheckedUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUncheckedUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUncheckedUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUpsertWithoutReceivedMessagesInput = {
+    update: XOR<UserUpdateWithoutReceivedMessagesInput, UserUncheckedUpdateWithoutReceivedMessagesInput>
+    create: XOR<UserCreateWithoutReceivedMessagesInput, UserUncheckedCreateWithoutReceivedMessagesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReceivedMessagesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReceivedMessagesInput, UserUncheckedUpdateWithoutReceivedMessagesInput>
+  }
+
+  export type UserUpdateWithoutReceivedMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
+    coach?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -40011,7 +48980,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -40041,7 +49015,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -40126,7 +49105,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -40156,7 +49140,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -40231,7 +49220,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -40261,7 +49255,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -40353,7 +49352,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -40383,7 +49387,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -40640,7 +49649,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -40670,7 +49684,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -40738,7 +49757,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -40768,7 +49792,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -41158,7 +50187,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -41188,7 +50222,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -41234,7 +50273,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -41264,7 +50308,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -41294,7 +50343,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -41324,7 +50378,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -41406,7 +50465,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -41436,7 +50500,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -41482,7 +50551,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -41512,7 +50586,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -41609,7 +50688,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -41639,7 +50723,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -41799,7 +50888,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -41829,7 +50923,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -41875,7 +50974,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -41905,7 +51009,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -41935,7 +51044,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -41965,7 +51079,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
     usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -42011,7 +51130,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -42041,7 +51165,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -42087,11 +51216,70 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type PostCreateManyCreatedByInput = {
-    id?: number
-    name: string
+  export type PostCreateManyUserInput = {
+    id?: string
+    type: $Enums.PostType
+    visibility?: $Enums.PostVisibility
+    content?: string | null
+    imageUrls?: PostCreateimageUrlsInput | string[]
+    kcalIn?: number | null
+    kcalOut?: number | null
+    balance?: number | null
+    weightKg?: number | null
+    proteinG?: number | null
+    recipeId?: string | null
+    planId?: string | null
+    dailyLogId?: string | null
+    featuredBy?: string | null
+    featuredAt?: Date | string | null
+    challengeId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type PostReactionCreateManyUserInput = {
+    id?: string
+    postId: string
+    emoji: string
+  }
+
+  export type CommentCreateManyUserInput = {
+    id?: string
+    postId: string
+    parentId?: string | null
+    content: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+  }
+
+  export type ChallengeCreateManyCoachInput = {
+    id?: string
+    title: string
+    description: string
+    imageUrl?: string | null
+    startsAt: Date | string
+    endsAt: Date | string
+    targetAll?: boolean
+    targetIds?: ChallengeCreatetargetIdsInput | string[]
+    createdAt?: Date | string
+  }
+
+  export type DirectMessageCreateManyFromInput = {
+    id?: string
+    toId: string
+    content: string
+    imageUrl?: string | null
+    readAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type DirectMessageCreateManyToInput = {
+    id?: string
+    fromId: string
+    content: string
+    imageUrl?: string | null
+    readAt?: Date | string | null
+    createdAt?: Date | string
   }
 
   export type AccountCreateManyUserInput = {
@@ -42240,7 +51428,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -42270,7 +51463,12 @@ export namespace Prisma {
     registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
     usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -42332,24 +51530,210 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PostUpdateWithoutCreatedByInput = {
-    name?: StringFieldUpdateOperationsInput | string
+  export type PostUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+    visibility?: EnumPostVisibilityFieldUpdateOperationsInput | $Enums.PostVisibility
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: PostUpdateimageUrlsInput | string[]
+    kcalIn?: NullableFloatFieldUpdateOperationsInput | number | null
+    kcalOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    balance?: NullableFloatFieldUpdateOperationsInput | number | null
+    weightKg?: NullableFloatFieldUpdateOperationsInput | number | null
+    proteinG?: NullableFloatFieldUpdateOperationsInput | number | null
+    recipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    dailyLogId?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    challenge?: ChallengeUpdateOneWithoutPostsNestedInput
+    reactions?: PostReactionUpdateManyWithoutPostNestedInput
+    comments?: CommentUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+    visibility?: EnumPostVisibilityFieldUpdateOperationsInput | $Enums.PostVisibility
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: PostUpdateimageUrlsInput | string[]
+    kcalIn?: NullableFloatFieldUpdateOperationsInput | number | null
+    kcalOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    balance?: NullableFloatFieldUpdateOperationsInput | number | null
+    weightKg?: NullableFloatFieldUpdateOperationsInput | number | null
+    proteinG?: NullableFloatFieldUpdateOperationsInput | number | null
+    recipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    dailyLogId?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    challengeId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reactions?: PostReactionUncheckedUpdateManyWithoutPostNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+    visibility?: EnumPostVisibilityFieldUpdateOperationsInput | $Enums.PostVisibility
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: PostUpdateimageUrlsInput | string[]
+    kcalIn?: NullableFloatFieldUpdateOperationsInput | number | null
+    kcalOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    balance?: NullableFloatFieldUpdateOperationsInput | number | null
+    weightKg?: NullableFloatFieldUpdateOperationsInput | number | null
+    proteinG?: NullableFloatFieldUpdateOperationsInput | number | null
+    recipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    dailyLogId?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    challengeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PostUncheckedUpdateWithoutCreatedByInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type PostReactionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    post?: PostUpdateOneRequiredWithoutReactionsNestedInput
   }
 
-  export type PostUncheckedUpdateManyWithoutCreatedByInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
+  export type PostReactionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PostReactionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CommentUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: PostUpdateOneRequiredWithoutCommentsNestedInput
+    parent?: CommentUpdateOneWithoutRepliesNestedInput
+    replies?: CommentUpdateManyWithoutParentNestedInput
+  }
+
+  export type CommentUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type CommentUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChallengeUpdateWithoutCoachInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targetAll?: BoolFieldUpdateOperationsInput | boolean
+    targetIds?: ChallengeUpdatetargetIdsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUpdateManyWithoutChallengeNestedInput
+  }
+
+  export type ChallengeUncheckedUpdateWithoutCoachInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targetAll?: BoolFieldUpdateOperationsInput | boolean
+    targetIds?: ChallengeUpdatetargetIdsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUncheckedUpdateManyWithoutChallengeNestedInput
+  }
+
+  export type ChallengeUncheckedUpdateManyWithoutCoachInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targetAll?: BoolFieldUpdateOperationsInput | boolean
+    targetIds?: ChallengeUpdatetargetIdsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DirectMessageUpdateWithoutFromInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    to?: UserUpdateOneRequiredWithoutReceivedMessagesNestedInput
+  }
+
+  export type DirectMessageUncheckedUpdateWithoutFromInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    toId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DirectMessageUncheckedUpdateManyWithoutFromInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    toId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DirectMessageUpdateWithoutToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    from?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
+  }
+
+  export type DirectMessageUncheckedUpdateWithoutToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fromId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DirectMessageUncheckedUpdateManyWithoutToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fromId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -42669,6 +52053,194 @@ export namespace Prisma {
     carbOxidationRate?: NullableFloatFieldUpdateOperationsInput | number | null
     fatOxidationRate?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PostReactionCreateManyPostInput = {
+    id?: string
+    userId: string
+    emoji: string
+  }
+
+  export type CommentCreateManyPostInput = {
+    id?: string
+    userId: string
+    parentId?: string | null
+    content: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+  }
+
+  export type PostReactionUpdateWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneRequiredWithoutPostReactionsNestedInput
+  }
+
+  export type PostReactionUncheckedUpdateWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PostReactionUncheckedUpdateManyWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CommentUpdateWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCommentsNestedInput
+    parent?: CommentUpdateOneWithoutRepliesNestedInput
+    replies?: CommentUpdateManyWithoutParentNestedInput
+  }
+
+  export type CommentUncheckedUpdateWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type CommentUncheckedUpdateManyWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommentCreateManyParentInput = {
+    id?: string
+    postId: string
+    userId: string
+    content: string
+    imageUrl?: string | null
+    createdAt?: Date | string
+  }
+
+  export type CommentUpdateWithoutParentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: PostUpdateOneRequiredWithoutCommentsNestedInput
+    user?: UserUpdateOneRequiredWithoutCommentsNestedInput
+    replies?: CommentUpdateManyWithoutParentNestedInput
+  }
+
+  export type CommentUncheckedUpdateWithoutParentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type CommentUncheckedUpdateManyWithoutParentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PostCreateManyChallengeInput = {
+    id?: string
+    userId: string
+    type: $Enums.PostType
+    visibility?: $Enums.PostVisibility
+    content?: string | null
+    imageUrls?: PostCreateimageUrlsInput | string[]
+    kcalIn?: number | null
+    kcalOut?: number | null
+    balance?: number | null
+    weightKg?: number | null
+    proteinG?: number | null
+    recipeId?: string | null
+    planId?: string | null
+    dailyLogId?: string | null
+    featuredBy?: string | null
+    featuredAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PostUpdateWithoutChallengeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+    visibility?: EnumPostVisibilityFieldUpdateOperationsInput | $Enums.PostVisibility
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: PostUpdateimageUrlsInput | string[]
+    kcalIn?: NullableFloatFieldUpdateOperationsInput | number | null
+    kcalOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    balance?: NullableFloatFieldUpdateOperationsInput | number | null
+    weightKg?: NullableFloatFieldUpdateOperationsInput | number | null
+    proteinG?: NullableFloatFieldUpdateOperationsInput | number | null
+    recipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    dailyLogId?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPostsNestedInput
+    reactions?: PostReactionUpdateManyWithoutPostNestedInput
+    comments?: CommentUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutChallengeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+    visibility?: EnumPostVisibilityFieldUpdateOperationsInput | $Enums.PostVisibility
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: PostUpdateimageUrlsInput | string[]
+    kcalIn?: NullableFloatFieldUpdateOperationsInput | number | null
+    kcalOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    balance?: NullableFloatFieldUpdateOperationsInput | number | null
+    weightKg?: NullableFloatFieldUpdateOperationsInput | number | null
+    proteinG?: NullableFloatFieldUpdateOperationsInput | number | null
+    recipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    dailyLogId?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reactions?: PostReactionUncheckedUpdateManyWithoutPostNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateManyWithoutChallengeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+    visibility?: EnumPostVisibilityFieldUpdateOperationsInput | $Enums.PostVisibility
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: PostUpdateimageUrlsInput | string[]
+    kcalIn?: NullableFloatFieldUpdateOperationsInput | number | null
+    kcalOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    balance?: NullableFloatFieldUpdateOperationsInput | number | null
+    weightKg?: NullableFloatFieldUpdateOperationsInput | number | null
+    proteinG?: NullableFloatFieldUpdateOperationsInput | number | null
+    recipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    dailyLogId?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredBy?: NullableStringFieldUpdateOperationsInput | string | null
+    featuredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RecipeIngredientCreateManyIngredientInput = {

@@ -244,7 +244,10 @@ export default function IngredientManagerPanel() {
   const utils = api.useUtils()
 
   const { data: ingredients = [], isLoading } =
-    api.ingredient.getCatalog.useQuery()
+    api.ingredient.getCatalog.useQuery(
+      undefined,
+      { staleTime: 10 * 60_000 }  // 10 minutos — lento (las mutaciones invalidan manualmente)
+    )
 
   const setCustomPrice = api.ingredient.setCustomPrice.useMutation({
     onSuccess: () => {

@@ -8,6 +8,8 @@ import { recipeRouter } from "@/server/api/routers/recipe"
 import { coachRouter } from "@/server/api/routers/coach"
 import { nutritionPlanRouter } from "@/server/api/routers/nutrition-plan"
 import { authRouter } from "@/server/api/routers/auth"
+import { adminRouter } from "@/server/api/routers/admin"
+import { communicationsRouter } from "@/server/api/routers/communications"
 /**
  * This is the primary router for your server.
  *
@@ -23,6 +25,8 @@ export const appRouter = createTRPCRouter({
   coach:coachRouter,
   nutritionPlan:nutritionPlanRouter,
   auth:authRouter,
+  admin:adminRouter,
+  communications:communicationsRouter,
 });
 
 // export type definition of API

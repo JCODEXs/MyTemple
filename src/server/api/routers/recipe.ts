@@ -5,7 +5,7 @@
 import { z } from "zod"
 import { TRPCError } from "@trpc/server"
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc"
-import { RecipeService } from "@/server/services/recipe.service"
+import { RecipeService } from "@/server/services/recipe.serviceV1"
 
 
 // ─── Schemas ──────────────────────────────────────────────────────────────────

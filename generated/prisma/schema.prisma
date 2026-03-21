@@ -108,7 +108,12 @@ model User {
   usedCode          RegistrationCode?  @relation("UsedRegistrationCode")
   subscription      Subscription?
 
-  posts Post[]
+  posts            Post[]          @relation("UserPosts")
+  postReactions    PostReaction[]
+  comments         Comment[]
+  challenges       Challenge[]     @relation("CoachChallenges")
+  sentMessages     DirectMessage[] @relation("SentMessages")
+  receivedMessages DirectMessage[] @relation("ReceivedMessages")
 
   accounts Account[]
   sessions Session[]
@@ -199,6 +204,8 @@ model RegistrationCode {
   maxUses          Int            @default(1)
   useCount         Int            @default(0)
   createdAt        DateTime       @default(now())
+
+  @@index([createdByCoachId, type, usedAt])
 }
 
 model Subscription {
@@ -220,16 +227,131 @@ model Subscription {
 // POSTS
 //////////////////////////////////////////////////////
 
+enum PostType {
+  CHECKIN // check-in diario con métricas
+  ACHIEVEMENT // logro (primera semana, objetivo alcanzado)
+  QUESTION // pregunta al coach o comunidad
+  CHALLENGE // respuesta a un reto
+  SHARE // receta o plan compartido
+  FREE // post libre
+}
+
+enum PostVisibility {
+  PRIVATE // solo el usuario y su coach
+  COACH_GROUP // coach + todos sus clientes
+  PUBLIC // toda la comunidad
+}
+
 model Post {
-  id        Int      @id @default(autoincrement())
-  name      String
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation("UserPosts", fields: [userId], references: [id], onDelete: Cascade)
+
+  type       PostType
+  visibility PostVisibility @default(PRIVATE)
+
+  content   String? // texto del post
+  imageUrls String[] // array de URLs (UploadThing)
+
+  // Métricas automáticas del día (snapshot si es CHECKIN)
+  kcalIn   Float?
+  kcalOut  Float?
+  balance  Float?
+  weightKg Float?
+  proteinG Float?
+
+  // Links a contenido de la app
+  recipeId   String?
+  planId     String?
+  dailyLogId String?
+
+  // Coach destacó este post
+  featuredBy String?
+  featuredAt DateTime?
+
+  // Reto al que responde
+  challengeId String?
+  challenge   Challenge? @relation(fields: [challengeId], references: [id])
+
+  reactions PostReaction[]
+  comments  Comment[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  createdById String
-  createdBy   User   @relation(fields: [createdById], references: [id])
+  @@index([userId, createdAt])
+  @@index([visibility, createdAt])
+}
 
-  @@index([name])
+model PostReaction {
+  id     String @id @default(cuid())
+  postId String
+  userId String
+  emoji  String // "❤️" | "🔥" | "🏆" | "💪" | "👏"
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId, emoji])
+}
+
+model Comment {
+  id       String  @id @default(cuid())
+  postId   String
+  userId   String
+  parentId String? // null = top-level, string = respuesta
+
+  content  String
+  imageUrl String?
+
+  post    Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent  Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies Comment[] @relation("CommentReplies")
+
+  createdAt DateTime @default(now())
+
+  @@index([postId, createdAt])
+}
+
+model Challenge {
+  id      String @id @default(cuid())
+  coachId String
+  coach   User   @relation("CoachChallenges", fields: [coachId], references: [id])
+
+  title       String
+  description String
+  imageUrl    String?
+
+  startsAt DateTime
+  endsAt   DateTime
+
+  // A quiénes aplica
+  targetAll Boolean  @default(false) // todos los clientes del coach
+  targetIds String[] // o lista específica de clientIds
+
+  posts Post[]
+
+  createdAt DateTime @default(now())
+
+  @@index([coachId, endsAt])
+}
+
+model DirectMessage {
+  id     String @id @default(cuid())
+  fromId String
+  toId   String
+  from   User   @relation("SentMessages", fields: [fromId], references: [id])
+  to     User   @relation("ReceivedMessages", fields: [toId], references: [id])
+
+  content  String
+  imageUrl String?
+  readAt   DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([fromId, toId, createdAt])
+  @@index([toId, readAt])
 }
 
 //////////////////////////////////////////////////////
@@ -303,6 +425,8 @@ model Recipe {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([userId, updatedAt])
 }
 
 model RecipeIngredient {
@@ -316,6 +440,8 @@ model RecipeIngredient {
   gramsInBase Float
 
   @@unique([recipeId, ingredientId])
+  @@index([recipeId])
+  @@index([ingredientId])
 }
 
 //////////////////////////////////////////////////////
@@ -341,6 +467,8 @@ model NutritionPlan {
   days PlanDay[]
 
   createdAt DateTime @default(now())
+
+  @@index([userId, startDate])
 }
 
 model PlanDay {
@@ -354,6 +482,8 @@ model PlanDay {
   meals Meal[]
 
   @@unique([planId, date])
+  @@index([planId, date])
+  @@index([date])
 }
 
 model Meal {
@@ -424,6 +554,8 @@ model DailyLog {
   workouts Workout[]
 
   @@unique([userId, date])
+  @@index([userId, date])
+  @@index([userId])
 }
 
 //////////////////////////////////////////////////////
@@ -452,6 +584,9 @@ model Workout {
   sessions WorkoutSession[]
 
   createdAt DateTime @default(now())
+
+  @@index([userId, date])
+  @@index([dailyLogId])
 }
 
 model WorkoutSession {
@@ -478,6 +613,7 @@ model HydrationLog {
   waterMl Float
 
   @@unique([userId, date])
+  @@index([userId, date])
 }
 
 //////////////////////////////////////////////////////
@@ -494,4 +630,5 @@ model WeightLog {
   weightKg Float
 
   @@unique([userId, date])
+  @@index([userId, date])
 }

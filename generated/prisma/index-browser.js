@@ -215,10 +215,64 @@ exports.Prisma.SubscriptionScalarFieldEnum = {
 
 exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  userId: 'userId',
+  type: 'type',
+  visibility: 'visibility',
+  content: 'content',
+  imageUrls: 'imageUrls',
+  kcalIn: 'kcalIn',
+  kcalOut: 'kcalOut',
+  balance: 'balance',
+  weightKg: 'weightKg',
+  proteinG: 'proteinG',
+  recipeId: 'recipeId',
+  planId: 'planId',
+  dailyLogId: 'dailyLogId',
+  featuredBy: 'featuredBy',
+  featuredAt: 'featuredAt',
+  challengeId: 'challengeId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  createdById: 'createdById'
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PostReactionScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
+  emoji: 'emoji'
+};
+
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
+  parentId: 'parentId',
+  content: 'content',
+  imageUrl: 'imageUrl',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ChallengeScalarFieldEnum = {
+  id: 'id',
+  coachId: 'coachId',
+  title: 'title',
+  description: 'description',
+  imageUrl: 'imageUrl',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  targetAll: 'targetAll',
+  targetIds: 'targetIds',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.DirectMessageScalarFieldEnum = {
+  id: 'id',
+  fromId: 'fromId',
+  toId: 'toId',
+  content: 'content',
+  imageUrl: 'imageUrl',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.IngredientScalarFieldEnum = {
@@ -416,6 +470,21 @@ exports.SubscriptionStatus = exports.$Enums.SubscriptionStatus = {
   TRIAL: 'TRIAL'
 };
 
+exports.PostType = exports.$Enums.PostType = {
+  CHECKIN: 'CHECKIN',
+  ACHIEVEMENT: 'ACHIEVEMENT',
+  QUESTION: 'QUESTION',
+  CHALLENGE: 'CHALLENGE',
+  SHARE: 'SHARE',
+  FREE: 'FREE'
+};
+
+exports.PostVisibility = exports.$Enums.PostVisibility = {
+  PRIVATE: 'PRIVATE',
+  COACH_GROUP: 'COACH_GROUP',
+  PUBLIC: 'PUBLIC'
+};
+
 exports.MealType = exports.$Enums.MealType = {
   BREAKFAST: 'BREAKFAST',
   LUNCH: 'LUNCH',
@@ -442,6 +511,10 @@ exports.Prisma.ModelName = {
   RegistrationCode: 'RegistrationCode',
   Subscription: 'Subscription',
   Post: 'Post',
+  PostReaction: 'PostReaction',
+  Comment: 'Comment',
+  Challenge: 'Challenge',
+  DirectMessage: 'DirectMessage',
   Ingredient: 'Ingredient',
   UserIngredientOverride: 'UserIngredientOverride',
   Recipe: 'Recipe',

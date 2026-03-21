@@ -103,29 +103,46 @@ export const UserProfileService = {
    * Devuelve el perfil con el último peso registrado y el peso
    * estimado acumulado desde los DailyLogs — útil para el dashboard.
    */
-  async getSummary(userId: string) {
-    const [profile, latestWeight, totalDelta] = await Promise.all([
-      db.userProfile.findUnique({ where: { userId } }),
-      db.weightLog.findFirst({
-        where: { userId },
-        orderBy: { date: "desc" },
-      }),
-      db.dailyLog.aggregate({
-        where: { userId },
-        _sum: { estimatedWeightDeltaKg: true },
-      }),
-    ])
+ async getSummary(userId: string) {
+  const [profile, latestWeight, totalDelta] = await Promise.all([
+    db.userProfile.findUnique({
+      where: { userId },
+      include: {
+        user: {                              // ← añadir esto
+          select: {
+            id:     true,
+            name:   true,
+            email:  true,
+            role:   true,
+            coachId: true,
+            coach: {                         // ← y el coach vinculado
+              select: { id: true, name: true, email: true }
+            },
+          },
+        },
+      },
+    }),
+    db.weightLog.findFirst({
+      where: { userId },
+      orderBy: { date: "desc" },
+    }),
+    db.dailyLog.aggregate({
+      where: { userId },
+      _sum: { estimatedWeightDeltaKg: true },
+    }),
+  ])
 
-    if (!profile) return null
+  if (!profile) return null
 
-    const estimatedCurrentWeight =
-      profile.weightKg + (totalDelta._sum.estimatedWeightDeltaKg ?? 0)
+  const estimatedCurrentWeight =
+    profile.weightKg + (totalDelta._sum.estimatedWeightDeltaKg ?? 0)
 
-    return {
-      ...profile,
-      latestLoggedWeight: latestWeight?.weightKg ?? profile.weightKg,
-      latestWeightDate: latestWeight?.date ?? null,
-      estimatedCurrentWeight,
-    }
-  },
+  return {
+    ...profile,
+    latestLoggedWeight:    latestWeight?.weightKg ?? profile.weightKg,
+    latestWeightDate:      latestWeight?.date ?? null,
+    estimatedCurrentWeight,
+    // user ya viene dentro de profile por el include
+  }
+},
 }

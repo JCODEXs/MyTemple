@@ -171,8 +171,14 @@ export default function CoachClientDashboard({ clientId }: { clientId: string })
   const router = useRouter()
   const [showPlanModal, setShowPlanModal] = useState(false)
 
-  const { data, isLoading, error } = api.coach.getClientData.useQuery({ clientId })
-  const { data: clientPlans = [] } = api.coach.getClientPlans.useQuery({ clientId })
+  const { data, isLoading, error } = api.coach.getClientData.useQuery(
+    { clientId },
+    { staleTime: 10 * 60_000 }  // 10 minutos — lento
+  )
+  const { data: clientPlans = [] } = api.coach.getClientPlans.useQuery(
+    { clientId },
+    { staleTime: 10 * 60_000 }  // 10 minutos — lento
+  )
   // Note: coach needs a separate procedure to get CLIENT's plans
   // For now we show the coach's own plans as a reference
 

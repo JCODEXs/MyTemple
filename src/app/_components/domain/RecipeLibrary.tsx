@@ -480,7 +480,10 @@ export default function RecipeLibrary() {
   const router = useRouter()
   const utils  = api.useUtils()
 
-  const { data: recipes = [], isLoading } = api.recipe.getAll.useQuery()
+  const { data: recipes = [], isLoading } = api.recipe.getAll.useQuery(
+    undefined,
+    { staleTime: 10 * 60_000 }  // 10 minutos — lento
+  )
 
   const [search,     setSearch]     = useState("")
   const [sortBy,     setSortBy]     = useState("category")

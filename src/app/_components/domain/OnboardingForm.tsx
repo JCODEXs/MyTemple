@@ -4,7 +4,9 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { api } from "@/trpc/react"
-import { Sex, GoalType } from "@/generated/prisma"
+import type { Sex, GoalType } from "../../../../generated/prisma"
+// import { useSession } from "next-auth/react"
+
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -46,6 +48,20 @@ function StepDots({ current, total }: { current: number; total: number }) {
 export default function OnboardingForm() {
   const router = useRouter()
   const [step, setStep] = useState(0)
+
+
+// if (status === "loading") {
+//   return (
+//     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-amber-50 to-orange-50">
+//       <div className="text-amber-600 animate-pulse">Cargando...</div>
+//     </div>
+//   )
+// }
+
+// if (status === "unauthenticated") {
+//   router.push("/auth/signin")
+//   return null
+// }
 
   const [form, setForm] = useState({
     sex:           "MALE"        as Sex,

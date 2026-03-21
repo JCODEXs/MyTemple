@@ -104,10 +104,17 @@ export default function ProfilePage() {
   const utils = api.useUtils()
 
   // ── Queries ─────────────────────────────────────────────────────────────────
-  const { data: summary } = api.userProfile.getSummary.useQuery()
-  const { data: session } = api.userProfile.get.useQuery()
+  const { data: summary } = api.userProfile.getSummary.useQuery(
+    undefined,
+    { staleTime: 10 * 60_000 }  // 10 minutos — lento
+  )
+  const { data: session } = api.userProfile.get.useQuery(
+    undefined,
+    { staleTime: 10 * 60_000 }  // 10 minutos — lento
+  )
   const { data: codes   } = api.coach.getActiveCodes.useQuery(undefined, {
-    enabled: summary?.user?.role === "COACH" || summary?.user?.role === "ADMIN",
+    enabled:   summary?.user?.role === "COACH" || summary?.user?.role === "ADMIN",
+    staleTime: 10 * 60_000,     // 10 minutos — lento
   })
 
   // ── Profile form state ───────────────────────────────────────────────────────

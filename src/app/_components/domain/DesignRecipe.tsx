@@ -1,13 +1,14 @@
 "use client"
 
 import { useState, useMemo } from "react"
+import { UploadButton } from "@/utils/uploadthing"
 import { toast } from "sonner"
 import { api } from "@/trpc/react"
 import ActionBox from "./ActionBox"
 import RecipeIngredientCard from "./RecipeIngredientCard"
 import { calculateRecipeNutrition } from "@/lib/domain/nutrition/recipe-calculator"
 import type { RouterOutputs } from "@/trpc/react"
-import { RecipeCategory } from "@/generated/prisma"
+
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -22,7 +23,7 @@ interface RecipeIngredientDraft {
 interface RecipeMeta {
   name: string
   baseServings: number
-  category: RecipeCategory | ""
+  category: string | ""
   isPrivate: boolean
   isVegan: boolean
   isVegetarian: boolean
@@ -31,6 +32,7 @@ interface RecipeMeta {
   isSpicy: boolean
   isQuickMeal: boolean
   steps: string
+  imageUrl: string
 }
 
 const DEFAULT_META: RecipeMeta = {
@@ -45,6 +47,7 @@ const DEFAULT_META: RecipeMeta = {
   isSpicy: false,
   isQuickMeal: false,
   steps: "",
+  imageUrl: "",
 }
 
 const CATEGORY_OPTIONS: { value: RecipeCategory; label: string }[] = [
@@ -125,7 +128,10 @@ export default function DesignRecipe() {
   const [draftIngredients, setDraftIngredients] = useState<RecipeIngredientDraft[]>([])
   const [globalStep, setGlobalStep] = useState(10)
 
-  const { data: activeIngredients = [] } = api.ingredient.getActive.useQuery()
+  const { data: activeIngredients = [] } = api.ingredient.getActive.useQuery(
+    undefined,
+    { staleTime: Infinity }  // inmutable — solo cambia si el usuario edita su catálogo
+  )
 
   const createRecipe = api.recipe.create.useMutation({
     onSuccess: () => {
@@ -187,6 +193,7 @@ export default function DesignRecipe() {
       isSpicy: meta.isSpicy,
       isQuickMeal: meta.isQuickMeal,
       steps: meta.steps || undefined,
+      imageUrl: meta.imageUrl || undefined,
       ingredients: draftIngredients.map((i) => ({
         ingredientId: i.ingredientId,
         gramsInBase: i.gramsInBase,
@@ -217,28 +224,6 @@ export default function DesignRecipe() {
                 Haz clic en un ingrediente para seleccionar la cantidad
               </p>
               <ActionBox onAddIngredient={handleAddIngredient} />
-
-              {/* Global step for cards */}
-              <div className="mt-4">
-                <p className="mb-1 text-xs font-semibold text-gray-400 uppercase tracking-wide">
-                  Paso de ajuste en receta
-                </p>
-                <div className="flex flex-wrap gap-1">
-                  {[1, 5, 10, 25, 50].map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => setGlobalStep(s)}
-                      className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-all ${
-                        globalStep === s
-                          ? "bg-amber-500 text-white"
-                          : "bg-gray-100 text-gray-600 hover:bg-amber-100"
-                      }`}
-                    >
-                      {s}g
-                    </button>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
 
@@ -253,14 +238,37 @@ export default function DesignRecipe() {
 
             {/* Ingredients in recipe */}
             <div className="rounded-2xl bg-white p-5 shadow-md">
-              <h2 className="mb-4 font-bold text-gray-800">
-                Ingredientes en la receta
-                {draftIngredients.length > 0 && (
-                  <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-xs text-amber-700">
-                    {draftIngredients.length}
+              <div className="mb-4 flex items-center justify-between gap-4 flex-wrap">
+                <h2 className="font-bold text-gray-800">
+                  Ingredientes en la receta
+                  {draftIngredients.length > 0 && (
+                    <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-xs text-amber-700">
+                      {draftIngredients.length}
+                    </span>
+                  )}
+                </h2>
+                {/* Global step for cards */}
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide whitespace-nowrap">
+                    Paso de ajuste
                   </span>
-                )}
-              </h2>
+                  <div className="flex flex-wrap gap-1">
+                    {[1, 5, 10, 25, 50].map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => setGlobalStep(s)}
+                        className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-all ${
+                          globalStep === s
+                            ? "bg-amber-500 text-white"
+                            : "bg-gray-100 text-gray-600 hover:bg-amber-100"
+                        }`}
+                      >
+                        {s}g
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
               {draftIngredients.length === 0 ? (
                 <div className="flex flex-col items-center justify-center rounded-xl bg-amber-50 py-10 text-center">
                   <span className="text-4xl">👆</span>
@@ -373,6 +381,76 @@ export default function DesignRecipe() {
                   placeholder="1. Cocinar el pollo a fuego medio...&#10;2. Mezclar los ingredientes..."
                   className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-800 focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 resize-none"
                 />
+              </div>
+
+              {/* Image upload */}
+              <div>
+                <label className="mb-2 block text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                  📸 Imagen de la receta
+                </label>
+
+                {meta.imageUrl ? (
+                  /* ── Thumbnail preview ── */
+                  <div className="group relative w-full overflow-hidden rounded-2xl border-2 border-amber-200 shadow-md">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={meta.imageUrl}
+                      alt="Imagen de la receta"
+                      className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    {/* gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                    {/* badge bottom-left */}
+                    <span className="absolute bottom-3 left-3 flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-gray-700 shadow">
+                      ✅ Imagen cargada
+                    </span>
+                    {/* remove button top-right */}
+                    <button
+                      type="button"
+                      onClick={() => setMeta((p) => ({ ...p, imageUrl: "" }))}
+                      className="absolute right-3 top-3 rounded-full bg-white/90 p-1.5 text-red-500 shadow transition-all hover:bg-red-500 hover:text-white"
+                      title="Quitar imagen"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </button>
+                  </div>
+                ) : (
+                  /* ── Upload zone ── */
+                  <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-amber-300 bg-amber-50/60 px-4 py-8 text-center transition-colors hover:border-amber-400 hover:bg-amber-50">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-3xl shadow-inner">
+                      🖼️
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-700">Sube una foto de tu receta</p>
+                      <p className="mt-0.5 text-xs text-gray-400">PNG, JPG o WEBP · máx. 4 MB</p>
+                    </div>
+                    <UploadButton
+                      endpoint="imageUploader"
+                      onClientUploadComplete={(res) => {
+                        const url = res[0]?.ufsUrl ?? res[0]?.url
+                        if (url) setMeta((p) => ({ ...p, imageUrl: url }))
+                      }}
+                      onUploadError={(error: Error) =>
+                        toast.error(`Error al subir imagen: ${error.message}`)
+                      }
+                      appearance={{
+                        container: "mt-1 w-auto",
+                        button:
+                          "rounded-xl bg-amber-500 px-5 py-2 text-sm font-bold text-white shadow transition-colors hover:bg-amber-600 ut-uploading:cursor-not-allowed ut-uploading:bg-amber-300",
+                        allowedContent: "hidden",
+                      }}
+                      content={{
+                        button({ ready, isUploading }) {
+                          if (isUploading) return "⏳ Subiendo..."
+                          if (ready) return "📤 Seleccionar imagen"
+                          return "Cargando..."
+                        },
+                      }}
+                    />
+                  </div>
+                )}
               </div>
             </div>
 

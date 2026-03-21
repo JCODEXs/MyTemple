@@ -1,39 +1,39 @@
 import { z } from "zod"
-import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc"
+import { createTRPCRouter, protectedProcedure, coachProcedure } from "@/server/api/trpc"
 import { CoachService } from "@/server/services/coach.service"
 
 export const coachRouter = createTRPCRouter({
 
-  // ── Coach procedures ────────────────────────────────────────────────────────
+  // ── Coach-only procedures ───────────────────────────────────────────────────
 
-  getClientPlans: protectedProcedure
+  getClientPlans: coachProcedure
   .input(z.object({ clientId: z.string().cuid() }))
   .query(async ({ ctx, input }) => {
     return CoachService.getClientPlans(ctx.session.user.id, input.clientId)
   }),
 
-  generateInviteCode: protectedProcedure
+  generateInviteCode: coachProcedure
     .mutation(async ({ ctx }) => {
       return CoachService.generateInviteCode(ctx.session.user.id)
     }),
 
-  getActiveCodes: protectedProcedure
+  getActiveCodes: coachProcedure
     .query(async ({ ctx }) => {
       return CoachService.getActiveCodes(ctx.session.user.id)
     }),
 
-  getClients: protectedProcedure
+  getClients: coachProcedure
     .query(async ({ ctx }) => {
       return CoachService.getClients(ctx.session.user.id)
     }),
 
-  getClientData: protectedProcedure
+  getClientData: coachProcedure
     .input(z.object({ clientId: z.string().cuid() }))
     .query(async ({ ctx, input }) => {
       return CoachService.getClientData(ctx.session.user.id, input.clientId)
     }),
 
-  unlinkClient: protectedProcedure
+  unlinkClient: coachProcedure
     .input(z.object({ clientId: z.string().cuid() }))
     .mutation(async ({ ctx, input }) => {
       return CoachService.unlinkClient(ctx.session.user.id, input.clientId)
