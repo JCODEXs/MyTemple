@@ -60,11 +60,11 @@ const { id } = await params
  */
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const userId = await getUserId()
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-
+const { id } = await params
   try {
     const body: unknown = await req.json()
     const parsed = updateWorkoutSchema.safeParse(body)
@@ -75,7 +75,7 @@ export async function PATCH(
       )
     }
 
-    const workout = await WorkoutService.update(userId, params.id, parsed.data)
+    const workout = await WorkoutService.update(userId, id, parsed.data)
     return NextResponse.json(workout)
   } catch (error) {
     const msg = (error as Error).message
@@ -92,13 +92,13 @@ export async function PATCH(
  */
 export async function DELETE(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const userId = await getUserId()
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-
+const { id } = await params
   try {
-    await WorkoutService.delete(userId, params.id)
+    await WorkoutService.delete(userId, id)
     return NextResponse.json({ success: true })
   } catch (error) {
     const msg = (error as Error).message
