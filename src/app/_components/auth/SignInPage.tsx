@@ -22,7 +22,9 @@ export function SignInPage() {
   const [magicSent, setMagicSent] = useState(false)
   const [error,     setError]     = useState(
     errorParam === "SubscriptionExpired"
-      ? "Tu suscripción de coach ha vencido. Renuévala para acceder."
+      ? "Tu suscripción ha vencido. Renuévala para acceder."
+      : errorParam === "TrialExpired"
+      ? "Tu período de prueba ha expirado. Suscríbete para continuar."
       : errorParam === "OAuthAccountNotLinked"
       ? "Ya existe una cuenta con ese email. Inicia sesión con tu método original."
       : null
@@ -35,7 +37,7 @@ export function SignInPage() {
 
     const res = await signIn("credentials", {
       email, password,
-      redirect:    false,
+      // redirect:    false,
       callbackUrl,
     })
 

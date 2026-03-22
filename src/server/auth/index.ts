@@ -111,23 +111,35 @@ callbacks: {
   }),
 
   async signIn({ user }) {
-    if (!user.id) return true  // permitir siempre si no hay id
+    if (!user.id) return true
 
     try {
       const dbUser = await db.user.findUnique({
         where:  { id: user.id },
-        select: { role: true, subscription: { select: { status: true } } },
+        select: {
+          role: true,
+          subscription: { select: { status: true, currentPeriodEnd: true } },
+        },
       })
 
-      if (
-        dbUser?.role === "COACH" &&
-        dbUser.subscription?.status === "PAST_DUE"
-      ) {
-        return "/auth/signin?error=SubscriptionExpired"
+      if (dbUser?.role === "COACH" || dbUser?.role === "USER") {
+        const sub = dbUser.subscription
+
+        // Bloquear si PAST_DUE
+        if (sub?.status === "PAST_DUE") {
+          return "/auth/signin?error=SubscriptionExpired"
+        }
+
+        // Bloquear si TRIAL expirado (currentPeriodEnd pasó y no hay pago)
+        if (
+          sub?.status === "TRIAL" &&
+          sub.currentPeriodEnd &&
+          sub.currentPeriodEnd < new Date()
+        ) {
+          return "/auth/signin?error=TrialExpired"
+        }
       }
-    } catch {
-      // Si falla el check, permitir igual — no bloquear el login
-    }
+    } catch { /* permitir login si falla el check */ }
 
     return true
   },
