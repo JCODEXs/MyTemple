@@ -23,7 +23,7 @@ interface RecipeIngredientDraft {
 interface RecipeMeta {
   name: string
   baseServings: number
-  category: string | ""
+  category: string 
   isPrivate: boolean
   isVegan: boolean
   isVegetarian: boolean
@@ -50,7 +50,7 @@ const DEFAULT_META: RecipeMeta = {
   imageUrl: "",
 }
 
-const CATEGORY_OPTIONS: { value: RecipeCategory; label: string }[] = [
+const CATEGORY_OPTIONS: { value: string; label: string }[] = [
   { value: "VEGETARIAN", label: "🥬 Vegetariana" },
   { value: "MEAT",       label: "🥩 Carnes"      },
   { value: "SEAFOOD",    label: "🐟 Mariscos"    },
@@ -331,7 +331,7 @@ export default function DesignRecipe() {
                 <label className="mb-1 block text-xs font-semibold text-gray-500">Categoría</label>
                 <select
                   value={meta.category}
-                  onChange={(e) => setMeta((p) => ({ ...p, category: e.target.value as RecipeCategory | "" }))}
+                  onChange={(e) => setMeta((p) => ({ ...p, category: e.target.value  }))}
                   className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-800 focus:border-amber-400 focus:outline-none"
                 >
                   <option value="">Sin categoría</option>
