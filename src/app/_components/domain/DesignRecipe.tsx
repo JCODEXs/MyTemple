@@ -435,8 +435,8 @@ export default function DesignRecipe() {
                       }}
                      onUploadError={(e: UploadThingError
                      ) => {
-  toast.error(`Error al subir imagen: ${e.message}`)
-}}
+                             toast.error(`Error al subir imagen: ${e.message}`)
+                            }}
                       appearance={{
                         container: "mt-1 w-auto",
                         button:

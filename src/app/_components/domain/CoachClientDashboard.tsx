@@ -102,6 +102,10 @@ function AssignPlanModal({
   const [selected, setSelected] = useState<string | null>(null)
   const utils = api.useUtils()
 
+  // today computed once per render for plan active-status comparison
+  const now   = new Date()
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+
   // Coach assigns by marking the plan as visible to client — for now
   // the simplest approach: coach creates plan FOR the client using their clientId
   // Here we show the client's existing plans and let coach "activate" one
@@ -129,7 +133,6 @@ function AssignPlanModal({
             {plans.map((p) => {
               const start = new Date(p.startDate)
               const end   = new Date(p.endDate)
-              const today = new Date()
               const isActive = today >= start && today <= end
 
               return (
@@ -188,6 +191,12 @@ export default function CoachClientDashboard({ clientId }: { clientId: string })
     if (!data?.weightLogs.length) return []
     return [...data.weightLogs].reverse().map((w) => w.weightKg)
   }, [data])
+
+  // Stable "today" (midnight) — computed once on mount, not on every render
+  const today = useMemo(() => {
+    const now = new Date()
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  }, [])
 
   const weeklyAvg = useMemo(() => {
     if (!data?.weekLogs.length) return null
@@ -362,9 +371,8 @@ export default function CoachClientDashboard({ clientId }: { clientId: string })
             {/* Last 7 days dots */}
             <div className="mt-4 flex justify-between">
               {Array.from({ length: 7 }).map((_, i) => {
-                const d = new Date()
-                d.setDate(d.getDate() - (6 - i))
-                d.setHours(0, 0, 0, 0)
+                // Derive each day from the stable `today` — no raw new Date() inside map
+                const d = new Date(today.getFullYear(), today.getMonth(), today.getDate() - (6 - i))
                 const log = data.weekLogs.find((l) => {
                   const ld = new Date(l.date)
                   ld.setHours(0, 0, 0, 0)

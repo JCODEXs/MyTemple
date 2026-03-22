@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { toast } from "sonner"
 import { api } from "@/trpc/react"
 import type { RouterOutputs } from "@/trpc/react"
@@ -85,7 +85,11 @@ function AdaptationResultCard({
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function WeightLogForm() {
-  const today = new Date()
+  // Stable midnight date — computed once on mount
+  const today = useMemo(() => {
+    const now = new Date()
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  }, [])
   const [weight,    setWeight]    = useState<number>(70)
   const [inputVal,  setInputVal]  = useState("70")
   const [result,    setResult]    = useState<AdaptationResult | null>(null)
