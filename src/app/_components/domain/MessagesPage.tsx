@@ -5,6 +5,7 @@ import { toast }    from "sonner"
 import { api }      from "@/trpc/react"
 import { UploadButton } from "@uploadthing/react"
 import type { RouterOutputs } from "@/trpc/react"
+import type { UploadThingError } from "uploadthing/server"
 
 type Post        = RouterOutputs["communications"]["getFeed"]["items"][number]
 type Message     = RouterOutputs["communications"]["getConversation"][number]
@@ -68,7 +69,10 @@ function ImageUploadZone({
                 const url = res[0]?.ufsUrl ?? res[0]?.url
                 if (url) onChange([...imageUrls, url])
               }}
-              onUploadError={(e: Error) => toast.error(`Error: ${e.message}`)}
+                   onUploadError={(e: UploadThingError
+                                  ) => {
+               toast.error(`Error al subir imagen: ${e.message}`)
+             }}
               appearance={{
                 button: "rounded-xl bg-amber-500 px-4 py-2 text-xs font-bold text-white hover:bg-amber-600 ut-uploading:bg-amber-300 ut-uploading:cursor-not-allowed",
                 allowedContent: "hidden",
@@ -335,12 +339,12 @@ function PostCard({ post, currentUserId }: { post: Post; currentUserId: string }
       )}
 
       {/* Images */}
-      {post.imageUrls.length > 0 && (
+      {post?.imageUrls?.length > 0 && (
         <div className={`grid gap-1 px-4 pb-3 ${
-          post.imageUrls.length === 1 ? "grid-cols-1" :
-          post.imageUrls.length === 2 ? "grid-cols-2" : "grid-cols-3"
+          post?.imageUrls?.length === 1 ? "grid-cols-1" :
+          post?.imageUrls?.length === 2 ? "grid-cols-2" : "grid-cols-3"
         }`}>
-          {post.imageUrls.map((url) => (
+          {post?.imageUrls?.map((url) => (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img key={url} src={url} alt=""
               className={`w-full rounded-xl object-cover ${
@@ -565,7 +569,10 @@ function DMConversation({ convo, currentUserId }: { convo: Convo; currentUserId:
               const url = res[0]?.ufsUrl ?? res[0]?.url
               if (url) setImageUrl(url)
             }}
-            onUploadError={(e: Error) => toast.error(e.message)}
+             onUploadError={(e: UploadThingError
+                                 ) => {
+              toast.error(`Error al subir imagen: ${e.message}`)
+            }}
             appearance={{
               button: "rounded-xl bg-white/10 px-3 py-2.5 text-sm text-gray-400 hover:bg-white/20 ut-uploading:opacity-50",
               allowedContent: "hidden",
@@ -708,20 +715,20 @@ export default function MessagesPage() {
                     <button key={convo.other.id}
                       onClick={() => setActiveConvo(convo)}
                       className={`w-full flex items-center gap-3 px-4 py-3.5 text-left hover:bg-white/5 transition-colors ${
-                        activeConvo?.other.id === convo.other.id ? "bg-white/10" : ""
+                        activeConvo?.other.id === convo?.other.id ? "bg-white/10" : ""
                       }`}>
                       <div className="h-10 w-10 flex-shrink-0 rounded-xl bg-gradient-to-br from-amber-400/30 to-orange-500/30
                         flex items-center justify-center text-sm font-black text-amber-400 relative">
-                        {convo.other.name?.[0]?.toUpperCase() ?? "?"}
-                        {convo.unreadCount > 0 && (
+                        {convo?.other.name?.[0]?.toUpperCase() ?? "?"}
+                        {convo?.unreadCount > 0 && (
                           <div className="absolute -right-1 -top-1 h-4 w-4 rounded-full bg-amber-500 flex items-center justify-center text-[9px] font-black text-white">
-                            {convo.unreadCount}
+                            {convo?.unreadCount}
                           </div>
                         )}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-semibold text-white truncate">{convo.other.name}</p>
-                        <p className="text-xs text-gray-500 truncate">{convo.lastMessage.content}</p>
+                        <p className="text-sm font-semibold text-white truncate">{convo?.other.name}</p>
+                        <p className="text-xs text-gray-500 truncate">{convo?.lastMessage.content}</p>
                       </div>
                     </button>
                   ))}
