@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useCallback } from "react"
+import { useState, useMemo, useCallback, useEffect } from "react"
 import { toast } from "sonner"
 import { api } from "@/trpc/react"
 import type { WorkoutType } from "../../../../generated/prisma"
