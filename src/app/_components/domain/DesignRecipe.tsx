@@ -8,6 +8,7 @@ import ActionBox from "./ActionBox"
 import RecipeIngredientCard from "./RecipeIngredientCard"
 import { calculateRecipeNutrition } from "@/lib/domain/nutrition/recipe-calculator"
 import type { RouterOutputs } from "@/trpc/react"
+import type { UploadThingError } from "uploadthing/server"
 
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -432,9 +433,10 @@ export default function DesignRecipe() {
                         const url = res[0]?.ufsUrl ?? res[0]?.url
                         if (url) setMeta((p) => ({ ...p, imageUrl: url }))
                       }}
-                      onUploadError={(error: Error) =>
-                        toast.error(`Error al subir imagen: ${error.message}`)
-                      }
+                     onUploadError={(e: UploadThingError
+                     ) => {
+  toast.error(`Error al subir imagen: ${e.message}`)
+}}
                       appearance={{
                         container: "mt-1 w-auto",
                         button:
