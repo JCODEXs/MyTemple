@@ -1,5 +1,5 @@
-import SubscribePage from "@/app/_components/domain/SubscribePage"
+import MPSubscribePage from "@/app/_components/domain/MPSubscribePage"
 
 export default function Page() {
-  return <SubscribePage />
+  return <MPSubscribePage />
 }

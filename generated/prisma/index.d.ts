@@ -148,6 +148,11 @@ export type HydrationLog = $Result.DefaultSelection<Prisma.$HydrationLogPayload>
  * 
  */
 export type WeightLog = $Result.DefaultSelection<Prisma.$WeightLogPayload>
+/**
+ * Model PendingPayment
+ * 
+ */
+export type PendingPayment = $Result.DefaultSelection<Prisma.$PendingPaymentPayload>
 
 /**
  * Enums
@@ -665,6 +670,16 @@ export class PrismaClient<
     * ```
     */
   get weightLog(): Prisma.WeightLogDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pendingPayment`: Exposes CRUD operations for the **PendingPayment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PendingPayments
+    * const pendingPayments = await prisma.pendingPayment.findMany()
+    * ```
+    */
+  get pendingPayment(): Prisma.PendingPaymentDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1132,7 +1147,8 @@ export namespace Prisma {
     Workout: 'Workout',
     WorkoutSession: 'WorkoutSession',
     HydrationLog: 'HydrationLog',
-    WeightLog: 'WeightLog'
+    WeightLog: 'WeightLog',
+    PendingPayment: 'PendingPayment'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1151,7 +1167,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "session" | "verificationToken" | "user" | "userProfile" | "coachInviteCode" | "registrationCode" | "subscription" | "post" | "postReaction" | "comment" | "challenge" | "directMessage" | "ingredient" | "userIngredientOverride" | "recipe" | "recipeIngredient" | "nutritionPlan" | "planDay" | "meal" | "mealRecipe" | "metabolicProfile" | "dailyLog" | "workout" | "workoutSession" | "hydrationLog" | "weightLog"
+      modelProps: "account" | "session" | "verificationToken" | "user" | "userProfile" | "coachInviteCode" | "registrationCode" | "subscription" | "post" | "postReaction" | "comment" | "challenge" | "directMessage" | "ingredient" | "userIngredientOverride" | "recipe" | "recipeIngredient" | "nutritionPlan" | "planDay" | "meal" | "mealRecipe" | "metabolicProfile" | "dailyLog" | "workout" | "workoutSession" | "hydrationLog" | "weightLog" | "pendingPayment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3153,6 +3169,80 @@ export namespace Prisma {
           }
         }
       }
+      PendingPayment: {
+        payload: Prisma.$PendingPaymentPayload<ExtArgs>
+        fields: Prisma.PendingPaymentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PendingPaymentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingPaymentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PendingPaymentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingPaymentPayload>
+          }
+          findFirst: {
+            args: Prisma.PendingPaymentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingPaymentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PendingPaymentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingPaymentPayload>
+          }
+          findMany: {
+            args: Prisma.PendingPaymentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingPaymentPayload>[]
+          }
+          create: {
+            args: Prisma.PendingPaymentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingPaymentPayload>
+          }
+          createMany: {
+            args: Prisma.PendingPaymentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PendingPaymentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingPaymentPayload>[]
+          }
+          delete: {
+            args: Prisma.PendingPaymentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingPaymentPayload>
+          }
+          update: {
+            args: Prisma.PendingPaymentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingPaymentPayload>
+          }
+          deleteMany: {
+            args: Prisma.PendingPaymentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PendingPaymentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PendingPaymentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingPaymentPayload>[]
+          }
+          upsert: {
+            args: Prisma.PendingPaymentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingPaymentPayload>
+          }
+          aggregate: {
+            args: Prisma.PendingPaymentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePendingPayment>
+          }
+          groupBy: {
+            args: Prisma.PendingPaymentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PendingPaymentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PendingPaymentCountArgs<ExtArgs>
+            result: $Utils.Optional<PendingPaymentCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3276,6 +3366,7 @@ export namespace Prisma {
     workoutSession?: WorkoutSessionOmit
     hydrationLog?: HydrationLogOmit
     weightLog?: WeightLogOmit
+    pendingPayment?: PendingPaymentOmit
   }
 
   /* Types for Logging */
@@ -3365,6 +3456,7 @@ export namespace Prisma {
     challenges: number
     sentMessages: number
     receivedMessages: number
+    pendingPayments: number
     accounts: number
     sessions: number
     recipes: number
@@ -3387,6 +3479,7 @@ export namespace Prisma {
     challenges?: boolean | UserCountOutputTypeCountChallengesArgs
     sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
     receivedMessages?: boolean | UserCountOutputTypeCountReceivedMessagesArgs
+    pendingPayments?: boolean | UserCountOutputTypeCountPendingPaymentsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     recipes?: boolean | UserCountOutputTypeCountRecipesArgs
@@ -3471,6 +3564,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountReceivedMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DirectMessageWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPendingPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PendingPaymentWhereInput
   }
 
   /**
@@ -7299,6 +7399,7 @@ export namespace Prisma {
     challenges?: boolean | User$challengesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
     receivedMessages?: boolean | User$receivedMessagesArgs<ExtArgs>
+    pendingPayments?: boolean | User$pendingPaymentsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     profile?: boolean | User$profileArgs<ExtArgs>
@@ -7369,6 +7470,7 @@ export namespace Prisma {
     challenges?: boolean | User$challengesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
     receivedMessages?: boolean | User$receivedMessagesArgs<ExtArgs>
+    pendingPayments?: boolean | User$pendingPaymentsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     profile?: boolean | User$profileArgs<ExtArgs>
@@ -7405,6 +7507,7 @@ export namespace Prisma {
       challenges: Prisma.$ChallengePayload<ExtArgs>[]
       sentMessages: Prisma.$DirectMessagePayload<ExtArgs>[]
       receivedMessages: Prisma.$DirectMessagePayload<ExtArgs>[]
+      pendingPayments: Prisma.$PendingPaymentPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       profile: Prisma.$UserProfilePayload<ExtArgs> | null
@@ -7835,6 +7938,7 @@ export namespace Prisma {
     challenges<T extends User$challengesArgs<ExtArgs> = {}>(args?: Subset<T, User$challengesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sentMessages<T extends User$sentMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     receivedMessages<T extends User$receivedMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$receivedMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DirectMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    pendingPayments<T extends User$pendingPaymentsArgs<ExtArgs> = {}>(args?: Subset<T, User$pendingPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PendingPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     profile<T extends User$profileArgs<ExtArgs> = {}>(args?: Subset<T, User$profileArgs<ExtArgs>>): Prisma__UserProfileClient<$Result.GetResult<Prisma.$UserProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -8570,6 +8674,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DirectMessageScalarFieldEnum | DirectMessageScalarFieldEnum[]
+  }
+
+  /**
+   * User.pendingPayments
+   */
+  export type User$pendingPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingPayment
+     */
+    select?: PendingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingPayment
+     */
+    omit?: PendingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingPaymentInclude<ExtArgs> | null
+    where?: PendingPaymentWhereInput
+    orderBy?: PendingPaymentOrderByWithRelationInput | PendingPaymentOrderByWithRelationInput[]
+    cursor?: PendingPaymentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PendingPaymentScalarFieldEnum | PendingPaymentScalarFieldEnum[]
   }
 
   /**
@@ -35276,6 +35404,1176 @@ export namespace Prisma {
 
 
   /**
+   * Model PendingPayment
+   */
+
+  export type AggregatePendingPayment = {
+    _count: PendingPaymentCountAggregateOutputType | null
+    _avg: PendingPaymentAvgAggregateOutputType | null
+    _sum: PendingPaymentSumAggregateOutputType | null
+    _min: PendingPaymentMinAggregateOutputType | null
+    _max: PendingPaymentMaxAggregateOutputType | null
+  }
+
+  export type PendingPaymentAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type PendingPaymentSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type PendingPaymentMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    reference: string | null
+    plan: string | null
+    amount: number | null
+    currency: string | null
+    method: string | null
+    activated: boolean | null
+    activatedAt: Date | null
+    expiresAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type PendingPaymentMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    reference: string | null
+    plan: string | null
+    amount: number | null
+    currency: string | null
+    method: string | null
+    activated: boolean | null
+    activatedAt: Date | null
+    expiresAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type PendingPaymentCountAggregateOutputType = {
+    id: number
+    userId: number
+    reference: number
+    plan: number
+    amount: number
+    currency: number
+    method: number
+    activated: number
+    activatedAt: number
+    expiresAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type PendingPaymentAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type PendingPaymentSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type PendingPaymentMinAggregateInputType = {
+    id?: true
+    userId?: true
+    reference?: true
+    plan?: true
+    amount?: true
+    currency?: true
+    method?: true
+    activated?: true
+    activatedAt?: true
+    expiresAt?: true
+    createdAt?: true
+  }
+
+  export type PendingPaymentMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    reference?: true
+    plan?: true
+    amount?: true
+    currency?: true
+    method?: true
+    activated?: true
+    activatedAt?: true
+    expiresAt?: true
+    createdAt?: true
+  }
+
+  export type PendingPaymentCountAggregateInputType = {
+    id?: true
+    userId?: true
+    reference?: true
+    plan?: true
+    amount?: true
+    currency?: true
+    method?: true
+    activated?: true
+    activatedAt?: true
+    expiresAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type PendingPaymentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PendingPayment to aggregate.
+     */
+    where?: PendingPaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PendingPayments to fetch.
+     */
+    orderBy?: PendingPaymentOrderByWithRelationInput | PendingPaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PendingPaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PendingPayments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PendingPayments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PendingPayments
+    **/
+    _count?: true | PendingPaymentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PendingPaymentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PendingPaymentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PendingPaymentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PendingPaymentMaxAggregateInputType
+  }
+
+  export type GetPendingPaymentAggregateType<T extends PendingPaymentAggregateArgs> = {
+        [P in keyof T & keyof AggregatePendingPayment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePendingPayment[P]>
+      : GetScalarType<T[P], AggregatePendingPayment[P]>
+  }
+
+
+
+
+  export type PendingPaymentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PendingPaymentWhereInput
+    orderBy?: PendingPaymentOrderByWithAggregationInput | PendingPaymentOrderByWithAggregationInput[]
+    by: PendingPaymentScalarFieldEnum[] | PendingPaymentScalarFieldEnum
+    having?: PendingPaymentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PendingPaymentCountAggregateInputType | true
+    _avg?: PendingPaymentAvgAggregateInputType
+    _sum?: PendingPaymentSumAggregateInputType
+    _min?: PendingPaymentMinAggregateInputType
+    _max?: PendingPaymentMaxAggregateInputType
+  }
+
+  export type PendingPaymentGroupByOutputType = {
+    id: string
+    userId: string
+    reference: string
+    plan: string
+    amount: number
+    currency: string
+    method: string
+    activated: boolean
+    activatedAt: Date | null
+    expiresAt: Date
+    createdAt: Date
+    _count: PendingPaymentCountAggregateOutputType | null
+    _avg: PendingPaymentAvgAggregateOutputType | null
+    _sum: PendingPaymentSumAggregateOutputType | null
+    _min: PendingPaymentMinAggregateOutputType | null
+    _max: PendingPaymentMaxAggregateOutputType | null
+  }
+
+  type GetPendingPaymentGroupByPayload<T extends PendingPaymentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PendingPaymentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PendingPaymentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PendingPaymentGroupByOutputType[P]>
+            : GetScalarType<T[P], PendingPaymentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PendingPaymentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    reference?: boolean
+    plan?: boolean
+    amount?: boolean
+    currency?: boolean
+    method?: boolean
+    activated?: boolean
+    activatedAt?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pendingPayment"]>
+
+  export type PendingPaymentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    reference?: boolean
+    plan?: boolean
+    amount?: boolean
+    currency?: boolean
+    method?: boolean
+    activated?: boolean
+    activatedAt?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pendingPayment"]>
+
+  export type PendingPaymentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    reference?: boolean
+    plan?: boolean
+    amount?: boolean
+    currency?: boolean
+    method?: boolean
+    activated?: boolean
+    activatedAt?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pendingPayment"]>
+
+  export type PendingPaymentSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    reference?: boolean
+    plan?: boolean
+    amount?: boolean
+    currency?: boolean
+    method?: boolean
+    activated?: boolean
+    activatedAt?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type PendingPaymentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "reference" | "plan" | "amount" | "currency" | "method" | "activated" | "activatedAt" | "expiresAt" | "createdAt", ExtArgs["result"]["pendingPayment"]>
+  export type PendingPaymentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PendingPaymentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PendingPaymentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PendingPaymentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PendingPayment"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      reference: string
+      plan: string
+      amount: number
+      currency: string
+      method: string
+      activated: boolean
+      activatedAt: Date | null
+      expiresAt: Date
+      createdAt: Date
+    }, ExtArgs["result"]["pendingPayment"]>
+    composites: {}
+  }
+
+  type PendingPaymentGetPayload<S extends boolean | null | undefined | PendingPaymentDefaultArgs> = $Result.GetResult<Prisma.$PendingPaymentPayload, S>
+
+  type PendingPaymentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PendingPaymentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PendingPaymentCountAggregateInputType | true
+    }
+
+  export interface PendingPaymentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PendingPayment'], meta: { name: 'PendingPayment' } }
+    /**
+     * Find zero or one PendingPayment that matches the filter.
+     * @param {PendingPaymentFindUniqueArgs} args - Arguments to find a PendingPayment
+     * @example
+     * // Get one PendingPayment
+     * const pendingPayment = await prisma.pendingPayment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PendingPaymentFindUniqueArgs>(args: SelectSubset<T, PendingPaymentFindUniqueArgs<ExtArgs>>): Prisma__PendingPaymentClient<$Result.GetResult<Prisma.$PendingPaymentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PendingPayment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PendingPaymentFindUniqueOrThrowArgs} args - Arguments to find a PendingPayment
+     * @example
+     * // Get one PendingPayment
+     * const pendingPayment = await prisma.pendingPayment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PendingPaymentFindUniqueOrThrowArgs>(args: SelectSubset<T, PendingPaymentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PendingPaymentClient<$Result.GetResult<Prisma.$PendingPaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PendingPayment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingPaymentFindFirstArgs} args - Arguments to find a PendingPayment
+     * @example
+     * // Get one PendingPayment
+     * const pendingPayment = await prisma.pendingPayment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PendingPaymentFindFirstArgs>(args?: SelectSubset<T, PendingPaymentFindFirstArgs<ExtArgs>>): Prisma__PendingPaymentClient<$Result.GetResult<Prisma.$PendingPaymentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PendingPayment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingPaymentFindFirstOrThrowArgs} args - Arguments to find a PendingPayment
+     * @example
+     * // Get one PendingPayment
+     * const pendingPayment = await prisma.pendingPayment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PendingPaymentFindFirstOrThrowArgs>(args?: SelectSubset<T, PendingPaymentFindFirstOrThrowArgs<ExtArgs>>): Prisma__PendingPaymentClient<$Result.GetResult<Prisma.$PendingPaymentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PendingPayments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingPaymentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PendingPayments
+     * const pendingPayments = await prisma.pendingPayment.findMany()
+     * 
+     * // Get first 10 PendingPayments
+     * const pendingPayments = await prisma.pendingPayment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pendingPaymentWithIdOnly = await prisma.pendingPayment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PendingPaymentFindManyArgs>(args?: SelectSubset<T, PendingPaymentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PendingPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PendingPayment.
+     * @param {PendingPaymentCreateArgs} args - Arguments to create a PendingPayment.
+     * @example
+     * // Create one PendingPayment
+     * const PendingPayment = await prisma.pendingPayment.create({
+     *   data: {
+     *     // ... data to create a PendingPayment
+     *   }
+     * })
+     * 
+     */
+    create<T extends PendingPaymentCreateArgs>(args: SelectSubset<T, PendingPaymentCreateArgs<ExtArgs>>): Prisma__PendingPaymentClient<$Result.GetResult<Prisma.$PendingPaymentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PendingPayments.
+     * @param {PendingPaymentCreateManyArgs} args - Arguments to create many PendingPayments.
+     * @example
+     * // Create many PendingPayments
+     * const pendingPayment = await prisma.pendingPayment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PendingPaymentCreateManyArgs>(args?: SelectSubset<T, PendingPaymentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PendingPayments and returns the data saved in the database.
+     * @param {PendingPaymentCreateManyAndReturnArgs} args - Arguments to create many PendingPayments.
+     * @example
+     * // Create many PendingPayments
+     * const pendingPayment = await prisma.pendingPayment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PendingPayments and only return the `id`
+     * const pendingPaymentWithIdOnly = await prisma.pendingPayment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PendingPaymentCreateManyAndReturnArgs>(args?: SelectSubset<T, PendingPaymentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PendingPaymentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PendingPayment.
+     * @param {PendingPaymentDeleteArgs} args - Arguments to delete one PendingPayment.
+     * @example
+     * // Delete one PendingPayment
+     * const PendingPayment = await prisma.pendingPayment.delete({
+     *   where: {
+     *     // ... filter to delete one PendingPayment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PendingPaymentDeleteArgs>(args: SelectSubset<T, PendingPaymentDeleteArgs<ExtArgs>>): Prisma__PendingPaymentClient<$Result.GetResult<Prisma.$PendingPaymentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PendingPayment.
+     * @param {PendingPaymentUpdateArgs} args - Arguments to update one PendingPayment.
+     * @example
+     * // Update one PendingPayment
+     * const pendingPayment = await prisma.pendingPayment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PendingPaymentUpdateArgs>(args: SelectSubset<T, PendingPaymentUpdateArgs<ExtArgs>>): Prisma__PendingPaymentClient<$Result.GetResult<Prisma.$PendingPaymentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PendingPayments.
+     * @param {PendingPaymentDeleteManyArgs} args - Arguments to filter PendingPayments to delete.
+     * @example
+     * // Delete a few PendingPayments
+     * const { count } = await prisma.pendingPayment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PendingPaymentDeleteManyArgs>(args?: SelectSubset<T, PendingPaymentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PendingPayments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingPaymentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PendingPayments
+     * const pendingPayment = await prisma.pendingPayment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PendingPaymentUpdateManyArgs>(args: SelectSubset<T, PendingPaymentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PendingPayments and returns the data updated in the database.
+     * @param {PendingPaymentUpdateManyAndReturnArgs} args - Arguments to update many PendingPayments.
+     * @example
+     * // Update many PendingPayments
+     * const pendingPayment = await prisma.pendingPayment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PendingPayments and only return the `id`
+     * const pendingPaymentWithIdOnly = await prisma.pendingPayment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PendingPaymentUpdateManyAndReturnArgs>(args: SelectSubset<T, PendingPaymentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PendingPaymentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PendingPayment.
+     * @param {PendingPaymentUpsertArgs} args - Arguments to update or create a PendingPayment.
+     * @example
+     * // Update or create a PendingPayment
+     * const pendingPayment = await prisma.pendingPayment.upsert({
+     *   create: {
+     *     // ... data to create a PendingPayment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PendingPayment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PendingPaymentUpsertArgs>(args: SelectSubset<T, PendingPaymentUpsertArgs<ExtArgs>>): Prisma__PendingPaymentClient<$Result.GetResult<Prisma.$PendingPaymentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PendingPayments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingPaymentCountArgs} args - Arguments to filter PendingPayments to count.
+     * @example
+     * // Count the number of PendingPayments
+     * const count = await prisma.pendingPayment.count({
+     *   where: {
+     *     // ... the filter for the PendingPayments we want to count
+     *   }
+     * })
+    **/
+    count<T extends PendingPaymentCountArgs>(
+      args?: Subset<T, PendingPaymentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PendingPaymentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PendingPayment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingPaymentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PendingPaymentAggregateArgs>(args: Subset<T, PendingPaymentAggregateArgs>): Prisma.PrismaPromise<GetPendingPaymentAggregateType<T>>
+
+    /**
+     * Group by PendingPayment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingPaymentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PendingPaymentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PendingPaymentGroupByArgs['orderBy'] }
+        : { orderBy?: PendingPaymentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PendingPaymentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPendingPaymentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PendingPayment model
+   */
+  readonly fields: PendingPaymentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PendingPayment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PendingPaymentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PendingPayment model
+   */
+  interface PendingPaymentFieldRefs {
+    readonly id: FieldRef<"PendingPayment", 'String'>
+    readonly userId: FieldRef<"PendingPayment", 'String'>
+    readonly reference: FieldRef<"PendingPayment", 'String'>
+    readonly plan: FieldRef<"PendingPayment", 'String'>
+    readonly amount: FieldRef<"PendingPayment", 'Float'>
+    readonly currency: FieldRef<"PendingPayment", 'String'>
+    readonly method: FieldRef<"PendingPayment", 'String'>
+    readonly activated: FieldRef<"PendingPayment", 'Boolean'>
+    readonly activatedAt: FieldRef<"PendingPayment", 'DateTime'>
+    readonly expiresAt: FieldRef<"PendingPayment", 'DateTime'>
+    readonly createdAt: FieldRef<"PendingPayment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PendingPayment findUnique
+   */
+  export type PendingPaymentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingPayment
+     */
+    select?: PendingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingPayment
+     */
+    omit?: PendingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which PendingPayment to fetch.
+     */
+    where: PendingPaymentWhereUniqueInput
+  }
+
+  /**
+   * PendingPayment findUniqueOrThrow
+   */
+  export type PendingPaymentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingPayment
+     */
+    select?: PendingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingPayment
+     */
+    omit?: PendingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which PendingPayment to fetch.
+     */
+    where: PendingPaymentWhereUniqueInput
+  }
+
+  /**
+   * PendingPayment findFirst
+   */
+  export type PendingPaymentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingPayment
+     */
+    select?: PendingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingPayment
+     */
+    omit?: PendingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which PendingPayment to fetch.
+     */
+    where?: PendingPaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PendingPayments to fetch.
+     */
+    orderBy?: PendingPaymentOrderByWithRelationInput | PendingPaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PendingPayments.
+     */
+    cursor?: PendingPaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PendingPayments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PendingPayments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PendingPayments.
+     */
+    distinct?: PendingPaymentScalarFieldEnum | PendingPaymentScalarFieldEnum[]
+  }
+
+  /**
+   * PendingPayment findFirstOrThrow
+   */
+  export type PendingPaymentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingPayment
+     */
+    select?: PendingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingPayment
+     */
+    omit?: PendingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which PendingPayment to fetch.
+     */
+    where?: PendingPaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PendingPayments to fetch.
+     */
+    orderBy?: PendingPaymentOrderByWithRelationInput | PendingPaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PendingPayments.
+     */
+    cursor?: PendingPaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PendingPayments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PendingPayments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PendingPayments.
+     */
+    distinct?: PendingPaymentScalarFieldEnum | PendingPaymentScalarFieldEnum[]
+  }
+
+  /**
+   * PendingPayment findMany
+   */
+  export type PendingPaymentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingPayment
+     */
+    select?: PendingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingPayment
+     */
+    omit?: PendingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingPaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which PendingPayments to fetch.
+     */
+    where?: PendingPaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PendingPayments to fetch.
+     */
+    orderBy?: PendingPaymentOrderByWithRelationInput | PendingPaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PendingPayments.
+     */
+    cursor?: PendingPaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PendingPayments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PendingPayments.
+     */
+    skip?: number
+    distinct?: PendingPaymentScalarFieldEnum | PendingPaymentScalarFieldEnum[]
+  }
+
+  /**
+   * PendingPayment create
+   */
+  export type PendingPaymentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingPayment
+     */
+    select?: PendingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingPayment
+     */
+    omit?: PendingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingPaymentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PendingPayment.
+     */
+    data: XOR<PendingPaymentCreateInput, PendingPaymentUncheckedCreateInput>
+  }
+
+  /**
+   * PendingPayment createMany
+   */
+  export type PendingPaymentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PendingPayments.
+     */
+    data: PendingPaymentCreateManyInput | PendingPaymentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PendingPayment createManyAndReturn
+   */
+  export type PendingPaymentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingPayment
+     */
+    select?: PendingPaymentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingPayment
+     */
+    omit?: PendingPaymentOmit<ExtArgs> | null
+    /**
+     * The data used to create many PendingPayments.
+     */
+    data: PendingPaymentCreateManyInput | PendingPaymentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingPaymentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PendingPayment update
+   */
+  export type PendingPaymentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingPayment
+     */
+    select?: PendingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingPayment
+     */
+    omit?: PendingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingPaymentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PendingPayment.
+     */
+    data: XOR<PendingPaymentUpdateInput, PendingPaymentUncheckedUpdateInput>
+    /**
+     * Choose, which PendingPayment to update.
+     */
+    where: PendingPaymentWhereUniqueInput
+  }
+
+  /**
+   * PendingPayment updateMany
+   */
+  export type PendingPaymentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PendingPayments.
+     */
+    data: XOR<PendingPaymentUpdateManyMutationInput, PendingPaymentUncheckedUpdateManyInput>
+    /**
+     * Filter which PendingPayments to update
+     */
+    where?: PendingPaymentWhereInput
+    /**
+     * Limit how many PendingPayments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PendingPayment updateManyAndReturn
+   */
+  export type PendingPaymentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingPayment
+     */
+    select?: PendingPaymentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingPayment
+     */
+    omit?: PendingPaymentOmit<ExtArgs> | null
+    /**
+     * The data used to update PendingPayments.
+     */
+    data: XOR<PendingPaymentUpdateManyMutationInput, PendingPaymentUncheckedUpdateManyInput>
+    /**
+     * Filter which PendingPayments to update
+     */
+    where?: PendingPaymentWhereInput
+    /**
+     * Limit how many PendingPayments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingPaymentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PendingPayment upsert
+   */
+  export type PendingPaymentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingPayment
+     */
+    select?: PendingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingPayment
+     */
+    omit?: PendingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingPaymentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PendingPayment to update in case it exists.
+     */
+    where: PendingPaymentWhereUniqueInput
+    /**
+     * In case the PendingPayment found by the `where` argument doesn't exist, create a new PendingPayment with this data.
+     */
+    create: XOR<PendingPaymentCreateInput, PendingPaymentUncheckedCreateInput>
+    /**
+     * In case the PendingPayment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PendingPaymentUpdateInput, PendingPaymentUncheckedUpdateInput>
+  }
+
+  /**
+   * PendingPayment delete
+   */
+  export type PendingPaymentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingPayment
+     */
+    select?: PendingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingPayment
+     */
+    omit?: PendingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingPaymentInclude<ExtArgs> | null
+    /**
+     * Filter which PendingPayment to delete.
+     */
+    where: PendingPaymentWhereUniqueInput
+  }
+
+  /**
+   * PendingPayment deleteMany
+   */
+  export type PendingPaymentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PendingPayments to delete
+     */
+    where?: PendingPaymentWhereInput
+    /**
+     * Limit how many PendingPayments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PendingPayment without action
+   */
+  export type PendingPaymentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingPayment
+     */
+    select?: PendingPaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingPayment
+     */
+    omit?: PendingPaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingPaymentInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -35662,6 +36960,23 @@ export namespace Prisma {
   };
 
   export type WeightLogScalarFieldEnum = (typeof WeightLogScalarFieldEnum)[keyof typeof WeightLogScalarFieldEnum]
+
+
+  export const PendingPaymentScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    reference: 'reference',
+    plan: 'plan',
+    amount: 'amount',
+    currency: 'currency',
+    method: 'method',
+    activated: 'activated',
+    activatedAt: 'activatedAt',
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt'
+  };
+
+  export type PendingPaymentScalarFieldEnum = (typeof PendingPaymentScalarFieldEnum)[keyof typeof PendingPaymentScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -36129,6 +37444,7 @@ export namespace Prisma {
     challenges?: ChallengeListRelationFilter
     sentMessages?: DirectMessageListRelationFilter
     receivedMessages?: DirectMessageListRelationFilter
+    pendingPayments?: PendingPaymentListRelationFilter
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     profile?: XOR<UserProfileNullableScalarRelationFilter, UserProfileWhereInput> | null
@@ -36166,6 +37482,7 @@ export namespace Prisma {
     challenges?: ChallengeOrderByRelationAggregateInput
     sentMessages?: DirectMessageOrderByRelationAggregateInput
     receivedMessages?: DirectMessageOrderByRelationAggregateInput
+    pendingPayments?: PendingPaymentOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     profile?: UserProfileOrderByWithRelationInput
@@ -36206,6 +37523,7 @@ export namespace Prisma {
     challenges?: ChallengeListRelationFilter
     sentMessages?: DirectMessageListRelationFilter
     receivedMessages?: DirectMessageListRelationFilter
+    pendingPayments?: PendingPaymentListRelationFilter
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     profile?: XOR<UserProfileNullableScalarRelationFilter, UserProfileWhereInput> | null
@@ -37967,6 +39285,93 @@ export namespace Prisma {
     weightKg?: FloatWithAggregatesFilter<"WeightLog"> | number
   }
 
+  export type PendingPaymentWhereInput = {
+    AND?: PendingPaymentWhereInput | PendingPaymentWhereInput[]
+    OR?: PendingPaymentWhereInput[]
+    NOT?: PendingPaymentWhereInput | PendingPaymentWhereInput[]
+    id?: StringFilter<"PendingPayment"> | string
+    userId?: StringFilter<"PendingPayment"> | string
+    reference?: StringFilter<"PendingPayment"> | string
+    plan?: StringFilter<"PendingPayment"> | string
+    amount?: FloatFilter<"PendingPayment"> | number
+    currency?: StringFilter<"PendingPayment"> | string
+    method?: StringFilter<"PendingPayment"> | string
+    activated?: BoolFilter<"PendingPayment"> | boolean
+    activatedAt?: DateTimeNullableFilter<"PendingPayment"> | Date | string | null
+    expiresAt?: DateTimeFilter<"PendingPayment"> | Date | string
+    createdAt?: DateTimeFilter<"PendingPayment"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type PendingPaymentOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    reference?: SortOrder
+    plan?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    method?: SortOrder
+    activated?: SortOrder
+    activatedAt?: SortOrderInput | SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type PendingPaymentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    reference?: string
+    AND?: PendingPaymentWhereInput | PendingPaymentWhereInput[]
+    OR?: PendingPaymentWhereInput[]
+    NOT?: PendingPaymentWhereInput | PendingPaymentWhereInput[]
+    userId?: StringFilter<"PendingPayment"> | string
+    plan?: StringFilter<"PendingPayment"> | string
+    amount?: FloatFilter<"PendingPayment"> | number
+    currency?: StringFilter<"PendingPayment"> | string
+    method?: StringFilter<"PendingPayment"> | string
+    activated?: BoolFilter<"PendingPayment"> | boolean
+    activatedAt?: DateTimeNullableFilter<"PendingPayment"> | Date | string | null
+    expiresAt?: DateTimeFilter<"PendingPayment"> | Date | string
+    createdAt?: DateTimeFilter<"PendingPayment"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "reference">
+
+  export type PendingPaymentOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    reference?: SortOrder
+    plan?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    method?: SortOrder
+    activated?: SortOrder
+    activatedAt?: SortOrderInput | SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    _count?: PendingPaymentCountOrderByAggregateInput
+    _avg?: PendingPaymentAvgOrderByAggregateInput
+    _max?: PendingPaymentMaxOrderByAggregateInput
+    _min?: PendingPaymentMinOrderByAggregateInput
+    _sum?: PendingPaymentSumOrderByAggregateInput
+  }
+
+  export type PendingPaymentScalarWhereWithAggregatesInput = {
+    AND?: PendingPaymentScalarWhereWithAggregatesInput | PendingPaymentScalarWhereWithAggregatesInput[]
+    OR?: PendingPaymentScalarWhereWithAggregatesInput[]
+    NOT?: PendingPaymentScalarWhereWithAggregatesInput | PendingPaymentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PendingPayment"> | string
+    userId?: StringWithAggregatesFilter<"PendingPayment"> | string
+    reference?: StringWithAggregatesFilter<"PendingPayment"> | string
+    plan?: StringWithAggregatesFilter<"PendingPayment"> | string
+    amount?: FloatWithAggregatesFilter<"PendingPayment"> | number
+    currency?: StringWithAggregatesFilter<"PendingPayment"> | string
+    method?: StringWithAggregatesFilter<"PendingPayment"> | string
+    activated?: BoolWithAggregatesFilter<"PendingPayment"> | boolean
+    activatedAt?: DateTimeNullableWithAggregatesFilter<"PendingPayment"> | Date | string | null
+    expiresAt?: DateTimeWithAggregatesFilter<"PendingPayment"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"PendingPayment"> | Date | string
+  }
+
   export type AccountCreateInput = {
     id?: string
     type: string
@@ -38184,6 +39589,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -38220,6 +39626,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -38256,6 +39663,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -38292,6 +39700,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -40133,6 +41542,103 @@ export namespace Prisma {
     weightKg?: FloatFieldUpdateOperationsInput | number
   }
 
+  export type PendingPaymentCreateInput = {
+    id?: string
+    reference: string
+    plan: string
+    amount: number
+    currency: string
+    method: string
+    activated?: boolean
+    activatedAt?: Date | string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutPendingPaymentsInput
+  }
+
+  export type PendingPaymentUncheckedCreateInput = {
+    id?: string
+    userId: string
+    reference: string
+    plan: string
+    amount: number
+    currency: string
+    method: string
+    activated?: boolean
+    activatedAt?: Date | string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type PendingPaymentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    plan?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
+    activated?: BoolFieldUpdateOperationsInput | boolean
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPendingPaymentsNestedInput
+  }
+
+  export type PendingPaymentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    plan?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
+    activated?: BoolFieldUpdateOperationsInput | boolean
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PendingPaymentCreateManyInput = {
+    id?: string
+    userId: string
+    reference: string
+    plan: string
+    amount: number
+    currency: string
+    method: string
+    activated?: boolean
+    activatedAt?: Date | string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type PendingPaymentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    plan?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
+    activated?: BoolFieldUpdateOperationsInput | boolean
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PendingPaymentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    plan?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
+    activated?: BoolFieldUpdateOperationsInput | boolean
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -40449,6 +41955,12 @@ export namespace Prisma {
     none?: DirectMessageWhereInput
   }
 
+  export type PendingPaymentListRelationFilter = {
+    every?: PendingPaymentWhereInput
+    some?: PendingPaymentWhereInput
+    none?: PendingPaymentWhereInput
+  }
+
   export type AccountListRelationFilter = {
     every?: AccountWhereInput
     some?: AccountWhereInput
@@ -40543,6 +42055,10 @@ export namespace Prisma {
   }
 
   export type DirectMessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PendingPaymentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -42009,6 +43525,56 @@ export namespace Prisma {
     weightKg?: SortOrder
   }
 
+  export type PendingPaymentCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    reference?: SortOrder
+    plan?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    method?: SortOrder
+    activated?: SortOrder
+    activatedAt?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PendingPaymentAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type PendingPaymentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    reference?: SortOrder
+    plan?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    method?: SortOrder
+    activated?: SortOrder
+    activatedAt?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PendingPaymentMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    reference?: SortOrder
+    plan?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    method?: SortOrder
+    activated?: SortOrder
+    activatedAt?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PendingPaymentSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
   export type UserCreateNestedOneWithoutAccountsInput = {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
@@ -42142,6 +43708,13 @@ export namespace Prisma {
     connectOrCreate?: DirectMessageCreateOrConnectWithoutToInput | DirectMessageCreateOrConnectWithoutToInput[]
     createMany?: DirectMessageCreateManyToInputEnvelope
     connect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+  }
+
+  export type PendingPaymentCreateNestedManyWithoutUserInput = {
+    create?: XOR<PendingPaymentCreateWithoutUserInput, PendingPaymentUncheckedCreateWithoutUserInput> | PendingPaymentCreateWithoutUserInput[] | PendingPaymentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PendingPaymentCreateOrConnectWithoutUserInput | PendingPaymentCreateOrConnectWithoutUserInput[]
+    createMany?: PendingPaymentCreateManyUserInputEnvelope
+    connect?: PendingPaymentWhereUniqueInput | PendingPaymentWhereUniqueInput[]
   }
 
   export type AccountCreateNestedManyWithoutUserInput = {
@@ -42299,6 +43872,13 @@ export namespace Prisma {
     connectOrCreate?: DirectMessageCreateOrConnectWithoutToInput | DirectMessageCreateOrConnectWithoutToInput[]
     createMany?: DirectMessageCreateManyToInputEnvelope
     connect?: DirectMessageWhereUniqueInput | DirectMessageWhereUniqueInput[]
+  }
+
+  export type PendingPaymentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PendingPaymentCreateWithoutUserInput, PendingPaymentUncheckedCreateWithoutUserInput> | PendingPaymentCreateWithoutUserInput[] | PendingPaymentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PendingPaymentCreateOrConnectWithoutUserInput | PendingPaymentCreateOrConnectWithoutUserInput[]
+    createMany?: PendingPaymentCreateManyUserInputEnvelope
+    connect?: PendingPaymentWhereUniqueInput | PendingPaymentWhereUniqueInput[]
   }
 
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
@@ -42549,6 +44129,20 @@ export namespace Prisma {
     update?: DirectMessageUpdateWithWhereUniqueWithoutToInput | DirectMessageUpdateWithWhereUniqueWithoutToInput[]
     updateMany?: DirectMessageUpdateManyWithWhereWithoutToInput | DirectMessageUpdateManyWithWhereWithoutToInput[]
     deleteMany?: DirectMessageScalarWhereInput | DirectMessageScalarWhereInput[]
+  }
+
+  export type PendingPaymentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PendingPaymentCreateWithoutUserInput, PendingPaymentUncheckedCreateWithoutUserInput> | PendingPaymentCreateWithoutUserInput[] | PendingPaymentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PendingPaymentCreateOrConnectWithoutUserInput | PendingPaymentCreateOrConnectWithoutUserInput[]
+    upsert?: PendingPaymentUpsertWithWhereUniqueWithoutUserInput | PendingPaymentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PendingPaymentCreateManyUserInputEnvelope
+    set?: PendingPaymentWhereUniqueInput | PendingPaymentWhereUniqueInput[]
+    disconnect?: PendingPaymentWhereUniqueInput | PendingPaymentWhereUniqueInput[]
+    delete?: PendingPaymentWhereUniqueInput | PendingPaymentWhereUniqueInput[]
+    connect?: PendingPaymentWhereUniqueInput | PendingPaymentWhereUniqueInput[]
+    update?: PendingPaymentUpdateWithWhereUniqueWithoutUserInput | PendingPaymentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PendingPaymentUpdateManyWithWhereWithoutUserInput | PendingPaymentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PendingPaymentScalarWhereInput | PendingPaymentScalarWhereInput[]
   }
 
   export type AccountUpdateManyWithoutUserNestedInput = {
@@ -42855,6 +44449,20 @@ export namespace Prisma {
     update?: DirectMessageUpdateWithWhereUniqueWithoutToInput | DirectMessageUpdateWithWhereUniqueWithoutToInput[]
     updateMany?: DirectMessageUpdateManyWithWhereWithoutToInput | DirectMessageUpdateManyWithWhereWithoutToInput[]
     deleteMany?: DirectMessageScalarWhereInput | DirectMessageScalarWhereInput[]
+  }
+
+  export type PendingPaymentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PendingPaymentCreateWithoutUserInput, PendingPaymentUncheckedCreateWithoutUserInput> | PendingPaymentCreateWithoutUserInput[] | PendingPaymentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PendingPaymentCreateOrConnectWithoutUserInput | PendingPaymentCreateOrConnectWithoutUserInput[]
+    upsert?: PendingPaymentUpsertWithWhereUniqueWithoutUserInput | PendingPaymentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PendingPaymentCreateManyUserInputEnvelope
+    set?: PendingPaymentWhereUniqueInput | PendingPaymentWhereUniqueInput[]
+    disconnect?: PendingPaymentWhereUniqueInput | PendingPaymentWhereUniqueInput[]
+    delete?: PendingPaymentWhereUniqueInput | PendingPaymentWhereUniqueInput[]
+    connect?: PendingPaymentWhereUniqueInput | PendingPaymentWhereUniqueInput[]
+    update?: PendingPaymentUpdateWithWhereUniqueWithoutUserInput | PendingPaymentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PendingPaymentUpdateManyWithWhereWithoutUserInput | PendingPaymentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PendingPaymentScalarWhereInput | PendingPaymentScalarWhereInput[]
   }
 
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
@@ -44105,6 +45713,20 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWeightLogsInput, UserUpdateWithoutWeightLogsInput>, UserUncheckedUpdateWithoutWeightLogsInput>
   }
 
+  export type UserCreateNestedOneWithoutPendingPaymentsInput = {
+    create?: XOR<UserCreateWithoutPendingPaymentsInput, UserUncheckedCreateWithoutPendingPaymentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPendingPaymentsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutPendingPaymentsNestedInput = {
+    create?: XOR<UserCreateWithoutPendingPaymentsInput, UserUncheckedCreateWithoutPendingPaymentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPendingPaymentsInput
+    upsert?: UserUpsertWithoutPendingPaymentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPendingPaymentsInput, UserUpdateWithoutPendingPaymentsInput>, UserUncheckedUpdateWithoutPendingPaymentsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -44537,6 +46159,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
     recipes?: RecipeCreateNestedManyWithoutUserInput
@@ -44572,6 +46195,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
     recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
@@ -44623,6 +46247,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
     recipes?: RecipeUpdateManyWithoutUserNestedInput
@@ -44658,6 +46283,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
     recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
@@ -44693,6 +46319,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
     recipes?: RecipeCreateNestedManyWithoutUserInput
@@ -44728,6 +46355,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
     recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
@@ -44779,6 +46407,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
     recipes?: RecipeUpdateManyWithoutUserNestedInput
@@ -44814,6 +46443,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
     recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
@@ -44899,6 +46529,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -44934,6 +46565,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -44974,6 +46606,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -45009,6 +46642,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -45323,6 +46957,42 @@ export namespace Prisma {
 
   export type DirectMessageCreateManyToInputEnvelope = {
     data: DirectMessageCreateManyToInput | DirectMessageCreateManyToInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PendingPaymentCreateWithoutUserInput = {
+    id?: string
+    reference: string
+    plan: string
+    amount: number
+    currency: string
+    method: string
+    activated?: boolean
+    activatedAt?: Date | string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type PendingPaymentUncheckedCreateWithoutUserInput = {
+    id?: string
+    reference: string
+    plan: string
+    amount: number
+    currency: string
+    method: string
+    activated?: boolean
+    activatedAt?: Date | string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type PendingPaymentCreateOrConnectWithoutUserInput = {
+    where: PendingPaymentWhereUniqueInput
+    create: XOR<PendingPaymentCreateWithoutUserInput, PendingPaymentUncheckedCreateWithoutUserInput>
+  }
+
+  export type PendingPaymentCreateManyUserInputEnvelope = {
+    data: PendingPaymentCreateManyUserInput | PendingPaymentCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -45764,6 +47434,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -45799,6 +47470,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -46119,6 +47791,39 @@ export namespace Prisma {
   export type DirectMessageUpdateManyWithWhereWithoutToInput = {
     where: DirectMessageScalarWhereInput
     data: XOR<DirectMessageUpdateManyMutationInput, DirectMessageUncheckedUpdateManyWithoutToInput>
+  }
+
+  export type PendingPaymentUpsertWithWhereUniqueWithoutUserInput = {
+    where: PendingPaymentWhereUniqueInput
+    update: XOR<PendingPaymentUpdateWithoutUserInput, PendingPaymentUncheckedUpdateWithoutUserInput>
+    create: XOR<PendingPaymentCreateWithoutUserInput, PendingPaymentUncheckedCreateWithoutUserInput>
+  }
+
+  export type PendingPaymentUpdateWithWhereUniqueWithoutUserInput = {
+    where: PendingPaymentWhereUniqueInput
+    data: XOR<PendingPaymentUpdateWithoutUserInput, PendingPaymentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PendingPaymentUpdateManyWithWhereWithoutUserInput = {
+    where: PendingPaymentScalarWhereInput
+    data: XOR<PendingPaymentUpdateManyMutationInput, PendingPaymentUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PendingPaymentScalarWhereInput = {
+    AND?: PendingPaymentScalarWhereInput | PendingPaymentScalarWhereInput[]
+    OR?: PendingPaymentScalarWhereInput[]
+    NOT?: PendingPaymentScalarWhereInput | PendingPaymentScalarWhereInput[]
+    id?: StringFilter<"PendingPayment"> | string
+    userId?: StringFilter<"PendingPayment"> | string
+    reference?: StringFilter<"PendingPayment"> | string
+    plan?: StringFilter<"PendingPayment"> | string
+    amount?: FloatFilter<"PendingPayment"> | number
+    currency?: StringFilter<"PendingPayment"> | string
+    method?: StringFilter<"PendingPayment"> | string
+    activated?: BoolFilter<"PendingPayment"> | boolean
+    activatedAt?: DateTimeNullableFilter<"PendingPayment"> | Date | string | null
+    expiresAt?: DateTimeFilter<"PendingPayment"> | Date | string
+    createdAt?: DateTimeFilter<"PendingPayment"> | Date | string
   }
 
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
@@ -46484,6 +48189,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     recipes?: RecipeCreateNestedManyWithoutUserInput
@@ -46519,6 +48225,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
@@ -46570,6 +48277,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     recipes?: RecipeUpdateManyWithoutUserNestedInput
@@ -46605,6 +48313,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
@@ -46639,6 +48348,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -46674,6 +48384,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -46714,6 +48425,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -46749,6 +48461,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -46800,6 +48513,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -46835,6 +48549,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -46881,6 +48596,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -46916,6 +48632,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -46951,6 +48668,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -46986,6 +48704,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -47026,6 +48745,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -47061,6 +48781,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -47112,6 +48833,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -47147,6 +48869,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -47193,6 +48916,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -47228,6 +48952,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -47263,6 +48988,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -47298,6 +49024,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -47349,6 +49076,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -47384,6 +49112,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -47419,6 +49148,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -47454,6 +49184,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -47588,6 +49319,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -47623,6 +49355,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -47778,6 +49511,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -47813,6 +49547,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -47921,6 +49656,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -47956,6 +49692,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -48042,6 +49779,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -48077,6 +49815,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -48240,6 +49979,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -48275,6 +50015,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -48357,6 +50098,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutUserInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -48392,6 +50134,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -48499,6 +50242,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutUserNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -48534,6 +50278,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -48585,6 +50330,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutUserInput
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -48620,6 +50366,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -48660,6 +50407,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutUserInput
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -48695,6 +50443,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -48746,6 +50495,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -48781,6 +50531,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -48827,6 +50578,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -48862,6 +50614,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -48986,6 +50739,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -49021,6 +50775,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -49111,6 +50866,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -49146,6 +50902,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -49226,6 +50983,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -49261,6 +51019,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -49358,6 +51117,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -49393,6 +51153,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -49655,6 +51416,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -49690,6 +51452,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -49763,6 +51526,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -49798,6 +51562,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -50193,6 +51958,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -50228,6 +51994,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -50279,6 +52046,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -50314,6 +52082,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -50349,6 +52118,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -50384,6 +52154,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -50471,6 +52242,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -50506,6 +52278,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -50557,6 +52330,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -50592,6 +52366,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -50694,6 +52469,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -50729,6 +52505,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -50894,6 +52671,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -50929,6 +52707,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -50980,6 +52759,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -51015,6 +52795,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -51050,6 +52831,7 @@ export namespace Prisma {
     challenges?: ChallengeCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     profile?: UserProfileCreateNestedOneWithoutUserInput
@@ -51085,6 +52867,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
     sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
     receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    pendingPayments?: PendingPaymentUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
@@ -51136,6 +52919,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -51171,6 +52955,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -51178,6 +52963,166 @@ export namespace Prisma {
     nutritionPlans?: NutritionPlanUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     hydrationLogs?: HydrationLogUncheckedUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUncheckedUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutPendingPaymentsInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeCreateNestedOneWithoutUsedByInput
+    coach?: UserCreateNestedOneWithoutClientsInput
+    clients?: UserCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageCreateNestedManyWithoutToInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    profile?: UserProfileCreateNestedOneWithoutUserInput
+    recipes?: RecipeCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPendingPaymentsInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    name?: string | null
+    image?: string | null
+    role?: $Enums.UserRole
+    coachId?: string | null
+    passwordHash?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coachCodes?: CoachInviteCodeUncheckedCreateNestedManyWithoutCoachInput
+    usedInviteCode?: CoachInviteCodeUncheckedCreateNestedOneWithoutUsedByInput
+    clients?: UserUncheckedCreateNestedManyWithoutCoachInput
+    registrationCodes?: RegistrationCodeUncheckedCreateNestedManyWithoutCreatedByCoachInput
+    usedCode?: RegistrationCodeUncheckedCreateNestedOneWithoutUsedByInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    postReactions?: PostReactionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutCoachInput
+    sentMessages?: DirectMessageUncheckedCreateNestedManyWithoutFromInput
+    receivedMessages?: DirectMessageUncheckedCreateNestedManyWithoutToInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    profile?: UserProfileUncheckedCreateNestedOneWithoutUserInput
+    recipes?: RecipeUncheckedCreateNestedManyWithoutUserInput
+    nutritionPlans?: NutritionPlanUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    hydrationLogs?: HydrationLogUncheckedCreateNestedManyWithoutUserInput
+    weightLogs?: WeightLogUncheckedCreateNestedManyWithoutUserInput
+    dailyLogs?: DailyLogUncheckedCreateNestedManyWithoutUserInput
+    ingredientOverrides?: UserIngredientOverrideUncheckedCreateNestedManyWithoutUserInput
+    metabolicProfiles?: MetabolicProfileUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPendingPaymentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPendingPaymentsInput, UserUncheckedCreateWithoutPendingPaymentsInput>
+  }
+
+  export type UserUpsertWithoutPendingPaymentsInput = {
+    update: XOR<UserUpdateWithoutPendingPaymentsInput, UserUncheckedUpdateWithoutPendingPaymentsInput>
+    create: XOR<UserCreateWithoutPendingPaymentsInput, UserUncheckedCreateWithoutPendingPaymentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPendingPaymentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPendingPaymentsInput, UserUncheckedUpdateWithoutPendingPaymentsInput>
+  }
+
+  export type UserUpdateWithoutPendingPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUpdateOneWithoutUsedByNestedInput
+    coach?: UserUpdateOneWithoutClientsNestedInput
+    clients?: UserUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUpdateManyWithoutUserNestedInput
+    dailyLogs?: DailyLogUpdateManyWithoutUserNestedInput
+    ingredientOverrides?: UserIngredientOverrideUpdateManyWithoutUserNestedInput
+    metabolicProfiles?: MetabolicProfileUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPendingPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    coachId?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coachCodes?: CoachInviteCodeUncheckedUpdateManyWithoutCoachNestedInput
+    usedInviteCode?: CoachInviteCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    clients?: UserUncheckedUpdateManyWithoutCoachNestedInput
+    registrationCodes?: RegistrationCodeUncheckedUpdateManyWithoutCreatedByCoachNestedInput
+    usedCode?: RegistrationCodeUncheckedUpdateOneWithoutUsedByNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    postReactions?: PostReactionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
+    sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
+    receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
+    recipes?: RecipeUncheckedUpdateManyWithoutUserNestedInput
+    nutritionPlans?: NutritionPlanUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    hydrationLogs?: HydrationLogUncheckedUpdateManyWithoutUserNestedInput
+    weightLogs?: WeightLogUncheckedUpdateManyWithoutUserNestedInput
     dailyLogs?: DailyLogUncheckedUpdateManyWithoutUserNestedInput
     ingredientOverrides?: UserIngredientOverrideUncheckedUpdateManyWithoutUserNestedInput
     metabolicProfiles?: MetabolicProfileUncheckedUpdateManyWithoutUserNestedInput
@@ -51279,6 +53224,19 @@ export namespace Prisma {
     content: string
     imageUrl?: string | null
     readAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type PendingPaymentCreateManyUserInput = {
+    id?: string
+    reference: string
+    plan: string
+    amount: number
+    currency: string
+    method: string
+    activated?: boolean
+    activatedAt?: Date | string | null
+    expiresAt: Date | string
     createdAt?: Date | string
   }
 
@@ -51434,6 +53392,7 @@ export namespace Prisma {
     challenges?: ChallengeUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     profile?: UserProfileUpdateOneWithoutUserNestedInput
@@ -51469,6 +53428,7 @@ export namespace Prisma {
     challenges?: ChallengeUncheckedUpdateManyWithoutCoachNestedInput
     sentMessages?: DirectMessageUncheckedUpdateManyWithoutFromNestedInput
     receivedMessages?: DirectMessageUncheckedUpdateManyWithoutToNestedInput
+    pendingPayments?: PendingPaymentUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     profile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -51733,6 +53693,45 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PendingPaymentUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    plan?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
+    activated?: BoolFieldUpdateOperationsInput | boolean
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PendingPaymentUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    plan?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
+    activated?: BoolFieldUpdateOperationsInput | boolean
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PendingPaymentUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    plan?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: StringFieldUpdateOperationsInput | string
+    activated?: BoolFieldUpdateOperationsInput | boolean
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

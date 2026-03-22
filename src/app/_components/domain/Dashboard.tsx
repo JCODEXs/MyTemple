@@ -3,16 +3,9 @@
 import { useMemo } from "react"
 import { useRouter } from "next/navigation"
 import { api } from "@/trpc/react"
-import { useSession } from "next-auth/react"
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
-export function UserInfo() {
-  const { data: session, status } = useSession()
 
-  if (status === "loading") return null
-
-  return <div>{session?.user.name}</div>
-}
 function getMondayOfWeek(d = new Date()) {
   const day  = d.getDay()
   const diff = (day === 0 ? -6 : 1 - day)
@@ -207,7 +200,7 @@ const { today, weekStart, weekEnd, thirtyDaysAgo } = useMemo(() => {
     undefined,
     { staleTime: 10 * 60_000 }  // 10 minutos — cambia poco
   )
-  const userName = UserInfo()
+  
   const { data: todayLog } = api.dailyLog.getDay.useQuery(
     { date: today },
     { staleTime: 30_000 }       // 30 segundos — tiempo real
@@ -235,7 +228,7 @@ const { today, weekStart, weekEnd, thirtyDaysAgo } = useMemo(() => {
   // })
 
   // ── Derived values ─────────────────────────────────────────────────────────
-
+  const userName = profile?.user?.name?.split(" ")[0] ?? "atleta"
   // Estimated weight series from cumulative deltas
   const weightSeries = useMemo(() => {
     if (!monthLogs || !profile) return []
@@ -252,6 +245,18 @@ const { today, weekStart, weekEnd, thirtyDaysAgo } = useMemo(() => {
     weekLogs?.map((l) => l.caloriesIn) ?? [], [weekLogs])
   const weeklyBalance = useMemo(() =>
     weekLogs?.map((l) => l.balance) ?? [], [weekLogs])
+   // BMR calculado desde profile (no viene en DailyLog)
+  const bmrEstimate = profile
+    ? Math.round(
+        (10 * profile.weightKg + 6.25 * profile.heightCm - 5 * profile.age +
+        (profile.sex === "MALE" ? 5 : -161)) * profile.metabolicAdjustment
+      )
+    : null
+
+  // NEAT = gasto total - BMR
+  const neatEstimate = todayLog && bmrEstimate
+    ? Math.round(todayLog.caloriesOut - bmrEstimate)
+    : null
 
   // Target macros from profile goal + TDEE estimate
   const tdeeEstimate = profile
@@ -365,14 +370,14 @@ const { today, weekStart, weekEnd, thirtyDaysAgo } = useMemo(() => {
               <div className="col-span-2 flex justify-around items-center rounded-2xl bg-white/5 px-4 py-3">
                 <div className="text-center">
                   <p className="text-xs text-gray-500 mb-1">❤️ BMR</p>
-                  <p className="text-base font-black text-white">{fmt(todayLog?.bmr ?? profile?.metabolicAdjustment ? (10 * (profile?.weightKg ?? 0) + 6.25 * (profile?.heightCm ?? 0) - 5 * (profile?.age ?? 0) + ((profile?.sex === "MALE") ? 5 : -161)) * (profile?.metabolicAdjustment ?? 1) : null, 0)}</p>
+                  <p className="text-base font-black text-white">{fmt(bmrEstimate,0)??"-"}</p>
                   <p className="text-[10px] text-gray-600">kcal base</p>
                 </div>
                 <div className="h-8 w-px bg-white/10" />
                 <div className="text-center">
                   <p className="text-xs text-gray-500 mb-1">⚡ NEAT</p>
                   <p className="text-base font-black text-white">
-                    {profile ? fmt((todayLog?.caloriesOut ?? 0) - (10 * profile.weightKg + 6.25 * profile.heightCm - 5 * profile.age + (profile.sex === "MALE" ? 5 : -161)) * profile.metabolicAdjustment, 0) : "—"}
+                    {profile ? fmt(neatEstimate,0) : "—"}
                   </p>
                   <p className="text-[10px] text-gray-600">kcal actividad</p>
                 </div>

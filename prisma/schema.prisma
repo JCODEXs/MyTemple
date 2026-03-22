@@ -114,7 +114,7 @@ model User {
   challenges     Challenge[]     @relation("CoachChallenges")
   sentMessages   DirectMessage[] @relation("SentMessages")
   receivedMessages DirectMessage[] @relation("ReceivedMessages")
-
+  pendingPayments PendingPayment[]
   accounts Account[]
   sessions Session[]
 
@@ -632,3 +632,31 @@ model WeightLog {
   @@unique([userId, date])
   @@index([userId, date])
 }
+
+//////////////////////////////////////////////////////
+// payments
+//////////////////////////////////////////////////////
+
+
+model PendingPayment {
+  id          String   @id @default(cuid())
+  userId      String
+  reference   String   @unique   // mytemple_{userId}_{plan}_{timestamp}
+  plan        String             // "ATHLETE" | "COACH"
+  amount      Float
+  currency    String
+  method      String             // "QR" | "LINK" | "SUBSCRIPTION"
+  activated   Boolean  @default(false)
+  activatedAt DateTime?
+  expiresAt   DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([reference])
+}
+
+// Añadir en User:
+// pendingPayments PendingPayment[]

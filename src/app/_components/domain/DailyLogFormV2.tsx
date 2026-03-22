@@ -345,7 +345,10 @@ function MealSlotRow({
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function DailyLogForm({ date }: { date?: Date }) {
-  const today  = date ?? new Date()
+ const today = useMemo(() => {
+  const now = new Date()
+  return new Date(now.getFullYear(), now.getMonth(), now.getDate()) // medianoche exacta
+}, []) 
   const [result, setResult] = useState<EnergyResult | null>(null)
 
   // --- Preloaded meal plan (from db) ---

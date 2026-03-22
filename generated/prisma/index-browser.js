@@ -415,6 +415,20 @@ exports.Prisma.WeightLogScalarFieldEnum = {
   weightKg: 'weightKg'
 };
 
+exports.Prisma.PendingPaymentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  reference: 'reference',
+  plan: 'plan',
+  amount: 'amount',
+  currency: 'currency',
+  method: 'method',
+  activated: 'activated',
+  activatedAt: 'activatedAt',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -528,7 +542,8 @@ exports.Prisma.ModelName = {
   Workout: 'Workout',
   WorkoutSession: 'WorkoutSession',
   HydrationLog: 'HydrationLog',
-  WeightLog: 'WeightLog'
+  WeightLog: 'WeightLog',
+  PendingPayment: 'PendingPayment'
 };
 
 /**

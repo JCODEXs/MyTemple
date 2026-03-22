@@ -191,15 +191,17 @@ function WeeklyGrid({ plan, onDayClick }: {
   plan:       PlanFull
   onDayClick: (day: PlanDay) => void
 }) {
+  // Compute today once per render — not inside the .map()
+  const now   = new Date()
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+
   return (
     <div className="grid grid-cols-7 gap-2">
       {["L", "M", "X", "J", "V", "S", "D"].map((d) => (
         <div key={d} className="text-center text-[10px] font-bold text-gray-600 pb-1">{d}</div>
       ))}
       {plan.days.map((day) => {
-        const t     = day.totals
-        const today = new Date()
-        today.setHours(0, 0, 0, 0)
+        const t       = day.totals
         const dayDate = new Date(day.date)
         const isToday = dayDate.getTime() === today.getTime()
         const isPast  = dayDate < today
