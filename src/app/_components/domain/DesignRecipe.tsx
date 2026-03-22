@@ -433,10 +433,9 @@ export default function DesignRecipe() {
                         const url = res[0]?.ufsUrl ?? res[0]?.url
                         if (url) setMeta((p) => ({ ...p, imageUrl: url }))
                       }}
-                     onUploadError={(e: UploadThingError
-                     ) => {
-                             toast.error(`Error al subir imagen: ${e.message}`)
-                            }}
+                    onUploadError={(e) => {
+  toast.error(`Error al subir imagen: ${e.message}`)
+}}
                       appearance={{
                         container: "mt-1 w-auto",
                         button:
