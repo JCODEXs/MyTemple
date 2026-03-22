@@ -7,12 +7,12 @@ import AppNav from "../_components/domain/navigation/AppNav"
 
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const session = await auth()                
+  const session   = await auth()       
   if (!session) redirect("/auth/signin")
 
   const profile = await db.userProfile.findUnique({
     where: { userId: session.user.id },
-    select: { id: true },
+    select: { id: true  },
   })
 
   if (!profile) redirect("/setup")
