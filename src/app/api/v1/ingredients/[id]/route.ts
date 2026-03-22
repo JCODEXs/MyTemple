@@ -22,13 +22,14 @@ const overrideSchema = z.object({
  */
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const userId = await getUserId()
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
   try {
-    const ingredient = await IngredientService.getOne(userId, params.id)
+    const ingredient = await IngredientService.getOne(userId, id)
     if (!ingredient) return NextResponse.json({ error: "Ingrediente no encontrado" }, { status: 404 })
     return NextResponse.json(ingredient)
   } catch (error) {
@@ -48,8 +49,9 @@ export async function GET(
  */
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const userId = await getUserId()
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
@@ -61,7 +63,7 @@ export async function PATCH(
     }
 
     const result = await IngredientService.upsertOverride(userId, {
-      ingredientId: params.id,
+      ingredientId: id,
       ...parsed.data,
     })
     return NextResponse.json(result)
