@@ -252,11 +252,11 @@ export default function CoachClientDashboard({ clientId }: { clientId: string })
             className="rounded-xl bg-white/5 p-2 text-gray-400 hover:bg-white/10">←</button>
           <div className="flex items-center gap-3 flex-1">
             <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-xl font-black text-white shadow flex-shrink-0">
-              {client.name?.[0]?.toUpperCase() ?? "?"}
+              {client?.name?.[0]?.toUpperCase() ?? "?"}
             </div>
             <div>
-              <h1 className="text-xl font-black text-white">{client.name ?? client.email}</h1>
-              <p className="text-xs text-gray-500">{client.email}</p>
+              <h1 className="text-xl font-black text-white">{client?.name ?? client?.email}</h1>
+              <p className="text-xs text-gray-500">{client?.email}</p>
             </div>
           </div>
           <button onClick={() => setShowPlanModal(true)}
