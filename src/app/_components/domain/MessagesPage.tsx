@@ -69,7 +69,7 @@ function ImageUploadZone({
                 const url = res[0]?.ufsUrl ?? res[0]?.url
                 if (url) onChange([...imageUrls, url])
               }}
-                   onUploadError={(e: UploadThingError
+                   onUploadError={(e
                                   ) => {
                toast.error(`Error al subir imagen: ${e.message}`)
              }}
