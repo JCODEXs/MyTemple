@@ -4,7 +4,7 @@
 
 import { db }        from "@/server/db"
 import { TRPCError } from "@trpc/server"
-import type { UserRole } from "@/generated/prisma"
+import type { UserRole } from "../../../generated/prisma"
 
 export const AdminService = {
 

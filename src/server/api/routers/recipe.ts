@@ -5,7 +5,7 @@
 import { z } from "zod"
 import { TRPCError } from "@trpc/server"
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc"
-import { RecipeService } from "@/server/services/recipe.serviceV1"
+import { RecipeService } from "@/server/services/recipe.service"
 
 
 // ─── Schemas ──────────────────────────────────────────────────────────────────
@@ -79,6 +79,16 @@ export const recipeRouter = createTRPCRouter({
   getAll: protectedProcedure
     .query(async ({ ctx }) => {
       return RecipeService.getAll(ctx.session.user.id)
+    }),
+     getCommunityRecipes: protectedProcedure     // ← no auth required to browse
+    .query(async () => {
+      return RecipeService.getCommunityRecipes()
+    }),
+
+  importFromCommunity: protectedProcedure
+    .input(z.object({ sourceRecipeId: z.string().cuid() }))
+    .mutation(async ({ ctx, input }) => {
+      return RecipeService.importFromCommunity(ctx.session.user.id, input.sourceRecipeId)
     }),
 
   scaleByServings: protectedProcedure

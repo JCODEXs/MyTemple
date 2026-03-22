@@ -283,4 +283,119 @@ export const RecipeService = {
     const domain = buildDomainIngredients(ris, new Map())
     return scaleRecipeToTargetKcal(domain, recipe.baseServings, targetKcalPerServing)
   },
+    // ── Get community/seed recipes ────────────────────────────────────────────
+
+  async getCommunityRecipes() {
+    const recipes = await db.recipe.findMany({
+      where:   { isCommunity: true },
+      orderBy: { category: "asc" },
+    })
+
+    if (recipes.length === 0) return []
+
+    const recipeIds = recipes.map((r) => r.id)
+
+    const allRIs = await db.recipeIngredient.findMany({
+      where:   { recipeId: { in: recipeIds } },
+      include: { ingredient: true },
+    })
+
+    // Community recipes: no overrides to check (not user-specific)
+    const ingredientsByRecipe = new Map<string, typeof allRIs>()
+    for (const ri of allRIs) {
+      const list = ingredientsByRecipe.get(ri.recipeId) ?? []
+      list.push(ri)
+      ingredientsByRecipe.set(ri.recipeId, list)
+    }
+
+    return recipes.map((recipe) => {
+      const ris       = ingredientsByRecipe.get(recipe.id) ?? []
+      const domain    = ris.map((ri) => ({
+        ingredient: {
+          id:             ri.ingredient.id,
+          name:           ri.ingredient.name,
+          kcalPer100g:    ri.ingredient.kcalPer100g,
+          proteinPer100g: ri.ingredient.proteinPer100g,
+          carbsPer100g:   ri.ingredient.carbsPer100g,
+          fatPer100g:     ri.ingredient.fatPer100g,
+          fiberPer100g:   ri.ingredient.fiberPer100g,
+        },
+        gramsInBase: ri.gramsInBase,
+        pricePerKg:  ri.ingredient.defaultPricePerKg,
+      }))
+      const nutrition = calculateRecipeNutrition(domain, recipe.baseServings)
+      const cost      = calculateRecipeCost(domain, recipe.baseServings)
+
+      return {
+        ...recipe,
+        ingredients: ris.map((ri) => ({
+          id:           ri.id,
+          ingredientId: ri.ingredientId,
+          gramsInBase:  ri.gramsInBase,
+          ingredient:   ri.ingredient,
+        })),
+        nutrition,
+        cost,
+      }
+    })
+  },
+
+  // ── Import community recipe — creates a personal copy ─────────────────────
+
+  async importFromCommunity(userId: string, sourceRecipeId: string) {
+    // Verify source exists and is a community recipe
+    const source = await db.recipe.findFirst({
+      where:   { id: sourceRecipeId, isCommunity: true },
+      include: { ingredients: true },
+    })
+    if (!source) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "Receta no encontrada." })
+    }
+
+    // Check if already imported
+    const existing = await db.recipe.findFirst({
+      where: { userId, sourceRecipeId },
+    })
+    if (existing) {
+      throw new TRPCError({
+        code:    "CONFLICT",
+        message: "Ya tienes esta receta en tu colección.",
+      })
+    }
+
+    // Create personal copy — does NOT set isCommunity
+    return db.$transaction(async (tx) => {
+      const copy = await tx.recipe.create({
+        data: {
+          userId,
+          name:          source.name,
+          description:   source.description,
+          steps:         source.steps,
+          baseServings:  source.baseServings,
+          category:      source.category,
+          isPrivate:     false,
+          isVegan:       source.isVegan,
+          isVegetarian:  source.isVegetarian,
+          isHealthy:     source.isHealthy,
+          isLowCarb:     source.isLowCarb,
+          isSpicy:       source.isSpicy,
+          isQuickMeal:   source.isQuickMeal,
+          imageUrl:      source.imageUrl,
+          isCommunity:   false,       // ← personal copy is NOT community
+          sourceRecipeId: source.id,  // ← tracks origin
+        },
+      })
+
+      // Copy all ingredients exactly
+      await tx.recipeIngredient.createMany({
+        data: source.ingredients.map((ri) => ({
+          recipeId:    copy.id,
+          ingredientId: ri.ingredientId,
+          gramsInBase: ri.gramsInBase,
+        })),
+      })
+
+      return copy
+    })
+  },
 }

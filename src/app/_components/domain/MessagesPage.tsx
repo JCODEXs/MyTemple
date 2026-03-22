@@ -569,7 +569,7 @@ function DMConversation({ convo, currentUserId }: { convo: Convo; currentUserId:
               const url = res[0]?.ufsUrl ?? res[0]?.url
               if (url) setImageUrl(url)
             }}
-             onUploadError={(e: UploadThingError
+             onUploadError={(e
                                  ) => {
               toast.error(`Error al subir imagen: ${e.message}`)
             }}

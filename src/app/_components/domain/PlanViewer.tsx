@@ -123,7 +123,7 @@ function DayDetailModal({
               <div key={label} className={`rounded-2xl bg-gradient-to-br ${color} border ${border} p-3`}>
                 <p className="text-[10px] font-bold text-gray-400 mb-1">{label}</p>
                 <p className="text-2xl font-black text-white">
-                  {data ? Math.round(data.caloriesIn ?? data.kcal ?? 0) : "—"}
+                  {data ? Math.round((data as any).caloriesIn ?? (data as any).kcal ?? 0) : "—"}
                   <span className="text-xs font-normal text-gray-400 ml-0.5">kcal</span>
                 </p>
                 {data && (

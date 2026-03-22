@@ -3793,11 +3793,13 @@ export namespace Prisma {
   export type RecipeCountOutputType = {
     ingredients: number
     mealRecipes: number
+    importedCopies: number
   }
 
   export type RecipeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ingredients?: boolean | RecipeCountOutputTypeCountIngredientsArgs
     mealRecipes?: boolean | RecipeCountOutputTypeCountMealRecipesArgs
+    importedCopies?: boolean | RecipeCountOutputTypeCountImportedCopiesArgs
   }
 
   // Custom InputTypes
@@ -3823,6 +3825,13 @@ export namespace Prisma {
    */
   export type RecipeCountOutputTypeCountMealRecipesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MealRecipeWhereInput
+  }
+
+  /**
+   * RecipeCountOutputType without action
+   */
+  export type RecipeCountOutputTypeCountImportedCopiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecipeWhereInput
   }
 
 
@@ -21862,6 +21871,8 @@ export namespace Prisma {
     isQuickMeal: boolean | null
     imageUrl: string | null
     steps: string | null
+    sourceRecipeId: string | null
+    isCommunity: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -21882,6 +21893,8 @@ export namespace Prisma {
     isQuickMeal: boolean | null
     imageUrl: string | null
     steps: string | null
+    sourceRecipeId: string | null
+    isCommunity: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -21902,6 +21915,8 @@ export namespace Prisma {
     isQuickMeal: number
     imageUrl: number
     steps: number
+    sourceRecipeId: number
+    isCommunity: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -21932,6 +21947,8 @@ export namespace Prisma {
     isQuickMeal?: true
     imageUrl?: true
     steps?: true
+    sourceRecipeId?: true
+    isCommunity?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -21952,6 +21969,8 @@ export namespace Prisma {
     isQuickMeal?: true
     imageUrl?: true
     steps?: true
+    sourceRecipeId?: true
+    isCommunity?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -21972,6 +21991,8 @@ export namespace Prisma {
     isQuickMeal?: true
     imageUrl?: true
     steps?: true
+    sourceRecipeId?: true
+    isCommunity?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -22079,6 +22100,8 @@ export namespace Prisma {
     isQuickMeal: boolean
     imageUrl: string | null
     steps: string | null
+    sourceRecipeId: string | null
+    isCommunity: boolean
     createdAt: Date
     updatedAt: Date
     _count: RecipeCountAggregateOutputType | null
@@ -22118,11 +22141,15 @@ export namespace Prisma {
     isQuickMeal?: boolean
     imageUrl?: boolean
     steps?: boolean
+    sourceRecipeId?: boolean
+    isCommunity?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     ingredients?: boolean | Recipe$ingredientsArgs<ExtArgs>
     mealRecipes?: boolean | Recipe$mealRecipesArgs<ExtArgs>
+    sourceRecipe?: boolean | Recipe$sourceRecipeArgs<ExtArgs>
+    importedCopies?: boolean | Recipe$importedCopiesArgs<ExtArgs>
     _count?: boolean | RecipeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["recipe"]>
 
@@ -22142,9 +22169,12 @@ export namespace Prisma {
     isQuickMeal?: boolean
     imageUrl?: boolean
     steps?: boolean
+    sourceRecipeId?: boolean
+    isCommunity?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    sourceRecipe?: boolean | Recipe$sourceRecipeArgs<ExtArgs>
   }, ExtArgs["result"]["recipe"]>
 
   export type RecipeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -22163,9 +22193,12 @@ export namespace Prisma {
     isQuickMeal?: boolean
     imageUrl?: boolean
     steps?: boolean
+    sourceRecipeId?: boolean
+    isCommunity?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    sourceRecipe?: boolean | Recipe$sourceRecipeArgs<ExtArgs>
   }, ExtArgs["result"]["recipe"]>
 
   export type RecipeSelectScalar = {
@@ -22184,22 +22217,28 @@ export namespace Prisma {
     isQuickMeal?: boolean
     imageUrl?: boolean
     steps?: boolean
+    sourceRecipeId?: boolean
+    isCommunity?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type RecipeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "description" | "baseServings" | "category" | "isPrivate" | "isVegan" | "isVegetarian" | "isHealthy" | "isLowCarb" | "isSpicy" | "isQuickMeal" | "imageUrl" | "steps" | "createdAt" | "updatedAt", ExtArgs["result"]["recipe"]>
+  export type RecipeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "description" | "baseServings" | "category" | "isPrivate" | "isVegan" | "isVegetarian" | "isHealthy" | "isLowCarb" | "isSpicy" | "isQuickMeal" | "imageUrl" | "steps" | "sourceRecipeId" | "isCommunity" | "createdAt" | "updatedAt", ExtArgs["result"]["recipe"]>
   export type RecipeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     ingredients?: boolean | Recipe$ingredientsArgs<ExtArgs>
     mealRecipes?: boolean | Recipe$mealRecipesArgs<ExtArgs>
+    sourceRecipe?: boolean | Recipe$sourceRecipeArgs<ExtArgs>
+    importedCopies?: boolean | Recipe$importedCopiesArgs<ExtArgs>
     _count?: boolean | RecipeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RecipeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    sourceRecipe?: boolean | Recipe$sourceRecipeArgs<ExtArgs>
   }
   export type RecipeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    sourceRecipe?: boolean | Recipe$sourceRecipeArgs<ExtArgs>
   }
 
   export type $RecipePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -22208,6 +22247,8 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
       ingredients: Prisma.$RecipeIngredientPayload<ExtArgs>[]
       mealRecipes: Prisma.$MealRecipePayload<ExtArgs>[]
+      sourceRecipe: Prisma.$RecipePayload<ExtArgs> | null
+      importedCopies: Prisma.$RecipePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -22225,6 +22266,8 @@ export namespace Prisma {
       isQuickMeal: boolean
       imageUrl: string | null
       steps: string | null
+      sourceRecipeId: string | null
+      isCommunity: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["recipe"]>
@@ -22624,6 +22667,8 @@ export namespace Prisma {
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     ingredients<T extends Recipe$ingredientsArgs<ExtArgs> = {}>(args?: Subset<T, Recipe$ingredientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecipeIngredientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     mealRecipes<T extends Recipe$mealRecipesArgs<ExtArgs> = {}>(args?: Subset<T, Recipe$mealRecipesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealRecipePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sourceRecipe<T extends Recipe$sourceRecipeArgs<ExtArgs> = {}>(args?: Subset<T, Recipe$sourceRecipeArgs<ExtArgs>>): Prisma__RecipeClient<$Result.GetResult<Prisma.$RecipePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    importedCopies<T extends Recipe$importedCopiesArgs<ExtArgs> = {}>(args?: Subset<T, Recipe$importedCopiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecipePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -22668,6 +22713,8 @@ export namespace Prisma {
     readonly isQuickMeal: FieldRef<"Recipe", 'Boolean'>
     readonly imageUrl: FieldRef<"Recipe", 'String'>
     readonly steps: FieldRef<"Recipe", 'String'>
+    readonly sourceRecipeId: FieldRef<"Recipe", 'String'>
+    readonly isCommunity: FieldRef<"Recipe", 'Boolean'>
     readonly createdAt: FieldRef<"Recipe", 'DateTime'>
     readonly updatedAt: FieldRef<"Recipe", 'DateTime'>
   }
@@ -23111,6 +23158,49 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MealRecipeScalarFieldEnum | MealRecipeScalarFieldEnum[]
+  }
+
+  /**
+   * Recipe.sourceRecipe
+   */
+  export type Recipe$sourceRecipeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recipe
+     */
+    select?: RecipeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recipe
+     */
+    omit?: RecipeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeInclude<ExtArgs> | null
+    where?: RecipeWhereInput
+  }
+
+  /**
+   * Recipe.importedCopies
+   */
+  export type Recipe$importedCopiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recipe
+     */
+    select?: RecipeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recipe
+     */
+    omit?: RecipeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeInclude<ExtArgs> | null
+    where?: RecipeWhereInput
+    orderBy?: RecipeOrderByWithRelationInput | RecipeOrderByWithRelationInput[]
+    cursor?: RecipeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RecipeScalarFieldEnum | RecipeScalarFieldEnum[]
   }
 
   /**
@@ -36826,6 +36916,8 @@ export namespace Prisma {
     isQuickMeal: 'isQuickMeal',
     imageUrl: 'imageUrl',
     steps: 'steps',
+    sourceRecipeId: 'sourceRecipeId',
+    isCommunity: 'isCommunity',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -38491,11 +38583,15 @@ export namespace Prisma {
     isQuickMeal?: BoolFilter<"Recipe"> | boolean
     imageUrl?: StringNullableFilter<"Recipe"> | string | null
     steps?: StringNullableFilter<"Recipe"> | string | null
+    sourceRecipeId?: StringNullableFilter<"Recipe"> | string | null
+    isCommunity?: BoolFilter<"Recipe"> | boolean
     createdAt?: DateTimeFilter<"Recipe"> | Date | string
     updatedAt?: DateTimeFilter<"Recipe"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ingredients?: RecipeIngredientListRelationFilter
     mealRecipes?: MealRecipeListRelationFilter
+    sourceRecipe?: XOR<RecipeNullableScalarRelationFilter, RecipeWhereInput> | null
+    importedCopies?: RecipeListRelationFilter
   }
 
   export type RecipeOrderByWithRelationInput = {
@@ -38514,11 +38610,15 @@ export namespace Prisma {
     isQuickMeal?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
     steps?: SortOrderInput | SortOrder
+    sourceRecipeId?: SortOrderInput | SortOrder
+    isCommunity?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     ingredients?: RecipeIngredientOrderByRelationAggregateInput
     mealRecipes?: MealRecipeOrderByRelationAggregateInput
+    sourceRecipe?: RecipeOrderByWithRelationInput
+    importedCopies?: RecipeOrderByRelationAggregateInput
   }
 
   export type RecipeWhereUniqueInput = Prisma.AtLeast<{
@@ -38540,11 +38640,15 @@ export namespace Prisma {
     isQuickMeal?: BoolFilter<"Recipe"> | boolean
     imageUrl?: StringNullableFilter<"Recipe"> | string | null
     steps?: StringNullableFilter<"Recipe"> | string | null
+    sourceRecipeId?: StringNullableFilter<"Recipe"> | string | null
+    isCommunity?: BoolFilter<"Recipe"> | boolean
     createdAt?: DateTimeFilter<"Recipe"> | Date | string
     updatedAt?: DateTimeFilter<"Recipe"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     ingredients?: RecipeIngredientListRelationFilter
     mealRecipes?: MealRecipeListRelationFilter
+    sourceRecipe?: XOR<RecipeNullableScalarRelationFilter, RecipeWhereInput> | null
+    importedCopies?: RecipeListRelationFilter
   }, "id">
 
   export type RecipeOrderByWithAggregationInput = {
@@ -38563,6 +38667,8 @@ export namespace Prisma {
     isQuickMeal?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
     steps?: SortOrderInput | SortOrder
+    sourceRecipeId?: SortOrderInput | SortOrder
+    isCommunity?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: RecipeCountOrderByAggregateInput
@@ -38591,6 +38697,8 @@ export namespace Prisma {
     isQuickMeal?: BoolWithAggregatesFilter<"Recipe"> | boolean
     imageUrl?: StringNullableWithAggregatesFilter<"Recipe"> | string | null
     steps?: StringNullableWithAggregatesFilter<"Recipe"> | string | null
+    sourceRecipeId?: StringNullableWithAggregatesFilter<"Recipe"> | string | null
+    isCommunity?: BoolWithAggregatesFilter<"Recipe"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Recipe"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Recipe"> | Date | string
   }
@@ -40732,11 +40840,14 @@ export namespace Prisma {
     isQuickMeal?: boolean
     imageUrl?: string | null
     steps?: string | null
+    isCommunity?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutRecipesInput
     ingredients?: RecipeIngredientCreateNestedManyWithoutRecipeInput
     mealRecipes?: MealRecipeCreateNestedManyWithoutRecipeInput
+    sourceRecipe?: RecipeCreateNestedOneWithoutImportedCopiesInput
+    importedCopies?: RecipeCreateNestedManyWithoutSourceRecipeInput
   }
 
   export type RecipeUncheckedCreateInput = {
@@ -40755,10 +40866,13 @@ export namespace Prisma {
     isQuickMeal?: boolean
     imageUrl?: string | null
     steps?: string | null
+    sourceRecipeId?: string | null
+    isCommunity?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     ingredients?: RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
     mealRecipes?: MealRecipeUncheckedCreateNestedManyWithoutRecipeInput
+    importedCopies?: RecipeUncheckedCreateNestedManyWithoutSourceRecipeInput
   }
 
   export type RecipeUpdateInput = {
@@ -40776,11 +40890,14 @@ export namespace Prisma {
     isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     steps?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutRecipesNestedInput
     ingredients?: RecipeIngredientUpdateManyWithoutRecipeNestedInput
     mealRecipes?: MealRecipeUpdateManyWithoutRecipeNestedInput
+    sourceRecipe?: RecipeUpdateOneWithoutImportedCopiesNestedInput
+    importedCopies?: RecipeUpdateManyWithoutSourceRecipeNestedInput
   }
 
   export type RecipeUncheckedUpdateInput = {
@@ -40799,10 +40916,13 @@ export namespace Prisma {
     isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     steps?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceRecipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredients?: RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
     mealRecipes?: MealRecipeUncheckedUpdateManyWithoutRecipeNestedInput
+    importedCopies?: RecipeUncheckedUpdateManyWithoutSourceRecipeNestedInput
   }
 
   export type RecipeCreateManyInput = {
@@ -40821,6 +40941,8 @@ export namespace Prisma {
     isQuickMeal?: boolean
     imageUrl?: string | null
     steps?: string | null
+    sourceRecipeId?: string | null
+    isCommunity?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -40840,6 +40962,7 @@ export namespace Prisma {
     isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     steps?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -40860,6 +40983,8 @@ export namespace Prisma {
     isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     steps?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceRecipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42950,6 +43075,11 @@ export namespace Prisma {
     none?: MealRecipeWhereInput
   }
 
+  export type RecipeNullableScalarRelationFilter = {
+    is?: RecipeWhereInput | null
+    isNot?: RecipeWhereInput | null
+  }
+
   export type MealRecipeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -42970,6 +43100,8 @@ export namespace Prisma {
     isQuickMeal?: SortOrder
     imageUrl?: SortOrder
     steps?: SortOrder
+    sourceRecipeId?: SortOrder
+    isCommunity?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -42994,6 +43126,8 @@ export namespace Prisma {
     isQuickMeal?: SortOrder
     imageUrl?: SortOrder
     steps?: SortOrder
+    sourceRecipeId?: SortOrder
+    isCommunity?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -43014,6 +43148,8 @@ export namespace Prisma {
     isQuickMeal?: SortOrder
     imageUrl?: SortOrder
     steps?: SortOrder
+    sourceRecipeId?: SortOrder
+    isCommunity?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -45219,6 +45355,19 @@ export namespace Prisma {
     connect?: MealRecipeWhereUniqueInput | MealRecipeWhereUniqueInput[]
   }
 
+  export type RecipeCreateNestedOneWithoutImportedCopiesInput = {
+    create?: XOR<RecipeCreateWithoutImportedCopiesInput, RecipeUncheckedCreateWithoutImportedCopiesInput>
+    connectOrCreate?: RecipeCreateOrConnectWithoutImportedCopiesInput
+    connect?: RecipeWhereUniqueInput
+  }
+
+  export type RecipeCreateNestedManyWithoutSourceRecipeInput = {
+    create?: XOR<RecipeCreateWithoutSourceRecipeInput, RecipeUncheckedCreateWithoutSourceRecipeInput> | RecipeCreateWithoutSourceRecipeInput[] | RecipeUncheckedCreateWithoutSourceRecipeInput[]
+    connectOrCreate?: RecipeCreateOrConnectWithoutSourceRecipeInput | RecipeCreateOrConnectWithoutSourceRecipeInput[]
+    createMany?: RecipeCreateManySourceRecipeInputEnvelope
+    connect?: RecipeWhereUniqueInput | RecipeWhereUniqueInput[]
+  }
+
   export type RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput = {
     create?: XOR<RecipeIngredientCreateWithoutRecipeInput, RecipeIngredientUncheckedCreateWithoutRecipeInput> | RecipeIngredientCreateWithoutRecipeInput[] | RecipeIngredientUncheckedCreateWithoutRecipeInput[]
     connectOrCreate?: RecipeIngredientCreateOrConnectWithoutRecipeInput | RecipeIngredientCreateOrConnectWithoutRecipeInput[]
@@ -45231,6 +45380,13 @@ export namespace Prisma {
     connectOrCreate?: MealRecipeCreateOrConnectWithoutRecipeInput | MealRecipeCreateOrConnectWithoutRecipeInput[]
     createMany?: MealRecipeCreateManyRecipeInputEnvelope
     connect?: MealRecipeWhereUniqueInput | MealRecipeWhereUniqueInput[]
+  }
+
+  export type RecipeUncheckedCreateNestedManyWithoutSourceRecipeInput = {
+    create?: XOR<RecipeCreateWithoutSourceRecipeInput, RecipeUncheckedCreateWithoutSourceRecipeInput> | RecipeCreateWithoutSourceRecipeInput[] | RecipeUncheckedCreateWithoutSourceRecipeInput[]
+    connectOrCreate?: RecipeCreateOrConnectWithoutSourceRecipeInput | RecipeCreateOrConnectWithoutSourceRecipeInput[]
+    createMany?: RecipeCreateManySourceRecipeInputEnvelope
+    connect?: RecipeWhereUniqueInput | RecipeWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutRecipesNestedInput = {
@@ -45269,6 +45425,30 @@ export namespace Prisma {
     deleteMany?: MealRecipeScalarWhereInput | MealRecipeScalarWhereInput[]
   }
 
+  export type RecipeUpdateOneWithoutImportedCopiesNestedInput = {
+    create?: XOR<RecipeCreateWithoutImportedCopiesInput, RecipeUncheckedCreateWithoutImportedCopiesInput>
+    connectOrCreate?: RecipeCreateOrConnectWithoutImportedCopiesInput
+    upsert?: RecipeUpsertWithoutImportedCopiesInput
+    disconnect?: RecipeWhereInput | boolean
+    delete?: RecipeWhereInput | boolean
+    connect?: RecipeWhereUniqueInput
+    update?: XOR<XOR<RecipeUpdateToOneWithWhereWithoutImportedCopiesInput, RecipeUpdateWithoutImportedCopiesInput>, RecipeUncheckedUpdateWithoutImportedCopiesInput>
+  }
+
+  export type RecipeUpdateManyWithoutSourceRecipeNestedInput = {
+    create?: XOR<RecipeCreateWithoutSourceRecipeInput, RecipeUncheckedCreateWithoutSourceRecipeInput> | RecipeCreateWithoutSourceRecipeInput[] | RecipeUncheckedCreateWithoutSourceRecipeInput[]
+    connectOrCreate?: RecipeCreateOrConnectWithoutSourceRecipeInput | RecipeCreateOrConnectWithoutSourceRecipeInput[]
+    upsert?: RecipeUpsertWithWhereUniqueWithoutSourceRecipeInput | RecipeUpsertWithWhereUniqueWithoutSourceRecipeInput[]
+    createMany?: RecipeCreateManySourceRecipeInputEnvelope
+    set?: RecipeWhereUniqueInput | RecipeWhereUniqueInput[]
+    disconnect?: RecipeWhereUniqueInput | RecipeWhereUniqueInput[]
+    delete?: RecipeWhereUniqueInput | RecipeWhereUniqueInput[]
+    connect?: RecipeWhereUniqueInput | RecipeWhereUniqueInput[]
+    update?: RecipeUpdateWithWhereUniqueWithoutSourceRecipeInput | RecipeUpdateWithWhereUniqueWithoutSourceRecipeInput[]
+    updateMany?: RecipeUpdateManyWithWhereWithoutSourceRecipeInput | RecipeUpdateManyWithWhereWithoutSourceRecipeInput[]
+    deleteMany?: RecipeScalarWhereInput | RecipeScalarWhereInput[]
+  }
+
   export type RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput = {
     create?: XOR<RecipeIngredientCreateWithoutRecipeInput, RecipeIngredientUncheckedCreateWithoutRecipeInput> | RecipeIngredientCreateWithoutRecipeInput[] | RecipeIngredientUncheckedCreateWithoutRecipeInput[]
     connectOrCreate?: RecipeIngredientCreateOrConnectWithoutRecipeInput | RecipeIngredientCreateOrConnectWithoutRecipeInput[]
@@ -45295,6 +45475,20 @@ export namespace Prisma {
     update?: MealRecipeUpdateWithWhereUniqueWithoutRecipeInput | MealRecipeUpdateWithWhereUniqueWithoutRecipeInput[]
     updateMany?: MealRecipeUpdateManyWithWhereWithoutRecipeInput | MealRecipeUpdateManyWithWhereWithoutRecipeInput[]
     deleteMany?: MealRecipeScalarWhereInput | MealRecipeScalarWhereInput[]
+  }
+
+  export type RecipeUncheckedUpdateManyWithoutSourceRecipeNestedInput = {
+    create?: XOR<RecipeCreateWithoutSourceRecipeInput, RecipeUncheckedCreateWithoutSourceRecipeInput> | RecipeCreateWithoutSourceRecipeInput[] | RecipeUncheckedCreateWithoutSourceRecipeInput[]
+    connectOrCreate?: RecipeCreateOrConnectWithoutSourceRecipeInput | RecipeCreateOrConnectWithoutSourceRecipeInput[]
+    upsert?: RecipeUpsertWithWhereUniqueWithoutSourceRecipeInput | RecipeUpsertWithWhereUniqueWithoutSourceRecipeInput[]
+    createMany?: RecipeCreateManySourceRecipeInputEnvelope
+    set?: RecipeWhereUniqueInput | RecipeWhereUniqueInput[]
+    disconnect?: RecipeWhereUniqueInput | RecipeWhereUniqueInput[]
+    delete?: RecipeWhereUniqueInput | RecipeWhereUniqueInput[]
+    connect?: RecipeWhereUniqueInput | RecipeWhereUniqueInput[]
+    update?: RecipeUpdateWithWhereUniqueWithoutSourceRecipeInput | RecipeUpdateWithWhereUniqueWithoutSourceRecipeInput[]
+    updateMany?: RecipeUpdateManyWithWhereWithoutSourceRecipeInput | RecipeUpdateManyWithWhereWithoutSourceRecipeInput[]
+    deleteMany?: RecipeScalarWhereInput | RecipeScalarWhereInput[]
   }
 
   export type RecipeCreateNestedOneWithoutIngredientsInput = {
@@ -47102,10 +47296,13 @@ export namespace Prisma {
     isQuickMeal?: boolean
     imageUrl?: string | null
     steps?: string | null
+    isCommunity?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     ingredients?: RecipeIngredientCreateNestedManyWithoutRecipeInput
     mealRecipes?: MealRecipeCreateNestedManyWithoutRecipeInput
+    sourceRecipe?: RecipeCreateNestedOneWithoutImportedCopiesInput
+    importedCopies?: RecipeCreateNestedManyWithoutSourceRecipeInput
   }
 
   export type RecipeUncheckedCreateWithoutUserInput = {
@@ -47123,10 +47320,13 @@ export namespace Prisma {
     isQuickMeal?: boolean
     imageUrl?: string | null
     steps?: string | null
+    sourceRecipeId?: string | null
+    isCommunity?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     ingredients?: RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
     mealRecipes?: MealRecipeUncheckedCreateNestedManyWithoutRecipeInput
+    importedCopies?: RecipeUncheckedCreateNestedManyWithoutSourceRecipeInput
   }
 
   export type RecipeCreateOrConnectWithoutUserInput = {
@@ -47958,6 +48158,8 @@ export namespace Prisma {
     isQuickMeal?: BoolFilter<"Recipe"> | boolean
     imageUrl?: StringNullableFilter<"Recipe"> | string | null
     steps?: StringNullableFilter<"Recipe"> | string | null
+    sourceRecipeId?: StringNullableFilter<"Recipe"> | string | null
+    isCommunity?: BoolFilter<"Recipe"> | boolean
     createdAt?: DateTimeFilter<"Recipe"> | Date | string
     updatedAt?: DateTimeFilter<"Recipe"> | Date | string
   }
@@ -51083,6 +51285,117 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type RecipeCreateWithoutImportedCopiesInput = {
+    id?: string
+    name: string
+    description?: string | null
+    baseServings: number
+    category?: string | null
+    isPrivate?: boolean
+    isVegan?: boolean
+    isVegetarian?: boolean
+    isHealthy?: boolean
+    isLowCarb?: boolean
+    isSpicy?: boolean
+    isQuickMeal?: boolean
+    imageUrl?: string | null
+    steps?: string | null
+    isCommunity?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutRecipesInput
+    ingredients?: RecipeIngredientCreateNestedManyWithoutRecipeInput
+    mealRecipes?: MealRecipeCreateNestedManyWithoutRecipeInput
+    sourceRecipe?: RecipeCreateNestedOneWithoutImportedCopiesInput
+  }
+
+  export type RecipeUncheckedCreateWithoutImportedCopiesInput = {
+    id?: string
+    userId: string
+    name: string
+    description?: string | null
+    baseServings: number
+    category?: string | null
+    isPrivate?: boolean
+    isVegan?: boolean
+    isVegetarian?: boolean
+    isHealthy?: boolean
+    isLowCarb?: boolean
+    isSpicy?: boolean
+    isQuickMeal?: boolean
+    imageUrl?: string | null
+    steps?: string | null
+    sourceRecipeId?: string | null
+    isCommunity?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ingredients?: RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
+    mealRecipes?: MealRecipeUncheckedCreateNestedManyWithoutRecipeInput
+  }
+
+  export type RecipeCreateOrConnectWithoutImportedCopiesInput = {
+    where: RecipeWhereUniqueInput
+    create: XOR<RecipeCreateWithoutImportedCopiesInput, RecipeUncheckedCreateWithoutImportedCopiesInput>
+  }
+
+  export type RecipeCreateWithoutSourceRecipeInput = {
+    id?: string
+    name: string
+    description?: string | null
+    baseServings: number
+    category?: string | null
+    isPrivate?: boolean
+    isVegan?: boolean
+    isVegetarian?: boolean
+    isHealthy?: boolean
+    isLowCarb?: boolean
+    isSpicy?: boolean
+    isQuickMeal?: boolean
+    imageUrl?: string | null
+    steps?: string | null
+    isCommunity?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutRecipesInput
+    ingredients?: RecipeIngredientCreateNestedManyWithoutRecipeInput
+    mealRecipes?: MealRecipeCreateNestedManyWithoutRecipeInput
+    importedCopies?: RecipeCreateNestedManyWithoutSourceRecipeInput
+  }
+
+  export type RecipeUncheckedCreateWithoutSourceRecipeInput = {
+    id?: string
+    userId: string
+    name: string
+    description?: string | null
+    baseServings: number
+    category?: string | null
+    isPrivate?: boolean
+    isVegan?: boolean
+    isVegetarian?: boolean
+    isHealthy?: boolean
+    isLowCarb?: boolean
+    isSpicy?: boolean
+    isQuickMeal?: boolean
+    imageUrl?: string | null
+    steps?: string | null
+    isCommunity?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ingredients?: RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
+    mealRecipes?: MealRecipeUncheckedCreateNestedManyWithoutRecipeInput
+    importedCopies?: RecipeUncheckedCreateNestedManyWithoutSourceRecipeInput
+  }
+
+  export type RecipeCreateOrConnectWithoutSourceRecipeInput = {
+    where: RecipeWhereUniqueInput
+    create: XOR<RecipeCreateWithoutSourceRecipeInput, RecipeUncheckedCreateWithoutSourceRecipeInput>
+  }
+
+  export type RecipeCreateManySourceRecipeInputEnvelope = {
+    data: RecipeCreateManySourceRecipeInput | RecipeCreateManySourceRecipeInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutRecipesInput = {
     update: XOR<UserUpdateWithoutRecipesInput, UserUncheckedUpdateWithoutRecipesInput>
     create: XOR<UserCreateWithoutRecipesInput, UserUncheckedCreateWithoutRecipesInput>
@@ -51209,6 +51522,81 @@ export namespace Prisma {
     order?: IntFilter<"MealRecipe"> | number
   }
 
+  export type RecipeUpsertWithoutImportedCopiesInput = {
+    update: XOR<RecipeUpdateWithoutImportedCopiesInput, RecipeUncheckedUpdateWithoutImportedCopiesInput>
+    create: XOR<RecipeCreateWithoutImportedCopiesInput, RecipeUncheckedCreateWithoutImportedCopiesInput>
+    where?: RecipeWhereInput
+  }
+
+  export type RecipeUpdateToOneWithWhereWithoutImportedCopiesInput = {
+    where?: RecipeWhereInput
+    data: XOR<RecipeUpdateWithoutImportedCopiesInput, RecipeUncheckedUpdateWithoutImportedCopiesInput>
+  }
+
+  export type RecipeUpdateWithoutImportedCopiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    baseServings?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isVegan?: BoolFieldUpdateOperationsInput | boolean
+    isVegetarian?: BoolFieldUpdateOperationsInput | boolean
+    isHealthy?: BoolFieldUpdateOperationsInput | boolean
+    isLowCarb?: BoolFieldUpdateOperationsInput | boolean
+    isSpicy?: BoolFieldUpdateOperationsInput | boolean
+    isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    steps?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutRecipesNestedInput
+    ingredients?: RecipeIngredientUpdateManyWithoutRecipeNestedInput
+    mealRecipes?: MealRecipeUpdateManyWithoutRecipeNestedInput
+    sourceRecipe?: RecipeUpdateOneWithoutImportedCopiesNestedInput
+  }
+
+  export type RecipeUncheckedUpdateWithoutImportedCopiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    baseServings?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isVegan?: BoolFieldUpdateOperationsInput | boolean
+    isVegetarian?: BoolFieldUpdateOperationsInput | boolean
+    isHealthy?: BoolFieldUpdateOperationsInput | boolean
+    isLowCarb?: BoolFieldUpdateOperationsInput | boolean
+    isSpicy?: BoolFieldUpdateOperationsInput | boolean
+    isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    steps?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceRecipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ingredients?: RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
+    mealRecipes?: MealRecipeUncheckedUpdateManyWithoutRecipeNestedInput
+  }
+
+  export type RecipeUpsertWithWhereUniqueWithoutSourceRecipeInput = {
+    where: RecipeWhereUniqueInput
+    update: XOR<RecipeUpdateWithoutSourceRecipeInput, RecipeUncheckedUpdateWithoutSourceRecipeInput>
+    create: XOR<RecipeCreateWithoutSourceRecipeInput, RecipeUncheckedCreateWithoutSourceRecipeInput>
+  }
+
+  export type RecipeUpdateWithWhereUniqueWithoutSourceRecipeInput = {
+    where: RecipeWhereUniqueInput
+    data: XOR<RecipeUpdateWithoutSourceRecipeInput, RecipeUncheckedUpdateWithoutSourceRecipeInput>
+  }
+
+  export type RecipeUpdateManyWithWhereWithoutSourceRecipeInput = {
+    where: RecipeScalarWhereInput
+    data: XOR<RecipeUpdateManyMutationInput, RecipeUncheckedUpdateManyWithoutSourceRecipeInput>
+  }
+
   export type RecipeCreateWithoutIngredientsInput = {
     id?: string
     name: string
@@ -51224,10 +51612,13 @@ export namespace Prisma {
     isQuickMeal?: boolean
     imageUrl?: string | null
     steps?: string | null
+    isCommunity?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutRecipesInput
     mealRecipes?: MealRecipeCreateNestedManyWithoutRecipeInput
+    sourceRecipe?: RecipeCreateNestedOneWithoutImportedCopiesInput
+    importedCopies?: RecipeCreateNestedManyWithoutSourceRecipeInput
   }
 
   export type RecipeUncheckedCreateWithoutIngredientsInput = {
@@ -51246,9 +51637,12 @@ export namespace Prisma {
     isQuickMeal?: boolean
     imageUrl?: string | null
     steps?: string | null
+    sourceRecipeId?: string | null
+    isCommunity?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     mealRecipes?: MealRecipeUncheckedCreateNestedManyWithoutRecipeInput
+    importedCopies?: RecipeUncheckedCreateNestedManyWithoutSourceRecipeInput
   }
 
   export type RecipeCreateOrConnectWithoutIngredientsInput = {
@@ -51321,10 +51715,13 @@ export namespace Prisma {
     isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     steps?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutRecipesNestedInput
     mealRecipes?: MealRecipeUpdateManyWithoutRecipeNestedInput
+    sourceRecipe?: RecipeUpdateOneWithoutImportedCopiesNestedInput
+    importedCopies?: RecipeUpdateManyWithoutSourceRecipeNestedInput
   }
 
   export type RecipeUncheckedUpdateWithoutIngredientsInput = {
@@ -51343,9 +51740,12 @@ export namespace Prisma {
     isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     steps?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceRecipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     mealRecipes?: MealRecipeUncheckedUpdateManyWithoutRecipeNestedInput
+    importedCopies?: RecipeUncheckedUpdateManyWithoutSourceRecipeNestedInput
   }
 
   export type IngredientUpsertWithoutRecipeIngredientsInput = {
@@ -51827,10 +52227,13 @@ export namespace Prisma {
     isQuickMeal?: boolean
     imageUrl?: string | null
     steps?: string | null
+    isCommunity?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutRecipesInput
     ingredients?: RecipeIngredientCreateNestedManyWithoutRecipeInput
+    sourceRecipe?: RecipeCreateNestedOneWithoutImportedCopiesInput
+    importedCopies?: RecipeCreateNestedManyWithoutSourceRecipeInput
   }
 
   export type RecipeUncheckedCreateWithoutMealRecipesInput = {
@@ -51849,9 +52252,12 @@ export namespace Prisma {
     isQuickMeal?: boolean
     imageUrl?: string | null
     steps?: string | null
+    sourceRecipeId?: string | null
+    isCommunity?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     ingredients?: RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
+    importedCopies?: RecipeUncheckedCreateNestedManyWithoutSourceRecipeInput
   }
 
   export type RecipeCreateOrConnectWithoutMealRecipesInput = {
@@ -51908,10 +52314,13 @@ export namespace Prisma {
     isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     steps?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutRecipesNestedInput
     ingredients?: RecipeIngredientUpdateManyWithoutRecipeNestedInput
+    sourceRecipe?: RecipeUpdateOneWithoutImportedCopiesNestedInput
+    importedCopies?: RecipeUpdateManyWithoutSourceRecipeNestedInput
   }
 
   export type RecipeUncheckedUpdateWithoutMealRecipesInput = {
@@ -51930,9 +52339,12 @@ export namespace Prisma {
     isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     steps?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceRecipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredients?: RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
+    importedCopies?: RecipeUncheckedUpdateManyWithoutSourceRecipeNestedInput
   }
 
   export type UserCreateWithoutMetabolicProfilesInput = {
@@ -53275,6 +53687,8 @@ export namespace Prisma {
     isQuickMeal?: boolean
     imageUrl?: string | null
     steps?: string | null
+    sourceRecipeId?: string | null
+    isCommunity?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -53810,10 +54224,13 @@ export namespace Prisma {
     isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     steps?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredients?: RecipeIngredientUpdateManyWithoutRecipeNestedInput
     mealRecipes?: MealRecipeUpdateManyWithoutRecipeNestedInput
+    sourceRecipe?: RecipeUpdateOneWithoutImportedCopiesNestedInput
+    importedCopies?: RecipeUpdateManyWithoutSourceRecipeNestedInput
   }
 
   export type RecipeUncheckedUpdateWithoutUserInput = {
@@ -53831,10 +54248,13 @@ export namespace Prisma {
     isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     steps?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceRecipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredients?: RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
     mealRecipes?: MealRecipeUncheckedUpdateManyWithoutRecipeNestedInput
+    importedCopies?: RecipeUncheckedUpdateManyWithoutSourceRecipeNestedInput
   }
 
   export type RecipeUncheckedUpdateManyWithoutUserInput = {
@@ -53852,6 +54272,8 @@ export namespace Prisma {
     isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     steps?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceRecipeId?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -54307,6 +54729,27 @@ export namespace Prisma {
     order?: number
   }
 
+  export type RecipeCreateManySourceRecipeInput = {
+    id?: string
+    userId: string
+    name: string
+    description?: string | null
+    baseServings: number
+    category?: string | null
+    isPrivate?: boolean
+    isVegan?: boolean
+    isVegetarian?: boolean
+    isHealthy?: boolean
+    isLowCarb?: boolean
+    isSpicy?: boolean
+    isQuickMeal?: boolean
+    imageUrl?: string | null
+    steps?: string | null
+    isCommunity?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type RecipeIngredientUpdateWithoutRecipeInput = {
     id?: StringFieldUpdateOperationsInput | string
     gramsInBase?: FloatFieldUpdateOperationsInput | number
@@ -54344,6 +54787,75 @@ export namespace Prisma {
     mealId?: StringFieldUpdateOperationsInput | string
     servings?: FloatFieldUpdateOperationsInput | number
     order?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RecipeUpdateWithoutSourceRecipeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    baseServings?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isVegan?: BoolFieldUpdateOperationsInput | boolean
+    isVegetarian?: BoolFieldUpdateOperationsInput | boolean
+    isHealthy?: BoolFieldUpdateOperationsInput | boolean
+    isLowCarb?: BoolFieldUpdateOperationsInput | boolean
+    isSpicy?: BoolFieldUpdateOperationsInput | boolean
+    isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    steps?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutRecipesNestedInput
+    ingredients?: RecipeIngredientUpdateManyWithoutRecipeNestedInput
+    mealRecipes?: MealRecipeUpdateManyWithoutRecipeNestedInput
+    importedCopies?: RecipeUpdateManyWithoutSourceRecipeNestedInput
+  }
+
+  export type RecipeUncheckedUpdateWithoutSourceRecipeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    baseServings?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isVegan?: BoolFieldUpdateOperationsInput | boolean
+    isVegetarian?: BoolFieldUpdateOperationsInput | boolean
+    isHealthy?: BoolFieldUpdateOperationsInput | boolean
+    isLowCarb?: BoolFieldUpdateOperationsInput | boolean
+    isSpicy?: BoolFieldUpdateOperationsInput | boolean
+    isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    steps?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ingredients?: RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
+    mealRecipes?: MealRecipeUncheckedUpdateManyWithoutRecipeNestedInput
+    importedCopies?: RecipeUncheckedUpdateManyWithoutSourceRecipeNestedInput
+  }
+
+  export type RecipeUncheckedUpdateManyWithoutSourceRecipeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    baseServings?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    isVegan?: BoolFieldUpdateOperationsInput | boolean
+    isVegetarian?: BoolFieldUpdateOperationsInput | boolean
+    isHealthy?: BoolFieldUpdateOperationsInput | boolean
+    isLowCarb?: BoolFieldUpdateOperationsInput | boolean
+    isSpicy?: BoolFieldUpdateOperationsInput | boolean
+    isQuickMeal?: BoolFieldUpdateOperationsInput | boolean
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    steps?: NullableStringFieldUpdateOperationsInput | string | null
+    isCommunity?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PlanDayCreateManyPlanInput = {

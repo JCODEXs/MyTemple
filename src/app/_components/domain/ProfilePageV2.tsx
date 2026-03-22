@@ -445,16 +445,16 @@ export default function ProfilePage() {
             <div className="rounded-3xl bg-white/5 p-5 ring-1 ring-white/10 space-y-4">
               <SectionTitle>🔗 Mi coach</SectionTitle>
 
-              {summary?.coach ? (
+              {summary?.user?.coach ? (
                 <>
                   <div className="flex items-center gap-3 rounded-2xl bg-green-500/10 border border-green-500/30 p-4">
                     <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-green-400 to-emerald-600
                       flex items-center justify-center text-xl font-black text-white flex-shrink-0">
-                      {summary.coach.name?.[0]?.toUpperCase() ?? "C"}
+                      {summary.user.coach.name?.[0]?.toUpperCase() ?? "C"}
                     </div>
                     <div>
-                      <p className="font-bold text-white">{summary.coach.name}</p>
-                      <p className="text-xs text-gray-400">{summary.coach.email}</p>
+                      <p className="font-bold text-white">{summary.user.coach.name}</p>
+                      <p className="text-xs text-gray-400">{summary.user.coach.email}</p>
                       <span className="mt-1 inline-block rounded-full bg-green-500/20 px-2 py-0.5 text-[10px] font-bold text-green-400">
                         ✓ Vinculado
                       </span>

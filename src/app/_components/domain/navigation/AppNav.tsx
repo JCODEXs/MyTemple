@@ -18,6 +18,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/dashboard",    label: "Dashboard",     icon: "⚡", roles: [],                        bottom: true  },
   { href: "/log",          label: "Registrar día", icon: "📋", roles: ["USER","COACH","ADMIN"],   bottom: true  },
   { href: "/weight",       label: "Peso",          icon: "⚖️", roles: ["USER","COACH","ADMIN"],   bottom: false },
+ { href: "/recipeImport", label: "Recetas de la comunidad", icon: "🌍", roles: [], bottom: false },
   { href: "/library",      label: "recetas",       icon: "🍳", roles: ["USER","COACH","ADMIN"],   bottom: true  },
   { href: "/plans",        label: "Planes",        icon: "📅", roles: ["USER","COACH","ADMIN"],   bottom: false },
   { href: "/ingredients",  label: "Ingredientes",  icon: "🧺", roles: ["USER","COACH","ADMIN"],   bottom: false },

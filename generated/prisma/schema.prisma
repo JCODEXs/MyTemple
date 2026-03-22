@@ -421,11 +421,19 @@ model Recipe {
 
   ingredients RecipeIngredient[]
 
-  mealRecipes MealRecipe[]
+  mealRecipes    MealRecipe[]
+  // Trazabilidad de importaciones
+  sourceRecipeId String? // si fue importada, apunta a la receta original
+  sourceRecipe   Recipe?      @relation("RecipeImports", fields: [sourceRecipeId], references: [id], onDelete: SetNull)
+  importedCopies Recipe[]     @relation("RecipeImports")
+
+  // Visibilidad pública (para el catálogo de la comunidad)
+  isCommunity Boolean @default(false) // true = aparece en importaciones
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@index([isCommunity, category]) // ← añadir para getCommunityRecipes
   @@index([userId, updatedAt])
 }
 

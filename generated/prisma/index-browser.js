@@ -315,6 +315,8 @@ exports.Prisma.RecipeScalarFieldEnum = {
   isQuickMeal: 'isQuickMeal',
   imageUrl: 'imageUrl',
   steps: 'steps',
+  sourceRecipeId: 'sourceRecipeId',
+  isCommunity: 'isCommunity',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
