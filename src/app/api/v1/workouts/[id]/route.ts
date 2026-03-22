@@ -39,13 +39,13 @@ async function getUserId(): Promise<string | null> {
  */
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise< { id: string } >}
 ) {
   const userId = await getUserId()
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-
+const { id } = await params
   try {
-    const workout = await WorkoutService.getOne(userId, params.id)
+    const workout = await WorkoutService.getOne(userId, id)
     if (!workout) return NextResponse.json({ error: "Entrenamiento no encontrado" }, { status: 404 })
     return NextResponse.json(workout)
   } catch (error) {

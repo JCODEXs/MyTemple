@@ -50,7 +50,7 @@ const PLANS = [
     ],
     cta:      "Comenzar gratis",
     href:     "/auth/register",
-    featured: false,
+    featured: false,""
   },
   {
     name:     "Coach",
