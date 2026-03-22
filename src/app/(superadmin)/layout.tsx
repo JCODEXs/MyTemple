@@ -22,3 +22,4 @@ export default async function SuperAdminLayout({ children }: { children: React.R
       </main>
     </div>
   )
+}
