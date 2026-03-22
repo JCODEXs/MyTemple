@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useMemo } from "react"
 import { toast }    from "sonner"
 import { api }      from "@/trpc/react"
-import { UploadButton } from "@uploadthing/react"
+import { UploadButton } from "@/utils/uploadthing"
 import type { RouterOutputs } from "@/trpc/react"
 import type { UploadThingError } from "uploadthing/server"
 
