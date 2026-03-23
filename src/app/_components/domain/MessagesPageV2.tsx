@@ -5,7 +5,7 @@ import { toast }         from "sonner"
 import { api }           from "@/trpc/react"
 import { UploadButton }  from "@/utils/uploadthing"
 import type { RouterOutputs } from "@/trpc/react"
-import type { UploadThingError } from "uploadthing/server"
+// import { useRealtimeMessages } from "@/hooks/useRealtimeMessages"
 
 type Post      = RouterOutputs["communications"]["getFeed"]["items"][number]
 type Message   = RouterOutputs["communications"]["getConversation"][number]
@@ -383,8 +383,8 @@ function DMConversation({ otherId, otherName, currentUserId }: { otherId: string
   const [text,     setText]     = useState("")
   const [imageUrl, setImageUrl] = useState("")
 
-  const { data: messages = [] } = api.communications.getConversation.useQuery({ otherId }, { refetchInterval: Infinity})
-useRealtimeMessages(otherId) 
+  const { data: messages = [] } = api.communications.getConversation.useQuery({ otherId }, { refetchInterval: 3000})
+  // useRealtimeMessages(otherId)
   const sendMessage = api.communications.sendMessage.useMutation({
     onMutate: async ({ toId, content, imageUrl: imgUrl }) => {
       await utils.communications.getConversation.cancel({ otherId: toId })
