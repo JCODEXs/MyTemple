@@ -176,7 +176,7 @@ export const CommunicationsService = {
 
 async getFeed(userId: string, input: { limit?: number; cursor?: string; userId?: string }) {
   const limit = input.limit ?? 20
-  const POST_INCLUDE2 = Prisma.validator<Prisma.PostInclude>()({
+const POST_INCLUDE2 = {
   user: {
     select: { id: true, name: true, image: true, role: true }
   },
@@ -198,10 +198,8 @@ async getFeed(userId: string, input: { limit?: number; cursor?: string; userId?:
     },
     orderBy: { createdAt: "asc" }
   }
-});
-type PostWithRelations = Prisma.PostGetPayload<{
-  include: typeof POST_INCLUDE2;
-}>;
+};
+
 
   const user = await db.user.findUnique({
     where:  { id: userId },
