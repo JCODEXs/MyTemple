@@ -234,11 +234,11 @@ const where = {
     user: {
       select: { id: true, name: true, image: true, role: true }
     },
-    reactions: {                    // 🔑 Incluir reacciones
-      include: {
-        user: { select: { id: true, name: true } } // opcional, si necesitas info del usuario
-      }
-    },
+   reactions: {
+    include: {
+      user: { select: { id: true, name: true } }
+    }
+  },
     comments: {                     // 🔑 Incluir comentarios
       where: { parentId: null },    // Solo comentarios raíz (no respuestas)
       include: {
