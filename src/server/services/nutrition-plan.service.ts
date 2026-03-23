@@ -1,4 +1,5 @@
 import { db } from "@/server/db"
+import { randomBytes } from "crypto"
 import { TRPCError } from "@trpc/server"
 import {
   generatePlan,
@@ -53,6 +54,10 @@ function toDateOnly(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate())
 }
 
+
+function generateId(): string {
+  return randomBytes(12).toString("base64url")
+}
 async function loadRecipeCandidates(userId: string): Promise<RecipeCandidate[]> {
   const recipes = await db.recipe.findMany({
     where: { userId },
@@ -128,67 +133,154 @@ export const NutritionPlanService = {
   /**
    * Crea y persiste un plan nutricional completo a partir de una sugerencia aceptada.
    */
-  async createFromSuggestion(userId: string, input: CreatePlanInput & {
-    days: {
-      date:   Date
-      meals: {
-        mealType: MealType
-        recipes: { recipeId: string; servings: number }[]
-      }[]
-    }[]
-  }) {
-    const profile = await db.userProfile.findUnique({ where: { userId } })
-    if (!profile) throw new TRPCError({ code: "NOT_FOUND", message: "Perfil no encontrado." })
+  async createFromSuggestion(userId: string, input: CreatePlanInput & { days: PlanDayForForm[] }) {
+  const profile = await db.userProfile.findUnique({ where: { userId } })
+  if (!profile) throw new TRPCError({ code: "NOT_FOUND", message: "Perfil no encontrado." })
 
-    const macroSplit = GOAL_MACRO_SPLITS[profile.goal] ??
-      GOAL_MACRO_SPLITS["MAINTENANCE"]!
+  const macroSplit = GOAL_MACRO_SPLITS[profile.goal] ?? GOAL_MACRO_SPLITS["MAINTENANCE"]!
 
-    return db.$transaction(async (tx) => {
-      const plan = await tx.nutritionPlan.create({
-        data: {
-          userId,
-          name:       input.name,
-          startDate:  toDateOnly(input.startDate),
-          endDate:    toDateOnly(input.endDate),
-          targetKcal: input.targetKcal ?? 2000,
-          proteinPct: input.proteinPct ?? macroSplit.proteinPct,
-          carbsPct:   input.carbsPct   ?? macroSplit.carbsPct,
-          fatPct:     input.fatPct     ?? macroSplit.fatPct,
-        },
-      })
-
-      for (const day of input.days) {
-        const planDay = await tx.planDay.create({
-          data: {
-            planId: plan.id,
-            date:   toDateOnly(day.date),
-          },
-        })
-
-        for (const meal of day.meals) {
-          const mealRecord = await tx.meal.create({
-            data: {
-              dayId:    planDay.id,
-              mealType: meal.mealType,
-            },
-          })
-
-          if (meal.recipes.length > 0) {
-            await tx.mealRecipe.createMany({
-              data: meal.recipes.map((r, i) => ({
-                mealId:   mealRecord.id,
-                recipeId: r.recipeId,
-                servings: r.servings,
-                order:    i,
-              })),
-            })
-          }
-        }
-      }
-
-      return plan
+  return db.$transaction(async (tx) => {
+    // 1. Crear el plan
+    const plan = await tx.nutritionPlan.create({
+      data: {
+        userId,
+        name: input.name,
+        startDate: toDateOnly(input.startDate),
+        endDate: toDateOnly(input.endDate),
+        targetKcal: input.targetKcal ?? 2000,
+        proteinPct: input.proteinPct ?? macroSplit.proteinPct,
+        carbsPct: input.carbsPct ?? macroSplit.carbsPct,
+        fatPct: input.fatPct ?? macroSplit.fatPct,
+      },
     })
-  },
+
+    // 2. Crear días y meals en una sola operación
+    const planDaysData = input.days.map((day) => ({
+      id: generateId(),
+      planId: plan.id,
+      date: toDateOnly(day.date),
+    }))
+
+    await tx.planDay.createMany({ data: planDaysData })
+
+    // 3. Obtener los días creados (más eficiente que findMany después de createMany)
+    const planDays = await tx.planDay.findMany({
+      where: { planId: plan.id },
+      orderBy: { date: "asc" },
+    })
+
+    // 4. Crear comidas con sus relaciones directamente
+    const mealsWithRecipes = planDays.flatMap((planDay, dayIndex) => {
+      const inputDay = input.days[dayIndex]
+      if (!inputDay) return []
+      
+      return inputDay.meals.map((meal) => ({
+        meal: {
+          id: generateId(),
+          dayId: planDay.id,
+          mealType: meal.mealType,
+        },
+        recipes: meal.recipes.map((r, order) => ({
+          id: generateId(),
+          recipeId: r.recipeId,
+          servings: r.servings,
+          order,
+        }))
+      }))
+    })
+
+    // 5. Insertar comidas
+    const mealsData = mealsWithRecipes.map(mwr => mwr.meal)
+    if (mealsData.length > 0) {
+      await tx.meal.createMany({ data: mealsData })
+    }
+
+    // 6. Obtener las comidas creadas para enlazar recipes
+    const meals = await tx.meal.findMany({
+      where: { dayId: { in: planDays.map(d => d.id) } }
+    })
+
+    // 7. Insertar mealRecipes
+    const mealRecipesData = meals.flatMap(meal => {
+      const mealWithRecipes = mealsWithRecipes.find(mwr => mwr.meal.id === meal.id)
+      if (!mealWithRecipes) return []
+      return mealWithRecipes.recipes.map(recipe => ({
+        ...recipe,
+        mealId: meal.id
+      }))
+    })
+
+    if (mealRecipesData.length > 0) {
+      await tx.mealRecipe.createMany({ data: mealRecipesData })
+    }
+
+    return plan
+  }, {
+    timeout: 30000,
+    maxWait: 10000,
+  })
+},
+  // async createFromSuggestion(userId: string, input: CreatePlanInput & {
+  //   days: {
+  //     date:   Date
+  //     meals: {
+  //       mealType: MealType
+  //       recipes: { recipeId: string; servings: number }[]
+  //     }[]
+  //   }[]
+  // }) {
+  //   const profile = await db.userProfile.findUnique({ where: { userId } })
+  //   if (!profile) throw new TRPCError({ code: "NOT_FOUND", message: "Perfil no encontrado." })
+
+  //   const macroSplit = GOAL_MACRO_SPLITS[profile.goal] ??
+  //     GOAL_MACRO_SPLITS["MAINTENANCE"]!
+
+  //   return db.$transaction(async (tx) => {
+  //     const plan = await tx.nutritionPlan.create({
+  //       data: {
+  //         userId,
+  //         name:       input.name,
+  //         startDate:  toDateOnly(input.startDate),
+  //         endDate:    toDateOnly(input.endDate),
+  //         targetKcal: input.targetKcal ?? 2000,
+  //         proteinPct: input.proteinPct ?? macroSplit.proteinPct,
+  //         carbsPct:   input.carbsPct   ?? macroSplit.carbsPct,
+  //         fatPct:     input.fatPct     ?? macroSplit.fatPct,
+  //       },
+  //     })
+
+  //     for (const day of input.days) {
+  //       const planDay = await tx.planDay.create({
+  //         data: {
+  //           planId: plan.id,
+  //           date:   toDateOnly(day.date),
+  //         },
+  //       })
+
+  //       for (const meal of day.meals) {
+  //         const mealRecord = await tx.meal.create({
+  //           data: {
+  //             dayId:    planDay.id,
+  //             mealType: meal.mealType,
+  //           },
+  //         })
+
+  //         if (meal.recipes.length > 0) {
+  //           await tx.mealRecipe.createMany({
+  //             data: meal.recipes.map((r, i) => ({
+  //               mealId:   mealRecord.id,
+  //               recipeId: r.recipeId,
+  //               servings: r.servings,
+  //               order:    i,
+  //             })),
+  //           })
+  //         }
+  //       }
+  //     }
+
+  //     return plan
+  //   })
+  // },
 
   /**
    * Lista planes del usuario.
