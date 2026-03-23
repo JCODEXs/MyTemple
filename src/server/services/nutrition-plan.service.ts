@@ -47,7 +47,13 @@ export interface PlanDayForForm {
   totalCarbsG:   number
   totalFatG:     number
 }
-
+type PlanDayInput = {
+  date: Date
+  meals: Array<{
+    mealType: MealType
+    recipes: Array<{ recipeId: string; servings: number }>
+  }>
+}
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function toDateOnly(date: Date): Date {
@@ -133,7 +139,7 @@ export const NutritionPlanService = {
   /**
    * Crea y persiste un plan nutricional completo a partir de una sugerencia aceptada.
    */
-  async createFromSuggestion(userId: string, input: CreatePlanInput & { days: PlanDayForForm[] }) {
+  async createFromSuggestion(userId: string, input: CreatePlanInput & { days: PlanDayInput[] }) {
   const profile = await db.userProfile.findUnique({ where: { userId } })
   if (!profile) throw new TRPCError({ code: "NOT_FOUND", message: "Perfil no encontrado." })
 
