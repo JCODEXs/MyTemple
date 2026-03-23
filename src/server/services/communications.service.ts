@@ -280,7 +280,7 @@ const where = {
   const items      = hasMore ? posts.slice(0, limit) : posts
   const nextCursor = hasMore ? items.at(-1)?.createdAt.toISOString() ?? null : null
 
-  return { items, nextCursor, hasMore }
+  return { items:posts, nextCursor, hasMore }
 },
 
   async getUserPosts(userId: string, targetUserId: string) {
