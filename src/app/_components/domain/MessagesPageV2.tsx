@@ -237,9 +237,7 @@ function PostCard({ post, currentUserId }: { post: Post; currentUserId: string }
         return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p) => {
           if (p.id !== postId) return p
           const already = p?.reactions.some((r) => r.emoji === emoji && r.userId === currentUserId)
-          return { ...p, reactions: already
-  ? p.reactions.filter(...)
-  : [...(p.reactions ?? []), newReaction]
+          return { ...p, reactions: already ? p?.reactions.filter((r) => !(r.emoji === emoji && r.userId === currentUserId))
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             : [...p?.reactions, { id: `opt-${Date.now()}`, emoji, userId: currentUserId, postId } as any] }
         })}))}
