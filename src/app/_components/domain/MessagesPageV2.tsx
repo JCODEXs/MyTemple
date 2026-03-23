@@ -337,7 +337,7 @@ function PostCard({ post, currentUserId }: { post: Post; currentUserId: string }
       </div>
       {showComments && (
         <div className="border-t border-white/5 px-4 pb-4 space-y-3 pt-3">
-          {post.?comments.map((comment) => (
+          {post?.comments.map((comment) => (
             <div key={comment.id}>
               <div className="flex gap-2">
                 <div className="h-6 w-6 flex-shrink-0 rounded-full bg-white/10 flex items-center justify-center text-[10px] font-bold text-gray-400">{comment.user.name?.[0]?.toUpperCase() ?? "?"}</div>
