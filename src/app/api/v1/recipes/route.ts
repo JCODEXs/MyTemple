@@ -5,6 +5,9 @@
 
 import { type NextRequest, NextResponse } from "next/server"
 import { auth } from "@/server/auth"
+import { RecipeService } from "@/server/services/recipe.service"
+import z from "zod"
+
 
 async function getUserId() {
 const session = await auth()
@@ -21,7 +24,7 @@ const createRecipeSchemaREST = z.object({
   description: z.string().max(500).optional(),
   steps: z.string().max(5000).optional(),
   baseServings: z.number().int().min(1).max(100),
-  category: z.nativeEnum(RecipeCategory).optional(),
+  category: z.string().optional(),
   isPrivate: z.boolean().optional(),
   isVegan: z.boolean().optional(),
   isVegetarian: z.boolean().optional(),
