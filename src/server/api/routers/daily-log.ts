@@ -2,7 +2,7 @@ import { z } from "zod"
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc"
 import { DailyEnergyService } from "../../services/daily-energy.service"
 import { WorkoutType } from "../../../../generated/prisma"
-
+import { UserProfileService } from "./user-profile.service"
 // ─── Schemas ──────────────────────────────────────────────────────────────────
 
 const workoutInputSchema = z.object({
@@ -90,7 +90,7 @@ export const dailyLogRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const [log, profile] = await Promise.all([
         DailyEnergyService.getDay(ctx.session.user.id, input.date),
-        db.userProfile.findUnique({ where: { userId: ctx.session.user.id } }),
+        UserProfileService.get(ctx.session.user.id),
       ])
 
       if (!log || !profile) return null
