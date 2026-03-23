@@ -1,29 +1,10 @@
 import { db }        from "@/server/db"
 import { TRPCError } from "@trpc/server"
-import type { PostType,PostVisibility,Prisma } from "../../../generated/prisma"
+import type { PostType,PostVisibility, } from "../../../generated/prisma"
+import  { Prisma } from "@prisma/client"
 // ─── Types ────────────────────────────────────────────────────────────────────
-type PostWithRelations = Prisma.PostGetPayload<{
-  include: {
-    user: {
-      select: { id: true; name: true; image: true; role: true };
-    };
-    reactions: {
-      include: {
-        user: { select: { id: true; name: true } };
-      };
-    };
-    comments: {
-      include: {
-        user: { select: { id: true; name: true; image: true } };
-        replies: {
-          include: {
-            user: { select: { id: true; name: true; image: true } };
-          };
-        };
-      };
-    };
-  };
-}>;
+
+
 export interface CreatePostInput {
   type:       PostType
   visibility: PostVisibility
@@ -195,6 +176,32 @@ export const CommunicationsService = {
 
 async getFeed(userId: string, input: { limit?: number; cursor?: string; userId?: string }) {
   const limit = input.limit ?? 20
+  const POST_INCLUDE2 = Prisma.validator<Prisma.PostInclude>()({
+  user: {
+    select: { id: true, name: true, image: true, role: true }
+  },
+  reactions: {
+    include: {
+      user: { select: { id: true, name: true } }
+    }
+  },
+  comments: {
+    where: { parentId: null },
+    include: {
+      user: { select: { id: true, name: true, image: true } },
+      replies: {
+        include: {
+          user: { select: { id: true, name: true, image: true } }
+        },
+        orderBy: { createdAt: "asc" }
+      }
+    },
+    orderBy: { createdAt: "asc" }
+  }
+});
+type PostWithRelations = Prisma.PostGetPayload<{
+  include: typeof POST_INCLUDE2;
+}>;
 
   const user = await db.user.findUnique({
     where:  { id: userId },
@@ -246,34 +253,14 @@ const where = {
   }),
 };
 
+
+
  const posts: PostWithRelations[] = await db.post.findMany({
   take: limit + 1,
   cursor: input.cursor ? { id: input.cursor } : undefined,
   orderBy: { createdAt: "desc" },
   where,
-  include: {
-    user: {
-      select: { id: true, name: true, image: true, role: true }
-    },
-   reactions: {
-    include: {
-      user: { select: { id: true, name: true } }
-    }
-  },
-    comments: {                     // 🔑 Incluir comentarios
-      where: { parentId: null },    // Solo comentarios raíz (no respuestas)
-      include: {
-        user: { select: { id: true, name: true, image: true } },
-        replies: {                  // Respuestas a este comentario
-          include: {
-            user: { select: { id: true, name: true, image: true } }
-          },
-          orderBy: { createdAt: "asc" }
-        }
-      },
-      orderBy: { createdAt: "asc" }
-    }
-  }
+  include: POST_INCLUDE2,
 });
 
   const hasMore    = posts.length > limit
