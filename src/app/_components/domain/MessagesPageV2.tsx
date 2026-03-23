@@ -53,7 +53,9 @@ function ImageUploadZone({ imageUrls, onChange }: { imageUrls: string[]; onChang
             <UploadButton
               endpoint="imageUploader"
               onClientUploadComplete={(res) => { const url = res[0]?.ufsUrl ?? res[0]?.url; if (url) onChange([...imageUrls, url]) }}
-              onUploadError={(e) => toast.error(`Error al subir: ${e.message}`)}
+                onUploadError={(e) => {
+              toast.error(`Error al subir imagen: ${e.message}`)
+            }}
               appearance={{ button: "rounded-xl bg-amber-500 px-4 py-2 text-xs font-bold text-white hover:bg-amber-600 ut-uploading:bg-amber-300", allowedContent: "hidden" }}
               content={{ button: ({ ready, isUploading }) => isUploading ? "⏳ Subiendo..." : ready ? "📤 Subir foto" : "Cargando..." }}
             />
@@ -196,7 +198,9 @@ function CreateChallengeModal({ onClose }: { onClose: () => void }) {
               <UploadButton
                 endpoint="imageUploader"
                 onClientUploadComplete={(res) => { const url = res[0]?.ufsUrl ?? res[0]?.url; if (url) setImageUrl(url) }}
-                onUploadError={(e) => toast.error(e.message)}
+                 onUploadError={(e) => {
+              toast.error(`Error al subir imagen: ${e.message}`)
+            }}
                 appearance={{ button: "rounded-xl bg-white/10 px-3 py-1.5 text-xs text-gray-400 hover:bg-white/20", allowedContent: "hidden", container: "w-auto" }}
                 content={{ button: () => "📸 Subir" }}
               />
