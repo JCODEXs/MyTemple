@@ -5,6 +5,7 @@ import { toast }         from "sonner"
 import { api }           from "@/trpc/react"
 import { UploadButton }  from "@/utils/uploadthing"
 import type { RouterOutputs } from "@/trpc/react"
+import type { UploadThingError } from "uploadthing/server"
 
 type Post      = RouterOutputs["communications"]["getFeed"]["items"][number]
 type Message   = RouterOutputs["communications"]["getConversation"][number]
@@ -281,7 +282,7 @@ function PostCard({ post, currentUserId }: { post: Post; currentUserId: string }
     <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 overflow-hidden">
       <div className="flex items-start gap-3 p-4">
         <div className="h-9 w-9 flex-shrink-0 rounded-xl bg-gradient-to-br from-amber-400/30 to-orange-500/30 flex items-center justify-center text-sm font-black text-amber-400">
-          {post.user.name?.[0]?.toUpperCase() ?? "?"}
+          {post?.user?.name?.[0]?.toUpperCase() ?? "?"}
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
@@ -290,14 +291,14 @@ function PostCard({ post, currentUserId }: { post: Post; currentUserId: string }
             {post.featuredBy && <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-bold text-amber-400">⭐ Destacado</span>}
           </div>
           <p className="text-[10px] text-gray-600 mt-0.5">
-            {new Date(post.createdAt).toLocaleDateString("es-CO", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
+            {new Date(post?.createdAt).toLocaleDateString("es-CO", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
           </p>
         </div>
       </div>
-      {post.content && <p className="px-4 pb-3 text-sm text-gray-200 leading-relaxed">{post.content}</p>}
-      {post.imageUrls?.length > 0 && (
+      {post?.content && <p className="px-4 pb-3 text-sm text-gray-200 leading-relaxed">{post.content}</p>}
+      {post?.imageUrls?.length > 0 && (
         <div className={`grid gap-1 px-4 pb-3 ${post.imageUrls.length === 1 ? "grid-cols-1" : post.imageUrls.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
-          {post.imageUrls.map((url) => (
+          {post?.imageUrls.map((url) => (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img key={url} src={url} alt="" className={`w-full rounded-xl object-cover ${post.imageUrls.length === 1 ? "max-h-72" : "h-28"}`} />
           ))}
@@ -331,12 +332,12 @@ function PostCard({ post, currentUserId }: { post: Post; currentUserId: string }
         })}
         <button onClick={() => setShowComments((v) => !v)}
           className="ml-auto flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1 text-xs text-gray-400 hover:bg-white/10 transition-colors">
-          💬 {post.comments.length}
+          💬 {post?.comments?.length}
         </button>
       </div>
       {showComments && (
         <div className="border-t border-white/5 px-4 pb-4 space-y-3 pt-3">
-          {post.comments.map((comment) => (
+          {post.?comments.map((comment) => (
             <div key={comment.id}>
               <div className="flex gap-2">
                 <div className="h-6 w-6 flex-shrink-0 rounded-full bg-white/10 flex items-center justify-center text-[10px] font-bold text-gray-400">{comment.user.name?.[0]?.toUpperCase() ?? "?"}</div>
@@ -345,7 +346,7 @@ function PostCard({ post, currentUserId }: { post: Post; currentUserId: string }
                   <p className="text-xs text-gray-200 mt-0.5">{comment.content}</p>
                 </div>
               </div>
-              {comment.replies.map((reply) => (
+              {comment?.replies.map((reply) => (
                 <div key={reply.id} className="ml-8 mt-1.5 flex gap-2">
                   <div className="h-5 w-5 flex-shrink-0 rounded-full bg-white/10 flex items-center justify-center text-[9px] font-bold text-gray-500">{reply.user.name?.[0]?.toUpperCase() ?? "?"}</div>
                   <div className="flex-1 rounded-xl bg-white/5 px-3 py-2">
@@ -446,7 +447,9 @@ function DMConversation({ otherId, otherName, currentUserId }: { otherId: string
           <UploadButton
             endpoint="imageUploader"
             onClientUploadComplete={(res) => { const url = res[0]?.ufsUrl ?? res[0]?.url; if (url) setImageUrl(url) }}
-            onUploadError={(e) => toast.error(e.message)}
+      onUploadError={(e) => {
+              toast.error(`Error al subir imagen: ${e.message}`)
+            }}
             appearance={{ button: "rounded-xl bg-white/10 px-3 py-2.5 text-sm text-gray-400 hover:bg-white/20", allowedContent: "hidden", container: "w-auto" }}
             content={{ button: () => "📸" }}
           />
