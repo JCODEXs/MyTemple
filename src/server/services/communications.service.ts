@@ -208,14 +208,16 @@ async getFeed(userId: string, input: { limit?: number; cursor?: string; userId?:
     ]
   }
  
-  const where: Prisma.PostWhereInput = {
-    OR: [
-      { userId: { in: visibleUserIds } },
-      { visibility: "PUBLIC" },
-    ],
-    ...(input.userId    ? { userId:    input.userId          } : {}),
-    ...(input.cursor    ? { createdAt: { lt: new Date(input.cursor) } } : {}),
-  }
+ const where = {
+  OR: [
+    { userId: { in: visibleUserIds } },
+    { visibility: "PUBLIC" },
+  ],
+  ...(input.userId && { userId: input.userId }),
+  ...(input.cursor && {
+    createdAt: { lt: new Date(input.cursor) },
+  }),
+};
  
   const posts = await db.post.findMany({
     where,
