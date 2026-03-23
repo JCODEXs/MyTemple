@@ -1,7 +1,6 @@
 import { db }        from "@/server/db"
 import { TRPCError } from "@trpc/server"
-import type { PostType, PostVisibility } from "../../../generated/prisma"
-import { Prisma } from "@prisma/client";
+import type { PostType,PostVisibility } from "../../../generated/prisma"
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export interface CreatePostInput {
@@ -58,9 +57,9 @@ export const CommunicationsService = {
     where:  { id: userId },
     select: { coachId: true, role: true },
   })
- 
+
   const isCoach = user?.role === "COACH" || user?.role === "ADMIN"
- 
+
   if (isCoach) {
     // Coach puede escribir a sus clientes
     return db.user.findMany({
@@ -68,7 +67,7 @@ export const CommunicationsService = {
       select: { id: true, name: true, image: true, email: true },
     })
   }
- 
+
   // USER puede escribir solo a su coach
   if (!user?.coachId) return []
   const coach = await db.user.findUnique({
@@ -175,16 +174,16 @@ export const CommunicationsService = {
 
 async getFeed(userId: string, input: { limit?: number; cursor?: string; userId?: string }) {
   const limit = input.limit ?? 20
- 
+
   const user = await db.user.findUnique({
     where:  { id: userId },
     select: { coachId: true, role: true },
   })
- 
+
   const isCoach = user?.role === "COACH" || user?.role === "ADMIN"
- 
+
   let visibleUserIds: string[]
- 
+
   if (isCoach) {
     // COACH ve: sus posts + posts de sus clientes (coachId = userId)
     const clients = await db.user.findMany({
@@ -192,7 +191,7 @@ async getFeed(userId: string, input: { limit?: number; cursor?: string; userId?:
       select: { id: true },
     })
     visibleUserIds = [userId, ...clients.map((c) => c.id)]
- 
+
   } else {
     // USER ve: sus posts + posts de su coach + posts de compañeros del mismo coach
     const peers = user?.coachId
@@ -207,8 +206,8 @@ async getFeed(userId: string, input: { limit?: number; cursor?: string; userId?:
       ...peers.map((p) => p.id),
     ]
   }
- 
- const where = {
+
+const where = {
   OR: [
     { userId: { in: visibleUserIds } },
     { visibility: "PUBLIC" },
@@ -218,18 +217,41 @@ async getFeed(userId: string, input: { limit?: number; cursor?: string; userId?:
     createdAt: { lt: new Date(input.cursor) },
   }),
 };
- 
-  const posts = await db.post.findMany({
-    where,
-    orderBy: { createdAt: "desc" },
-    take:    limit + 1,
-    include: POST_INCLUDE,
-  })
- 
+
+ const posts = await db.post.findMany({
+  take: limit + 1,
+  cursor: input.cursor ? { id: input.cursor } : undefined,
+  orderBy: { createdAt: "desc" },
+  where,
+  include: {
+    user: {
+      select: { id: true, name: true, image: true, role: true }
+    },
+    reactions: {                    // 🔑 Incluir reacciones
+      include: {
+        user: { select: { id: true, name: true } } // opcional, si necesitas info del usuario
+      }
+    },
+    comments: {                     // 🔑 Incluir comentarios
+      where: { parentId: null },    // Solo comentarios raíz (no respuestas)
+      include: {
+        user: { select: { id: true, name: true, image: true } },
+        replies: {                  // Respuestas a este comentario
+          include: {
+            user: { select: { id: true, name: true, image: true } }
+          },
+          orderBy: { createdAt: "asc" }
+        }
+      },
+      orderBy: { createdAt: "asc" }
+    }
+  }
+});
+
   const hasMore    = posts.length > limit
   const items      = hasMore ? posts.slice(0, limit) : posts
   const nextCursor = hasMore ? items.at(-1)?.createdAt.toISOString() ?? null : null
- 
+
   return { items, nextCursor, hasMore }
 },
 
