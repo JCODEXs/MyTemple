@@ -52,6 +52,31 @@ const POST_INCLUDE = {
 // ─── Service ──────────────────────────────────────────────────────────────────
 
 export const CommunicationsService = {
+  //-- Contacts
+  async getAvailableContacts(userId: string) {
+  const user = await db.user.findUnique({
+    where:  { id: userId },
+    select: { coachId: true, role: true },
+  })
+ 
+  const isCoach = user?.role === "COACH" || user?.role === "ADMIN"
+ 
+  if (isCoach) {
+    // Coach puede escribir a sus clientes
+    return db.user.findMany({
+      where:  { coachId: userId },
+      select: { id: true, name: true, image: true, email: true },
+    })
+  }
+ 
+  // USER puede escribir solo a su coach
+  if (!user?.coachId) return []
+  const coach = await db.user.findUnique({
+    where:  { id: user.coachId },
+    select: { id: true, name: true, image: true, email: true },
+  })
+  return coach ? [coach] : []
+},
 
   // ── Posts ───────────────────────────────────────────────────────────────────
 
@@ -148,58 +173,63 @@ export const CommunicationsService = {
 
   // ── Feed ────────────────────────────────────────────────────────────────────
 
-  async getFeed(userId: string, input: GetFeedInput) {
-    const limit = input.limit ?? 20
-
-    // Determinar qué posts puede ver este usuario
-    const user = await db.user.findUnique({
-      where:  { id: userId },
-      select: { coachId: true, role: true },
+async getFeed(userId: string, input: { limit?: number; cursor?: string; userId?: string }) {
+  const limit = input.limit ?? 20
+ 
+  const user = await db.user.findUnique({
+    where:  { id: userId },
+    select: { coachId: true, role: true },
+  })
+ 
+  const isCoach = user?.role === "COACH" || user?.role === "ADMIN"
+ 
+  let visibleUserIds: string[]
+ 
+  if (isCoach) {
+    // COACH ve: sus posts + posts de sus clientes (coachId = userId)
+    const clients = await db.user.findMany({
+      where:  { coachId: userId },
+      select: { id: true },
     })
-
-    // Posts visibles:
-    // 1. Propios (cualquier visibilidad)
-    // 2. PUBLIC de cualquiera
-    // 3. PRIVATE de su coach (si tiene coach)
-    // 4. COACH_GROUP de su coach + compañeros del mismo coach
-    const coachClients = user?.coachId
+    visibleUserIds = [userId, ...clients.map((c) => c.id)]
+ 
+  } else {
+    // USER ve: sus posts + posts de su coach + posts de compañeros del mismo coach
+    const peers = user?.coachId
       ? await db.user.findMany({
           where:  { coachId: user.coachId },
           select: { id: true },
         })
       : []
-
-    const visibleUserIds = [
+    visibleUserIds = [
       userId,
       ...(user?.coachId ? [user.coachId] : []),
-      ...coachClients.map((c) => c.id),
+      ...peers.map((p) => p.id),
     ]
-
-    const where: Record<string, unknown> = {
-      OR: [
-        { userId: { in: visibleUserIds } },
-        { visibility: "PUBLIC" },
-      ],
-    }
-
-    if (input.userId) where.userId = input.userId
-    if (input.cursor) {
-      where.createdAt = { lt: new Date(input.cursor) }
-    }
-
-    const posts = await db.post.findMany({
-      where,
-      orderBy: { createdAt: "desc" },
-      take:    limit + 1,
-      include: POST_INCLUDE,
-    })
-
-    const hasMore   = posts.length > limit
-    const items     = hasMore ? posts.slice(0, limit) : posts
-    const nextCursor = hasMore ? items.at(-1)?.createdAt.toISOString() : null
-
-    return { items, nextCursor, hasMore }
-  },
+  }
+ 
+  const where: Prisma.PostWhereInput = {
+    OR: [
+      { userId: { in: visibleUserIds } },
+      { visibility: "PUBLIC" },
+    ],
+    ...(input.userId    ? { userId:    input.userId          } : {}),
+    ...(input.cursor    ? { createdAt: { lt: new Date(input.cursor) } } : {}),
+  }
+ 
+  const posts = await db.post.findMany({
+    where,
+    orderBy: { createdAt: "desc" },
+    take:    limit + 1,
+    include: POST_INCLUDE,
+  })
+ 
+  const hasMore    = posts.length > limit
+  const items      = hasMore ? posts.slice(0, limit) : posts
+  const nextCursor = hasMore ? items.at(-1)?.createdAt.toISOString() ?? null : null
+ 
+  return { items, nextCursor, hasMore }
+},
 
   async getUserPosts(userId: string, targetUserId: string) {
     return db.post.findMany({

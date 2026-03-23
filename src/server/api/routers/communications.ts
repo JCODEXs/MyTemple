@@ -87,19 +87,26 @@ export const communicationsRouter = createTRPCRouter({
 
   // ── Challenges ─────────────────────────────────────────────────────────────
 
-  createChallenge: coachProcedure
-    .input(z.object({
-      title:       z.string().min(1).max(100),
-      description: z.string().min(1).max(1000),
-      imageUrl:    z.string().url().optional(),
-      startsAt:    z.coerce.date(),
-      endsAt:      z.coerce.date(),
-      targetAll:   z.boolean().default(true),
-      targetIds:   z.array(z.string().cuid()).optional(),
-    }))
-    .mutation(({ ctx, input }) =>
-      CommunicationsService.createChallenge(ctx.session.user.id, input)
-    ),
+ 
+getAvailableContacts: protectedProcedure
+  .query(({ ctx }) =>
+    CommunicationsService.getAvailableContacts(ctx.session.user.id)
+  ),
+ 
+// createChallenge ya debería existir — verificar que usa coachProcedure:
+createChallenge: coachProcedure
+  .input(z.object({
+    title:       z.string().min(1).max(100),
+    description: z.string().min(1).max(1000),
+    imageUrl:    z.string().url().optional(),
+    startsAt:    z.coerce.date(),
+    endsAt:      z.coerce.date(),
+    targetAll:   z.boolean().default(true),
+    targetIds:   z.array(z.string().cuid()).optional(),
+  }))
+  .mutation(({ ctx, input }) =>
+    CommunicationsService.createChallenge(ctx.session.user.id, input)
+  ),
 
   getActiveChallenges: protectedProcedure
     .query(({ ctx }) =>
