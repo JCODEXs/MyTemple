@@ -127,20 +127,25 @@ export const subscriptionRouter = createTRPCRouter({
     ),
 
   // Verificar pago manualmente (para el caso pending)
-  verifyPayment: protectedProcedure
-    .input(z.object({ reference: z.string() }))
-    .mutation(async ({ ctx, input }) => {
-      const pending = await db.pendingPayment.findUnique({
-        where: { reference: input.reference },
-      })
-      if (!pending || pending.userId !== ctx.session.user.id) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Pago no encontrado." })
+verifyPayment: protectedProcedure
+  .input(z.object({ reference: z.string() }))
+  .mutation(async ({ ctx, input }) => {
+    try {
+      const result = await MPSubscriptionService.verifyPayment(
+        input.reference,
+        ctx.session.user.id
+      )
+      return result
+    } catch (error) {
+      if (error instanceof Error && error.message === "Pago no encontrado") {
+        throw new TRPCError({ code: "NOT_FOUND", message: error.message })
       }
-      if (pending.activated) {
-        return { activated: true }
+      if (error instanceof Error && error.message === "No autorizado") {
+        throw new TRPCError({ code: "UNAUTHORIZED", message: error.message })
       }
-      return { activated: false, status: "pending" }
-    }),
+      throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Error al verificar pago" })
+    }
+  }),
 
   // Cancelar suscripción
   cancel: protectedProcedure

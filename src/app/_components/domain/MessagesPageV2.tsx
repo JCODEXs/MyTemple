@@ -383,8 +383,8 @@ function DMConversation({ otherId, otherName, currentUserId }: { otherId: string
   const [text,     setText]     = useState("")
   const [imageUrl, setImageUrl] = useState("")
 
-  const { data: messages = [] } = api.communications.getConversation.useQuery({ otherId }, { refetchInterval: 5000 })
-
+  const { data: messages = [] } = api.communications.getConversation.useQuery({ otherId }, { refetchInterval: Infinity})
+useRealtimeMessages(otherId) 
   const sendMessage = api.communications.sendMessage.useMutation({
     onMutate: async ({ toId, content, imageUrl: imgUrl }) => {
       await utils.communications.getConversation.cancel({ otherId: toId })
