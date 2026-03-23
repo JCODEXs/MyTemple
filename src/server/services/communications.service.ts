@@ -209,10 +209,17 @@ async getFeed(userId: string, input: { limit?: number; cursor?: string; userId?:
 
 const where = {
   OR: [
-    { userId: { in: visibleUserIds } },
+    { userId },
+    {
+      user: {
+        coachId: userId,
+      },
+    },
     { visibility: "PUBLIC" },
   ],
+
   ...(input.userId && { userId: input.userId }),
+
   ...(input.cursor && {
     createdAt: { lt: new Date(input.cursor) },
   }),
