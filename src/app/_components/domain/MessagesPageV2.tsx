@@ -5,6 +5,7 @@ import { toast }         from "sonner"
 import { api }           from "@/trpc/react"
 import { UploadButton }  from "@/utils/uploadthing"
 import type { RouterOutputs } from "@/trpc/react"
+import type { PostType } from "@prisma/client"
 // import { useRealtimeMessages } from "@/hooks/useRealtimeMessages"
 
 type Post      = RouterOutputs["communications"]["getFeed"]["items"][number]
@@ -226,7 +227,7 @@ function PostCard({ post, currentUserId }: { post: Post; currentUserId: string }
   const [showComments, setShowComments] = useState(false)
   const [commentText,  setCommentText]  = useState("")
   const [replyTo,      setReplyTo]      = useState<string | null>(null)
-  const meta = POST_TYPE_META[post.type] ?? POST_TYPE_META.FREE
+const meta = POST_TYPE_META[post.type as keyof typeof POST_TYPE_META] ?? POST_TYPE_META.FREE
 
   const toggleReaction = api.communications.toggleReaction.useMutation({
     onMutate: async ({ postId, emoji }) => {
@@ -234,16 +235,19 @@ function PostCard({ post, currentUserId }: { post: Post; currentUserId: string }
       const prev = utils.communications.getFeed.getInfiniteData({ limit: 20 })
       utils.communications.getFeed.setInfiniteData({ limit: 20 }, (old) => {
         if (!old) return old
-        return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p) => {
+        return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p: Post) => {
           if (p.id !== postId) return p
          const reactions = p.reactions ?? []
 
 const already = reactions.some(
   (r) => r.emoji === emoji && r.userId === currentUserId
 )
-          return { ...p, reactions: already ? p?.reactions.filter((r) => !(r.emoji === emoji && r.userId === currentUserId))
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            : [...p?.reactions, { id: `opt-${Date.now()}`, emoji, userId: currentUserId, postId } as any] }
+        return {
+  ...p,
+  reactions: already
+    ? reactions.filter((r) => !(r.emoji === emoji && r.userId === currentUserId))
+    : [...reactions, { id: `opt-${Date.now()}`, emoji, userId: currentUserId, postId } as any]
+}
         })}))}
       })
       return { prev }
@@ -260,7 +264,7 @@ const already = reactions.some(
       const temp = { id: `opt-${Date.now()}`, content, postId, userId: currentUserId, parentId: parentId ?? null, createdAt: new Date(), user: { id: currentUserId, name: "Tú" }, replies: [] } as any
       utils.communications.getFeed.setInfiniteData({ limit: 20 }, (old) => {
         if (!old) return old
-        return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p) => {
+        return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p: Post) => {
           if (p.id !== postId) return p
           if (parentId) return { ...p, comments: p.comments.map((c) => c.id === parentId ? { ...c, replies: [...c.replies, temp] } : c) }
           return { ...p, comments: [...p.comments, temp] }
@@ -275,7 +279,7 @@ const already = reactions.some(
 
   const reactionGroups = useMemo(() => {
     const groups = new Map<string, { count: number; userReacted: boolean }>()
-    for (const r of post?.reactions) {
+    for (const r of post.reactions ?? []) {
       const e = groups.get(r.emoji) ?? { count: 0, userReacted: false }
       groups.set(r.emoji, { count: e.count + 1, userReacted: e.userReacted || r.userId === currentUserId })
     }
@@ -341,7 +345,7 @@ const already = reactions.some(
       </div>
       {showComments && (
         <div className="border-t border-white/5 px-4 pb-4 space-y-3 pt-3">
-          {post?.comments.map((comment) => (
+          {(post.comments ?? []).map((comment) => (
             <div key={comment.id}>
               <div className="flex gap-2">
                 <div className="h-6 w-6 flex-shrink-0 rounded-full bg-white/10 flex items-center justify-center text-[10px] font-bold text-gray-400">{comment.user.name?.[0]?.toUpperCase() ?? "?"}</div>
@@ -350,7 +354,7 @@ const already = reactions.some(
                   <p className="text-xs text-gray-200 mt-0.5">{comment.content}</p>
                 </div>
               </div>
-              {comment?.replies.map((reply) => (
+              {(comment.replies ?? []).map((reply) => (
                 <div key={reply.id} className="ml-8 mt-1.5 flex gap-2">
                   <div className="h-5 w-5 flex-shrink-0 rounded-full bg-white/10 flex items-center justify-center text-[9px] font-bold text-gray-500">{reply.user.name?.[0]?.toUpperCase() ?? "?"}</div>
                   <div className="flex-1 rounded-xl bg-white/5 px-3 py-2">
