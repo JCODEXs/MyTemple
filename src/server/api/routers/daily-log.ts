@@ -2,7 +2,7 @@ import { z } from "zod"
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc"
 import { DailyEnergyService } from "../../services/daily-energy.service"
 import { WorkoutType } from "../../../../generated/prisma"
-import { UserProfileService } from "./user-profile.service"
+import { UserProfileService } from "@/server/services/user-profile.service"
 // ─── Schemas ──────────────────────────────────────────────────────────────────
 
 const workoutInputSchema = z.object({
