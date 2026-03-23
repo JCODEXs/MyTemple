@@ -231,6 +231,48 @@ export const MPSubscriptionService = {
       reference,
     }
   },
+   /**
+   * Verifica el estado de un pago pendiente por referencia.
+   * Retorna el estado actual (pendiente, activado, etc.)
+   */
+  async verifyPayment(reference: string, userId?: string) {
+    const pending = await db.pendingPayment.findUnique({
+      where: { reference },
+    })
+
+    if (!pending) {
+      throw new Error("Pago no encontrado")
+    }
+
+    // Si se pasa userId, verificar que pertenezca al usuario actual
+    if (userId && pending.userId !== userId) {
+      throw new Error("No autorizado")
+    }
+
+    if (pending.activated) {
+      return { 
+        activated: true,
+        activatedAt: pending.activatedAt,
+        plan: pending.plan,
+        status: "activated"
+      }
+    }
+
+    // Opcional: verificar en MP si el pago ya fue aprobado pero no llegó webhook
+    // Esto evita esperar al webhook para casos de pago único
+    if (pending.method !== "QR") {
+      // Podrías consultar a MP aquí si es necesario
+      // Por ahora solo retornamos pendiente
+    }
+
+    return {
+      activated: false,
+      status: "pending",
+      reference: pending.reference,
+      plan: pending.plan,
+      expiresAt: pending.expiresAt,
+    }
+  },
 
   // ── ACTIVAR SUSCRIPCIÓN ───────────────────────────────────────────────────
 
