@@ -670,7 +670,7 @@ export default function MessagesPage() {
             ) : (
               challenges.map((challenge) => {
                 const daysLeft        = Math.max(0, Math.ceil((new Date(challenge.endsAt).getTime() - Date.now()) / 86400000))
-                const hasParticipated = challenge.posts.length > 0
+               const hasParticipated = challenge.posts.some((p) => p.userId === currentUserId)
                 const pct             = Math.max(0, Math.round(((7 - daysLeft) / 7) * 100))
                 return (
                   <div key={challenge.id} className="rounded-2xl ring-1 ring-white/10 overflow-hidden">
@@ -690,7 +690,29 @@ export default function MessagesPage() {
                           <div className="h-full rounded-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all" style={{ width: `${pct}%` }} />
                         </div>
                       </div>
-                      <p className="text-xs text-gray-500 mb-3">{challenge.posts.length} respuesta{challenge.posts.length !== 1 ? "s" : ""}</p>
+                     {isCoach ? (
+  <div className="mb-3 rounded-xl bg-white/5 border border-white/10 px-4 py-3">
+    <p className="text-xs font-bold text-gray-400 mb-2">Respuestas recibidas</p>
+    {challenge.posts.length === 0 ? (
+      <p className="text-xs text-gray-600">Ningún cliente ha respondido todavía</p>
+    ) : (
+      <div className="flex flex-wrap gap-2">
+        {challenge.posts.map((p) => (
+          <div key={p.id} className="flex items-center gap-1.5 rounded-full bg-green-500/20 border border-green-500/30 px-2.5 py-1">
+            <span className="h-4 w-4 rounded-full bg-green-500/40 flex items-center justify-center text-[9px] font-black text-green-400">
+              {p.user.name?.[0]?.toUpperCase() ?? "?"}
+            </span>
+            <span className="text-[10px] font-bold text-green-400">{p.user.name}</span>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+) : (
+  <p className="text-xs text-gray-500 mb-3">
+    {challenge.posts.length} respuesta{challenge.posts.length !== 1 ? "s" : ""}
+  </p>
+)}
                       {!hasParticipated && !isCoach && (
                         <button onClick={() => setRespondTo(challenge)}
                           className="w-full rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 py-2.5 text-sm font-bold text-white hover:from-amber-600 hover:to-orange-600 transition-all">

@@ -342,8 +342,9 @@ async getFeed(userId: string, input: { limit?: number; cursor?: string; userId?:
       include: {
         coach: { select: { id: true, name: true, image: true } },
         posts: {
-          where:   { userId },
-          select:  { id: true },
+          // where:   { userId },
+          select:  { id: true,userId: true,            // ← necesario para saber si el user ya respondió
+          user:   { select: { id: true, name: true } }, },
         },
       },
       orderBy: { endsAt: "asc" },
