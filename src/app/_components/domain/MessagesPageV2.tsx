@@ -5,7 +5,7 @@ import { toast }         from "sonner"
 import { api }           from "@/trpc/react"
 import { UploadButton }  from "@/utils/uploadthing"
 import type { RouterOutputs } from "@/trpc/react"
-import type { Prisma, PostReaction, Comment } from "../../../../generated/prisma"
+import type { Prisma, PostReaction } from "../../../../generated/prisma"
 // import { useRealtimeMessages } from "@/hooks/useRealtimeMessages"
 
 type Post      = RouterOutputs["communications"]["getFeed"]["items"][number]
@@ -29,7 +29,7 @@ type CommentWithReplies = Prisma.CommentGetPayload<{
     post: true
     user: true
     parent: true
-    replies: true
+    replies: { include: { user: true } }  
   }
 }>
 const TABS = ["feed", "messages", "challenges"] as const
@@ -362,11 +362,11 @@ const already = reactions.some(
                   <p className="text-xs text-gray-200 mt-0.5">{comment.content}</p>
                 </div>
               </div>
-              {(comment.replies ?? []).map((reply:CommentWithReplies) => (
+              {(comment.replies ?? []).map((reply) => (
                 <div key={reply.id} className="ml-8 mt-1.5 flex gap-2">
                   <div className="h-5 w-5 flex-shrink-0 rounded-full bg-white/10 flex items-center justify-center text-[9px] font-bold text-gray-500">{reply.user.name?.[0]?.toUpperCase() ?? "?"}</div>
                   <div className="flex-1 rounded-xl bg-white/5 px-3 py-2">
-                    <p className="text-[10px] font-bold text-gray-500">{reply.user.name}</p>
+                    <p className="text-[10px] font -bold text-gray-500">{reply.user.name}</p>
                     <p className="text-xs text-gray-300 mt-0.5">{reply.content}</p>
                   </div>
                 </div>

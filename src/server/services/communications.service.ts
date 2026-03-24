@@ -1,7 +1,6 @@
 import { db }        from "@/server/db"
 import { TRPCError } from "@trpc/server"
 import type { PostType,PostVisibility, } from "../../../generated/prisma"
-import  { Prisma } from "@prisma/client"
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 
