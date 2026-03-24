@@ -5,7 +5,7 @@ import { toast }         from "sonner"
 import { api }           from "@/trpc/react"
 import { UploadButton }  from "@/utils/uploadthing"
 import type { RouterOutputs } from "@/trpc/react"
-// import type { PostType } from "../../../../generated/prisma"
+import type { PostType, PostReaction } from "../../../../generated/prisma"
 // import { useRealtimeMessages } from "@/hooks/useRealtimeMessages"
 
 type Post      = RouterOutputs["communications"]["getFeed"]["items"][number]
@@ -279,7 +279,8 @@ const already = reactions.some(
 
   const reactionGroups = useMemo(() => {
     const groups = new Map<string, { count: number; userReacted: boolean }>()
-    for (const r of post.reactions ?? []) {
+    const reactions:PostReaction[]=post.reactions
+    for (const r of reactions ?? []) {
       const e = groups.get(r.emoji) ?? { count: 0, userReacted: false }
       groups.set(r.emoji, { count: e.count + 1, userReacted: e.userReacted || r.userId === currentUserId })
     }
