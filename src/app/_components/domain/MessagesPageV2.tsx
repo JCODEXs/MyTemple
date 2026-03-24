@@ -353,7 +353,7 @@ const already = reactions.some(
       </div>
       {showComments && (
         <div className="border-t border-white/5 px-4 pb-4 space-y-3 pt-3">
-          {(post.comments ?? []).map((comment) => (
+          {(post.comments ?? []).map((comment:CommentWithReplies) => (
             <div key={comment.id}>
               <div className="flex gap-2">
                 <div className="h-6 w-6 flex-shrink-0 rounded-full bg-white/10 flex items-center justify-center text-[10px] font-bold text-gray-400">{comment.user.name?.[0]?.toUpperCase() ?? "?"}</div>
@@ -435,7 +435,7 @@ function DMConversation({ otherId, otherName, currentUserId }: { otherId: string
             <p className="text-sm text-gray-500">Sé el primero en escribir</p>
           </div>
         )}
-        {messages.map((msg) => {
+        {messages.map((msg: Message) => {
           const isMine = msg.fromId === currentUserId
           return (
             <div key={msg.id} className={`flex ${isMine ? "justify-end" : "justify-start"}`}>
@@ -546,7 +546,7 @@ function MessagesTab({ currentUserId }: { currentUserId: string }) {
           </div>
         ) : (
           <div className="divide-y divide-white/5 overflow-y-auto flex-1">
-            {convos.map((convo) => (
+            {convos.map((convo: Convo) => (
               <button key={convo.other.id} onClick={() => openConvo(convo)}
                 className={`w-full flex items-center gap-3 px-4 py-3.5 text-left hover:bg-white/5 transition-colors ${activeId === convo.other.id ? "bg-white/10" : ""}`}>
                 <div className="relative h-10 w-10 flex-shrink-0 rounded-xl bg-gradient-to-br from-amber-400/30 to-orange-500/30 flex items-center justify-center text-sm font-black text-amber-400">
@@ -684,7 +684,7 @@ export default function MessagesPage() {
                 )}
               </div>
             ) : (
-              challenges.map((challenge) => {
+              challenges.map((challenge: Challenge) => {
                 const daysLeft        = Math.max(0, Math.ceil((new Date(challenge.endsAt).getTime() - Date.now()) / 86400000))
                const hasParticipated = challenge.posts.some((p) => p.userId === currentUserId)
                 const pct             = Math.max(0, Math.round(((7 - daysLeft) / 7) * 100))
@@ -713,7 +713,7 @@ export default function MessagesPage() {
       <p className="text-xs text-gray-600">Ningún cliente ha respondido todavía</p>
     ) : (
       <div className="flex flex-wrap gap-2">
-        {challenge.posts.map((p) => (
+        {challenge.posts.map((p: Post) => (
           <div key={p.id} className="flex items-center gap-1.5 rounded-full bg-green-500/20 border border-green-500/30 px-2.5 py-1">
             <span className="h-4 w-4 rounded-full bg-green-500/40 flex items-center justify-center text-[9px] font-black text-green-400">
               {p.user.name?.[0]?.toUpperCase() ?? "?"}
