@@ -314,7 +314,7 @@ const already = reactions.some(
       {post?.content && <p className="px-4 pb-3 text-sm text-gray-200 leading-relaxed">{post.content}</p>}
       {post?.imageUrls?.length > 0 && (
         <div className={`grid gap-1 px-4 pb-3 ${post.imageUrls.length === 1 ? "grid-cols-1" : post.imageUrls.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
-          {post?.imageUrls.map((url) => (
+          {post?.imageUrls.map((url: string) => (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img key={url} src={url} alt="" className={`w-full rounded-xl object-cover ${post.imageUrls.length === 1 ? "max-h-72" : "h-28"}`} />
           ))}
