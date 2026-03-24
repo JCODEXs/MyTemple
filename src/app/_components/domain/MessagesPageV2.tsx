@@ -5,7 +5,7 @@ import { toast }         from "sonner"
 import { api }           from "@/trpc/react"
 import { UploadButton }  from "@/utils/uploadthing"
 import type { RouterOutputs } from "@/trpc/react"
-import type { PostType, PostReaction, Comment } from "../../../../generated/prisma"
+import type { Prisma, PostReaction, Comment } from "../../../../generated/prisma"
 // import { useRealtimeMessages } from "@/hooks/useRealtimeMessages"
 
 type Post      = RouterOutputs["communications"]["getFeed"]["items"][number]
@@ -24,7 +24,14 @@ const POST_TYPE_META = {
   SHARE:       { label: "Compartido", emoji: "🔗", color: "text-green-400 bg-green-500/20"  },
   FREE:        { label: "Post",       emoji: "💬", color: "text-gray-400 bg-gray-500/20"    },
 }
-
+type CommentWithReplies = Prisma.CommentGetPayload<{
+  include: {
+    post: true
+    user: true
+    parent: true
+    replies: true
+  }
+}>
 const TABS = ["feed", "messages", "challenges"] as const
 type Tab = typeof TABS[number]
 
@@ -266,7 +273,7 @@ const already = reactions.some(
         if (!old) return old
         return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p: Post) => {
           if (p.id !== postId) return p
-          if (parentId) return { ...p, comments: p.comments.map((c: Comment) => c.id === parentId ? { ...c, replies: [...c.replies, temp] } : c) }
+          if (parentId) return { ...p, comments: p.comments.map((c: CommentWithReplies) => c.id === parentId ? { ...c, replies: [...c.replies, temp] } : c) }
           return { ...p, comments: [...p.comments, temp] }
         })}))}
       })
