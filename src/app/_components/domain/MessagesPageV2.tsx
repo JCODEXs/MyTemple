@@ -5,7 +5,7 @@ import { toast }         from "sonner"
 import { api }           from "@/trpc/react"
 import { UploadButton }  from "@/utils/uploadthing"
 import type { RouterOutputs } from "@/trpc/react"
-import type { PostType, PostReaction } from "../../../../generated/prisma"
+import type { PostType, PostReaction, Comment } from "../../../../generated/prisma"
 // import { useRealtimeMessages } from "@/hooks/useRealtimeMessages"
 
 type Post      = RouterOutputs["communications"]["getFeed"]["items"][number]
@@ -266,7 +266,7 @@ const already = reactions.some(
         if (!old) return old
         return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p: Post) => {
           if (p.id !== postId) return p
-          if (parentId) return { ...p, comments: p.comments.map((c) => c.id === parentId ? { ...c, replies: [...c.replies, temp] } : c) }
+          if (parentId) return { ...p, comments: p.comments.map((c: Comment) => c.id === parentId ? { ...c, replies: [...c.replies, temp] } : c) }
           return { ...p, comments: [...p.comments, temp] }
         })}))}
       })
