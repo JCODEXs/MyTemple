@@ -237,7 +237,7 @@ const meta = POST_TYPE_META[post.type as keyof typeof POST_TYPE_META] ?? POST_TY
         if (!old) return old
         return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p: Post) => {
           if (p.id !== postId) return p
-         const reactions = p.reactions ?? []
+         const reactions:PostReaction[] = p.reactions ?? []
 
 const already = reactions.some(
   (r) => r.emoji === emoji && r.userId === currentUserId
