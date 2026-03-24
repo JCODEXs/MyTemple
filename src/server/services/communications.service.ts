@@ -252,7 +252,7 @@ const where = {
 
 
 
- const posts: PostWithRelations[] = await db.post.findMany({
+ const posts= await db.post.findMany({
   take: limit + 1,
   cursor: input.cursor ? { id: input.cursor } : undefined,
   orderBy: { createdAt: "desc" },
