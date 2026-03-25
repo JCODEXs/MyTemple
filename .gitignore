@@ -12,6 +12,8 @@
 /prisma/db.sqlite
 /prisma/db.sqlite-journal
 db.sqlite
+/node_modules/.prisma
+/prisma/generated
 
 # next.js
 /.next/
