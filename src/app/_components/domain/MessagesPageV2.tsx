@@ -391,7 +391,7 @@ const already = reactions.some(
       </div>
       {showComments && (
         <div className="border-t border-white/5 px-4 pb-4 space-y-3 pt-3">
-          {(post.comments ?? []).map((comment:CommentWithReplies) => (
+          {(post.comments ?? []).map((comment) => (
             <div key={comment.id}>
               <div className="flex gap-2">
                 <div className="h-6 w-6 flex-shrink-0 rounded-full bg-white/10 flex items-center justify-center text-[10px] font-bold text-gray-400">{comment.user.name?.[0]?.toUpperCase() ?? "?"}</div>
@@ -405,7 +405,7 @@ const already = reactions.some(
                   <div className="h-5 w-5 flex-shrink-0 rounded-full bg-white/10 flex items-center justify-center text-[9px] font-bold text-gray-500">{reply.user.name?.[0]?.toUpperCase() ?? "?"}</div>
                   <div className="flex-1 rounded-xl bg-white/5 px-3 py-2">
                     <p className="text-[10px] font -bold text-gray-500">{reply.user.name}</p>
-                    <p className="text-xs text-gray-300 mt-0.5">{reply.content}</p>
+                    <p className="text-xs text-gray-300 mt-0.5">{reply?.content}</p>
                   </div>
                 </div>
               ))}
