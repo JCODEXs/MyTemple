@@ -722,7 +722,7 @@ export default function MessagesPage() {
                 )}
               </div>
             ) : (
-              challenges.map((challenge: Challenge) => {
+              challenges.map((challenge) => {
                 const daysLeft        = Math.max(0, Math.ceil((new Date(challenge.endsAt).getTime() - Date.now()) / 86400000))
                const hasParticipated = challenge.posts.some((p) => p.userId === currentUserId)
                 const pct             = Math.max(0, Math.round(((7 - daysLeft) / 7) * 100))
@@ -751,7 +751,7 @@ export default function MessagesPage() {
       <p className="text-xs text-gray-600">Ningún cliente ha respondido todavía</p>
     ) : (
       <div className="flex flex-wrap gap-2">
-        {challenge.posts.map((p: Post) => (
+        {challenge.posts.map((p) => (
           <div key={p.id} className="flex items-center gap-1.5 rounded-full bg-green-500/20 border border-green-500/30 px-2.5 py-1">
             <span className="h-4 w-4 rounded-full bg-green-500/40 flex items-center justify-center text-[9px] font-black text-green-400">
               {p.user.name?.[0]?.toUpperCase() ?? "?"}
