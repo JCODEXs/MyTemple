@@ -259,7 +259,7 @@ const where = {
   orderBy: { createdAt: "desc" },
   where,
   include: POST_INCLUDE2,
-});
+}) as any as PostWithRelations[];;
 
   const hasMore    = posts.length > limit
   const items      = hasMore ? posts.slice(0, limit) : posts
