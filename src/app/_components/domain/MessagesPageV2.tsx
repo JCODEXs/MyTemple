@@ -5,7 +5,8 @@ import { toast }         from "sonner"
 import { api }           from "@/trpc/react"
 import { UploadButton }  from "@/utils/uploadthing"
 import type { RouterOutputs } from "@/trpc/react"
-import type { Prisma, PostReaction } from "../../../../generated/prisma"
+import type { PostReaction } from "../../../../generated/prisma"
+import type {PostWithRelations } from "@/server/services/communications.service"
 // import { useRealtimeMessages } from "@/hooks/useRealtimeMessages"
 
 type Post      = RouterOutputs["communications"]["getFeed"]["items"][number]
@@ -24,52 +25,10 @@ const POST_TYPE_META = {
   SHARE:       { label: "Compartido", emoji: "🔗", color: "text-green-400 bg-green-500/20"  },
   FREE:        { label: "Post",       emoji: "💬", color: "text-gray-400 bg-gray-500/20"    },
 }
-const POST_INCLUDE2 = {
-  user: {
-    select: { id: true, name: true, image: true, role: true }
-  },
-  reactions: {
-    include: {
-      user: { select: { id: true, name: true } }
-    }
-  },
-  comments: {
-    where: { parentId: null },
-    include: {
-      user: { select: { id: true, name: true, image: true } },
-      replies: {
-        include: {
-          user: { select: { id: true, name: true, image: true } }
-        },
-        orderBy: { createdAt: "asc" }
-      }
-    },
-    orderBy: { createdAt: "asc" }
-  }
-};
-type CommentWithReplies = Prisma.CommentGetPayload<{
-  include: {
-    post: true
-    user: true
-    parent: true
-    replies: { include: { user: true } }  
-  }
-}>
 
 
-export type PostWithRelations = Prisma.PostGetPayload<{
-  include:
-  {
-    user: {
-      select: { id: true, name: true, image: true, role: true }
-    }
-    reactions: {
-      include: {
-        user: { select: { id: true, name: true } }
-      }
-    }
-  }
-}>
+
+
 const TABS = ["feed", "messages", "challenges"] as const
 type Tab = typeof TABS[number]
 
