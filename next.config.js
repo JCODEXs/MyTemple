@@ -6,7 +6,13 @@ import "./src/env.js";
 import { withSentryConfig } from "@sentry/nextjs";
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  outputFileTracingIncludes: {
+    "**/*": ["node_modules/.prisma/client/*.node"],
+  },
+  // If you're using server components, you might need this as well:
+  serverExternalPackages: ["@prisma/client", "prisma"],
+};
 
 export default withSentryConfig(config, {
   org: "atrezzom",
