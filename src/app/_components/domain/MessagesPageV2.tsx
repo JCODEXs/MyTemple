@@ -24,6 +24,29 @@ const POST_TYPE_META = {
   SHARE:       { label: "Compartido", emoji: "🔗", color: "text-green-400 bg-green-500/20"  },
   FREE:        { label: "Post",       emoji: "💬", color: "text-gray-400 bg-gray-500/20"    },
 }
+const POST_INCLUDE2 = {
+  user: {
+    select: { id: true, name: true, image: true, role: true }
+  },
+  reactions: {
+    include: {
+      user: { select: { id: true, name: true } }
+    }
+  },
+  comments: {
+    where: { parentId: null },
+    include: {
+      user: { select: { id: true, name: true, image: true } },
+      replies: {
+        include: {
+          user: { select: { id: true, name: true, image: true } }
+        },
+        orderBy: { createdAt: "asc" }
+      }
+    },
+    orderBy: { createdAt: "asc" }
+  }
+};
 type CommentWithReplies = Prisma.CommentGetPayload<{
   include: {
     post: true
@@ -32,12 +55,16 @@ type CommentWithReplies = Prisma.CommentGetPayload<{
     replies: { include: { user: true } }  
   }
 }>
-type PostWhitRelations = Prisma.PostGetPayload<{
+export type PostWithRelations = Prisma.PostGetPayload<{
   include: {
-    user: true
-    reactions: true
-    comments: { include: { user: true, parent: true, replies: { include: { user: true } } } }
-  }
+    user: {
+      select: { id: true, name: true, image: true, role: true }
+    },
+  reactions: {
+    include: {
+      user: { select: { id: true, name: true } }
+    }
+  }}
 }>
 const TABS = ["feed", "messages", "challenges"] as const
 type Tab = typeof TABS[number]
@@ -249,7 +276,7 @@ const meta = POST_TYPE_META[post.type as keyof typeof POST_TYPE_META] ?? POST_TY
       const prev = utils.communications.getFeed.getInfiniteData({ limit: 20 })
       utils.communications.getFeed.setInfiniteData({ limit: 20 }, (old) => {
         if (!old) return old
-        return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p: PostWhitRelations) => {
+        return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p: PostWithRelations) => {
           if (p.id !== postId) return p
          const reactions:PostReaction[] = p.reactions ?? []
 
