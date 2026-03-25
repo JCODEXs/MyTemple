@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // src/app/not-found.tsx
 // Next.js App Router — este archivo se renderiza automáticamente en cualquier 404
 

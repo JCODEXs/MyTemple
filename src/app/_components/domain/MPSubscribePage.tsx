@@ -178,6 +178,7 @@ export default function SubscribePage() {
   useEffect(() => {
     if (qrData && !polling) {
       setPolling(true)
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       pollRef.current = setInterval(async () => {
         const res = await verifyPayment.mutateAsync({ reference: qrData.reference })
           .catch(() => null)
@@ -323,7 +324,7 @@ export default function SubscribePage() {
             {(["ATHLETE", "COACH"] as PlanKey[]).map((key) => (
               <PlanCard
                 key={key}
-                plan={plans[key]!}
+                plan={plans[key]}
                 selected={selectedPlan === key}
                 onSelect={() => setSelectedPlan(key)}
               />

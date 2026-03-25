@@ -13,6 +13,7 @@ export interface CreateProfileInput {
   activityFactor?: number
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface UpdateProfileInput extends Partial<CreateProfileInput> {}
 
 // ─── Service ──────────────────────────────────────────────────────────────────

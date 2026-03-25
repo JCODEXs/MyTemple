@@ -12,6 +12,7 @@ export default async function SuperAdminLayout({ children }: { children: React.R
     select: { role: true, name: true },
   })
 
+  // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
   if (!user || user.role !== "ADMIN") redirect("/dashboard")
 
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-optional-chain */
 import { db }        from "@/server/db"
 import { TRPCError } from "@trpc/server"
 

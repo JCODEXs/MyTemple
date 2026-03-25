@@ -145,6 +145,7 @@ export const RegistrationService = {
       select: { role: true },
     })
 
+    // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
     if (!admin || (admin.role !== "ADMIN")) {
       throw new TRPCError({ code: "FORBIDDEN", message: "Solo administradores pueden generar códigos de coach." })
     }

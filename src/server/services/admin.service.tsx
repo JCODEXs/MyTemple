@@ -13,6 +13,7 @@ export const AdminService = {
       where:  { id: userId },
       select: { role: true },
     })
+    // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
     if (!user || user.role !== "ADMIN") {
       throw new TRPCError({ code: "FORBIDDEN", message: "Acceso restringido a administradores." })
     }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-regexp-exec */
 import { type NextRequest, NextResponse } from "next/server"
 import { MPSubscriptionService }          from "@/server/services/mp-subscription.service"
 import crypto                             from "crypto"

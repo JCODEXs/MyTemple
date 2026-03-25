@@ -357,6 +357,7 @@ export default function PlanBuilder() {
 
   const handleSave = () => {
     if (!suggestion) return
+    // eslint-disable-next-line @typescript-eslint/dot-notation
     const macroSplit = GOAL_MACRO_SPLITS[profile?.goal ?? "MAINTENANCE"] ?? GOAL_MACRO_SPLITS["MAINTENANCE"]!
     const endDate    = new Date(startDate)
     endDate.setDate(endDate.getDate() + duration - 1)

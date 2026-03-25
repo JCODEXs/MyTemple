@@ -158,8 +158,8 @@ export function generatePlan(
   recipes:          RecipeCandidate[],
   targetKcalPerDay: number,
   startDate:        Date,
-  durationDays:     number = 7,
-  rotateDays:       boolean = true
+  durationDays:     number,
+  rotateDays:       true
 ): PlanSuggestion {
   const kcalBySlot  = distributeKcalBySlot(targetKcalPerDay)
   const activeSlots = MEAL_SLOTS.filter((s) => s.kcalPct > 0)

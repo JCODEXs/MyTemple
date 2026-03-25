@@ -105,8 +105,8 @@ callbacks: {
     ...session,
     user: {
       ...session.user,
-      id:   token.id   as string,
-      role: token.role as string ?? "USER",
+      id:   token.id!  ,
+      role: token.role! ?? "USER",
     },
   }),
 

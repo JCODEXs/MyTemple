@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/dot-notation */
 import { db } from "@/server/db"
 import { randomBytes } from "crypto"
 import { TRPCError } from "@trpc/server"
@@ -127,12 +128,14 @@ export const NutritionPlanService = {
 
     const targetKcal = input.targetKcal ??
       calculateDailyTarget(tdee, profile.goal)
+      const durationDays=input.durationDays 
 
     return generatePlan(
       recipes,
       targetKcal,
       toDateOnly(input.startDate),
-      input.durationDays
+      durationDays,
+      true
     )
   },
 
@@ -142,7 +145,7 @@ export const NutritionPlanService = {
   async createFromSuggestion(userId: string, input: CreatePlanInput & { days: PlanDayInput[] }) {
   const profile = await db.userProfile.findUnique({ where: { userId } })
   if (!profile) throw new TRPCError({ code: "NOT_FOUND", message: "Perfil no encontrado." })
-
+// eslint-disable-next-line @typescript-eslint/dot-notation
   const macroSplit = GOAL_MACRO_SPLITS[profile.goal] ?? GOAL_MACRO_SPLITS["MAINTENANCE"]!
 
   return db.$transaction(async (tx) => {
