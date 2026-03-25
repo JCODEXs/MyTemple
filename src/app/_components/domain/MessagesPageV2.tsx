@@ -55,16 +55,20 @@ type CommentWithReplies = Prisma.CommentGetPayload<{
     replies: { include: { user: true } }  
   }
 }>
+
+
 export type PostWithRelations = Prisma.PostGetPayload<{
-  include: {
+  include:
+  {
     user: {
       select: { id: true, name: true, image: true, role: true }
-    },
-  reactions: {
-    include: {
-      user: { select: { id: true, name: true } }
     }
-  }}
+    reactions: {
+      include: {
+        user: { select: { id: true, name: true } }
+      }
+    }
+  }
 }>
 const TABS = ["feed", "messages", "challenges"] as const
 type Tab = typeof TABS[number]
@@ -278,7 +282,7 @@ const meta = POST_TYPE_META[post.type as keyof typeof POST_TYPE_META] ?? POST_TY
         if (!old) return old
         return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p: PostWithRelations) => {
           if (p.id !== postId) return p
-         const reactions:PostReaction[] = p.reactions ?? []
+         const reactions = p.reactions ?? []
 
 const already = reactions.some(
   (r) => r.emoji === emoji && r.userId === currentUserId
@@ -305,7 +309,7 @@ const already = reactions.some(
       const temp = { id: `opt-${Date.now()}`, content, postId, userId: currentUserId, parentId: parentId ?? null, createdAt: new Date(), user: { id: currentUserId, name: "Tú" }, replies: [] } as any
       utils.communications.getFeed.setInfiniteData({ limit: 20 }, (old) => {
         if (!old) return old
-        return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p: Post) => {
+        return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p: PostWithRelations) => {
           if (p.id !== postId) return p
           if (parentId) return { ...p, comments: p.comments.map((c: CommentWithReplies) => c.id === parentId ? { ...c, replies: [...c.replies, temp] } : c) }
           return { ...p, comments: [...p.comments, temp] }
