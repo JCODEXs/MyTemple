@@ -14,6 +14,16 @@ export type PostWithRelations = Prisma.PostGetPayload<{
         user: { select: { id: true, name: true } }
       }
     }
+    comments: {
+      include: {
+        user: { select: { id: true, name: true, image: true } },
+        replies: {
+          include: {
+            user: { select: { id: true, name: true, image: true } }
+          }
+        }
+      }
+    }
   }
 }>
 export interface CreatePostInput {

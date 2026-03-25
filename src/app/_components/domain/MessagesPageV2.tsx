@@ -309,9 +309,9 @@ const already = reactions.some(
       const temp = { id: `opt-${Date.now()}`, content, postId, userId: currentUserId, parentId: parentId ?? null, createdAt: new Date(), user: { id: currentUserId, name: "Tú" }, replies: [] } as any
       utils.communications.getFeed.setInfiniteData({ limit: 20 }, (old) => {
         if (!old) return old
-        return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p: PostWithRelations) => {
+        return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p) => {
           if (p.id !== postId) return p
-          if (parentId) return { ...p, comments: p.comments.map((c: CommentWithReplies) => c.id === parentId ? { ...c, replies: [...c.replies, temp] } : c) }
+          if (parentId) return { ...p, comments: p.comments.map((c) => c.id === parentId ? { ...c, replies: [...c.replies, temp] } : c) }
           return { ...p, comments: [...p.comments, temp] }
         })}))}
       })
