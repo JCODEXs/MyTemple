@@ -1,4 +1,4 @@
-// middleware.ts — raíz del proyecto (reemplaza ambos archivos, borra proxy.ts)
+export const runtime = 'nodejs';
 
 import { auth }        from "@/server/auth"
 import { NextResponse, type NextRequest } from "next/server"
