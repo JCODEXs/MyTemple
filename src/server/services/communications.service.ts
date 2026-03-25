@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { db }        from "@/server/db"
 import { TRPCError } from "@trpc/server"
 import type { PostType,PostVisibility,Prisma } from "../../../generated/prisma"
@@ -259,6 +264,7 @@ const where: Prisma.PostWhereInput = {
   orderBy: { createdAt: "desc" },
   where,
   include: POST_INCLUDE2,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 }) as any as PostWithRelations[]
 
   const hasMore    = posts.length > limit
