@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { api } from "@/trpc/react"
-import type { Sex, GoalType } from "../../../../generated/prisma"
+import type { Sex, GoalType } from "@prisma/client"
 // import { useSession } from "next-auth/react"
 
 

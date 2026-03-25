@@ -12,7 +12,7 @@
  *   - Verduras y vegetales
  */
 
-import { PrismaClient } from "../generated/prisma"
+import { PrismaClient } from "@prisma/client"
 
 const db = new PrismaClient()
 

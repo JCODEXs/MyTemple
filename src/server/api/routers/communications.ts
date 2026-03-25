@@ -1,7 +1,7 @@
 import { z }                                    from "zod"
 import { createTRPCRouter, protectedProcedure, coachProcedure } from "@/server/api/trpc"
 import { CommunicationsService }               from "@/server/services/communications.service"
-import { PostType, PostVisibility }            from "../../../../generated/prisma"
+import { PostType, PostVisibility }            from "@prisma/client"
 
 const VALID_EMOJIS = ["❤️", "🔥", "🏆", "💪", "👏"] as const
 

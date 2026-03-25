@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { api } from "@/trpc/react"
 import { MEAL_SLOTS, GOAL_MACRO_SPLITS, type MealSlotId } from "@/lib/domain/nutrition/plan-generator"
-import type { MealType } from "../../../../generated/prisma"
+import type { MealType } from "@prisma/client"
 import type { RouterOutputs } from "@/trpc/react"
 
 type Suggestion     = RouterOutputs["nutritionPlan"]["generateSuggestion"]

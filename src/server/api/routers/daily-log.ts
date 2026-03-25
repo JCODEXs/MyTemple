@@ -1,7 +1,7 @@
 import { z } from "zod"
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc"
 import { DailyEnergyService } from "../../services/daily-energy.service"
-import { WorkoutType } from "../../../../generated/prisma"
+import { WorkoutType } from "@prisma/client"
 import { UserProfileService } from "@/server/services/user-profile.service"
 // ─── Schemas ──────────────────────────────────────────────────────────────────
 

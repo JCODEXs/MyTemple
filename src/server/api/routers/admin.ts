@@ -6,7 +6,7 @@
 import { z }                                          from "zod"
 import { createTRPCRouter, adminProcedure }            from "@/server/api/trpc"
 import { AdminService }                               from "@/server/services/admin.service"
-import { UserRole }                                   from "../../../../generated/prisma"
+import { UserRole }                                   from "@prisma/client"
 
 export const adminRouter = createTRPCRouter({
 

@@ -1,6 +1,6 @@
 import { db } from "@/server/db"
 import { estimateTrainingKcal } from "../../lib/domain/energy/metabolicFunctions"
-import type { WorkoutType } from "../../../generated/prisma"
+import type { WorkoutType } from "@prisma/client"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

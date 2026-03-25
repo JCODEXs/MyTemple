@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { auth } from "@/server/auth"
 
 import { DailyEnergyService } from "@/server/services/daily-energy.service"
-import { WorkoutType } from "../../../../../generated/prisma"
+import { WorkoutType } from "@prisma/client"
 import { z } from "zod"
 
 // ─── Schemas (mismos que tRPC, reutilizados) ──────────────────────────────────

@@ -1,5 +1,5 @@
 import { db } from "@/server/db"
-import type { Sex, GoalType } from "../../../generated/prisma"
+import type { Sex, GoalType } from "@prisma/client"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

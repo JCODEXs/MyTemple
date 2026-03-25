@@ -1,5 +1,5 @@
 // prisma/add-missing-ingredients.ts
-import { PrismaClient } from "../generated/prisma"
+import { PrismaClient } from "@prisma/client"
 import { readFileSync } from 'fs'
 
 const db = new PrismaClient()

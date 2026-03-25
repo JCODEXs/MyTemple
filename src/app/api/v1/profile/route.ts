@@ -6,7 +6,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { auth } from "@/server/auth"
 import { UserProfileService } from "@/server/services/user-profile.service"
 import { z } from "zod"
-import { Sex, GoalType } from "../../../../../generated/prisma"
+import { Sex, GoalType } from "@prisma/client"
 
 const profileBaseSchema = z.object({
   age: z.number().int().min(10).max(120),

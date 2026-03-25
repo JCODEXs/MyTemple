@@ -2,7 +2,7 @@ import { z } from "zod"
 import { TRPCError } from "@trpc/server"
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc"
 import { UserProfileService } from "@/server/services/user-profile.service"
-import { Sex, GoalType } from "../../../../generated/prisma"
+import { Sex, GoalType } from "@prisma/client"
 
 // ─── Schemas ──────────────────────────────────────────────────────────────────
 

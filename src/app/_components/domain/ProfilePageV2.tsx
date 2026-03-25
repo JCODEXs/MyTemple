@@ -8,7 +8,7 @@ import { toast }    from "sonner"
 import { useRouter } from "next/navigation"
 import { signOut }  from "next-auth/react"
 import { api }      from "@/trpc/react"
-import type { Sex, GoalType } from "../../../../generated/prisma"
+import type { Sex, GoalType } from "@prisma/client"
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 

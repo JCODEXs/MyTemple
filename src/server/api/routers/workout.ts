@@ -2,7 +2,7 @@ import { z } from "zod"
 import { TRPCError } from "@trpc/server"
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc"
 import { WorkoutService } from "@/server/services/workout.service"
-import { WorkoutType } from "../../../../generated/prisma"
+import { WorkoutType } from "@prisma/client"
 
 // ─── Schemas ──────────────────────────────────────────────────────────────────
 

@@ -12,7 +12,7 @@ import { toast }         from "sonner"
 import { api }           from "@/trpc/react"
 import { UploadButton }  from "@/utils/uploadthing"
 import type { RouterOutputs } from "@/trpc/react"
-import type { PostReaction } from "../../../../generated/prisma"
+import type { PostReaction } from "@prisma/client"
 // import type {PostWithRelations } from "@/server/services/communications.service"
 // import { useRealtimeMessages } from "@/hooks/useRealtimeMessages"
 

@@ -15,7 +15,7 @@ import {
   calculateRecipeNutrition,
   type RecipeIngredientInput,
 } from "@/lib/domain/nutrition/recipe-calculator"
-import type { MealType } from "../../../generated/prisma"
+import type { MealType } from "@prisma/client"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

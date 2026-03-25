@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { db }        from "@/server/db"
 import { TRPCError } from "@trpc/server"
-import type { PostType,PostVisibility,Prisma } from "../../../generated/prisma"
+import type { PostType,PostVisibility,Prisma } from "@prisma/client"
 // ─── Types ────────────────────────────────────────────────────────────────────
 const POST_INCLUDE2 = {
   user: {

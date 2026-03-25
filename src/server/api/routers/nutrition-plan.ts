@@ -1,7 +1,7 @@
 import { z } from "zod"
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc"
 import { NutritionPlanService } from "@/server/services/nutrition-plan.service"
-import { MealType } from "../../../../generated/prisma"
+import { MealType } from "@prisma/client"
 
 // ─── Schemas ──────────────────────────────────────────────────────────────────
 

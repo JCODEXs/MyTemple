@@ -9,7 +9,7 @@ import { useState, useMemo } from "react"
 import { toast }             from "sonner"
 import { api }               from "@/trpc/react"
 import type { RouterOutputs } from "@/trpc/react"
-import type { UserRole, SubscriptionStatus } from "../../../../generated/prisma"
+import type { UserRole, SubscriptionStatus } from "@prisma/client"
 
 type User = RouterOutputs["admin"]["getUsers"]["users"][number]
 type Sub  = RouterOutputs["admin"]["getSubscriptions"][number]

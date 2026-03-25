@@ -9,7 +9,7 @@ import type {
   EnergyOutput,
   TrainingInput,
 } from "../../lib/types"
-import type { WorkoutType } from "../../../generated/prisma"
+import type { WorkoutType } from "@prisma/client"
 
 // ─── Input / Output types ─────────────────────────────────────────────────────
 

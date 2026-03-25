@@ -3,7 +3,7 @@
 import { useState, useMemo, useCallback, useEffect } from "react"
 import { toast } from "sonner"
 import { api } from "@/trpc/react"
-import type { WorkoutType } from "../../../../generated/prisma"
+import type { WorkoutType } from "@prisma/client"
 import type { RouterOutputs } from "@/trpc/react"
 import {
   SPORTS, SPORT_CATEGORIES,

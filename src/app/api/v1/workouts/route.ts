@@ -5,7 +5,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { auth } from "@/server/auth"
 import { WorkoutService } from "@/server/services/workout.service"
-import { WorkoutType } from "../../../../../generated/prisma"
+import { WorkoutType } from "@prisma/client"
 import { z } from "zod"
 
 // ─── Schemas ──────────────────────────────────────────────────────────────────
