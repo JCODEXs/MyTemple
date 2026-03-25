@@ -557,7 +557,7 @@ export default function RecipeImportPageComponent() {
         {/* ── Results count ── */}
         <p className="text-xs text-gray-600">
           {filtered.length} receta{filtered.length !== 1 ? "s" : ""} encontrada{filtered.length !== 1 ? "s" : ""}
-          {(selectedCat ?? activeTags.size > 0 || search) && (
+          {((selectedCat ?? activeTags.size > 0) || search) && (
             <button
               onClick={() => { setSelectedCat(null); setActiveTags(new Set()); setSearch("") }}
               className="ml-2 text-amber-400 hover:text-amber-300">
