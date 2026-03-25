@@ -233,7 +233,7 @@ async getFeed(userId: string, input: { limit?: number; cursor?: string; userId?:
     ]
   }
 
-const where = {
+const where: Prisma.PostWhereInput = {
   OR: [
     { userId },
     {
@@ -259,7 +259,7 @@ const where = {
   orderBy: { createdAt: "desc" },
   where,
   include: POST_INCLUDE2,
-}) as any as PostWithRelations[];;
+})
 
   const hasMore    = posts.length > limit
   const items      = hasMore ? posts.slice(0, limit) : posts
@@ -274,7 +274,7 @@ const where = {
       orderBy: { createdAt: "desc" },
       take:    30,
       include: POST_INCLUDE,
-    })
+    }) 
   },
 
   // ── Reactions ───────────────────────────────────────────────────────────────
