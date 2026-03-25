@@ -7,6 +7,11 @@ import Resend      from "next-auth/providers/resend"
 import bcrypt      from "bcryptjs"
 import { z }       from "zod"
 import { db }      from "@/server/db"
+import { PrismaClient } from "@prisma/client"
+
+const prismaForAuth = db as unknown as PrismaClient
+
+
 
 // ─── Credentials schema ───────────────────────────────────────────────────────
 
@@ -22,7 +27,7 @@ const loginSchema = z.object({
 // The PrismaAdapter is still used for OAuth User/Account records.
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter:  PrismaAdapter(db),
+   adapter: PrismaAdapter(prismaForAuth),
   session:  { strategy: "jwt" },
 
   providers: [
