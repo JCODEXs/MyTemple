@@ -13,7 +13,7 @@ import { api }           from "@/trpc/react"
 import { UploadButton }  from "@/utils/uploadthing"
 import type { RouterOutputs } from "@/trpc/react"
 import type { PostReaction } from "../../../../generated/prisma"
-import type {PostWithRelations } from "@/server/services/communications.service"
+// import type {PostWithRelations } from "@/server/services/communications.service"
 // import { useRealtimeMessages } from "@/hooks/useRealtimeMessages"
 
 type Post      = RouterOutputs["communications"]["getFeed"]["items"][number]
