@@ -280,7 +280,7 @@ const meta = POST_TYPE_META[post.type as keyof typeof POST_TYPE_META] ?? POST_TY
       const prev = utils.communications.getFeed.getInfiniteData({ limit: 20 })
       utils.communications.getFeed.setInfiniteData({ limit: 20 }, (old) => {
         if (!old) return old
-        return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p: PostWithRelations) => {
+        return { ...old, pages: old.pages.map((page) => ({ ...page, items: page.items.map((p) => {
           if (p.id !== postId) return p
          const reactions = p.reactions ?? []
 

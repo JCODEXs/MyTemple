@@ -1,9 +1,21 @@
 import { db }        from "@/server/db"
 import { TRPCError } from "@trpc/server"
-import type { PostType,PostVisibility, } from "../../../generated/prisma"
+import type { PostType,PostVisibility,Prisma } from "../../../generated/prisma"
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-
+export type PostWithRelations = Prisma.PostGetPayload<{
+  include:
+  {
+    user: {
+      select: { id: true, name: true, image: true, role: true }
+    }
+    reactions: {
+      include: {
+        user: { select: { id: true, name: true } }
+      }
+    }
+  }
+}>
 export interface CreatePostInput {
   type:       PostType
   visibility: PostVisibility
@@ -252,7 +264,7 @@ const where = {
 
 
 
- const posts= await db.post.findMany({
+ const posts: PostWithRelations[]= await db.post.findMany({
   take: limit + 1,
   cursor: input.cursor ? { id: input.cursor } : undefined,
   orderBy: { createdAt: "desc" },
