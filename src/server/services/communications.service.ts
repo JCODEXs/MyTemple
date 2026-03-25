@@ -2,29 +2,31 @@ import { db }        from "@/server/db"
 import { TRPCError } from "@trpc/server"
 import type { PostType,PostVisibility,Prisma } from "../../../generated/prisma"
 // ─── Types ────────────────────────────────────────────────────────────────────
+const POST_INCLUDE2 = {
+  user: {
+    select: { id: true, name: true, image: true, role: true }
+  },
+  reactions: {
+    include: {
+      user: { select: { id: true, name: true } }
+    }
+  },
+  comments: {
+    // where: { parentId: null },
+    include: {
+      user: { select: { id: true, name: true, image: true } },
+      replies: {
+        include: {
+          user: { select: { id: true, name: true, image: true } }
+        },
+      }
+    },
+  }
+} as const;
 
 export type PostWithRelations = Prisma.PostGetPayload<{
-  include:
-  {
-    user: {
-      select: { id: true, name: true, image: true, role: true }
-    }
-    reactions: {
-      include: {
-        user: { select: { id: true, name: true } }
-      }
-    }
-    comments: {
-      include: {
-        user: { select: { id: true, name: true, image: true } },
-        replies: {
-          include: {
-            user: { select: { id: true, name: true, image: true } }
-          }
-        }
-      }
-    }
-  }
+  include: typeof POST_INCLUDE2
+  
 }>
 export interface CreatePostInput {
   type:       PostType
@@ -197,29 +199,6 @@ export const CommunicationsService = {
 
 async getFeed(userId: string, input: { limit?: number; cursor?: string; userId?: string }) {
   const limit = input.limit ?? 20
-const POST_INCLUDE2 = {
-  user: {
-    select: { id: true, name: true, image: true, role: true }
-  },
-  reactions: {
-    include: {
-      user: { select: { id: true, name: true } }
-    }
-  },
-  comments: {
-    where: { parentId: null },
-    include: {
-      user: { select: { id: true, name: true, image: true } },
-      replies: {
-        include: {
-          user: { select: { id: true, name: true, image: true } }
-        },
-        orderBy: { createdAt: "asc" }
-      }
-    },
-    orderBy: { createdAt: "asc" }
-  }
-};
 
 
   const user = await db.user.findUnique({
@@ -274,7 +253,7 @@ const where = {
 
 
 
- const posts: PostWithRelations[]= await db.post.findMany({
+ const posts= await db.post.findMany({
   take: limit + 1,
   cursor: input.cursor ? { id: input.cursor } : undefined,
   orderBy: { createdAt: "desc" },
