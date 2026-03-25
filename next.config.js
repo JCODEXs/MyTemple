@@ -7,11 +7,9 @@ import { withSentryConfig } from "@sentry/nextjs";
 
 /** @type {import("next").NextConfig} */
 const config = {
-  outputFileTracingIncludes: {
-    "**/*": ["node_modules/.prisma/client/*.node"],
+  experimental: {
+    serverComponentsExternalPackages: ["@prisma/client"],
   },
-  // If you're using server components, you might need this as well:
-  serverExternalPackages: ["@prisma/client", "prisma"],
 };
 
 export default withSentryConfig(config, {
