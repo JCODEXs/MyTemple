@@ -31,7 +31,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <AppNav role={role} userName={userName} />
 
        {/* Main content — margen izquierdo para el sidebar en desktop */}
-      <main className="md:ml-16 pb-20 md:pb-0 transition-all duration-200">
+      <main className="md:ml-16 pt-20 md:pt-0 transition-all duration-200 ">
         {children}
       </main>
     </AuthProvider>

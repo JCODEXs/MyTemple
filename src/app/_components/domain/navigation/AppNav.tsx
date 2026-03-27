@@ -47,7 +47,7 @@ function BottomTabs({ role, pathname }: { role: string; pathname: string }) {
   const visible = filterByRole(NAV_ITEMS.filter((i) => i.bottom), role)
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 md:hidden">
+    <nav className="fixed top-0 left-0 right-0 z-40 md:hidden pb-safe">
       <div className="bg-[#0c0c10]/95 backdrop-blur-xl border-t border-white/10 px-2 pb-safe">
         <div className="flex items-center justify-around py-2">
           {visible.map((item) => {
