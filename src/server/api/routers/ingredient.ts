@@ -2,6 +2,22 @@ import { z } from "zod"
 import { TRPCError } from "@trpc/server"
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc"
 import { IngredientService } from "@/server/services/ingredient.service"
+import { adminProcedure } from "@/server/api/trpc"
+
+export const ingredientInputSchema = z.object({
+  name:              z.string().min(2, "Mínimo 2 caracteres").max(80),
+  kcalPer100g:       z.number({ invalid_type_error: "Ingresa un número" }).nonnegative(),
+  proteinPer100g:    z.number({ invalid_type_error: "Ingresa un número" }).nonnegative(),
+  carbsPer100g:      z.number({ invalid_type_error: "Ingresa un número" }).nonnegative(),
+  fatPer100g:        z.number({ invalid_type_error: "Ingresa un número" }).nonnegative(),
+  fiberPer100g:      z.number().nonnegative().nullable().optional(),
+  sodiumMgPer100g:   z.number().nonnegative().nullable().optional(),
+  defaultPricePerKg: z.number().positive().nullable().optional(),
+  emoji:             z.string().max(4).nullable().optional(),
+  imageUrl:          z.string().url("URL inválida").nullable().optional(),
+})
+
+export type IngredientInput = z.infer<typeof ingredientInputSchema>
 
 export const ingredientRouter = createTRPCRouter({
   
@@ -65,6 +81,17 @@ export const ingredientRouter = createTRPCRouter({
       return { success: true }
     }),
 
+  createGlobal: adminProcedure
+    .input(ingredientInputSchema)
+    .mutation(async ({ input }) => {
+      return IngredientService.createGlobal(input)
+    }),
+
+  createPersonal: protectedProcedure
+    .input(ingredientInputSchema)
+    .mutation(async ({ ctx, input }) => {
+      return IngredientService.createPersonal(ctx.session.user.id, input)
+    }),
   // /
     // Un ingrediente con su override — para el panel de detalle.
   //  /

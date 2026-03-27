@@ -4,6 +4,7 @@ import { useState, useMemo } from "react"
 import { toast } from "sonner"
 import { api } from "@/trpc/react"
 import type { RouterOutputs } from "@/trpc/react"
+import { useRouter } from "next/navigation"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -83,6 +84,7 @@ function IngredientCard({
     await onResetOverride(ingredient.id)
     setIsLoading(false)
   }
+  const router=useRouter()
 
   return (
     <div className={`rounded-xl border bg-white p-4 shadow-sm transition-all ${
@@ -242,6 +244,7 @@ function IngredientCard({
 
 export default function IngredientManagerPanel() {
   const utils = api.useUtils()
+  const router= useRouter()
 
   const { data: ingredients = [], isLoading } =
     api.ingredient.getCatalog.useQuery(
@@ -323,13 +326,21 @@ export default function IngredientManagerPanel() {
       <div className="mx-auto max-w-6xl">
 
         {/* Header */}
-        <header className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-amber-900">
-            🧺 Gestión de Ingredientes
-          </h1>
-          <p className="text-amber-700">
-            Personaliza precios y activa los ingredientes de tu motor de recetas
-          </p>
+        <header className="mb-8 text-center flex justify-between items-center flex-row">
+          <div className="justify-between items-center ">
+            <h1 className="text-3xl font-bold text-amber-900">
+              🧺 Gestión de Ingredientes
+            </h1>
+            <p className="text-amber-700">
+              Personaliza precios y activa los ingredientes de tu motor de recetas
+            </p>
+          </div>
+             <button
+            onClick={() => router.push("/ingredients/new")}
+            className="rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 px-5 py-2.5 text-sm font-bold text-white shadow hover:from-amber-600 hover:to-orange-600 transition-all"
+          >
+            + Nuevo Ingrediente
+          </button>
         </header>
 
         {/* Stats */}

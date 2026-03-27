@@ -131,6 +131,7 @@ model User {
   dailyLogs     DailyLog[]
 
   ingredientOverrides UserIngredientOverride[]
+  personalIngredients Ingredient[] @relation("UserPersonalIngredients")
 
   metabolicProfiles MetabolicProfile[]
 
@@ -378,7 +379,12 @@ model Ingredient {
   recipeIngredients       RecipeIngredient[]
   userIngredientOverrides UserIngredientOverride[]
 
+  createdByUserId String?
+  createdByUser   User?   @relation("UserPersonalIngredients", fields: [createdByUserId], references: [id], onDelete: Cascade)
+
   updatedAt DateTime @updatedAt
+  
+  @@index([createdByUserId])  
 }
 
 model UserIngredientOverride {

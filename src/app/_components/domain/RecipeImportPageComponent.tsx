@@ -485,7 +485,7 @@ export default function RecipeImportPageComponent() {
                 : "Guarda las que quieras en tu colección"}
             </p>
           </div>
-          <button onClick={() => router.push("/recipes")}
+          <button onClick={() => router.push("/library")}
             className="flex-shrink-0 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-gray-400 hover:bg-white/10 transition-colors">
             Mis recetas →
           </button>

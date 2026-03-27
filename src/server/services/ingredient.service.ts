@@ -27,6 +27,19 @@ export interface UpsertOverrideInput {
   isActive?: boolean
 }
 
+export interface IngredientInput {
+  name: string
+  kcalPer100g: number
+  proteinPer100g: number
+  carbsPer100g: number
+  fatPer100g: number
+  fiberPer100g?: number | null
+  sodiumMgPer100g?: number | null
+  defaultPricePerKg?: number | null
+  emoji?: string | null
+  imageUrl?: string | null
+}
+
 // ─── Service ─────────────────────────────────────────────────────────────────
 
 export const IngredientService = {
@@ -34,14 +47,61 @@ export const IngredientService = {
    * Catálogo completo de ingredientes con el override del usuario mezclado.
    * Incluye isActive y effectivePrice calculados.
    */
+  async createGlobal(data: IngredientInput) {
+    const existing = await db.ingredient.findFirst({
+      where: { name: data.name, createdByUserId: null },
+    })
+    if (existing) {
+      throw new Error(`Ya existe un ingrediente global llamado "${data.name}"`)
+    }
+    return db.ingredient.create({
+      data: {
+        ...data,
+        fiberPer100g:      data.fiberPer100g      ?? null,
+        sodiumMgPer100g:   data.sodiumMgPer100g   ?? null,
+        defaultPricePerKg: data.defaultPricePerKg ?? null,
+        emoji:             data.emoji             ?? null,
+        imageUrl:          data.imageUrl          ?? null,
+        createdByUserId:   null,    // ← global: visible para todos
+      },
+    })
+  },
+
+  async createPersonal(userId: string, data: IngredientInput) {
+    const existing = await db.ingredient.findFirst({
+      where: { name: data.name, createdByUserId: userId },
+    })
+    if (existing) {
+      throw new Error(`Ya tienes un ingrediente personal llamado "${data.name}"`)
+    }
+    return db.ingredient.create({
+      data: {
+        ...data,
+        fiberPer100g:      data.fiberPer100g      ?? null,
+        sodiumMgPer100g:   data.sodiumMgPer100g   ?? null,
+        defaultPricePerKg: data.defaultPricePerKg ?? null,
+        emoji:             data.emoji             ?? null,
+        imageUrl:          data.imageUrl          ?? null,
+        createdByUserId:   userId,  // ← personal: solo para este usuario
+      },
+    })
+  },
+
+  // ACTUALIZAR getCatalogForUser para incluir ingredientes personales:
   async getCatalogForUser(userId: string): Promise<IngredientWithOverride[]> {
     const [ingredients, overrides] = await Promise.all([
-      db.ingredient.findMany({ orderBy: { name: "asc" } }),
+      db.ingredient.findMany({
+        where: {
+          OR: [
+            { createdByUserId: null   },   // globales (seed + admin)
+            { createdByUserId: userId },   // personales del usuario
+          ],
+        },
+        orderBy: { name: "asc" },
+      }),
       db.userIngredientOverride.findMany({ where: { userId } }),
     ])
 
-    // Shortcut: the vast majority of users have no overrides yet.
-    // Skip Map construction entirely and return a clean mapping.
     if (overrides.length === 0) {
       return ingredients.map((ing) => ({
         id:               ing.id,
@@ -59,15 +119,14 @@ export const IngredientService = {
         effectivePrice:   ing.defaultPricePerKg,
         isActive:         true,
         hasOverride:      false,
+        isPersonal:       ing.createdByUserId === userId,   // ← nuevo campo
       }))
     }
 
-    // With overrides — O(1) lookup via Map
     const overrideMap = new Map(overrides.map((o) => [o.ingredientId, o]))
 
     return ingredients.map((ing) => {
       const override = overrideMap.get(ing.id) ?? null
-
       return {
         id:               ing.id,
         name:             ing.name,
@@ -84,10 +143,10 @@ export const IngredientService = {
         effectivePrice:   override?.customPricePerKg ?? ing.defaultPricePerKg,
         isActive:         override?.isActive ?? true,
         hasOverride:      override !== null,
+        isPersonal:       ing.createdByUserId === userId,   // ← nuevo campo
       }
     })
   },
-
   /**
    * Solo los ingredientes activos del usuario — para el motor de recetas.
    */
@@ -126,6 +185,7 @@ export const IngredientService = {
   /**
    * Activa o desactiva un ingrediente en el motor de recetas del usuario.
    */
+
   async toggleActive(userId: string, ingredientId: string, isActive: boolean) {
     return IngredientService.upsertOverride(userId, { ingredientId, isActive })
   },
