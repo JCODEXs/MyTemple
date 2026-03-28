@@ -517,7 +517,7 @@ export default function EditRecipePage() {
                         const url = res[0]?.ufsUrl ?? res[0]?.url
                         if (url) setMeta((p) => ({ ...p, imageUrl: url }))
                       }}
-                      onUploadError={(e) => toast.error(`Error al subir: ${e.message}`)}
+                      onUploadError={(e) => {toast.error(`Error al subir: ${e.message}`)}}
                       appearance={{
                         container: "w-auto",
                         button: "rounded-xl bg-amber-500 px-5 py-2 text-sm font-bold text-white hover:bg-amber-600 ut-uploading:bg-amber-300 ut-uploading:cursor-not-allowed",
