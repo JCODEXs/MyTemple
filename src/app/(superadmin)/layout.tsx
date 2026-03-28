@@ -18,7 +18,7 @@ export default async function SuperAdminLayout({ children }: { children: React.R
   return (
     <div className="min-h-screen bg-[#0c0c10]">
       <AppNav role="ADMIN" userName={user.name ?? ""} />
-      <main className="md:ml-16 pt-20 md:pt-0">
+      <main className="md:ml-16 pb-20 md:pb-0">
         {children}
       </main>
     </div>

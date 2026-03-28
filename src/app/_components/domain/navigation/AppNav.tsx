@@ -19,10 +19,10 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/log",          label: "Registrar día", icon: "📋", roles: ["USER","COACH","ADMIN"],   bottom: true  },
   { href: "/weight",       label: "Peso",          icon: "⚖️", roles: ["USER","COACH","ADMIN"],   bottom: false },
   { href: "/recipeImport", label: "Recetas de la comunidad", icon: "🌍", roles: [], bottom: false },
-  { href: "/create-ingredients", label: "Ingrediente Grobal", icon: "🌍", roles: ["ADMIN"], bottom: true },
+  { href: "/create-ingredients", label: "Ingrediente Grobal", icon: "🌍", roles: ["ADMIN"], bottom: false },
   { href: "/library",      label: "recetas",       icon: "🍳", roles: ["USER","COACH","ADMIN"],   bottom: true  },
   { href: "/plans",        label: "Planes",        icon: "📅", roles: ["USER","COACH","ADMIN"],   bottom: false },
-  { href: "/ingredients",  label: "Ingredientes",  icon: "🧺", roles: ["USER","COACH","ADMIN"],   bottom: false },
+  { href: "/ingredients",  label: "Ingredientes",  icon: "🧺", roles: ["USER","COACH","ADMIN"],   bottom: true },
   { href: "/messages",     label: "Mensajes",      icon: "💬", roles: [],                        bottom: true  },
   { href: "/coach/clients",label: "Clientes",      icon: "🎓", roles: ["COACH","ADMIN"],          bottom: false },
   { href: "/superadmin",   label: "Admin",         icon: "🛡️", roles: ["ADMIN"],                 bottom: false },
@@ -47,7 +47,7 @@ function BottomTabs({ role, pathname }: { role: string; pathname: string }) {
   const visible = filterByRole(NAV_ITEMS.filter((i) => i.bottom), role)
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 md:hidden pb-safe">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 md:hidden ">
       <div className="bg-[#0c0c10]/95 backdrop-blur-xl border-t border-white/10 px-2 pb-safe">
         <div className="flex items-center justify-around py-2">
           {visible.map((item) => {
